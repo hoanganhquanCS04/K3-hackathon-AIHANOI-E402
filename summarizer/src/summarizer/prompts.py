@@ -8,7 +8,12 @@ from __future__ import annotations
 
 from summarizer.schemas import Chunk, SectionRef, SectionSummary, SessionRef
 
-PROMPT_VERSION = "v1"
+# Hai version TÁCH RIÊNG vì hai bước có cache riêng. Sửa prompt của bước gộp mà
+# dùng chung một version thì toàn bộ ~120 bản tóm tắt mục đang nằm trong cache
+# cũng bị coi là hết hạn, và phải gọi lại LLM cho mọi mục — trả tiền cho một thay
+# đổi không liên quan tới chúng.
+PROMPT_VERSION = "v2"          # bước MAP (tóm từng mục)
+REDUCE_PROMPT_VERSION = "v3"   # bước REDUCE (gộp cả buổi)
 
 SPEAKER_LABELS = {
     "instructor": "giảng viên",
@@ -20,28 +25,53 @@ SPEAKER_LABELS = {
 
 
 MAP_SYSTEM = """\
-Bạn trích xuất nội dung từ transcript bài giảng tiếng Việt. Đây là tác vụ trích \
-xuất, không phải viết lại hay bình luận.
+Bạn TỔNG HỢP nội dung một mục trong bài giảng tiếng Việt. Người đọc đã vắng buổi \
+học và muốn nắm mạch lập luận, không muốn đọc lại lời thoại.
+
+Điều quan trọng nhất — GỘP, ĐỪNG CHÉP:
+
+Transcript được cắt thành nhiều đoạn nhỏ chỉ vì lý do kỹ thuật. Một luận điểm \
+của giảng viên thường trải dài qua nhiều đoạn liên tiếp: nêu vấn đề ở đoạn này, \
+giải thích ở đoạn sau, cho ví dụ ở đoạn sau nữa. Nhiệm vụ của bạn là nhận ra \
+chúng thuộc CÙNG MỘT Ý và gộp lại thành một câu, rồi ghi ĐỦ mã của mọi đoạn đã \
+gộp.
+
+SAI (chép lại từng đoạn, mỗi ý một mã, mã chạy tuần tự):
+  - Kỹ năng xác định bài toán rất quan trọng. [T01-001]
+  - Nhiều công ty tuyển AI engineer nhưng thiếu người ra đề bài. [T01-002]
+  - 70% thành công đến từ con người và vận hành. [T01-003]
+
+ĐÚNG (gộp thành luận điểm, nhiều mã trên một ý):
+  - Nút thắt khi doanh nghiệp ứng dụng AI không nằm ở công nghệ mà ở khâu xác \
+định bài toán: nhiều nơi tuyển được AI engineer nhưng không có ai ra được đề bài \
+cụ thể, và khoảng 70% yếu tố thành công đến từ con người cùng quy trình vận hành. \
+[T01-001, T01-002, T01-003]
 
 Quy tắc bắt buộc:
 
 1. Chỉ dùng thông tin có trong đoạn transcript được cung cấp. Không thêm kiến \
 thức bên ngoài, không suy rộng.
-2. Mỗi ý trong `key_points`, `examples`, `student_questions` phải kèm ít nhất \
-một mã trích dẫn dạng TXX-NNN, và mã đó phải xuất hiện nguyên văn trong phần \
-transcript bên dưới. Tuyệt đối không tạo mã mới.
-3. Phân biệt rõ người nói. Lời của giảng viên và lời của học viên không được \
-trộn. Câu hỏi hoặc ý kiến do học viên nêu phải nằm ở `student_questions`, \
-không nằm ở `key_points`.
-4. Gặp `[không nghe rõ]` thì bỏ qua phần đó, không đoán nội dung bị mất.
-5. `abstract`: 1–2 câu nêu nội dung chính của mục.
-6. `key_points`: 3–6 ý, mỗi ý một câu, cụ thể và kiểm chứng được từ transcript. \
-Tránh câu chung chung kiểu "giảng viên nói về chủ đề này".
-7. `concepts`: các thuật ngữ hoặc khái niệm được nhắc tới, viết như trong bài.
-8. `examples`: ví dụ, case, con số cụ thể được nêu. Không có thì để mảng rỗng.
-9. `student_questions`: câu hỏi hoặc phản hồi của học viên. Không có thì để \
-mảng rỗng.
-10. Ngôn ngữ: tiếng Việt, văn phong trung tính, không tự xưng, không mở bài.\
+2. Mỗi ý trong `key_points`, `examples`, `student_questions` phải kèm mã trích \
+dẫn dạng TXX-NNN, và mã đó phải xuất hiện nguyên văn trong phần transcript bên \
+dưới. Tuyệt đối không tạo mã mới.
+3. `key_points`: TỐI ĐA 5 ý, và phải ÍT HƠN HẲN số đoạn của mục. Mục có 12 đoạn \
+thì khoảng 3–4 ý là hợp lý. Thà ít ý mà mỗi ý là một luận điểm hoàn chỉnh, còn \
+hơn nhiều ý vụn.
+4. Phần lớn các ý phải có TỪ 2 MÃ TRÍCH DẪN TRỞ LÊN. Nếu gần như mọi ý của bạn \
+chỉ có đúng một mã, và các mã chạy liên tiếp theo thứ tự đoạn, thì bạn đang chép \
+chứ không tổng hợp — hãy gộp lại.
+5. Mỗi ý viết 1–2 câu, nêu được nội dung và lý do/hệ quả, không chỉ nhắc chủ đề. \
+Tránh câu rỗng kiểu "giảng viên nói về chủ đề này".
+6. Đoạn nào không mang nội dung học (chào hỏi, nhắc giờ nghỉ, điểm danh, loay \
+hoay kỹ thuật) thì bỏ hẳn, không cần ép vào ý nào.
+7. Phân biệt rõ người nói. Lời giảng viên và lời học viên không được trộn. Câu \
+hỏi hoặc ý kiến do học viên nêu phải nằm ở `student_questions`, không nằm ở \
+`key_points`.
+8. Gặp `[không nghe rõ]` thì bỏ qua phần đó, không đoán nội dung bị mất.
+9. `abstract`: 1–2 câu nêu mục này bàn chuyện gì và đi đến đâu.
+10. `concepts`: các thuật ngữ hoặc khái niệm được nhắc tới, viết như trong bài.
+11. `examples`: ví dụ, case, con số cụ thể được nêu. Không có thì để mảng rỗng.
+12. Ngôn ngữ: tiếng Việt, văn phong trung tính, không tự xưng, không mở bài.\
 """
 
 
@@ -55,15 +85,23 @@ Quy tắc bắt buộc:
 1. `outline` phải liệt kê ĐỦ và ĐÚNG THỨ TỰ mọi mục được cung cấp. Không gộp \
 mục, không bỏ mục, không đổi thứ tự. Mỗi phần tử gồm `section_id` đúng như đã \
 cho, một `abstract` 1–2 câu, và các citation lấy từ chính mục đó.
-2. `key_points`: chọn 5–8 ý quan trọng nhất của cả buổi. Mỗi ý phải ghi \
-`section_id` của mục nguồn và giữ nguyên các mã trích dẫn TXX-NNN từ mục đó.
-3. `tldr`: 2–3 câu nêu trọng tâm cả buổi. Phải phản ánh cả những mục ở giữa và \
-cuối buổi, không chỉ mục đầu.
+2. `key_points`: 5–8 ý cho CẢ BUỔI. Đây là bước tổng hợp xuyên suốt, không phải \
+bước chọn lọc. Một chủ đề được bàn ở nhiều mục khác nhau thì phải GỘP thành MỘT \
+ý duy nhất, kèm đủ mã trích dẫn của tất cả các mục liên quan. Chép lại nguyên si \
+một ý từ một mục là làm sai — trừ khi ý đó thật sự chỉ xuất hiện ở đúng mục ấy. \
+Ưu tiên những ý xuyên suốt buổi hơn là chi tiết lẻ của một mục.
+3. `tldr`: 2–3 câu nêu buổi học đi từ đâu đến đâu — mạch chính, không phải danh \
+sách chủ đề. Phải phản ánh cả những mục ở giữa và cuối buổi, không chỉ mục đầu.
 4. Không tạo mã trích dẫn mới. Chỉ dùng lại mã đã xuất hiện trong phần tóm tắt \
 mục bên dưới.
 5. `open_questions`: những câu hỏi còn để ngỏ hoặc do học viên nêu mà buổi học \
 chưa chốt. Không có thì để mảng rỗng.
-6. Ngôn ngữ: tiếng Việt, văn phong trung tính.\
+6. Ngôn ngữ: tiếng Việt, văn phong trung tính.
+7. Nếu có phần DÀN Ý THAM KHẢO ở cuối: đó là danh sách khái niệm và câu hỏi rút \
+từ knowledge graph, dùng để bạn GỌI TÊN khái niệm cho nhất quán và để biết ý nào \
+là ý xuyên suốt đáng đưa lên. Nó KHÔNG phải nguồn nội dung. Không được lấy bất kỳ \
+thông tin nào chỉ có ở đó mà không có trong phần tóm tắt mục, và không được trích \
+dẫn nó. Dàn ý mâu thuẫn với tóm tắt mục thì tin tóm tắt mục.\
 """
 
 
@@ -115,13 +153,30 @@ def build_reduce_user(
     *,
     session: SessionRef,
     section_summaries: tuple[SectionSummary, ...],
+    outline_hint: str = "",
 ) -> str:
+    """`outline_hint` là dàn ý rút từ knowledge graph, có thể rỗng.
+
+    Đặt SAU phần tóm tắt mục là có chủ đích: phần cuối prompt được model chú ý
+    nhiều hơn, nhưng ở đây ta muốn ngược lại — tóm tắt mục mới là nguồn, dàn ý
+    chỉ là gợi ý. Nên nó vừa đứng cuối vừa được đánh dấu rõ là không phải nguồn,
+    và quy tắc 7 của REDUCE_SYSTEM nói thẳng điều đó.
+    """
+
     ordered = sorted(section_summaries, key=lambda item: item.section_order)
     body = "\n\n".join(_format_section_summary(summary) for summary in ordered)
     ids = ", ".join(summary.section_id for summary in ordered)
-    return (
+    prompt = (
         f"BUỔI: {session.session_locator}\n"
         f"SỐ MỤC: {len(ordered)}\n"
         f"DANH SÁCH section_id BẮT BUỘC CÓ ĐỦ TRONG outline: {ids}\n\n"
         f"TÓM TẮT TỪNG MỤC:\n\n{body}"
     )
+    if outline_hint.strip():
+        prompt += (
+            "\n\n---\n"
+            "DÀN Ý THAM KHẢO (từ knowledge graph — KHÔNG phải nguồn nội dung, "
+            "không được trích dẫn, không được lấy thông tin chỉ có ở đây):\n\n"
+            f"{outline_hint.strip()}"
+        )
+    return prompt

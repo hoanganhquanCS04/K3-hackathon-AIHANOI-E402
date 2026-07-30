@@ -19,14 +19,15 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass, field
 
+import router as _router
+import sources
+from part_reduce import summarize_part_sections
 from stubs import (  # noqa: F401  — phần đã thật sẵn thì dùng lại nguyên
     get_session,
     load_outline,
     refusal,
     resolve_part,
-    route,
 )
-
 from summarizer.cache import SummaryCache
 from summarizer.config import settings
 from summarizer.llm import OpenAIStructuredLLM
@@ -34,6 +35,12 @@ from summarizer.loader import get_loader
 from summarizer.mapper import summarize_sections
 from summarizer.reducer import summarize_session
 from summarizer.schemas import Chunk, SectionSummary
+
+# Model gộp cả buổi — đây là "bản tóm tắt cuối cùng" người dùng đọc, nên dùng
+# model mạnh. Bước MAP giữ model rẻ trong settings (gpt-4o-mini): nó chạy nhiều
+# lần hơn hẳn, và khoá cache có tên model nên đổi map model là ~120 bản tóm tắt
+# mục đang nằm trong artifacts/summary_cache/ thành vô dụng.
+REDUCE_MODEL = "gpt-5.6-sol"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Tài nguyên dùng chung
@@ -43,6 +50,12 @@ _loader = None
 _llm = None
 _cache = None
 _force = False
+
+# Quyết định của router ở lượt gần nhất. `build_recap()` đọc lại thay vì nhận
+# thêm tham số: app.py gọi route() rồi mới gọi hàm tóm tắt trong CÙNG một lượt
+# handle(), nên module state là đủ, và chữ ký mà UI đang gọi không phải sửa.
+_use_graph_outline = False
+_graph_note = ""
 
 
 def _resources():
@@ -67,6 +80,8 @@ class Stats:
     cache_hits: int = 0
     seconds: float = 0.0
     warnings: list[str] = field(default_factory=list)
+    router: str = ""       # model nào đã định tuyến, và vì sao
+    outline: str = ""      # dàn ý knowledge graph: đã dùng, hay vì sao không
 
 
 _last = Stats()
@@ -77,10 +92,32 @@ def last_stats() -> Stats:
 
 
 def backend_label() -> str:
+    graph_ok, graph_why = sources.graph_available()
     return (
-        f"{settings.loader_backend} · map `{settings.map_model}` · "
-        f"reduce `{settings.reduce_model}`"
+        f"router `{_router.ROUTER_MODEL}` · nội dung {settings.loader_backend} · "
+        f"map `{settings.map_model}` · gộp `{REDUCE_MODEL}` · "
+        f"KG {'sẵn sàng' if graph_ok else f'chưa dùng được ({graph_why})'}"
     )
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# CỔNG 0 — router
+# ─────────────────────────────────────────────────────────────────────────────
+
+
+def route(query: str, state: dict) -> dict:
+    """Giữ đúng chữ ký `stubs.route(query, state)` để `app.py` không phải sửa.
+
+    Buổi đang mở được suy ra từ `state["sid"]` chứ không nhận thêm tham số — nhờ
+    vậy router LLM có ngữ cảnh (tên buổi, số phần) mà giao diện vẫn gọi y như cũ.
+    """
+
+    global _use_graph_outline
+
+    session = get_session(load_outline(), state.get("sid")) if state.get("sid") else None
+    decision = _router.route(query, state, session)
+    _use_graph_outline = bool(decision.get("use_graph_outline"))
+    return decision
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -111,9 +148,7 @@ def _chunk_index(session_id: str) -> dict[str, Chunk]:
     return {chunk.chunk_id: chunk for chunk in loader.get_session_content(session_id)}
 
 
-def _to_ui_points(
-    summaries: tuple[SectionSummary, ...], chunks: dict[str, Chunk]
-) -> list[dict]:
+def _to_ui_points(items, chunks: dict[str, Chunk], section_title: str = "") -> list[dict]:
     """Đổi CitedItem sang đúng hình dạng mà render_msg() đang đọc.
 
     UI hiện `cite[0]` và `quote`, nên `quote` phải là nguyên văn của chính đoạn
@@ -121,19 +156,18 @@ def _to_ui_points(
     """
 
     points = []
-    for summary in summaries:
-        for item in summary.key_points:
-            first = item.citations[0]
-            chunk = chunks.get(first)
-            points.append(
-                {
-                    "claim": item.text,
-                    "cite": list(item.citations),
-                    "has_student_speech": bool(chunk and chunk.speaker_role == "student"),
-                    "quote": chunk.text if chunk else "(không tìm thấy đoạn gốc)",
-                    "section_title": summary.section_title,
-                }
-            )
+    for item in items:
+        first = item.citations[0]
+        chunk = chunks.get(first)
+        points.append(
+            {
+                "claim": item.text,
+                "cite": list(item.citations),
+                "has_student_speech": bool(chunk and chunk.speaker_role == "student"),
+                "quote": chunk.text if chunk else "(không tìm thấy đoạn gốc)",
+                "section_title": section_title or (chunk.section_title if chunk else ""),
+            }
+        )
     return points
 
 
@@ -171,14 +205,42 @@ def summarize_part(session: dict, part_idx: int) -> dict:
         cache=cache,
         force=_force,
     )
+    summaries = tuple(result.summary for result in results)
+    activity_heavy = part["activity_heavy"]
+
+    # Bước GỘP cấp phần. Không có bước này thì "tóm phần" chỉ là phép nối
+    # key_points của từng mục — phần 2 mục ra 7 ý rời, phần 4 mục ra ~15 ý, và
+    # người đọc thấy đúng là một đống ý chứ không phải bản tóm tắt.
+    part_result = None
+    if not activity_heavy:
+        part_result = summarize_part_sections(
+            part_title=part["title"],
+            part_index=part_idx,
+            total_parts=len(session["parts"]),
+            session_id=session_id,
+            summaries=summaries,
+            llm=llm,
+            cache=cache,
+            model=REDUCE_MODEL,
+            force=_force,
+        )
     elapsed = time.perf_counter() - started
 
-    summaries = tuple(result.summary for result in results)
+    engine, why = _router.last_route_info()
+    map_calls = sum(0 if result.cache_hit else 1 for result in results)
+    map_hits = sum(1 for result in results if result.cache_hit)
+    warnings = [w for result in results for w in result.report.warnings]
+    if part_result is not None:
+        map_calls += 0 if part_result.cache_hit else 1
+        map_hits += 1 if part_result.cache_hit else 0
+        warnings += part_result.report.warnings
     _last = Stats(
-        llm_calls=sum(0 if result.cache_hit else 1 for result in results),
-        cache_hits=sum(1 for result in results if result.cache_hit),
+        llm_calls=map_calls,
+        cache_hits=map_hits,
         seconds=elapsed,
-        warnings=[w for result in results for w in result.report.warnings],
+        warnings=warnings,
+        router=f"{engine} — {why}" if why else engine,
+        outline="không dùng dàn ý KG (chỉ tóm một phần)",
     )
 
     chunks = _chunk_index(session_id)
@@ -190,7 +252,6 @@ def summarize_part(session: dict, part_idx: int) -> dict:
                 f"có [không nghe rõ] ({', '.join(summary.unclear_chunk_ids)})"
             )
 
-    activity_heavy = part["activity_heavy"]
     return {
         "part": part,
         "skipped": activity_heavy,
@@ -201,7 +262,10 @@ def summarize_part(session: dict, part_idx: int) -> dict:
         )
         if activity_heavy
         else None,
-        "key_points": [] if activity_heavy else _to_ui_points(summaries, chunks),
+        "abstract": part_result.abstract if part_result else "",
+        "key_points": (
+            [] if part_result is None else _to_ui_points(part_result.key_points, chunks)
+        ),
         "gaps": gaps,
         "_summaries": summaries,
     }
@@ -213,11 +277,14 @@ def summarize_part(session: dict, part_idx: int) -> dict:
 
 
 def build_recap(session: dict, done: dict) -> dict:
-    """Gộp các phần đã tóm thành sổ tay.
+    """Tóm cả buổi — luôn chạy REDUCE thật trên 100% mục.
 
-    Bước reduce của summarizer cần đủ 100% section của buổi. Nếu người dùng mới
-    tóm vài phần thì chưa đủ điều kiện — khi đó gộp bằng CODE từ những phần đã
-    có, không gọi LLM và nói rõ là bản chưa đầy đủ.
+    Trước đây hàm này chỉ gộp bằng code những phần người dùng đã tóm sẵn. Kết quả
+    là "tóm cả buổi" sau khi mới tóm 1/5 phần chỉ ra một xâu ý rời của phần đó,
+    đúng như phản ánh: tóm theo từng đoạn nhỏ rồi ghép, không đi hết bài.
+
+    Giờ hàm tự chạy map cho những mục còn thiếu rồi mới reduce. Mục nào đã tóm
+    thì lấy từ cache, nên chỉ trả tiền cho phần thật sự còn thiếu.
     """
 
     global _last
@@ -231,26 +298,36 @@ def build_recap(session: dict, done: dict) -> dict:
         for summary in result.get("_summaries", ()):
             have[summary.section_id] = summary
 
-    complete = len(have) == len(all_refs)
     chunks = _chunk_index(session_id)
+    started = time.perf_counter()
 
-    if not complete:
-        _last = Stats(warnings=[f"mới có {len(have)}/{len(all_refs)} mục, chưa gọi reduce"])
-        picked = _to_ui_points(
-            tuple(sorted(have.values(), key=lambda s: s.section_order)), chunks
+    missing = tuple(ref for ref in all_refs if ref.section_id not in have)
+    map_calls = map_hits = 0
+    if missing:
+        results = summarize_sections(
+            session=session_ref,
+            sections=missing,
+            chunks_by_section={
+                ref.section_id: loader.get_section_content(ref.section_id)
+                for ref in missing
+            },
+            llm=llm,
+            cache=cache,
+            force=_force,
         )
-        return {
-            "session": session,
-            "n_parts_done": len(done),
-            "n_parts_total": len(session["parts"]),
-            "key_points": picked[:5],
-            "student_points": [p for p in picked if p["has_student_speech"]][:5],
-            "gaps": [g for i in sorted(done) for g in done[i].get("gaps", [])],
-            "tldr": None,
-        }
+        for item in results:
+            have[item.summary.section_id] = item.summary
+            map_calls += 0 if item.cache_hit else 1
+            map_hits += 1 if item.cache_hit else 0
+
+    # Dàn ý knowledge graph — tuỳ chọn. Chuỗi rỗng thì bước gộp chạy y như cũ.
+    hint, hint_note = ("", "router không yêu cầu dàn ý KG")
+    if _use_graph_outline:
+        hint, hint_note = sources.outline_hint(session_id)
+        if hint and not hint_note:
+            hint_note = f"đã dùng dàn ý KG ({len(hint.splitlines())} dòng)"
 
     ordered = tuple(sorted(have.values(), key=lambda s: s.section_order))
-    started = time.perf_counter()
     result = summarize_session(
         session=session_ref,
         sections=all_refs,
@@ -259,15 +336,20 @@ def build_recap(session: dict, done: dict) -> dict:
         llm=llm,
         cache=cache,
         force=_force,
+        model=REDUCE_MODEL,
+        outline_hint=hint,
     )
     elapsed = time.perf_counter() - started
 
     summary = result.summary
+    engine, why = _router.last_route_info()
     _last = Stats(
-        llm_calls=0 if result.cache_hit else 1,
-        cache_hits=1 if result.cache_hit else 0,
+        llm_calls=map_calls + (0 if result.cache_hit else 1),
+        cache_hits=map_hits + (1 if result.cache_hit else 0),
         seconds=elapsed,
         warnings=list(summary.warnings),
+        router=f"{engine} — {why}" if why else engine,
+        outline=hint_note,
     )
 
     def to_ui(item) -> dict:

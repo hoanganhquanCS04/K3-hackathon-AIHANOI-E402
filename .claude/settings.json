@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv sync *)",
+      "Bash(.venv/Scripts/python.exe -c \"import neo4j, streamlit; print\\('neo4j', neo4j.__version__, '| streamlit', streamlit.__version__\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 summarizer/.venv/Scripts/python.exe -c ' *)"
+    ]
+  }
+}
