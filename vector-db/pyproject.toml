@@ -1,0 +1,36 @@
+[project]
+name = "vector-db"
+version = "0.1.0"
+description = "Hierarchical OpenAI embeddings and Qdrant retrieval for VLearn transcripts"
+readme = "README.md"
+authors = [
+    { name = "Nguyen Huy Duc", email = "duc.nh2416887@sis.hust.edu.vn" }
+]
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.5.1",
+    "openai>=2.50.0",
+    "pydantic>=2.13.4",
+    "python-dotenv>=1.2.2",
+    "qdrant-client>=1.18.0",
+    "tenacity>=9.1.4",
+    "tiktoken>=0.13.0",
+]
+
+[project.scripts]
+vector-db = "vector_db:main"
+
+[build-system]
+requires = ["uv_build>=0.12.0,<0.13.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-cov>=7.1.0",
+    "ruff>=0.16.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
