@@ -20,3 +20,4 @@ data/vlearn-pack/
 
 vector-db/artifacts/embedding_cache.sqlite3
 vector-db/artifacts/rejected_records.jsonl
+summairizer/artifacts
