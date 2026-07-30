@@ -134,9 +134,18 @@ def handle(query: str, session: dict, toggles: Toggles | None = None) -> None:
         say("ai", "part", result, is_new=True)
         return
 
-    ans = answer_query(session, query, toggles=toggles)
+    with st.chat_message("assistant"):
+        live_box = st.empty()
+        raw_tokens = []
+        def _stream_llm(delta: str):
+            raw_tokens.append(delta)
+            live_box.markdown("".join(raw_tokens) + "▌")
+
+        ans = answer_query(session, query, toggles=toggles, stream_callback=_stream_llm)
+        live_box.empty()
+
     ans["_stats"] = last_stats()
-    say("ai", "answer", ans, is_new=True)
+    say("ai", "answer", ans)
 
 
 def screen_list() -> None:
