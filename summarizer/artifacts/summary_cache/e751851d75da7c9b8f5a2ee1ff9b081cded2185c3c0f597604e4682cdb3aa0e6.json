@@ -1,0 +1,68 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-014",
+  "section_title": "Bức tranh thị trường mô hình và tốc độ thay đổi",
+  "section_order": 14,
+  "abstract": "Nội dung chính của mục này là sự thay đổi nhanh chóng trong thị trường mô hình và cách mà các mô hình mới có thể thay thế các kiến trúc cũ chỉ trong thời gian ngắn.",
+  "key_points": [
+    {
+      "text": "Vùng màu trắng là các mô hình đóng, vùng màu cam là các mô hình mã nguồn mở, và làn sóng mô hình mã nguồn mở đang ngày càng lớn dần.",
+      "citations": [
+        "T04-076"
+      ]
+    },
+    {
+      "text": "Giá của các mô hình dự kiến sẽ giảm khoảng 10 lần mỗi năm.",
+      "citations": [
+        "T04-076"
+      ]
+    },
+    {
+      "text": "Chỉ sau 6 tháng hoặc 1 năm, một mô hình mới có thể giải quyết các task phức tạp chỉ với một câu prompt.",
+      "citations": [
+        "T04-077"
+      ]
+    },
+    {
+      "text": "Nhiều startup đã gặp khó khăn khi big tech ra mắt một tính năng mới có thể giải quyết bài toán mà họ đang tập trung vào.",
+      "citations": [
+        "T04-078"
+      ]
+    },
+    {
+      "text": "Nghiên cứu hoặc best practice của năm 2024 có thể đã trở nên lỗi thời vào năm 2026.",
+      "citations": [
+        "T04-079"
+      ]
+    }
+  ],
+  "concepts": [
+    "mô hình đóng",
+    "mô hình mã nguồn mở",
+    "core value",
+    "best practice"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-076",
+    "T04-077",
+    "T04-078",
+    "T04-079"
+  ],
+  "covered_chunk_ids": [
+    "T04-076",
+    "T04-077",
+    "T04-078",
+    "T04-079"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "a57b098fe9c3b9952f17821ad58114071ce2e8a198b6a309394f76e70c29559c",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:22.316664Z"
+}

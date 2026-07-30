@@ -1,0 +1,62 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-015",
+  "section_title": "Làn sóng mã nguồn mở Trung Quốc và khoảnh khắc DeepSeek",
+  "section_order": 15,
+  "abstract": "Nội dung chính đề cập đến sự nổi lên của các mô hình mã nguồn mở tại Trung Quốc và ảnh hưởng của khoảnh khắc DeepSeek đến thị trường AI.",
+  "key_points": [
+    {
+      "text": "Làn sóng các mô hình mã nguồn mở của Trung Quốc bắt đầu từ cuối năm 2024.",
+      "citations": [
+        "T04-080"
+      ]
+    },
+    {
+      "text": "Trước đây, thị trường chủ yếu là các mô hình đóng.",
+      "citations": [
+        "T04-080"
+      ]
+    },
+    {
+      "text": "Khoảnh khắc DeepSeek đã khiến thị trường lao dốc.",
+      "citations": [
+        "T04-080"
+      ]
+    },
+    {
+      "text": "Thời điểm DeepSeek ra đời cũng là lúc thị trường gọi vốn trong ngành AI chững lại.",
+      "citations": [
+        "T04-080"
+      ]
+    },
+    {
+      "text": "DeepSeek đã đặt ra câu hỏi về việc liệu AI có bị bong bóng hay không.",
+      "citations": [
+        "T04-080"
+      ]
+    }
+  ],
+  "concepts": [
+    "mô hình mã nguồn mở",
+    "DeepSeek",
+    "thị trường AI",
+    "bong bóng AI"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-080"
+  ],
+  "covered_chunk_ids": [
+    "T04-080"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "241d57c7ad0367adaf1ba95dff36174ef640fb9b03a0a90b95f372fc70914eaa",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:22.269468Z"
+}

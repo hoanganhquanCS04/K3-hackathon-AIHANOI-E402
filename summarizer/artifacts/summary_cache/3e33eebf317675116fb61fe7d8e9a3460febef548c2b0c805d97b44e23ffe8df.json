@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-012",
+  "section_title": "Câu chuyện xe tự hành Cruise và rủi ro một phần vạn",
+  "section_order": 12,
+  "abstract": "Bài giảng trình bày câu chuyện về tai nạn của xe tự lái Cruise và những rủi ro liên quan đến hệ thống an toàn AI, nhấn mạnh tầm quan trọng của việc nhận diện và xử lý các tình huống đặc thù trong phát triển công nghệ.",
+  "key_points": [
+    {
+      "text": "Công ty Cruise đã phải đóng cửa sau một tai nạn liên quan đến xe taxi tự lái do không kiểm tra đầy đủ tính năng an toàn.",
+      "citations": [
+        "T03-112"
+      ]
+    },
+    {
+      "text": "Hệ thống an toàn của xe tự lái có thể gặp khó khăn trong việc nhận diện vật cản bất ngờ.",
+      "citations": [
+        "T03-113"
+      ]
+    },
+    {
+      "text": "Các dự án công nghệ cần phải xem xét các rủi ro dù xác suất xảy ra thấp nhưng có thể gây thiệt hại lớn.",
+      "citations": [
+        "T03-116"
+      ]
+    },
+    {
+      "text": "Cần phải cảnh báo người dùng về những rủi ro tiềm ẩn từ các liên kết hoặc thông tin không còn chính xác.",
+      "citations": [
+        "T03-117"
+      ]
+    },
+    {
+      "text": "Việc không cập nhật thông tin trong log có thể dẫn đến những sai sót nghiêm trọng trong hệ thống.",
+      "citations": [
+        "T03-118"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI",
+    "sensor",
+    "signal processing",
+    "time-to-live",
+    "log"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-112",
+    "T03-113",
+    "T03-114",
+    "T03-115",
+    "T03-116",
+    "T03-117",
+    "T03-118"
+  ],
+  "covered_chunk_ids": [
+    "T03-112",
+    "T03-113",
+    "T03-116",
+    "T03-117",
+    "T03-118"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-113"
+  ],
+  "activity_chunk_ids": [
+    "T03-114"
+  ],
+  "content_hash": "29e1eafefa5dd25b270884a429a142538d01338b6b46fa44737cbda818a9517b",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:41.568926Z"
+}

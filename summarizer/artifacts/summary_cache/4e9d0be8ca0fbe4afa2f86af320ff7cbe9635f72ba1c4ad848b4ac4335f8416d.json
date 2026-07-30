@@ -1,0 +1,150 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "session",
+  "session_id": "T02",
+  "session_title": "Chỉ số thành công & mức tự động hoá (phần sau buổi)",
+  "session_locator": "Day 2 — Chỉ số thành công & mức tự động hoá (phần sau buổi)",
+  "tldr": "Buổi học tập trung vào việc áp dụng AI trong công việc thông qua ma trận tác động – nỗ lực, quick win, và phát biểu bài toán. Các chỉ số đo lường như North Star Metric và A/B testing được giới thiệu để đánh giá hiệu quả sản phẩm. Cuối cùng, các cấp độ kỹ thuật từ rule-based đến agent được trình bày để lựa chọn mức độ tự động hóa phù hợp với nhu cầu và khả năng kiểm soát rủi ro của tổ chức hoặc cá nhân.",
+  "key_points": [
+    {
+      "text": "Ma trận tác động – nỗ lực giúp xác định các công việc có nỗ lực thấp nhưng tác động cao, như việc sử dụng AI để tạo nội dung TikTok hoặc tự động hóa quy trình bằng HTML.",
+      "citations": [
+        "T02-003",
+        "T02-004"
+      ],
+      "section_id": "T02-SEC-001"
+    },
+    {
+      "text": "Quick win là các công việc dễ thực hiện nhưng mang lại kết quả đáng kể, giúp tạo động lực và niềm tin trong công việc.",
+      "citations": [
+        "T02-009",
+        "T02-010"
+      ],
+      "section_id": "T02-SEC-002"
+    },
+    {
+      "text": "North Star Metric là chỉ số quan trọng nhất mà sản phẩm hướng tới, được hỗ trợ bởi các chỉ số phụ để đo lường hiệu quả.",
+      "citations": [
+        "T02-024",
+        "T02-025"
+      ],
+      "section_id": "T02-SEC-003"
+    },
+    {
+      "text": "Automation là tự động hóa hoàn toàn, trong khi augmentation là AI hỗ trợ con người; việc lựa chọn mức độ tự động hóa cần dựa trên nhu cầu và thế mạnh của AI.",
+      "citations": [
+        "T02-031",
+        "T02-032"
+      ],
+      "section_id": "T02-SEC-004"
+    },
+    {
+      "text": "Ba cấp độ kỹ thuật trong áp dụng AI gồm rule-based, workflow, và agent, với mức độ phức tạp và chi phí tăng dần.",
+      "citations": [
+        "T02-035",
+        "T02-036"
+      ],
+      "section_id": "T02-SEC-005"
+    }
+  ],
+  "outline": [
+    {
+      "section_id": "T02-SEC-001",
+      "section_order": 1,
+      "section_title": "Nhận xét bài tập ma trận tác động – nỗ lực",
+      "abstract": "Nhận xét về bài tập ma trận tác động – nỗ lực của học viên, với các ví dụ về ứng dụng AI và tự động hóa trong đời sống.",
+      "citations": [
+        "T02-003",
+        "T02-004",
+        "T02-006",
+        "T02-007"
+      ]
+    },
+    {
+      "section_id": "T02-SEC-002",
+      "section_order": 2,
+      "section_title": "Từ quick win đến phát biểu bài toán",
+      "abstract": "Tập trung vào việc xác định các công việc ưu tiên, tìm kiếm các quick win, và xây dựng phát biểu bài toán để giải quyết các vấn đề cụ thể.",
+      "citations": [
+        "T02-009",
+        "T02-010",
+        "T02-011",
+        "T02-013",
+        "T02-014",
+        "T02-015",
+        "T02-017",
+        "T02-018"
+      ]
+    },
+    {
+      "section_id": "T02-SEC-003",
+      "section_order": 3,
+      "section_title": "Chỉ số thành công và đo lường sản phẩm",
+      "abstract": "Thảo luận về các chỉ số đo lường thành công của sản phẩm và phương pháp thực hiện A/B testing.",
+      "citations": [
+        "T02-019",
+        "T02-020",
+        "T02-024",
+        "T02-025",
+        "T02-027",
+        "T02-028",
+        "T02-029"
+      ]
+    },
+    {
+      "section_id": "T02-SEC-004",
+      "section_order": 4,
+      "section_title": "Automation và augmentation: chọn mức độ tự động hoá",
+      "abstract": "Thảo luận về cách chọn mức độ tự động hóa phù hợp trong việc áp dụng AI, từ augmentation đến automation.",
+      "citations": [
+        "T02-031",
+        "T02-032",
+        "T02-033",
+        "T02-034"
+      ]
+    },
+    {
+      "section_id": "T02-SEC-005",
+      "section_order": 5,
+      "section_title": "Ba cấp độ kỹ thuật: rule-based, workflow, agent",
+      "abstract": "Trình bày ba cấp độ kỹ thuật trong việc áp dụng công nghệ AI, từ đơn giản đến phức tạp, với nhấn mạnh vào việc bắt đầu từ các giải pháp đơn giản.",
+      "citations": [
+        "T02-035",
+        "T02-036",
+        "T02-037",
+        "T02-038",
+        "T02-039"
+      ]
+    }
+  ],
+  "concepts": [
+    "Ma trận tác động – nỗ lực",
+    "Quick win",
+    "Phát biểu bài toán",
+    "Chỉ số đo lường",
+    "North Star Metric",
+    "A/B testing",
+    "Automation",
+    "Augmentation",
+    "Rule-based",
+    "Workflow",
+    "Agent"
+  ],
+  "open_questions": [],
+  "coverage": {
+    "total_sections": 5,
+    "covered_sections": 5,
+    "total_chunks": 43,
+    "cited_chunks": 30,
+    "unclear_chunks": 10,
+    "activity_chunks": 6
+  },
+  "warnings": [
+    "Mục 3 (Chỉ số thành công và đo lường sản phẩm) có 7 đoạn [không nghe rõ]; nội dung tóm tắt có thể thiếu.",
+    "Mục 5 (Ba cấp độ kỹ thuật: rule-based, workflow, agent) có 3 đoạn [không nghe rõ]; nội dung tóm tắt có thể thiếu."
+  ],
+  "prompt_version": "v1",
+  "model_map": "gpt-4o",
+  "model_reduce": "gpt-4o",
+  "generated_at": "2026-07-30T09:20:50.979299Z"
+}

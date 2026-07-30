@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-011",
+  "section_title": "Temperature và top-k/top-p",
+  "section_order": 11,
+  "abstract": "Nội dung chính của mục này là giải thích về cách thức hoạt động của temperature và các chỉ số top-k/top-p trong mô hình LLM.",
+  "key_points": [
+    {
+      "text": "Temperature bằng 0 sẽ khiến mô hình luôn lấy xác suất cao nhất.",
+      "citations": [
+        "T04-072"
+      ]
+    },
+    {
+      "text": "Khi tăng temperature, mô hình sẽ random rộng hơn trong phạm vi xác suất.",
+      "citations": [
+        "T04-072"
+      ]
+    },
+    {
+      "text": "Top-k/top-p giúp khoanh vùng xác suất để lấy trong hàng nghìn, hàng triệu lựa chọn.",
+      "citations": [
+        "T04-072"
+      ]
+    },
+    {
+      "text": "Temperature càng lớn thì phạm vi random càng rộng hơn.",
+      "citations": [
+        "T04-072"
+      ]
+    },
+    {
+      "text": "Cần hiểu ý nghĩa của temperature và top-k/top-p khi gọi API.",
+      "citations": [
+        "T04-072"
+      ]
+    }
+  ],
+  "concepts": [
+    "Temperature",
+    "top-k",
+    "top-p"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-072"
+  ],
+  "covered_chunk_ids": [
+    "T04-072"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "63647c53896e1048356b58f4212dea5289d37678de3ae394afa2861b1571b62f",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:18.301946Z"
+}

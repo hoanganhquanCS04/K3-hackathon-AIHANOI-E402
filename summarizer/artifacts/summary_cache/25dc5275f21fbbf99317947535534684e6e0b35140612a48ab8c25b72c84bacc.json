@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-007",
+  "section_title": "Mô hình Double Diamond: làm đúng cái sai hay làm sai cái đúng?",
+  "section_order": 7,
+  "abstract": "Mục này trình bày mô hình Double Diamond trong việc xác định vấn đề và giải pháp trong sản phẩm, cùng với những quan điểm về việc làm đúng hay làm sai trong quá trình giải quyết vấn đề.",
+  "key_points": [
+    {
+      "text": "Mô hình Double Diamond bao gồm hai viên kim cương với bốn pha: mở rộng và hội tụ.",
+      "citations": [
+        "T01-049"
+      ]
+    },
+    {
+      "text": "Câu hỏi được đặt ra là 'do the right thing wrong' và 'do the wrong thing right' — cái nào nguy hiểm hơn?",
+      "citations": [
+        "T01-050"
+      ]
+    },
+    {
+      "text": "Làm đúng cái sai được cho là nguy hiểm hơn vì nó giới hạn không gian giải pháp.",
+      "citations": [
+        "T01-060"
+      ]
+    },
+    {
+      "text": "Làm đúng cái sai có thể tạo ra ảo tưởng về năng lực và khiến người ta không quay lại để xác minh vấn đề.",
+      "citations": [
+        "T01-061"
+      ]
+    },
+    {
+      "text": "Khi xác định vấn đề đúng, việc thử nghiệm các giải pháp sẽ giúp học hỏi từ thất bại.",
+      "citations": [
+        "T01-059"
+      ]
+    }
+  ],
+  "concepts": [
+    "mô hình Double Diamond",
+    "problem discovery",
+    "do the right thing wrong",
+    "do the wrong thing right",
+    "chi phí chìm"
+  ],
+  "examples": [],
+  "student_questions": [
+    {
+      "text": "Do the wrong thing right nguy hiểm hơn.",
+      "citations": [
+        "T01-051"
+      ]
+    },
+    {
+      "text": "Khi nhận diện một bài toán đúng từ đầu, dù làm sai vẫn học được bài học.",
+      "citations": [
+        "T01-053"
+      ]
+    },
+    {
+      "text": "Cả hai đều nguy hiểm như nhau, vì không quan trọng quá trình mà quan trọng kết quả.",
+      "citations": [
+        "T01-054"
+      ]
+    },
+    {
+      "text": "Làm đúng cái sai nguy hiểm hơn vì chi phí và thời gian mất nhiều.",
+      "citations": [
+        "T01-056"
+      ]
+    },
+    {
+      "text": "Làm đúng cái sai sẽ nguy hiểm hơn nhiều.",
+      "citations": [
+        "T01-057"
+      ]
+    }
+  ],
+  "source_chunk_ids": [
+    "T01-049",
+    "T01-050",
+    "T01-051",
+    "T01-052",
+    "T01-053",
+    "T01-054",
+    "T01-055",
+    "T01-056",
+    "T01-057",
+    "T01-058",
+    "T01-059",
+    "T01-060",
+    "T01-061"
+  ],
+  "covered_chunk_ids": [
+    "T01-049",
+    "T01-050",
+    "T01-051",
+    "T01-053",
+    "T01-054",
+    "T01-056",
+    "T01-057",
+    "T01-059",
+    "T01-060",
+    "T01-061"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T01-051",
+    "T01-057"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "a90714b762b3920b41386b4cd8812afd896abd2db3cda00b5143a202b3013389",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:40:58.084457Z"
+}

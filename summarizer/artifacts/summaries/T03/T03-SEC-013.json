@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-013",
+  "section_title": "Fine-tuning hay RAG — và cách thuyết phục sếp",
+  "section_order": 13,
+  "abstract": "Nội dung bài giảng tập trung vào việc sử dụng kỹ thuật fine-tuning và RAG trong phát triển hệ thống AI, cũng như cách thuyết phục lãnh đạo về giải pháp công nghệ.",
+  "key_points": [
+    {
+      "text": "Để sử dụng fine-tuning, cần có kinh nghiệm phát triển model, dữ liệu và khả năng validate.",
+      "citations": [
+        "T03-119"
+      ]
+    },
+    {
+      "text": "Fine-tuning có thể làm giảm khả năng generalization của model gốc.",
+      "citations": [
+        "T03-119"
+      ]
+    },
+    {
+      "text": "Để thuyết phục lãnh đạo, cần có kế hoạch rõ ràng và chứng minh hiệu quả của giải pháp.",
+      "citations": [
+        "T03-120"
+      ]
+    },
+    {
+      "text": "Dự án không nhất thiết phải thành công, miễn là có kế hoạch và đánh giá rủi ro hợp lý.",
+      "citations": [
+        "T03-121"
+      ]
+    },
+    {
+      "text": "Cần xem xét khả năng mở rộng và cải thiện hệ thống dựa trên feedback của người dùng.",
+      "citations": [
+        "T03-122"
+      ]
+    }
+  ],
+  "concepts": [
+    "fine-tuning",
+    "RAG system",
+    "prompt engineering",
+    "AI chatbot",
+    "AI agent",
+    "continuous learning"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-119",
+    "T03-120",
+    "T03-121",
+    "T03-122"
+  ],
+  "covered_chunk_ids": [
+    "T03-119",
+    "T03-120",
+    "T03-121",
+    "T03-122"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-119",
+    "T03-122"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "beabb0e03ecfe0bca1fe7e3cd2d99e65d15a84678d0b7f02371d862dca71ebd4",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:43.974769Z"
+}

@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-017",
+  "section_title": "Chọn mô hình phù hợp với công việc",
+  "section_order": 17,
+  "abstract": "Nội dung chính của mục này là hướng dẫn cách chọn mô hình AI phù hợp với công việc dựa trên hiểu biết về bài toán và sức mạnh của các mô hình.",
+  "key_points": [
+    {
+      "text": "Mỗi mô hình mới ra đời sẽ có bộ benchmark leaderboard.",
+      "citations": [
+        "T04-084"
+      ]
+    },
+    {
+      "text": "Cần phải hiểu bài toán và sức mạnh của các mô hình để lựa chọn phù hợp.",
+      "citations": [
+        "T04-084"
+      ]
+    },
+    {
+      "text": "Việc đơn giản thì xài các mô hình phù hợp, đơn giản mà giá rẻ.",
+      "citations": [
+        "T04-084"
+      ]
+    },
+    {
+      "text": "Việc khó và phức tạp thì mới xài những mô hình có tính suy luận cao.",
+      "citations": [
+        "T04-084"
+      ]
+    },
+    {
+      "text": "Cần dành thời gian xài để có sự cảm nhận về mô hình.",
+      "citations": [
+        "T04-085"
+      ]
+    }
+  ],
+  "concepts": [
+    "benchmark leaderboard",
+    "Kimi K3",
+    "Claude",
+    "multimodal"
+  ],
+  "examples": [
+    {
+      "text": "Ví dụ slide này là mình mới gen bằng Kimi K3.",
+      "citations": [
+        "T04-085"
+      ]
+    },
+    {
+      "text": "Khóa đầu tiên mình làm slide, mình gen bằng Claude và cảm thấy Claude vẫn không thực sự theo đúng ý mình.",
+      "citations": [
+        "T04-085"
+      ]
+    },
+    {
+      "text": "Kimi có thế mạnh là rất mạnh về multimodal: nó hiểu được hình ảnh, sinh ngữ nghĩa.",
+      "citations": [
+        "T04-085"
+      ]
+    },
+    {
+      "text": "Khi mình đưa một file PDF vào, nó đọc và extract ra được các element trong đấy, định vị đúng tọa độ.",
+      "citations": [
+        "T04-085"
+      ]
+    },
+    {
+      "text": "Lỗi này mình gặp phải khi xài Claude Opus tháng trước.",
+      "citations": [
+        "T04-085"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-084",
+    "T04-085"
+  ],
+  "covered_chunk_ids": [
+    "T04-084",
+    "T04-085"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-085"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "2679899d87599785584ceee94c66af06d69856096fc253f4b67b0058f9abdab2",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:26.452285Z"
+}

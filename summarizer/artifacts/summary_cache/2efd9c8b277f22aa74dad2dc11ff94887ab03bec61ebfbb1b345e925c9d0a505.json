@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-001",
+  "section_title": "Nhận xét bài tập ma trận tác động – nỗ lực",
+  "section_order": 1,
+  "abstract": "Buổi giảng tập trung vào việc nhận xét bài tập ma trận tác động và nỗ lực trong việc sử dụng công nghệ AI để tạo nội dung và quản lý thời gian.",
+  "key_points": [
+    {
+      "text": "Một quy trình làm nội dung TikTok được thực hiện rất chỉn chu với nỗ lực thấp nhưng impact cao.",
+      "citations": [
+        "T02-003"
+      ]
+    },
+    {
+      "text": "AI có thể tạo ra ảnh đẹp bằng code, như Claude và ChatGPT có thể sinh ra dạng vector và export ra PDF.",
+      "citations": [
+        "T02-004"
+      ]
+    },
+    {
+      "text": "Việc cài đặt reminder để nhắc nhở người dùng đi ngủ có thể không hiệu quả nếu người dùng không thực hiện theo.",
+      "citations": [
+        "T02-006"
+      ]
+    },
+    {
+      "text": "Có ứng dụng yêu cầu người dùng phải thực hiện hành động như chơi game hoặc tìm QR code để tắt báo thức, giúp người dùng tỉnh táo hơn.",
+      "citations": [
+        "T02-007"
+      ]
+    }
+  ],
+  "concepts": [
+    "nỗ lực",
+    "impact",
+    "AI",
+    "reminder",
+    "báo thức"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-001",
+    "T02-002",
+    "T02-003",
+    "T02-004",
+    "T02-005",
+    "T02-006",
+    "T02-007",
+    "T02-008"
+  ],
+  "covered_chunk_ids": [
+    "T02-003",
+    "T02-004",
+    "T02-006",
+    "T02-007"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [
+    "T02-001",
+    "T02-002",
+    "T02-005",
+    "T02-008"
+  ],
+  "content_hash": "9e0e4ad4abec0b55065e37d9287a4f11d7c20370dbe6944869d133df979800aa",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:41:47.046034Z"
+}

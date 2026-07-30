@@ -1,0 +1,99 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-003",
+  "section_title": "Phát triển sản phẩm AI có gì khác",
+  "section_order": 3,
+  "abstract": "Nội dung chính của mục này là thảo luận về sự khác biệt trong phát triển sản phẩm AI so với sản phẩm truyền thống, bao gồm các yếu tố cần thiết và thách thức trong quá trình phát triển.",
+  "key_points": [
+    {
+      "text": "Phát triển sản phẩm AI yêu cầu nắm vững nguyên lý phát triển sản phẩm và có năng lực sử dụng AI để tăng năng suất.",
+      "citations": [
+        "T01-018"
+      ]
+    },
+    {
+      "text": "Việc xử lý lỗi trong AI khác với sản phẩm truyền thống vì AI sinh ra xác suất, không đảm bảo kết quả giống nhau.",
+      "citations": [
+        "T01-019"
+      ]
+    },
+    {
+      "text": "Kỳ vọng của người dùng về sản phẩm AI đã thay đổi nhanh chóng, khiến việc cạnh tranh trở nên khốc liệt hơn.",
+      "citations": [
+        "T01-020"
+      ]
+    },
+    {
+      "text": "Chi phí chuyển đổi giữa các sản phẩm hiện nay thấp hơn nhiều, cho phép người dùng dễ dàng chuyển đổi.",
+      "citations": [
+        "T01-021"
+      ]
+    },
+    {
+      "text": "Việc xây dựng sản phẩm AI đòi hỏi phải xây dựng nhiều yếu tố cùng một lúc và cần có tư duy rõ ràng về sản phẩm.",
+      "citations": [
+        "T01-025"
+      ]
+    },
+    {
+      "text": "Tài liệu People + AI Guidebook của Google cung cấp framework chi tiết cho quá trình phát triển sản phẩm AI.",
+      "citations": [
+        "T01-029"
+      ]
+    }
+  ],
+  "concepts": [
+    "phát triển sản phẩm AI",
+    "mô hình ngôn ngữ lớn",
+    "mental model",
+    "expectation",
+    "AI Engineering",
+    "People + AI Guidebook"
+  ],
+  "examples": [],
+  "student_questions": [
+    {
+      "text": "Em sử dụng rất nhiều. Bắt đầu em sử dụng Antigravity, xong rồi em chuyển qua dùng [không nghe rõ], hiện tại thì đang dùng cái này.",
+      "citations": [
+        "T01-023"
+      ]
+    }
+  ],
+  "source_chunk_ids": [
+    "T01-018",
+    "T01-019",
+    "T01-020",
+    "T01-021",
+    "T01-022",
+    "T01-023",
+    "T01-024",
+    "T01-025",
+    "T01-026",
+    "T01-027",
+    "T01-028",
+    "T01-029"
+  ],
+  "covered_chunk_ids": [
+    "T01-018",
+    "T01-019",
+    "T01-020",
+    "T01-021",
+    "T01-023",
+    "T01-025",
+    "T01-029"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T01-023",
+    "T01-024",
+    "T01-027",
+    "T01-028"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "81e03f56338632ea29ab69188f19960638d4638a5d12aa92498f084aba1e0fa6",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:40:54.684145Z"
+}

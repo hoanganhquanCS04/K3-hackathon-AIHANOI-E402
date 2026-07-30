@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-002",
+  "section_title": "Từ quick win đến phát biểu bài toán",
+  "section_order": 2,
+  "abstract": "Nội dung chính của mục này là hướng dẫn cách xác định và phân loại các vấn đề cần giải quyết trong doanh nghiệp, từ việc tìm kiếm các quick win đến việc phát biểu bài toán và định lượng thành công.",
+  "key_points": [
+    {
+      "text": "Quick win rất quan trọng để tạo động lực cho các dự án.",
+      "citations": [
+        "T02-010"
+      ]
+    },
+    {
+      "text": "Framework đơn giản có thể áp dụng cho nhiều công việc khác nhau trong doanh nghiệp.",
+      "citations": [
+        "T02-011"
+      ]
+    },
+    {
+      "text": "Cần xem xét liệu AI có thực sự giải quyết vấn đề tốt hơn phương pháp thủ công hay không.",
+      "citations": [
+        "T02-014"
+      ]
+    },
+    {
+      "text": "Định lượng bài toán là cần thiết để đánh giá tác động và thuyết phục cấp trên.",
+      "citations": [
+        "T02-018"
+      ]
+    }
+  ],
+  "concepts": [
+    "quick win",
+    "impact",
+    "AI",
+    "workflow",
+    "định lượng"
+  ],
+  "examples": [
+    {
+      "text": "Nếu tôi giải quyết được việc tóm tắt các văn bản tài liệu mỗi ngày thì tôi tiết kiệm được 30 phút một ngày.",
+      "citations": [
+        "T02-015"
+      ]
+    },
+    {
+      "text": "Mỗi thứ Hai em mất khoảng 90 phút để tổng hợp weekly report từ nhiều nền tảng khác nhau.",
+      "citations": [
+        "T02-017"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-009",
+    "T02-010",
+    "T02-011",
+    "T02-012",
+    "T02-013",
+    "T02-014",
+    "T02-015",
+    "T02-016",
+    "T02-017",
+    "T02-018"
+  ],
+  "covered_chunk_ids": [
+    "T02-010",
+    "T02-011",
+    "T02-014",
+    "T02-015",
+    "T02-017",
+    "T02-018"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "94624d731ce122d1e19419b2d85586bac39738c301888a38ef5a7333c1e7dd0a",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:41:49.069003Z"
+}

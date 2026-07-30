@@ -1,0 +1,28 @@
+{
+  "prompt_version": "v1",
+  "map_model": "gpt-4o",
+  "reduce_model": "gpt-4o",
+  "loader_backend": "local",
+  "generated_at": "2026-07-30T09:21:17.193765+00:00",
+  "sessions": [
+    {
+      "session_id": "T02",
+      "session_locator": "Day 2 — Chỉ số thành công & mức tự động hoá (phần sau buổi)",
+      "section_count": 5,
+      "chunk_count": 43,
+      "map_cache_hits": 5,
+      "map_llm_calls": 0,
+      "warnings": [],
+      "reduce_cache_hit": true,
+      "reduce_llm_calls": 0,
+      "coverage": {
+        "total_sections": 5,
+        "covered_sections": 5,
+        "total_chunks": 43,
+        "cited_chunks": 30,
+        "unclear_chunks": 10,
+        "activity_chunks": 6
+      }
+    }
+  ]
+}

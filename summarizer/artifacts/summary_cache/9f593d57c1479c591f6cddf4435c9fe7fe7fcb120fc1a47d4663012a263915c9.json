@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-012",
+  "section_title": "Từ mô hình đến AI agent",
+  "section_order": 12,
+  "abstract": "Nội dung chính của mục này là quá trình chuyển đổi từ mô hình cơ bản thành AI agent có khả năng tương tác và hoạt động trong thế giới thực.",
+  "key_points": [
+    {
+      "text": "AI agent được phát triển từ một mô hình cơ bản.",
+      "citations": [
+        "T04-073"
+      ]
+    },
+    {
+      "text": "AI agent cần được gắn kết với các công cụ để có thể hoạt động hiệu quả.",
+      "citations": [
+        "T04-073"
+      ]
+    },
+    {
+      "text": "Trong môi trường doanh nghiệp, AI agent có thể cần làm việc với nhiều công cụ khác nhau.",
+      "citations": [
+        "T04-073"
+      ]
+    },
+    {
+      "text": "Quá trình phát triển AI agent bao gồm việc lắp thêm các khả năng bên ngoài cho mô hình.",
+      "citations": [
+        "T04-073"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI agent",
+    "mô hình",
+    "công cụ",
+    "kế hoạch"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-073"
+  ],
+  "covered_chunk_ids": [
+    "T04-073"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-073"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "13fc7db1f72e3d2fbee6c9158262e7342776bcdc89700c3c727f0aefffc7790d",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:18.998766Z"
+}

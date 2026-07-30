@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-002",
+  "section_title": "Product manager, project manager và văn hoá làm product",
+  "section_order": 2,
+  "abstract": "Buổi giảng tập trung vào sự khác biệt giữa product manager và project manager, cũng như văn hóa làm sản phẩm tại Việt Nam.",
+  "key_points": [
+    {
+      "text": "Các vị trí trong một team đang dần xoá mờ ranh giới, với sự xuất hiện của những người generalist.",
+      "citations": [
+        "T01-007"
+      ]
+    },
+    {
+      "text": "Product manager (PM) và project manager (PM) có những nhiệm vụ và kỹ năng khác nhau.",
+      "citations": [
+        "T01-008"
+      ]
+    },
+    {
+      "text": "Project manager thường đảm bảo dự án hoàn thành đúng tiến độ và ngân sách.",
+      "citations": [
+        "T01-010"
+      ]
+    },
+    {
+      "text": "Product manager tự tìm bài toán và giải pháp, trong khi product owner tập trung vào khảo sát user.",
+      "citations": [
+        "T01-011"
+      ]
+    },
+    {
+      "text": "Nhiều dự án để lại nợ kỹ thuật do không nghĩ xa hơn yêu cầu ban đầu.",
+      "citations": [
+        "T01-013"
+      ]
+    },
+    {
+      "text": "Văn hóa làm sản phẩm ở Sài Gòn được cho là tốt hơn ở Hà Nội.",
+      "citations": [
+        "T01-015"
+      ]
+    }
+  ],
+  "concepts": [
+    "product manager",
+    "project manager",
+    "product owner",
+    "user-centered",
+    "mindset",
+    "framework"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-007",
+    "T01-008",
+    "T01-009",
+    "T01-010",
+    "T01-011",
+    "T01-012",
+    "T01-013",
+    "T01-014",
+    "T01-015",
+    "T01-016",
+    "T01-017"
+  ],
+  "covered_chunk_ids": [
+    "T01-007",
+    "T01-008",
+    "T01-010",
+    "T01-011",
+    "T01-013",
+    "T01-015"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T01-012",
+    "T01-016"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "c26853e3e41e59fbe1c7f5f1583a7ad96d267343393f58338f4fd0e967516c24",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:40:54.165618Z"
+}

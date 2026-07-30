@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "session",
+  "session_id": "T02",
+  "session_title": "Chỉ số thành công & mức tự động hoá (phần sau buổi)",
+  "session_locator": "Day 2 — Chỉ số thành công & mức tự động hoá (phần sau buổi)",
+  "tldr": "Buổi học tập trung vào việc xác định chỉ số thành công và mức độ tự động hóa khi áp dụng AI trong doanh nghiệp. Các khái niệm như quick win, North Star Metric, và các cấp độ kỹ thuật trong AI được thảo luận để giúp người học hiểu rõ hơn về cách đo lường hiệu quả và lựa chọn giải pháp phù hợp.",
+  "key_points": [
+    {
+      "text": "Quy trình làm nội dung TikTok có thể thực hiện với nỗ lực thấp nhưng impact cao.",
+      "citations": [
+        "T02-003"
+      ],
+      "section_id": "T02-SEC-001"
+    },
+    {
+      "text": "Quick win rất quan trọng để tạo động lực cho các dự án.",
+      "citations": [
+        "T02-010"
+      ],
+      "section_id": "T02-SEC-002"
+    },
+    {
+      "text": "Đo lường hiệu quả sản phẩm cần xác định các chỉ số cụ thể như số lượng user và thời gian sử dụng.",
+      "citations": [
+        "T02-019"
+      ],
+      "section_id": "T02-SEC-003"
+    },
+    {
+      "text": "Bước đầu tiên trong việc quyết định đưa AI vào sử dụng là xác định nhu cầu và thế mạnh của AI.",
+      "citations": [
+        "T02-031"
+      ],
+      "section_id": "T02-SEC-004"
+    },
+    {
+      "text": "Cấp độ thứ nhất là dùng các quy tắc, nơi các quy tắc rõ ràng có thể được viết thành code mà không cần đến AI.",
+      "citations": [
+        "T02-036"
+      ],
+      "section_id": "T02-SEC-005"
+    },
+    {
+      "text": "North Star Metric là chỉ số cuối cùng mà sản phẩm hướng tới, cần xây dựng các giả thuyết để đo lường.",
+      "citations": [
+        "T02-025"
+      ],
+      "section_id": "T02-SEC-003"
+    },
+    {
+      "text": "Cần ưu tiên xử lý các công việc có impact lớn trước và chú ý đến độ hậu quả của công việc khi quyết định mức độ tự động hóa.",
+      "citations": [
+        "T02-034"
+      ],
+      "section_id": "T02-SEC-004"
+    },
+    {
+      "text": "Cấp độ hai là xây dựng theo dạng workflow, nơi AI agent có thể hỗ trợ trong từng bước lớn của quy trình.",
+      "citations": [
+        "T02-037"
+      ],
+      "section_id": "T02-SEC-005"
+    }
+  ],
+  "outline": [
+    {
+      "section_id": "T02-SEC-001",
+      "section_order": 1,
+      "section_title": "Nhận xét bài tập ma trận tác động – nỗ lực",
+      "abstract": "Buổi giảng tập trung vào việc nhận xét bài tập ma trận tác động và nỗ lực trong việc sử dụng công nghệ AI để tạo nội dung và quản lý thời gian.",
+      "citations": [
+        "T02-003",
+        "T02-004",
+        "T02-006",
+        "T02-007"
+      ]
+    },
+    {
+      "section_id": "T02-SEC-002",
+      "section_order": 2,
+      "section_title": "Từ quick win đến phát biểu bài toán",
+      "abstract": "Nội dung chính của mục này là hướng dẫn cách xác định và phân loại các vấn đề cần giải quyết trong doanh nghiệp, từ việc tìm kiếm các quick win đến việc phát biểu bài toán và định lượng thành công.",
+      "citations": [
+        "T02-010",
+        "T02-011",
+        "T02-014",
+        "T02-018",
+        "T02-015",
+        "T02-017"
+      ]
+    },
+    {
+      "section_id": "T02-SEC-003",
+      "section_order": 3,
+      "section_title": "Chỉ số thành công và đo lường sản phẩm",
+      "abstract": "Nội dung chính của mục này là về việc đo lường hiệu quả sản phẩm thông qua các chỉ số thành công và cách thiết kế các chỉ số này để đánh giá hiệu quả học tập hoặc trải nghiệm người dùng.",
+      "citations": [
+        "T02-019",
+        "T02-021",
+        "T02-024",
+        "T02-025",
+        "T02-028",
+        "T02-029",
+        "T02-020",
+        "T02-026",
+        "T02-030"
+      ]
+    },
+    {
+      "section_id": "T02-SEC-004",
+      "section_order": 4,
+      "section_title": "Automation và augmentation: chọn mức độ tự động hoá",
+      "abstract": "Bài giảng tập trung vào việc lựa chọn mức độ tự động hóa trong việc áp dụng AI vào sản phẩm, phân biệt giữa automation và augmentation.",
+      "citations": [
+        "T02-031",
+        "T02-032",
+        "T02-033",
+        "T02-034"
+      ]
+    },
+    {
+      "section_id": "T02-SEC-005",
+      "section_order": 5,
+      "section_title": "Ba cấp độ kỹ thuật: rule-based, workflow, agent",
+      "abstract": "Buổi giảng đề cập đến ba cấp độ kỹ thuật trong việc áp dụng AI, bao gồm rule-based, workflow và agent, cùng với những lưu ý khi xây dựng và sử dụng các giải pháp này.",
+      "citations": [
+        "T02-036",
+        "T02-037",
+        "T02-038",
+        "T02-039",
+        "T02-040",
+        "T02-042"
+      ]
+    }
+  ],
+  "concepts": [
+    "nỗ lực",
+    "impact",
+    "AI",
+    "reminder",
+    "báo thức",
+    "quick win",
+    "workflow",
+    "định lượng",
+    "North Star Metric",
+    "A/B testing",
+    "Google Analytics",
+    "visitor",
+    "user",
+    "metric",
+    "automation",
+    "augmentation",
+    "rule-based",
+    "agent"
+  ],
+  "open_questions": [],
+  "coverage": {
+    "total_sections": 5,
+    "covered_sections": 5,
+    "total_chunks": 43,
+    "cited_chunks": 29,
+    "unclear_chunks": 10,
+    "activity_chunks": 6
+  },
+  "warnings": [
+    "Mục 3 (Chỉ số thành công và đo lường sản phẩm) có 7 đoạn [không nghe rõ]; nội dung tóm tắt có thể thiếu.",
+    "Mục 5 (Ba cấp độ kỹ thuật: rule-based, workflow, agent) có 3 đoạn [không nghe rõ]; nội dung tóm tắt có thể thiếu."
+  ],
+  "prompt_version": "v1",
+  "model_map": "gpt-4o-mini",
+  "model_reduce": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:02.614499Z"
+}

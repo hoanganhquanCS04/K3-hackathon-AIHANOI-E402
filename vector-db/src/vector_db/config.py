@@ -27,6 +27,9 @@ class Settings(BaseModel):
     qdrant_api_key: str = ""
     qdrant_collection: str = "vlearn_transcripts_openai_small_768_v1"
     openai_api_key: str = ""
+    # Blank means api.openai.com; set it to route through an OpenAI-compatible
+    # relay such as YEScale.
+    openai_base_url: str = ""
     embedding_model: str = "text-embedding-3-small"
     embedding_dimensions: int = 768
     qdrant_timeout_seconds: int = 60
@@ -73,6 +76,7 @@ def load_settings() -> Settings:
             "vlearn_transcripts_openai_small_768_v1",
         ),
         openai_api_key=os.getenv("OPENAI_API_KEY", ""),
+        openai_base_url=os.getenv("OPENAI_BASE_URL", ""),
         embedding_model=os.getenv(
             "OPENAI_EMBEDDING_MODEL",
             "text-embedding-3-small",

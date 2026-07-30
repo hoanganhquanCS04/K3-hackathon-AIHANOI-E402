@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-011",
+  "section_title": "Vòng lặp HCD và bài tập cá nhân",
+  "section_order": 11,
+  "abstract": "Nội dung bài giảng tập trung vào quy trình thiết kế lấy con người làm trung tâm (HCD) và cách xác định bài toán kinh doanh cho AI thông qua việc quan sát và thử nghiệm.",
+  "key_points": [
+    {
+      "text": "Vòng lặp HCD là quy trình thiết kế lấy con người làm trung tâm.",
+      "citations": [
+        "T01-081"
+      ]
+    },
+    {
+      "text": "Trong quy trình xác định vấn đề, có thể xây dựng prototype để kiểm thử và xác định vấn đề đúng.",
+      "citations": [
+        "T01-082"
+      ]
+    },
+    {
+      "text": "Quy trình HCD bao gồm các bước: đồng cảm, xác định vấn đề, đưa ra ý tưởng, xây dựng prototype và kiểm thử.",
+      "citations": [
+        "T01-083"
+      ]
+    },
+    {
+      "text": "Việc quay vòng lặp HCD nhiều lần giúp tối ưu hóa sản phẩm với chi phí tiết kiệm.",
+      "citations": [
+        "T01-085"
+      ]
+    },
+    {
+      "text": "Sự tò mò và đặt câu hỏi là nguồn gốc của nhiều ý tưởng sản phẩm thành công.",
+      "citations": [
+        "T01-086"
+      ]
+    },
+    {
+      "text": "Bài tập cá nhân yêu cầu học viên liệt kê các vấn đề và tìm cơ hội cải tiến cho trợ lý AI.",
+      "citations": [
+        "T01-088"
+      ]
+    }
+  ],
+  "concepts": [
+    "Human-Centered Design",
+    "prototype",
+    "pain point",
+    "high impact",
+    "low effort"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-081",
+    "T01-082",
+    "T01-083",
+    "T01-084",
+    "T01-085",
+    "T01-086",
+    "T01-087",
+    "T01-088",
+    "T01-089"
+  ],
+  "covered_chunk_ids": [
+    "T01-081",
+    "T01-082",
+    "T01-083",
+    "T01-085",
+    "T01-086",
+    "T01-088"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T01-085"
+  ],
+  "activity_chunk_ids": [
+    "T01-089"
+  ],
+  "content_hash": "4eb82f64a4f56bc80df5956e95a877ec3a3ff6dad6ae0e87e5c7664a9d7019d0",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:41:00.805992Z"
+}
