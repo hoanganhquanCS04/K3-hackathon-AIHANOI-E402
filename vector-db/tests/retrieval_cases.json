@@ -1,0 +1,56 @@
+[
+  {
+    "query": "Product manager khác project manager như thế nào?",
+    "session_id": "T01",
+    "expected_chunk_ids": ["T01-008", "T01-010", "T01-011"],
+    "top_k": 5
+  },
+  {
+    "query": "Automation và augmentation khác nhau như thế nào?",
+    "session_id": "T02",
+    "expected_chunk_ids": ["T02-031", "T02-032", "T02-033", "T02-034"],
+    "top_k": 5
+  },
+  {
+    "query": "Giới hạn của LLM, tool calling và RAG",
+    "session_id": "T03",
+    "expected_chunk_ids": ["T03-034", "T03-035", "T03-036"],
+    "top_k": 5
+  },
+  {
+    "query": "Temperature và top-k top-p có tác dụng gì?",
+    "session_id": "T04",
+    "expected_chunk_ids": ["T04-072"],
+    "top_k": 5
+  },
+  {
+    "query": "Mixture of Experts là gì?",
+    "session_id": "T04",
+    "expected_chunk_ids": ["T04-086"],
+    "top_k": 5
+  },
+  {
+    "query": "Workflow là gì?",
+    "session_id": "T05",
+    "expected_chunk_ids": ["T05-010", "T05-011", "T05-012"],
+    "top_k": 5
+  },
+  {
+    "query": "Case SpaceX có phải bài toán thực tế hay không?",
+    "session_id": "T05",
+    "expected_chunk_ids": ["T05-080", "T05-081", "T05-082", "T05-083"],
+    "top_k": 5
+  },
+  {
+    "query": "Self-attention với ví dụ con mèo ngồi trên bàn",
+    "session_id": "T06",
+    "expected_chunk_ids": ["T06-129", "T06-130", "T06-131", "T06-132", "T06-133"],
+    "top_k": 5
+  },
+  {
+    "query": "Vì sao LLM bị hallucination?",
+    "session_id": "T06",
+    "expected_chunk_ids": ["T06-138", "T06-139", "T06-140"],
+    "top_k": 5
+  }
+]
