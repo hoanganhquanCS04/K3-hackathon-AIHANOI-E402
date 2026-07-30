@@ -124,7 +124,9 @@ def handle(query: str, session: dict, toggles: Toggles | None = None) -> None:
         say("ai", "part", result)
         return
 
-    say("ai", "answer", answer_query(session, query, toggles=toggles))
+    ans = answer_query(session, query, toggles=toggles)
+    ans["_stats"] = last_stats()
+    say("ai", "answer", ans)
 
 
 def screen_list() -> None:
@@ -300,13 +302,16 @@ def render_msg(m: dict) -> None:
             render_stats(p.get("_stats"))
 
         elif kind == "answer":
-            for c in p["claims"]:
-                st.markdown(
-                    f'- {claim_html(c)} <span class="cite">{c["cite"][0]}</span>'
-                    f'<blockquote class="q">“{c["quote"]}”</blockquote>',
-                    unsafe_allow_html=True,
-                )
-            st.caption(p["note"])
+            if p.get("claims"):
+                for c in p["claims"]:
+                    st.markdown(
+                        f'- {claim_html(c)} <span class="cite">{c["cite"][0]}</span>'
+                        f'<blockquote class="q">“{c["quote"]}”</blockquote>',
+                        unsafe_allow_html=True,
+                    )
+            if p.get("note"):
+                st.caption(p["note"])
+            render_stats(p.get("_stats"))
 
 
 def render_suggestions(session: dict) -> None:
