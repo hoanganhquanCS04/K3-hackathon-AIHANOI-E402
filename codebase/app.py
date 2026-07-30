@@ -215,6 +215,22 @@ def render_slide(session: dict) -> None:
         )
 
 
+def render_quote(kp: dict) -> None:
+    """Nguyên văn đoạn được trích, thu lại sau một cái bấm.
+
+    Trước đây blockquote này mở sẵn dưới MỌI ý. Đo trên phần 2 buổi 01: 1312 ký
+    tự tóm tắt so với 7230 ký tự nguyên văn — 85% màn hình là transcript thô, và
+    bản tóm tắt bị chôn ở giữa. Vẫn phải giữ nguyên văn (đó là cách người đọc
+    kiểm chứng mã đoạn), nhưng để nó nằm sau một cái bấm.
+    """
+
+    with st.expander(f"nguyên văn · {kp['cite'][0]}"):
+        st.markdown(
+            f'<blockquote class="q">“{kp["quote"]}”</blockquote>',
+            unsafe_allow_html=True,
+        )
+
+
 def render_stats(stats) -> None:
     """Cho thấy AI có thật sự chạy trong lượt đó không — số lời gọi và thời gian."""
 
@@ -229,6 +245,10 @@ def render_stats(stats) -> None:
         bits.append(f"{stats.seconds:.1f}s")
     if bits:
         st.caption(" · ".join(bits))
+    if getattr(stats, "router", ""):
+        st.caption(f"🧭 router: {stats.router}")
+    if getattr(stats, "outline", ""):
+        st.caption(f"🕸 {stats.outline}")
     for w in stats.warnings[:3]:
         st.caption(f"⚠ {w}")
 
@@ -259,14 +279,13 @@ def render_msg(m: dict) -> None:
                 st.warning(f"Phần này mình không tóm. {p['reason']}")
                 render_stats(p.get("_stats"))
                 return
+            if p.get("abstract"):
+                st.info(p["abstract"])
             for i, kp in enumerate(p["key_points"], 1):
                 tag = ' <b>· một học viên nêu</b>' if kp["has_student_speech"] else ""
                 cites = " ".join(f'<span class="cite">{c}</span>' for c in kp["cite"])
-                st.markdown(
-                    f'{i}. {claim_html(kp)} {cites}{tag}'
-                    f'<blockquote class="q">“{kp["quote"]}”</blockquote>',
-                    unsafe_allow_html=True,
-                )
+                st.markdown(f'{i}. {claim_html(kp)} {cites}{tag}', unsafe_allow_html=True)
+                render_quote(kp)
             for g in p["gaps"]:
                 st.caption(f"⚠ Chỗ bản ghi thiếu: {g}")
             render_stats(p.get("_stats"))
@@ -275,8 +294,8 @@ def render_msg(m: dict) -> None:
             s = p["session"]
             st.markdown(f"### Sổ tay buổi {s['id']} — {s['title']}")
             st.caption(
-                f"Gộp từ {p['n_parts_done']}/{p['n_parts_total']} phần đã tóm · "
-                f"độ tin cậy định vị buổi: {s['locate_confidence'].upper()}"
+                f"Tổng hợp từ toàn bộ {s['n_sections']} mục · {s['n_segments']} đoạn "
+                f"đã đọc · độ tin cậy định vị buổi: {s['locate_confidence'].upper()}"
             )
             if p.get("tldr"):
                 st.info(p["tldr"])
@@ -293,10 +312,6 @@ def render_msg(m: dict) -> None:
                 st.markdown("**⚠ Chỗ bản ghi thiếu**")
                 for g in p["gaps"]:
                     st.markdown(f"- {g}")
-            if p["n_parts_done"] < p["n_parts_total"]:
-                st.info(f"Còn {p['n_parts_total'] - p['n_parts_done']} phần chưa tóm — "
-                        "sổ tay mới gộp bằng code từ các phần đã tóm. Tóm đủ mọi phần "
-                        "thì mới chạy bước REDUCE để viết lại thành một mạch.")
             render_stats(p.get("_stats"))
 
         elif kind == "answer":
