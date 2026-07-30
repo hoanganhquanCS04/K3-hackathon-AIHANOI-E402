@@ -33,14 +33,18 @@ def render_section(summary: SectionSummary) -> str:
     if summary.unclear_chunk_ids:
         lines += [
             "",
-            f"> ⚠️ {len(summary.unclear_chunk_ids)} đoạn không nghe rõ: "
-            f"{_cite(summary.unclear_chunk_ids)}",
+            (
+                f"> ⚠️ {len(summary.unclear_chunk_ids)} đoạn không nghe rõ: "
+                f"{_cite(summary.unclear_chunk_ids)}"
+            ),
         ]
 
     lines += [
         "",
-        f"<sub>Đọc {len(summary.source_chunk_ids)} đoạn, trích dẫn "
-        f"{len(summary.covered_chunk_ids)}.</sub>",
+        (
+            f"<sub>Đọc {len(summary.source_chunk_ids)} đoạn, trích dẫn "
+            f"{len(summary.covered_chunk_ids)}.</sub>"
+        ),
     ]
     return "\n".join(lines)
 
@@ -52,8 +56,10 @@ def render_session(summary: SessionSummary) -> str:
         "",
         summary.tldr,
         "",
-        f"> Đã đọc **{coverage.total_chunks}/{coverage.total_chunks}** đoạn của "
-        f"{coverage.total_sections} mục; {coverage.cited_chunks} đoạn được trích dẫn.",
+        (
+            f"> Đã đọc **{coverage.total_chunks}/{coverage.total_chunks}** đoạn của "
+            f"{coverage.total_sections} mục; {coverage.cited_chunks} đoạn được trích dẫn."
+        ),
         "",
         "## Ý chính cả buổi",
         "",

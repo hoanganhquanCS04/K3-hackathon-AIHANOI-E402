@@ -53,8 +53,10 @@ def build_session(
     if total_from_sections != len(chunks):
         raise ValidationError(
             [
-                f"{session_id}: tổng chunk theo section ({total_from_sections}) khác "
-                f"tổng chunk theo session ({len(chunks)})"
+                (
+                    f"{session_id}: tổng chunk theo section ({total_from_sections}) "
+                    f"khác tổng chunk theo session ({len(chunks)})"
+                )
             ]
         )
 

@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-001",
+  "section_title": "Nhận xét bài tập ma trận tác động – nỗ lực",
+  "section_order": 1,
+  "abstract": "Phần này nhận xét về bài tập ma trận tác động – nỗ lực của học viên, với các ví dụ cụ thể về ứng dụng AI và các giải pháp tự động hóa trong đời sống.",
+  "key_points": [
+    {
+      "text": "Một học viên đã thực hiện bài tập rất kỹ lưỡng, tập trung vào quy trình làm nội dung TikTok với nỗ lực thấp nhưng tác động cao.",
+      "citations": [
+        "T02-003"
+      ]
+    },
+    {
+      "text": "Giảng viên giải thích cách sử dụng AI để tạo ảnh vector bằng HTML và xuất ra PDF, cho thấy tiềm năng của công nghệ trong việc tự động hóa.",
+      "citations": [
+        "T02-004"
+      ]
+    },
+    {
+      "text": "Giảng viên nhận xét về việc nhắc nhở người dùng, cho rằng việc nhắc nhở thường xuyên có thể mất hiệu quả nếu người dùng bỏ qua.",
+      "citations": [
+        "T02-006"
+      ]
+    },
+    {
+      "text": "Một ứng dụng báo thức sáng tạo yêu cầu người dùng thực hiện các hành động nhất định để tắt báo thức, giúp tăng hiệu quả của việc thức dậy.",
+      "citations": [
+        "T02-007"
+      ]
+    }
+  ],
+  "concepts": [
+    "ma trận tác động – nỗ lực",
+    "AI",
+    "tự động hóa"
+  ],
+  "examples": [
+    {
+      "text": "Một học viên đã làm bài tập về quy trình nội dung TikTok với nỗ lực thấp nhưng tác động cao, trong đó có các công việc mà AI là thế mạnh.",
+      "citations": [
+        "T02-003"
+      ]
+    },
+    {
+      "text": "Một ứng dụng báo thức yêu cầu người dùng phải thực hiện các hành động như quét QR code để tắt báo thức, giúp người dùng tỉnh táo hơn.",
+      "citations": [
+        "T02-007"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-001",
+    "T02-002",
+    "T02-003",
+    "T02-004",
+    "T02-005",
+    "T02-006",
+    "T02-007",
+    "T02-008"
+  ],
+  "covered_chunk_ids": [
+    "T02-003",
+    "T02-004",
+    "T02-006",
+    "T02-007"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [
+    "T02-001",
+    "T02-002",
+    "T02-005",
+    "T02-008"
+  ],
+  "content_hash": "9e0e4ad4abec0b55065e37d9287a4f11d7c20370dbe6944869d133df979800aa",
+  "prompt_version": "v1",
+  "model": "gpt-4o",
+  "generated_at": "2026-07-30T09:20:43.747838Z"
+}

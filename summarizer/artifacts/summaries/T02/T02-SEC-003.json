@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-003",
+  "section_title": "Chỉ số thành công và đo lường sản phẩm",
+  "section_order": 3,
+  "abstract": "Phần này của bài giảng tập trung vào các chỉ số đo lường thành công của sản phẩm và phương pháp thực hiện A/B testing.",
+  "key_points": [
+    {
+      "text": "Đo lường sản phẩm cần xác định các chỉ số cụ thể như số lượng user, thời gian sử dụng, và tỷ lệ quay lại.",
+      "citations": [
+        "T02-019",
+        "T02-020"
+      ]
+    },
+    {
+      "text": "North Star Metric là chỉ số quan trọng nhất mà sản phẩm hướng tới, và các chỉ số khác được thiết kế để hỗ trợ đạt được mục tiêu này.",
+      "citations": [
+        "T02-024",
+        "T02-025"
+      ]
+    },
+    {
+      "text": "A/B testing là phương pháp chia nhóm người dùng để thử nghiệm các thay đổi trong sản phẩm và đo lường hiệu quả của chúng.",
+      "citations": [
+        "T02-027",
+        "T02-028",
+        "T02-029"
+      ]
+    }
+  ],
+  "concepts": [
+    "Chỉ số đo lường",
+    "North Star Metric",
+    "A/B testing",
+    "Google Analytics",
+    "Explainable AI"
+  ],
+  "examples": [
+    {
+      "text": "Một sản phẩm có thể báo cáo có 1 triệu user, nhưng thực tế chỉ là 1 triệu visitor do cách tính của Google Analytics.",
+      "citations": [
+        "T02-020"
+      ]
+    },
+    {
+      "text": "Một nhóm nghiên cứu đã sử dụng công cụ trực quan hóa để cải thiện điểm số của sinh viên trong một bài kiểm tra.",
+      "citations": [
+        "T02-026"
+      ]
+    },
+    {
+      "text": "Netflix sử dụng A/B testing để tối ưu hóa ảnh bìa phim nhằm tăng lượt xem.",
+      "citations": [
+        "T02-030"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-019",
+    "T02-020",
+    "T02-021",
+    "T02-022",
+    "T02-023",
+    "T02-024",
+    "T02-025",
+    "T02-026",
+    "T02-027",
+    "T02-028",
+    "T02-029",
+    "T02-030"
+  ],
+  "covered_chunk_ids": [
+    "T02-019",
+    "T02-020",
+    "T02-024",
+    "T02-025",
+    "T02-026",
+    "T02-027",
+    "T02-028",
+    "T02-029",
+    "T02-030"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T02-019",
+    "T02-021",
+    "T02-023",
+    "T02-025",
+    "T02-026",
+    "T02-027",
+    "T02-028"
+  ],
+  "activity_chunk_ids": [
+    "T02-022"
+  ],
+  "content_hash": "d549aeda36bc53b69c55a489ce7c9cdab670716af97ad5d2347161cceec9582f",
+  "prompt_version": "v1",
+  "model": "gpt-4o",
+  "generated_at": "2026-07-30T09:20:44.056298Z"
+}
