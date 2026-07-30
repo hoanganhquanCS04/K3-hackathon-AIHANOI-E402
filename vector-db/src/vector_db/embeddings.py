@@ -51,7 +51,10 @@ class EmbeddingService:
                 "Missing OPENAI_API_KEY. It is required for embedding "
                 "API calls but not for parser tests or --dry-run."
             )
-        self.client = OpenAI(api_key=app_settings.openai_api_key)
+        self.client = OpenAI(
+            api_key=app_settings.openai_api_key,
+            base_url=app_settings.openai_base_url or None,
+        )
         app_settings.artifact_dir.mkdir(parents=True, exist_ok=True)
         self.cache_path = (
             cache_path or app_settings.artifact_dir / "embedding_cache.sqlite3"
