@@ -258,7 +258,7 @@ def build_recap(session: dict, done: dict) -> dict:
     }
 
 
-def answer_query(session: dict, query: str, toggles=None, stream_callback=None) -> dict:
+def answer_query(session: dict, query: str, toggles=None) -> dict:
     """ĐÃ NỐI THẬT với Agent & Tra cứu RRF 3 nhánh, ghi nhận thời gian từng chặng."""
     global _last
     
@@ -282,7 +282,6 @@ def answer_query(session: dict, query: str, toggles=None, stream_callback=None) 
         session=session["id"],
         toggles=toggles,
         trace=trace,
-        stream_callback=stream_callback,
     )
     elapsed = time.perf_counter() - started
 

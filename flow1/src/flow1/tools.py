@@ -80,7 +80,6 @@ def tra_cuu(
     retrievers=None,
     trace=None,
     rewrite_call=None,
-    stream_callback=None,
     **kw,
 ):
     """Viet lai query -> retrieve ba nhanh -> 4 cong. Tra ve `flow1.ask.Result`.
@@ -100,7 +99,6 @@ def tra_cuu(
         "rewritten": q,
         "toggles": toggles,
         "retrievers": retrievers,
-        "stream_callback": stream_callback,
     }
     for k in ("segs", "path", "classify_call", "answer_call", "check_citations"):
         if k in kw:

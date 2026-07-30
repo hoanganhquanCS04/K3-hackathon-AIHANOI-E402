@@ -65,7 +65,6 @@ def ask(
     rewritten=None,
     toggles=None,
     retrievers=None,
-    stream_callback=None,
 ) -> Result:
     """Một lượt hỏi qua 4 cổng. Mọi lời gọi model inject được để test không cần mạng."""
     from flow1.trace import NullTrace
@@ -120,53 +119,23 @@ def ask(
 
     # ---- CỔNG 2 -----------------------------------------------------------
     if answer_call is None:
-        def _llm_call(system, user_blocks, schema):
-            import os
-            user = "\n\n".join(b["text"] for b in user_blocks if b["type"] == "text")
-            if stream_callback is not None:
-                from openai import OpenAI
-                client = OpenAI(
-                    api_key=os.getenv("OPENAI_API_KEY", ""),
-                    base_url=os.getenv("OPENAI_BASE_URL") or None,
-                )
-                response_stream = client.chat.completions.create(
-                    model=os.getenv("ANSWER_MODEL", "gpt-4o-mini"),
-                    messages=[
-                        {"role": "system", "content": system},
-                        {"role": "user", "content": user},
-                    ],
-                    stream=True,
-                    temperature=0.0,
-                )
-                full_text = ""
-                for chunk in response_stream:
-                    if chunk.choices and chunk.choices[0].delta.content:
-                        delta = chunk.choices[0].delta.content
-                        full_text += delta
-                        try:
-                            stream_callback(delta)
-                        except Exception:
-                            pass
-                clean_json = full_text.strip()
-                if clean_json.startswith("```"):
-                    parts = clean_json.split("```")
-                    if len(parts) >= 2:
-                        clean_json = parts[1]
-                        if clean_json.startswith("json"):
-                            clean_json = clean_json[4:]
-                clean_json = clean_json.strip()
-                return schema.model_validate_json(clean_json)
-            else:
-                from summarizer.llm import OpenAIStructuredLLM
+        try:
+            from summarizer.llm import OpenAIStructuredLLM
+            def _llm_call(system, user_blocks, schema):
                 llm = OpenAIStructuredLLM()
+                user = "\n\n".join(b["text"] for b in user_blocks if b["type"] == "text")
                 return llm.parse(
                     model="gpt-4o-mini",
                     system=system,
                     user=user,
                     schema=schema,
-                    temperature=0.0,
+                    temperature=0.0
                 )
-        answer_call = _llm_call
+            answer_call = _llm_call
+        except ImportError:
+            def dummy_answer_call(system, user_blocks, schema):
+                raise RuntimeError("summarizer.llm chưa khả dụng")
+            answer_call = dummy_answer_call
 
     with trace.stage("context") as tdata:
         user_blocks = [
