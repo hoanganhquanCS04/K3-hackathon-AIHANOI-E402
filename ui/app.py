@@ -207,16 +207,28 @@ def render_stats(stats) -> None:
     if stats is None:
         return
     bits = []
+    if stats.seconds:
+        bits.append(f"⏱️ Tổng thời gian: **{stats.seconds:.2f}s**")
     if stats.llm_calls:
         bits.append(f"🔴 gọi LLM **{stats.llm_calls}** lần")
     if stats.cache_hits:
         bits.append(f"⚡ dùng cache {stats.cache_hits} lần")
-    if stats.seconds:
-        bits.append(f"{stats.seconds:.1f}s")
     if bits:
         st.caption(" · ".join(bits))
+
     for w in stats.warnings[:3]:
         st.caption(f"⚠ {w}")
+
+    if getattr(stats, "stage_timings", None):
+        with st.expander("⏱️ Chi tiết thời gian từng bước (Latency Breakdown)", expanded=False):
+            data_rows = []
+            for stage_name, ms, note in stats.stage_timings:
+                data_rows.append({
+                    "Bước / Công đoạn": stage_name,
+                    "Thời gian (ms)": f"{ms:.1f} ms",
+                    "Ghi chú": note or "—"
+                })
+            st.dataframe(data_rows, use_container_width=True, hide_index=True)
 
 
 def render_msg(m: dict) -> None:

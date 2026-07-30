@@ -37,6 +37,7 @@ from summarizer.loader import get_loader
 from summarizer.mapper import summarize_sections
 from summarizer.reducer import summarize_session
 from summarizer.schemas import Chunk, SectionSummary
+from flow1.trace import Trace
 
 _loader = None
 _llm = None
@@ -64,6 +65,7 @@ class Stats:
     cache_hits: int = 0
     seconds: float = 0.0
     warnings: list[str] = field(default_factory=list)
+    stage_timings: list[tuple[str, float, str]] = field(default_factory=list)
 
 
 _last = Stats()
@@ -142,11 +144,16 @@ def summarize_part(session: dict, part_idx: int) -> dict:
     elapsed = time.perf_counter() - started
 
     summaries = tuple(result.summary for result in results)
+    timings = [
+        ("MAP Tóm từng section (LLM)", round(elapsed * 1000.0, 1), f"{len(refs)} sections")
+    ]
+
     _last = Stats(
         llm_calls=sum(0 if result.cache_hit else 1 for result in results),
         cache_hits=sum(1 for result in results if result.cache_hit),
         seconds=elapsed,
         warnings=[w for result in results for w in result.report.warnings],
+        stage_timings=timings,
     )
 
     chunks = _chunk_index(session_id)
@@ -191,7 +198,10 @@ def build_recap(session: dict, done: dict) -> dict:
     chunks = _chunk_index(session_id)
 
     if not complete:
-        _last = Stats(warnings=[f"mới có {len(have)}/{len(all_refs)} mục, chưa gọi reduce"])
+        _last = Stats(
+            warnings=[f"mới có {len(have)}/{len(all_refs)} mục, chưa gọi reduce"],
+            stage_timings=[("Gộp sơ bộ (Code)", 0.5, "chưa tóm đủ các phần")],
+        )
         picked = _to_ui_points(
             tuple(sorted(have.values(), key=lambda s: s.section_order)), chunks
         )
@@ -224,6 +234,7 @@ def build_recap(session: dict, done: dict) -> dict:
         cache_hits=1 if result.cache_hit else 0,
         seconds=elapsed,
         warnings=list(summary.warnings),
+        stage_timings=[("REDUCE Gộp sổ tay (LLM)", round(elapsed * 1000.0, 1), "cả buổi")],
     )
 
     def to_ui(item) -> dict:
@@ -247,12 +258,12 @@ def build_recap(session: dict, done: dict) -> dict:
     }
 
 
-def answer_query(session: dict, query: str) -> dict:
-    """ĐÃ NỐI THẬT với luồng 1 (flow1)."""
+def answer_query(session: dict, query: str, toggles=None) -> dict:
+    """ĐÃ NỐI THẬT với Agent & Tra cứu RRF 3 nhánh, ghi nhận thời gian từng chặng."""
     global _last
     
     try:
-        from flow1.ask import ask
+        from flow1.agent import agent_run
     except Exception as e:
         import traceback
         traceback.print_exc()
@@ -260,24 +271,65 @@ def answer_query(session: dict, query: str) -> dict:
         return {
             "status": "error",
             "claims": [],
-            "note": f"Lỗi: Không import được flow1.ask. Chi tiết: {e}"
+            "note": f"Lỗi: Không import được flow1.agent. Chi tiết: {e}"
         }
 
+    trace = Trace(query)
     started = time.perf_counter()
-    result = ask(query, session=session["id"])
+
+    agent_res = agent_run(
+        query,
+        tool_kwargs={"session": session["id"], "toggles": toggles},
+        trace=trace,
+    )
     elapsed = time.perf_counter() - started
-    
+
+    stage_labels = {
+        "rule_gate": "🛡️ Rule Gate (Phân loại 0-token)",
+        "agent": "🤖 Agent Reasoning (Chọn Tool)",
+        "rewrite": "✍️ Query Rewrite (LLM 1 -> 3 dạng)",
+        "bm25": "🔎 BM25 Retrieval (Offline Keyword)",
+        "qdrant": "🎯 Qdrant Retrieval (Vector Cloud)",
+        "neo4j": "🌐 Neo4j Retrieval (Knowledge Graph)",
+        "gate_stats": "📊 Cổng 1 (Tính điểm BM25 thô)",
+        "fuse": "🔀 RRF Fusion (Gộp 3 nhánh)",
+        "context": "📦 Context Expansion (Gỡ đoạn nguyên tử)",
+        "gate1": "🛡️ Cổng 1 Decision (So ngưỡng T1)",
+        "generate": "💬 Generate Answer (LLM Verdict)",
+        "citation": "✅ Cổng 3 Validator (Kiểm mã trích dẫn)",
+        "tom_tat": "📄 Tóm tắt cả buổi (Map-Reduce Cache)",
+    }
+
+    timings = []
+    for s in trace.stages:
+        name_pretty = stage_labels.get(s.name, f"⚡ Stage `{s.name}`")
+        ms_val = s.data.get("ms", s.ms)
+        note = ""
+        if "top10" in s.data:
+            note = f"{len(s.data['top10'])} hits"
+        elif "tool_da_chon" in s.data:
+            note = f"Tool `{s.data['tool_da_chon']}`"
+        elif "nhan" in s.data and s.data["nhan"]:
+            note = f"Nhãn `{s.data['nhan']}`"
+
+        timings.append((name_pretty, round(float(ms_val), 1), note))
+
+    verdict = None
+    if hasattr(agent_res, "result") and agent_res.result:
+        verdict = getattr(agent_res.result, "verdict", None)
+
     _last = Stats(
-        llm_calls=1 if getattr(result, "verdict", None) else 0,
+        llm_calls=1 if verdict else 0,
         seconds=elapsed,
-        warnings=[drop.detail for drop in getattr(result.verdict, "drops", [])] if getattr(result, "verdict", None) else []
+        warnings=[drop.detail for drop in getattr(verdict, "drops", [])] if verdict else [],
+        stage_timings=timings,
     )
 
-    if result.outcome == "answered" and getattr(result, "verdict", None):
+    if agent_res.outcome in ("answered", "ok") and verdict:
         chunks = _chunk_index(_sid(session))
         
         claims = []
-        for claim in result.verdict.claims:
+        for claim in verdict.claims:
             first_cite = claim.cite[0] if claim.cite else ""
             chunk = chunks.get(first_cite)
             claims.append({
@@ -289,18 +341,18 @@ def answer_query(session: dict, query: str) -> dict:
         return {
             "status": "answered",
             "claims": claims,
-            "note": result.message
+            "note": getattr(agent_res.result, "message", "") or "Đã tra cứu thành công."
         }
     else:
-        message = result.message
+        message = agent_res.message
         if not message:
-            if result.outcome == "insufficient":
-                message = "Các đoạn bản ghi không đủ căn cứ để trả lời câu hỏi này (hoặc các ý đã bị bộ lọc từ chối)."
+            if agent_res.outcome == "insufficient":
+                message = "Các đoạn bản ghi không đủ căn cứ để trả lời câu hỏi này."
             else:
-                message = f"Không thể trả lời: {result.outcome}"
+                message = f"Thông báo: {agent_res.outcome}"
                 
         return {
-            "status": result.outcome,
+            "status": agent_res.outcome,
             "claims": [],
             "note": message
         }
