@@ -1,3 +1,7 @@
+
+
+
+
 # Transcript bài giảng (bản sạch) — Day 2 (sáng) — Xác định bài toán kinh doanh cho AI
 
 > **Nguồn:** `transcript_2/01.md` (bản ASR thô) · **Định vị buổi:** Day 2 (sáng) — Xác định bài toán kinh doanh cho AI — độ tin cậy: cao (khớp title bài học trong chatlog tutor)

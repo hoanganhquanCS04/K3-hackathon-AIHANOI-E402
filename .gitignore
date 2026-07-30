@@ -1,7 +1,10 @@
 .DS_Store
 node_modules/
+
 *.env
 .env
+.env.local
+
 .venv/
 __pycache__/
 .pytest_cache/
@@ -9,5 +12,11 @@ __pycache__/
 coverage.xml
 htmlcov/
 *.log
+
+codebase/store/
+codebase/cache/
+codebase/fixtures/
+data/vlearn-pack/
+
 vector-db/artifacts/embedding_cache.sqlite3
 vector-db/artifacts/rejected_records.jsonl
