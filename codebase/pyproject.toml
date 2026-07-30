@@ -1,9 +1,0 @@
-[project]
-name = "sotay"
-version = "0.1.0"
-requires-python = ">=3.13"
-dependencies = ["anthropic", "pydantic", "rank_bm25", "numpy", "streamlit"]
-
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-pythonpath = ["."]

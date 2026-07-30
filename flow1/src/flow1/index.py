@@ -21,7 +21,7 @@ from rank_bm25 import BM25Okapi
 
 from flow1.models import Chunk
 
-STORE_DIR = Path(__file__).resolve().parents[1] / "store"
+STORE_DIR = Path(__file__).resolve().parents[2] / "store"
 BM25_PATH = STORE_DIR / "bm25.pkl"
 
 _TOKEN_RE = re.compile(r"\w+", re.UNICODE)

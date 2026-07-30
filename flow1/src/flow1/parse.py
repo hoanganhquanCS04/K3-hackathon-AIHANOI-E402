@@ -25,7 +25,7 @@ from pathlib import Path
 
 from flow1.models import Seg
 
-TRANSCRIPT_DIR = Path(__file__).resolve().parents[2] / "data" / "vlearn-pack" / "transcript"
+TRANSCRIPT_DIR = Path(__file__).resolve().parents[3] / "data" / "vlearn-pack" / "transcript"
 SESSIONS: tuple[str, ...] = ("01", "02", "03", "04", "05", "06")
 
 GAP_MARKER = "[không nghe rõ]"

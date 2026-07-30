@@ -1,0 +1,22 @@
+[project]
+name = "vlearn-sotay"
+version = "0.1.0"
+requires-python = ">=3.13"
+
+[tool.uv.workspace]
+members = ["flow1", "vector-db", "summarizer", "graph-db"]
+
+[tool.uv.sources]
+flow1 = { workspace = true }
+vector-db = { workspace = true }
+summarizer = { workspace = true }
+graph-db = { workspace = true }
+
+[dependency-groups]
+dev = ["pytest>=9.1.1", "pytest-cov>=7.1.0", "ruff>=0.16.0"]
+
+[tool.pytest.ini_options]
+testpaths = ["flow1/tests", "vector-db/tests", "summarizer/tests", "graph-db/tests"]
+markers = ["live: cham API that (OpenAI/Qdrant/Neo4j); can key that de chay"]
+addopts = "-ra --import-mode=importlib"
+pythonpath = ["flow1/app"]

@@ -22,7 +22,7 @@ dependencies = [
 summarizer-build = "summarizer.build:main"
 
 [tool.uv.sources]
-vector-db = { path = "../vector-db", editable = true }
+vector-db = { workspace = true }
 
 [build-system]
 requires = ["uv_build>=0.12.0,<0.13.0"]

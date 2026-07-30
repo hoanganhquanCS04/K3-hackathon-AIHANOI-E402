@@ -194,7 +194,7 @@ def test_sotay_never_imports_flow1():
 def test_flow1_never_imports_the_flow2_generator():
     offenders = [
         path.name
-        for path in (CODEBASE / "flow1").glob("*.py")
+        for path in (CODEBASE / "src" / "flow1").glob("*.py")
         if "sotay.generate" in path.read_text(encoding="utf-8")
     ]
     assert offenders == [], f"hai luồng không kéo nhau sập: {offenders}"
@@ -204,7 +204,7 @@ def test_flow1_borrows_exactly_two_things_from_sotay():
     # Ranh giới provider duy nhất (llm) + bộ kiểm dùng chung (verify). Không hơn.
     allowed = {"sotay.llm", "sotay.verify"}
     found = set()
-    for path in (CODEBASE / "flow1").glob("*.py"):
+    for path in (CODEBASE / "src" / "flow1").glob("*.py"):
         for line in path.read_text(encoding="utf-8").splitlines():
             if "sotay." in line and ("import" in line or "from" in line):
                 for name in allowed | {"sotay.generate", "sotay.ingest", "sotay.render",

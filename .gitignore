@@ -54,9 +54,10 @@ htmlcov/
 out/
 
 # Project Cache & Storage
-codebase/store/
-codebase/cache/
-codebase/fixtures/
+flow1/store/
+flow1/cache/
+flow1/trace/
+flow1/fixtures/
 data/cache/
 *.cache
 data/vlearn-pack/

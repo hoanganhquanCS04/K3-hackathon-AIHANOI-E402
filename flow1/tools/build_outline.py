@@ -21,7 +21,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 SRC = ROOT / "data" / "vlearn-pack" / "transcript"
-OUT = ROOT / "codebase" / "fixtures" / "outline.json"
+OUT = ROOT / "flow1" / "fixtures" / "outline.json"
 
 # Buổi nào có ít section thì mỗi section là một phần; nhiều thì gộp lại còn ~5.
 MAX_SECTIONS_1_1 = 7
