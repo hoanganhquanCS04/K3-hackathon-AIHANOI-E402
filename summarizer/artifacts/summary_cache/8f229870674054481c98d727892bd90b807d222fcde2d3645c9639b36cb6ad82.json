@@ -1,0 +1,132 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-006",
+  "section_title": "Bài toán sinh đề toán tự động — ý tưởng từ các nhóm",
+  "section_order": 6,
+  "abstract": "Bài giảng tập trung vào việc phát triển ý tưởng cho bài toán sinh đề toán tự động, với sự tham gia thảo luận của học viên về cách sử dụng mô hình ngôn ngữ lớn (LLM) để tạo ra các đề toán đúng và có thể giải được.",
+  "key_points": [
+    {
+      "text": "Giáo viên có thể sử dụng mô hình tự động để nhận dạng chữ viết và tạo đồ thị cho hàm số.",
+      "citations": [
+        "T03-046"
+      ]
+    },
+    {
+      "text": "Học viên cần xây dựng một đề toán đa dạng mà vẫn đảm bảo đề toán đó đúng và có thể giải được.",
+      "citations": [
+        "T03-047"
+      ]
+    },
+    {
+      "text": "Một ý tưởng là xây dựng cơ sở dữ liệu chứa lý thuyết toán học để mô hình ngôn ngữ lớn tạo ra đề bài.",
+      "citations": [
+        "T03-056"
+      ]
+    },
+    {
+      "text": "Bài toán khó có thể được gộp lại từ những bài toán nhỏ thông qua suy luận đa bước.",
+      "citations": [
+        "T03-068"
+      ]
+    },
+    {
+      "text": "Một phương pháp là chuẩn bị các đáp án trước và nhờ AI viết ra đề bài cho các đáp án đó.",
+      "citations": [
+        "T03-070"
+      ]
+    }
+  ],
+  "concepts": [
+    "mô hình ngôn ngữ lớn (LLM)",
+    "database",
+    "paraphrase",
+    "logic sentence",
+    "suy luận đa bước"
+  ],
+  "examples": [],
+  "student_questions": [
+    {
+      "text": "Em nghĩ cái đó cần tới một cái database.",
+      "citations": [
+        "T03-048"
+      ]
+    },
+    {
+      "text": "Em sẽ thiết kế cái database đó: những con số nào có thể thay đổi thì em sẽ đánh dấu nó.",
+      "citations": [
+        "T03-050"
+      ]
+    },
+    {
+      "text": "Em nghĩ là có thể xây dựng một kho toàn là các cách giải.",
+      "citations": [
+        "T03-052"
+      ]
+    },
+    {
+      "text": "Em nghĩ là có thể dạy cho model một dạng biểu diễn logic của bài toán về mặt format.",
+      "citations": [
+        "T03-060"
+      ]
+    },
+    {
+      "text": "Sẽ có những bộ đáp án tùy vào bài toán.",
+      "citations": [
+        "T03-072"
+      ]
+    }
+  ],
+  "source_chunk_ids": [
+    "T03-046",
+    "T03-047",
+    "T03-048",
+    "T03-049",
+    "T03-050",
+    "T03-051",
+    "T03-052",
+    "T03-053",
+    "T03-054",
+    "T03-055",
+    "T03-056",
+    "T03-057",
+    "T03-058",
+    "T03-059",
+    "T03-060",
+    "T03-061",
+    "T03-062",
+    "T03-063",
+    "T03-064",
+    "T03-065",
+    "T03-066",
+    "T03-067",
+    "T03-068",
+    "T03-069",
+    "T03-070",
+    "T03-071",
+    "T03-072",
+    "T03-073"
+  ],
+  "covered_chunk_ids": [
+    "T03-046",
+    "T03-047",
+    "T03-048",
+    "T03-050",
+    "T03-052",
+    "T03-056",
+    "T03-060",
+    "T03-068",
+    "T03-070",
+    "T03-072"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-064"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "0ecfb11bb8564571fe743ed384addc3f530b72cc9a2b34cd99f3f932a55328b6",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:39.852057Z"
+}

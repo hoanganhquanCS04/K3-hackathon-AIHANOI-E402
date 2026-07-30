@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-003",
+  "section_title": "Lịch sử AI: Turing test và hai mùa đông",
+  "section_order": 3,
+  "abstract": "Bài giảng trình bày lịch sử của trí tuệ nhân tạo (AI), nhấn mạnh vào các mốc quan trọng như bài kiểm tra Turing và hai mùa đông của AI.",
+  "key_points": [
+    {
+      "text": "AI đã có khoảng 70 năm lịch sử, bắt đầu từ năm 1956.",
+      "citations": [
+        "T04-016"
+      ]
+    },
+    {
+      "text": "Bài kiểm tra Turing được thiết kế để xác định xem máy có thể mô phỏng trí thông minh của con người hay không.",
+      "citations": [
+        "T04-018"
+      ]
+    },
+    {
+      "text": "AI đã trải qua hai lần mùa đông, trong đó niềm tin vào AI giảm sút và các quỹ đầu tư không còn đổ tiền vào nghiên cứu.",
+      "citations": [
+        "T04-022"
+      ]
+    },
+    {
+      "text": "Mốc khai sinh của AI được xác định là năm 1956, khi các nhà khoa học tổ chức hội thảo để thảo luận về khả năng mô phỏng trí thông minh.",
+      "citations": [
+        "T04-024"
+      ]
+    },
+    {
+      "text": "Hướng tiếp cận symbolic AI gặp phải vấn đề khi không thể định nghĩa hết các luật cho các tình huống phức tạp.",
+      "citations": [
+        "T04-025"
+      ]
+    },
+    {
+      "text": "Mùa đông thứ hai của AI kéo dài từ những năm 1980 đến năm 2010 do các vấn đề trong việc cập nhật tri thức và bối cảnh.",
+      "citations": [
+        "T04-029"
+      ]
+    }
+  ],
+  "concepts": [
+    "Turing test",
+    "symbolic AI",
+    "perceptron",
+    "expert system"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-016",
+    "T04-017",
+    "T04-018",
+    "T04-019",
+    "T04-020",
+    "T04-021",
+    "T04-022",
+    "T04-023",
+    "T04-024",
+    "T04-025",
+    "T04-026",
+    "T04-027",
+    "T04-028",
+    "T04-029"
+  ],
+  "covered_chunk_ids": [
+    "T04-016",
+    "T04-018",
+    "T04-022",
+    "T04-024",
+    "T04-025",
+    "T04-029"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-017"
+  ],
+  "activity_chunk_ids": [
+    "T04-019",
+    "T04-021"
+  ],
+  "content_hash": "3e0ae589ed4058e31576e06f77c1606a927dd2d1a793a450e2895917fb55217e",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:11.776019Z"
+}

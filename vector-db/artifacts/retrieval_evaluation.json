@@ -1,0 +1,203 @@
+{
+  "case_count": 9,
+  "hit_at_5": 1.0,
+  "recall_at_5": 0.925925925925926,
+  "details": [
+    {
+      "query": "Product manager khác project manager như thế nào?",
+      "session_id": "T01",
+      "expected": [
+        "T01-008",
+        "T01-010",
+        "T01-011"
+      ],
+      "returned": [
+        "T01-010",
+        "T01-011",
+        "T01-009",
+        "T01-013",
+        "T01-012"
+      ],
+      "matched": [
+        "T01-010",
+        "T01-011"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Automation và augmentation khác nhau như thế nào?",
+      "session_id": "T02",
+      "expected": [
+        "T02-031",
+        "T02-032",
+        "T02-033",
+        "T02-034"
+      ],
+      "returned": [
+        "T02-033",
+        "T02-032",
+        "T02-034",
+        "T02-031",
+        "T02-038"
+      ],
+      "matched": [
+        "T02-031",
+        "T02-032",
+        "T02-033",
+        "T02-034"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Giới hạn của LLM, tool calling và RAG",
+      "session_id": "T03",
+      "expected": [
+        "T03-034",
+        "T03-035",
+        "T03-036"
+      ],
+      "returned": [
+        "T03-035",
+        "T03-036",
+        "T03-034",
+        "T03-079",
+        "T03-033"
+      ],
+      "matched": [
+        "T03-034",
+        "T03-035",
+        "T03-036"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Temperature và top-k top-p có tác dụng gì?",
+      "session_id": "T04",
+      "expected": [
+        "T04-072"
+      ],
+      "returned": [
+        "T04-072",
+        "T04-071",
+        "T04-081",
+        "T04-096",
+        "T04-058"
+      ],
+      "matched": [
+        "T04-072"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Mixture of Experts là gì?",
+      "session_id": "T04",
+      "expected": [
+        "T04-086"
+      ],
+      "returned": [
+        "T04-086",
+        "T04-084",
+        "T04-063",
+        "T04-052",
+        "T04-027"
+      ],
+      "matched": [
+        "T04-086"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Workflow là gì?",
+      "session_id": "T05",
+      "expected": [
+        "T05-010",
+        "T05-011",
+        "T05-012"
+      ],
+      "returned": [
+        "T05-010",
+        "T05-017",
+        "T05-011",
+        "T05-018",
+        "T05-012"
+      ],
+      "matched": [
+        "T05-010",
+        "T05-011",
+        "T05-012"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Case SpaceX có phải bài toán thực tế hay không?",
+      "session_id": "T05",
+      "expected": [
+        "T05-080",
+        "T05-081",
+        "T05-082",
+        "T05-083"
+      ],
+      "returned": [
+        "T05-080",
+        "T05-083",
+        "T05-082",
+        "T05-081",
+        "T05-130"
+      ],
+      "matched": [
+        "T05-080",
+        "T05-081",
+        "T05-082",
+        "T05-083"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Self-attention với ví dụ con mèo ngồi trên bàn",
+      "session_id": "T06",
+      "expected": [
+        "T06-129",
+        "T06-130",
+        "T06-131",
+        "T06-132",
+        "T06-133"
+      ],
+      "returned": [
+        "T06-129",
+        "T06-133",
+        "T06-132",
+        "T06-130",
+        "T06-131"
+      ],
+      "matched": [
+        "T06-129",
+        "T06-130",
+        "T06-131",
+        "T06-132",
+        "T06-133"
+      ],
+      "hit": true
+    },
+    {
+      "query": "Vì sao LLM bị hallucination?",
+      "session_id": "T06",
+      "expected": [
+        "T06-138",
+        "T06-139",
+        "T06-140"
+      ],
+      "returned": [
+        "T06-147",
+        "T06-149",
+        "T06-150",
+        "T06-138",
+        "T06-139"
+      ],
+      "matched": [
+        "T06-138",
+        "T06-139"
+      ],
+      "hit": true
+    }
+  ]
+}

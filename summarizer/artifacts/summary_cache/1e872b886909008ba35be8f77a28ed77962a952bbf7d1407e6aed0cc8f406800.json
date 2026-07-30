@@ -1,0 +1,89 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-002",
+  "section_title": "Từ quick win đến phát biểu bài toán",
+  "section_order": 2,
+  "abstract": "Phần này của bài giảng tập trung vào việc xác định các công việc ưu tiên, tìm kiếm các quick win, và xây dựng phát biểu bài toán để giải quyết các vấn đề cụ thể trong bối cảnh cá nhân và doanh nghiệp.",
+  "key_points": [
+    {
+      "text": "Giảng viên nhấn mạnh tầm quan trọng của việc tìm kiếm các quick win để tạo động lực và niềm tin trong công việc.",
+      "citations": [
+        "T02-009",
+        "T02-010"
+      ]
+    },
+    {
+      "text": "Framework phân loại công việc dựa trên ma trận tác động và nỗ lực có thể áp dụng cho cả cá nhân và tổ chức để xác định các ưu tiên.",
+      "citations": [
+        "T02-011",
+        "T02-013"
+      ]
+    },
+    {
+      "text": "Giảng viên khuyến khích cân nhắc kỹ trước khi áp dụng AI, đảm bảo rằng nó thực sự mang lại giá trị và không bị lạm dụng.",
+      "citations": [
+        "T02-014"
+      ]
+    },
+    {
+      "text": "Phát biểu bài toán cần xác định rõ đối tượng, quy trình hiện tại, các nút thắt, và các chỉ số thành công để đánh giá hiệu quả giải pháp.",
+      "citations": [
+        "T02-015",
+        "T02-017"
+      ]
+    },
+    {
+      "text": "Định lượng bài toán là yếu tố quan trọng để đánh giá tác động của giải pháp, bao gồm việc tiết kiệm thời gian, chi phí, và tăng hiệu quả công việc.",
+      "citations": [
+        "T02-018"
+      ]
+    }
+  ],
+  "concepts": [
+    "Quick win",
+    "Phát biểu bài toán",
+    "Ma trận tác động và nỗ lực",
+    "Định lượng bài toán",
+    "Mức độ sử dụng AI"
+  ],
+  "examples": [
+    {
+      "text": "Một bạn PM mất 90 phút mỗi thứ Hai để tổng hợp báo cáo tuần từ nhiều nền tảng khác nhau, với bước viết narrative là mất thời gian nhất.",
+      "citations": [
+        "T02-017"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-009",
+    "T02-010",
+    "T02-011",
+    "T02-012",
+    "T02-013",
+    "T02-014",
+    "T02-015",
+    "T02-016",
+    "T02-017",
+    "T02-018"
+  ],
+  "covered_chunk_ids": [
+    "T02-009",
+    "T02-010",
+    "T02-011",
+    "T02-013",
+    "T02-014",
+    "T02-015",
+    "T02-017",
+    "T02-018"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "94624d731ce122d1e19419b2d85586bac39738c301888a38ef5a7333c1e7dd0a",
+  "prompt_version": "v1",
+  "model": "gpt-4o",
+  "generated_at": "2026-07-30T09:20:44.768247Z"
+}

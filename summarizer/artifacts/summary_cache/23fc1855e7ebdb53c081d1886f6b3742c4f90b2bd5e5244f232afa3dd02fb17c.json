@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-008",
+  "section_title": "Chi phí vận hành: dựng con số trước khi trình sếp",
+  "section_order": 8,
+  "abstract": "Nội dung bài giảng tập trung vào việc xác định chi phí vận hành trong các dự án AI và cách trình bày các con số chi phí cho cấp quản lý.",
+  "key_points": [
+    {
+      "text": "Sếp thích sản phẩm tốn ít tiền để vận hành nhưng khách hàng vẫn chịu trả nhiều tiền.",
+      "citations": [
+        "T03-083"
+      ]
+    },
+    {
+      "text": "Chi phí vận hành của robot Pika bao gồm cả subscription cho LLM API.",
+      "citations": [
+        "T03-084"
+      ]
+    },
+    {
+      "text": "DevOps cần tính toán chi phí thuê infrastructure như Amazon S3 để lưu trữ dữ liệu.",
+      "citations": [
+        "T03-085"
+      ]
+    },
+    {
+      "text": "Việc giảm chi phí có thể thực hiện bằng cách chuyển đổi giữa các API hoặc tự host.",
+      "citations": [
+        "T03-086"
+      ]
+    },
+    {
+      "text": "Cần có bảng đánh giá chi phí cho từng giải pháp trong dự án để thể hiện sự chuyên nghiệp.",
+      "citations": [
+        "T03-087"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI engineer",
+    "PM",
+    "MLOps",
+    "DevOps",
+    "API",
+    "infrastructure",
+    "Amazon S3",
+    "GPU",
+    "CPU"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-083",
+    "T03-084",
+    "T03-085",
+    "T03-086",
+    "T03-087"
+  ],
+  "covered_chunk_ids": [
+    "T03-083",
+    "T03-084",
+    "T03-085",
+    "T03-086",
+    "T03-087"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-087"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "0cb8902b8f575d7b59e3e3df3edb7eafbb8bebf0ece08f9bd60251f4fb29da77",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:37.548304Z"
+}

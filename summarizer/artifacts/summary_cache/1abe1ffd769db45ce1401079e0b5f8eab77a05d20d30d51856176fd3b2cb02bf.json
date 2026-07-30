@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-001",
+  "section_title": "Chào lớp và giới thiệu giảng viên",
+  "section_order": 1,
+  "abstract": "Giảng viên giới thiệu về bản thân và nội dung khóa học về AI, đặc biệt là các mô hình ngôn ngữ lớn (LLM). Khóa học sẽ tập trung vào cách thức hoạt động của AI và ứng dụng thực tiễn của nó.",
+  "key_points": [
+    {
+      "text": "Khoảng 70% học viên là sinh viên năm cuối, 30% là những người đã có kinh nghiệm làm việc.",
+      "citations": [
+        "T04-002"
+      ]
+    },
+    {
+      "text": "Khóa học sẽ tập trung vào nền tảng của AI và các mô hình ngôn ngữ lớn, giải thích cách thức hoạt động của chúng.",
+      "citations": [
+        "T04-003"
+      ]
+    },
+    {
+      "text": "Dữ liệu là yếu tố quyết định thành công trong việc đánh giá độ rủi ro của người vay.",
+      "citations": [
+        "T04-005"
+      ]
+    },
+    {
+      "text": "Dự án cứu hộ được xây dựng để tổng hợp thông tin kêu cứu từ mạng xã hội trong các tình huống thiên tai.",
+      "citations": [
+        "T04-008"
+      ]
+    },
+    {
+      "text": "Dự án cứu hộ đã được sử dụng để tạo heatmap giúp các đơn vị cứu hộ ưu tiên khu vực cần cứu trợ.",
+      "citations": [
+        "T04-011"
+      ]
+    },
+    {
+      "text": "Giảng viên có kinh nghiệm làm việc trong các công ty công nghệ và tiếp cận từ góc độ business và product.",
+      "citations": [
+        "T04-012"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI",
+    "LLM",
+    "ChatGPT",
+    "AI agent",
+    "blockchain",
+    "big data",
+    "fintech",
+    "OCR",
+    "healthcare"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-001",
+    "T04-002",
+    "T04-003",
+    "T04-004",
+    "T04-005",
+    "T04-006",
+    "T04-007",
+    "T04-008",
+    "T04-009",
+    "T04-010",
+    "T04-011",
+    "T04-012"
+  ],
+  "covered_chunk_ids": [
+    "T04-002",
+    "T04-003",
+    "T04-005",
+    "T04-008",
+    "T04-011",
+    "T04-012"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-001",
+    "T04-010"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "e8b90dc6db7a22ffeaa422a8f7150de661edaf4864d1dd9c9f31d2fc1465c112",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:11.544229Z"
+}

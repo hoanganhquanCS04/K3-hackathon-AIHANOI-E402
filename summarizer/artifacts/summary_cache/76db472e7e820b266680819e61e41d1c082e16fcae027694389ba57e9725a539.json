@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-018",
+  "section_title": "Mixture of Experts",
+  "section_order": 18,
+  "abstract": "Nội dung chính của mục này là giới thiệu về kiến trúc Mixture of Experts trong các mô hình ngôn ngữ lớn, nhấn mạnh lợi ích của việc tiết kiệm chi phí và thời gian khi chỉ kích hoạt một số cụm tham số nhất định.",
+  "key_points": [
+    {
+      "text": "Mixture of Experts là cách tiếp cận xây dựng hệ chuyên gia, tách toàn bộ thành các cụm nhỏ hơn.",
+      "citations": [
+        "T04-086"
+      ]
+    },
+    {
+      "text": "Khi có một câu hỏi, chỉ cần chạy và kích hoạt một số cụm tham số nhất định, giúp tiết kiệm chi phí và thời gian.",
+      "citations": [
+        "T04-086"
+      ]
+    },
+    {
+      "text": "Kiến trúc Mixture of Experts được áp dụng trong hầu hết các mô hình ngôn ngữ lớn hiện nay.",
+      "citations": [
+        "T04-086"
+      ]
+    },
+    {
+      "text": "Mistral là một team startup của Pháp, được coi là nơi khai sinh của kiến trúc Mixture of Experts.",
+      "citations": [
+        "T04-086"
+      ]
+    },
+    {
+      "text": "Các mô hình ngôn ngữ lớn mã nguồn mở đều sử dụng Mixture of Experts để tiết kiệm chi phí.",
+      "citations": [
+        "T04-086"
+      ]
+    }
+  ],
+  "concepts": [
+    "Mixture of Experts",
+    "hệ chuyên gia",
+    "Mistral"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-086"
+  ],
+  "covered_chunk_ids": [
+    "T04-086"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "1055f9e8208752dc3aa6697ab37c5f47b843a264a3cc0f0de6525644708e6fb9",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:26.669308Z"
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-009",
+  "section_title": "Hậu quả khi sai sót, bảo mật và đánh giá bằng AI",
+  "section_order": 9,
+  "abstract": "Nội dung bài giảng tập trung vào hậu quả của sai sót trong hệ thống AI, bảo mật và cách đánh giá bằng AI. Giảng viên nhấn mạnh tầm quan trọng của việc xác định rõ ràng phạm vi và các ràng buộc trong thiết kế hệ thống.",
+  "key_points": [
+    {
+      "text": "Hậu quả khi sai sót trong hệ thống AI có thể dẫn đến kiện tụng và mất niềm tin từ người dùng.",
+      "citations": [
+        "T03-088"
+      ]
+    },
+    {
+      "text": "Người dùng có thể lợi dụng các lỗ hổng trong quy trình để yêu cầu những điều không hợp lý từ hệ thống AI.",
+      "citations": [
+        "T03-089"
+      ]
+    },
+    {
+      "text": "Cần có lớp bảo mật để ngăn chặn việc lộ thông tin nhạy cảm từ hệ thống AI.",
+      "citations": [
+        "T03-090"
+      ]
+    },
+    {
+      "text": "Cần có các chỉ số đo lường để đánh giá hiệu quả của hệ thống AI.",
+      "citations": [
+        "T03-091"
+      ]
+    },
+    {
+      "text": "Mục tiêu cải thiện trong thiết kế hệ thống cần được xác định rõ ràng và có thể đo lường.",
+      "citations": [
+        "T03-092"
+      ]
+    }
+  ],
+  "concepts": [
+    "hậu quả khi sai sót",
+    "bảo mật hệ thống",
+    "đánh giá bằng AI",
+    "guardrail",
+    "scope",
+    "constraint",
+    "MLOps"
+  ],
+  "examples": [],
+  "student_questions": [
+    {
+      "text": "Nếu làm xe tự hành mà nó đâm trúng người thì ai là người chịu trách nhiệm?",
+      "citations": [
+        "T03-094"
+      ]
+    },
+    {
+      "text": "Nếu em dự đoán sai một phát là nó đâm trúng người ta thì sao?",
+      "citations": [
+        "T03-096"
+      ]
+    },
+    {
+      "text": "Nếu model làm đúng khoảng 99%, còn 1% bị sai mà nó đâm trúng mình, thì lúc đó mình có nên có một cái trình xử lý nào đó cho cái 1% đấy không?",
+      "citations": [
+        "T03-099"
+      ]
+    },
+    {
+      "text": "Các bạn chọn theo track data infra sẽ có lợi thế gì so với các track khác?",
+      "citations": [
+        "T03-101"
+      ]
+    }
+  ],
+  "source_chunk_ids": [
+    "T03-088",
+    "T03-089",
+    "T03-090",
+    "T03-091",
+    "T03-092",
+    "T03-093",
+    "T03-094",
+    "T03-095",
+    "T03-096",
+    "T03-097",
+    "T03-098",
+    "T03-099",
+    "T03-100",
+    "T03-101",
+    "T03-102",
+    "T03-103",
+    "T03-104"
+  ],
+  "covered_chunk_ids": [
+    "T03-088",
+    "T03-089",
+    "T03-090",
+    "T03-091",
+    "T03-092",
+    "T03-094",
+    "T03-096",
+    "T03-099",
+    "T03-101"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-096"
+  ],
+  "activity_chunk_ids": [
+    "T03-093"
+  ],
+  "content_hash": "d1494692228ccf453e5167abdc4151135689a37ec20f950ce1fc884c51ea5d9f",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:39.916954Z"
+}

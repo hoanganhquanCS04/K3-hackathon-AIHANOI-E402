@@ -1,0 +1,16 @@
+# Bảng màu lấy theo VLearn: navy đậm cho chữ/nút, đỏ crimson cho nhãn nhấn,
+# nền xanh-xám rất nhạt, thẻ trắng. Pin base="light" để không phải chống theme tối
+# bằng CSS ở từng chỗ.
+[theme]
+base = "light"
+primaryColor = "#0F2B5B"
+backgroundColor = "#EDF2F8"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#132845"
+font = "sans-serif"
+
+[server]
+headless = true
+
+[browser]
+gatherUsageStats = false

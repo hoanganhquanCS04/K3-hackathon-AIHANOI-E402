@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-018",
+  "section_title": "Chuẩn bị bài tập nhóm cho ngày mai",
+  "section_order": 18,
+  "abstract": "Giảng viên hướng dẫn sinh viên chuẩn bị cho bài tập nhóm vào ngày mai, nhấn mạnh việc chọn nhóm và đề tài liên quan đến AI.",
+  "key_points": [
+    {
+      "text": "Sinh viên sẽ làm bài tập nhóm liên tục cho đến hết giai đoạn một.",
+      "citations": [
+        "T03-146"
+      ]
+    },
+    {
+      "text": "Mỗi nhóm sẽ có khoảng bốn đến năm bạn.",
+      "citations": [
+        "T03-146"
+      ]
+    },
+    {
+      "text": "Các dự án sẽ liên quan đến các chủ đề như bệnh viện, giáo dục, hoặc công ty.",
+      "citations": [
+        "T03-148"
+      ]
+    },
+    {
+      "text": "Sinh viên được khuyến khích chọn đề tài trước để sử dụng lại cho các buổi học sau.",
+      "citations": [
+        "T03-148"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI problem",
+    "dự án",
+    "robot",
+    "giao tiếp với robot"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-146",
+    "T03-147",
+    "T03-148",
+    "T03-149"
+  ],
+  "covered_chunk_ids": [
+    "T03-146",
+    "T03-148"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-148"
+  ],
+  "activity_chunk_ids": [
+    "T03-147",
+    "T03-149"
+  ],
+  "content_hash": "06d4d4ae6fc5d12867cee4ec5c2e0d9bf0fd7b418a2b562f4495b2369a936f61",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:47.371467Z"
+}

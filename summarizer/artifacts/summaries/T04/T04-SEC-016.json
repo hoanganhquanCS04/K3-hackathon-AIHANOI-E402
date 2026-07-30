@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-016",
+  "section_title": "Benchmark năng lực và xu hướng chi phí tính toán",
+  "section_order": 16,
+  "abstract": "Nội dung chính của mục này là phân tích benchmark năng lực của các mô hình AI và xu hướng chi phí tính toán trong lĩnh vực AI.",
+  "key_points": [
+    {
+      "text": "Benchmark năng lực trong software engineering đo lường khả năng của mô hình trong việc giải quyết bug.",
+      "citations": [
+        "T04-081"
+      ]
+    },
+    {
+      "text": "Mô hình Claude Sonnet 3.5 đã tăng từ 33% lên trên 80% trong việc giải quyết bug trong vòng 2 năm.",
+      "citations": [
+        "T04-081"
+      ]
+    },
+    {
+      "text": "Các công ty AI đang đối mặt với giới hạn về năng lực tính toán và chi phí phần cứng đang tăng cao.",
+      "citations": [
+        "T04-082"
+      ]
+    },
+    {
+      "text": "Khoảng cách giữa những người có khả năng chi trả cho mô hình đắt đỏ và những người không có khả năng sẽ ngày càng xa.",
+      "citations": [
+        "T04-082"
+      ]
+    },
+    {
+      "text": "Thời điểm trước đây, chi phí cho các sản phẩm công cụ AI khá rẻ, nhưng hiện tại đã tăng lên đáng kể.",
+      "citations": [
+        "T04-083"
+      ]
+    },
+    {
+      "text": "Người mới vào thị trường AI sẽ phải nỗ lực nhiều hơn so với những người đã có kinh nghiệm.",
+      "citations": [
+        "T04-083"
+      ]
+    }
+  ],
+  "concepts": [
+    "benchmark",
+    "software engineering",
+    "năng lực tính toán",
+    "chi phí tính toán"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-081",
+    "T04-082",
+    "T04-083"
+  ],
+  "covered_chunk_ids": [
+    "T04-081",
+    "T04-082",
+    "T04-083"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-082"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "e8ef564a3d1d9c81b8bb7d03ffe03ee3a5b62d21b040379f45a7fc2f32ce054e",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:24.351948Z"
+}

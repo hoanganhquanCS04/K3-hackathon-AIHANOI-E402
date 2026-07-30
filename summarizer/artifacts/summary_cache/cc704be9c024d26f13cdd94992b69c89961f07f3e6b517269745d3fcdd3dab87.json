@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-001",
+  "section_title": "Kỹ năng xác định bài toán từ yêu cầu mơ hồ",
+  "section_order": 1,
+  "abstract": "Nội dung bài giảng tập trung vào kỹ năng xác định bài toán từ yêu cầu mơ hồ trong bối cảnh ứng dụng AI tại doanh nghiệp.",
+  "key_points": [
+    {
+      "text": "Kỹ năng xác định bài toán từ yêu cầu mơ hồ là rất quan trọng trong các công ty muốn ứng dụng AI.",
+      "citations": [
+        "T01-001"
+      ]
+    },
+    {
+      "text": "Nhiều công ty tuyển dụng AI engineer nhưng thiếu người xác định đề bài cụ thể cho họ.",
+      "citations": [
+        "T01-002"
+      ]
+    },
+    {
+      "text": "70% thành công trong việc đưa AI vào doanh nghiệp đến từ con người và vận hành, không phải công nghệ.",
+      "citations": [
+        "T01-003"
+      ]
+    },
+    {
+      "text": "Cần xác định đúng vấn đề trước khi áp dụng công nghệ để giải quyết.",
+      "citations": [
+        "T01-004"
+      ]
+    },
+    {
+      "text": "Rèn luyện tư duy biến mục tiêu mơ hồ thành thứ cụ thể có thể triển khai là rất khó.",
+      "citations": [
+        "T01-005"
+      ]
+    },
+    {
+      "text": "Khi nhận yêu cầu mơ hồ, cần hỏi lại và bóc tách thành các tùy chọn cụ thể để xác nhận với stakeholder.",
+      "citations": [
+        "T01-006"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI engineer",
+    "stakeholder",
+    "tư duy phản biện"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-001",
+    "T01-002",
+    "T01-003",
+    "T01-004",
+    "T01-005",
+    "T01-006"
+  ],
+  "covered_chunk_ids": [
+    "T01-001",
+    "T01-002",
+    "T01-003",
+    "T01-004",
+    "T01-005",
+    "T01-006"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "5b9c8047e3c5e880f517ec1e07afd5142c18a909155c588b24ac081d4b0e0063",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:40:51.892308Z"
+}

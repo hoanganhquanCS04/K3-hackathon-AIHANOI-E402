@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-005",
+  "section_title": "Ba cấp độ kỹ thuật: rule-based, workflow, agent",
+  "section_order": 5,
+  "abstract": "Buổi giảng đề cập đến ba cấp độ kỹ thuật trong việc áp dụng AI, bao gồm rule-based, workflow và agent, cùng với những lưu ý khi xây dựng và sử dụng các giải pháp này.",
+  "key_points": [
+    {
+      "text": "Cấp độ thứ nhất là dùng các quy tắc, nơi các quy tắc rõ ràng có thể được viết thành code mà không cần đến AI.",
+      "citations": [
+        "T02-036"
+      ]
+    },
+    {
+      "text": "Cấp độ hai là xây dựng theo dạng workflow, nơi AI agent có thể hỗ trợ trong từng bước lớn của quy trình.",
+      "citations": [
+        "T02-037"
+      ]
+    },
+    {
+      "text": "Cấp độ ba là xây dựng một đội agent phức tạp, nơi các agent có thể chia việc và đánh giá lẫn nhau.",
+      "citations": [
+        "T02-038"
+      ]
+    },
+    {
+      "text": "Khi xây dựng các luồng phức tạp với agent, việc kiểm soát và debug sẽ trở nên khó khăn hơn.",
+      "citations": [
+        "T02-039"
+      ]
+    },
+    {
+      "text": "Trong quá trình xây dựng sản phẩm, cần phải đi từ từ và cẩn thận, bắt đầu từ những vấn đề đơn giản.",
+      "citations": [
+        "T02-040"
+      ]
+    },
+    {
+      "text": "Khi viết phát biểu bài toán cho sản phẩm, cần xác định các yếu tố như đối tượng ảnh hưởng và workflow.",
+      "citations": [
+        "T02-042"
+      ]
+    }
+  ],
+  "concepts": [
+    "rule-based",
+    "workflow",
+    "agent",
+    "AI agent",
+    "AI LLM"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-035",
+    "T02-036",
+    "T02-037",
+    "T02-038",
+    "T02-039",
+    "T02-040",
+    "T02-041",
+    "T02-042",
+    "T02-043"
+  ],
+  "covered_chunk_ids": [
+    "T02-036",
+    "T02-037",
+    "T02-038",
+    "T02-039",
+    "T02-040",
+    "T02-042"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T02-038",
+    "T02-040",
+    "T02-041"
+  ],
+  "activity_chunk_ids": [
+    "T02-043"
+  ],
+  "content_hash": "eace11c77b04efddd3b3d963c06126027a8fa2e4646c42dfaac2188ce1e1c690",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:41:47.042017Z"
+}

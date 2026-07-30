@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-009",
+  "section_title": "Tham số, RLHF và ngành gán nhãn dữ liệu",
+  "section_order": 9,
+  "abstract": "Nội dung chính của mục này là thảo luận về tham số trong mô hình AI, vai trò của RLHF trong việc đào tạo mô hình và ngành gán nhãn dữ liệu.",
+  "key_points": [
+    {
+      "text": "Tham số trong mô hình AI là một yếu tố quan trọng, mô hình có nhiều tham số thường mạnh hơn nhưng cũng có mô hình ít tham số vẫn có thể thực hiện tốt các tác vụ cụ thể.",
+      "citations": [
+        "T04-058"
+      ]
+    },
+    {
+      "text": "RLHF là một kỹ thuật giúp mô hình học hỏi thông qua việc nhận điểm thưởng hoặc bị trừ điểm dựa trên hiệu suất thực hiện nhiệm vụ.",
+      "citations": [
+        "T04-059"
+      ]
+    },
+    {
+      "text": "Con người đóng vai trò quan trọng trong việc đánh giá và huấn luyện mô hình AI, thông qua các phản hồi như like hoặc dislike.",
+      "citations": [
+        "T04-060"
+      ]
+    },
+    {
+      "text": "Ngành gán nhãn dữ liệu đã phát triển mạnh mẽ, với các công ty như Scale AI sử dụng nhân công giá rẻ để thực hiện các tác vụ gán nhãn.",
+      "citations": [
+        "T04-061"
+      ]
+    },
+    {
+      "text": "Hiện nay, các mô hình AI đã có khả năng tự động gán nhãn một số tác vụ đơn giản, do đó ngành gán nhãn dữ liệu đang chuyển hướng sang tuyển dụng nhân công chất lượng cao.",
+      "citations": [
+        "T04-062"
+      ]
+    },
+    {
+      "text": "Để phát triển mô hình AI thông minh, cần thiết phải có hệ thống thiết kế cho phép mô hình tự học và cải thiện qua thời gian.",
+      "citations": [
+        "T04-063"
+      ]
+    }
+  ],
+  "concepts": [
+    "tham số",
+    "parameter",
+    "reinforcement learning với con người tham gia",
+    "RLHF",
+    "gán nhãn dữ liệu",
+    "labeling",
+    "data annotation"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-058",
+    "T04-059",
+    "T04-060",
+    "T04-061",
+    "T04-062",
+    "T04-063"
+  ],
+  "covered_chunk_ids": [
+    "T04-058",
+    "T04-059",
+    "T04-060",
+    "T04-061",
+    "T04-062",
+    "T04-063"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-059",
+    "T04-063"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "7f58b32bec9f5b301b737bf91ed96d1c55b8eba10f128c6d0c4cc8d27e89bdb9",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:17.342111Z"
+}

@@ -1,0 +1,88 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-021",
+  "section_title": "Tương tác cuối buổi",
+  "section_order": 21,
+  "abstract": "Buổi học tập trung vào cách thức hoạt động của Transformer và các khía cạnh liên quan đến LLM, bao gồm cơ chế attention và các yếu tố ảnh hưởng đến hiệu suất của mô hình.",
+  "key_points": [
+    {
+      "text": "Transformer sử dụng cơ chế attention để xử lý dữ liệu chuỗi, cho phép xử lý song song trên tất cả các từ.",
+      "citations": [
+        "T04-094"
+      ]
+    },
+    {
+      "text": "Transformer giải quyết vấn đề long-term dependency của RNN và LSTM bằng cách lưu trạng thái của các từ trước đó.",
+      "citations": [
+        "T04-094"
+      ]
+    },
+    {
+      "text": "Khi temperature bằng 0, model ưu tiên token có xác suất cao nhất, dẫn đến đầu ra gần như deterministic.",
+      "citations": [
+        "T04-096"
+      ]
+    },
+    {
+      "text": "Với một prompt dài, yêu cầu quan trọng nên đặt ở đầu hoặc cuối để tránh bị bỏ sót.",
+      "citations": [
+        "T04-096"
+      ]
+    },
+    {
+      "text": "Lần gọi thứ 10 trong một cuộc chat thường đắt hơn lần đầu do history được lưu trữ và cộng dồn.",
+      "citations": [
+        "T04-096"
+      ]
+    },
+    {
+      "text": "Giá model giảm xấp xỉ 10 lần sau mỗi năm, mặc dù vẫn có nhiều người chọn 'tăng 10 lần'.",
+      "citations": [
+        "T04-096"
+      ]
+    }
+  ],
+  "concepts": [
+    "Transformer",
+    "attention",
+    "RNN",
+    "LSTM",
+    "autoregressive",
+    "token",
+    "temperature",
+    "self-host",
+    "open weight"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-092",
+    "T04-093",
+    "T04-094",
+    "T04-095",
+    "T04-096",
+    "T04-097",
+    "T04-098"
+  ],
+  "covered_chunk_ids": [
+    "T04-094",
+    "T04-096"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-094",
+    "T04-096"
+  ],
+  "activity_chunk_ids": [
+    "T04-092",
+    "T04-093",
+    "T04-097",
+    "T04-098"
+  ],
+  "content_hash": "17ef8e29baaf87bdb333c88ef05fa337845f8e86724905b696eecd0e3985fa10",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:29.549787Z"
+}

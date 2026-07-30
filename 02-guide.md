@@ -2,13 +2,13 @@
 
 > **Cách dùng:** Một file duy nhất, đọc theo thứ tự giai đoạn. Mỗi giai đoạn mở đầu bằng **các câu hỏi nhóm phải tự suy luận và trả lời** — đó là phần quan trọng nhất; scaffold (khung output) chỉ là phần nhẹ để chốt lại. Worksheet và bảng mẫu chỉ dùng để chốt lại kết quả — phần quan trọng là nhóm tự trả lời được các câu hỏi.
 
-| Giai đoạn | Mốc tương ứng | Mục |
-|---|---|---|
-| 1 · Khám phá | Phát đề → CP1 Canvas | §1 |
-| 2 · Thiết kế & Spec | CP1 → CP4 + spec.md 23:59 N1 | §2 |
-| 3 · Build | CP2 → CP3 | §3 |
-| 4 · Đo & Validate | CP3 → CP5 | §4 |
-| 5 · Demo & Nộp | CP5 → CP6 | §5 |
+| Giai đoạn            | Mốc tương ứng             | Mục |
+| ---------------------- | ----------------------------- | ---- |
+| 1 · Khám phá        | Phát đề → CP1 Canvas      | §1  |
+| 2 · Thiết kế & Spec | CP1 → CP4 + spec.md 23:59 N1 | §2  |
+| 3 · Build             | CP2 → CP3                    | §3  |
+| 4 · Đo & Validate    | CP3 → CP5                    | §4  |
+| 5 · Demo & Nộp       | CP5 → CP6                    | §5  |
 
 ---
 
@@ -36,6 +36,7 @@
 4. Khảo sát/phỏng vấn: hỏi về **lần gần nhất** ("lần gần nhất bạn muốn xem lại một đoạn bài giảng, bạn làm gì? mất bao lâu?") — tránh hỏi ý kiến kiểu "bạn có cần tính năng X không?" — hầu như ai cũng trả lời có, dữ liệu thu được không dùng được. **Ghi log toàn bộ: câu đã hỏi, từng câu trả lời nguyên văn, và ai trả lời.** Không có log thì không được tính là bằng chứng.
 
 **Chuẩn bằng chứng** (tiêu chí nghiệm thu 2 — hoàn thiện đến 23:59, CP1 chỉ cần mầm):
+
 - **Đường A — khảo sát:** ≥20 người ngoài nhóm · ≥50% xác nhận · log đầy đủ.
 - **Đường B — mining:** số đếm được + ≥5 ví dụ nguyên văn + phương pháp đếm.
 - Khuyến khích cả hai: B chứng minh pain *tồn tại*, A chứng minh user *muốn nó được giải*.
@@ -66,11 +67,11 @@ Mỗi thành viên dùng thử 1 sản phẩm gần giống (ChatGPT study mode 
 
 ## 2.3 Chọn mức automation theo cost-of-error
 
-| Mức | Khi nào đúng | Ví dụ trong khoá |
-|---|---|---|
-| **Augment** — AI gợi ý, người quyết | Sai thì đắt (kiến thức sai đến học viên, điểm số) | Quiz AI sinh, giảng viên duyệt từng câu |
-| **Conditional** — AI tự làm case chắc, chuyển người case mơ hồ | Đa số case lành, số ít hiểm | Trợ lý trả lời khi có căn cứ trong tài liệu; không có → chuyển TA |
-| **Automate** — AI tự làm | Sai thì rẻ, user tự thấy và sửa được | Sinh chapter/timestamp cho video |
+| Mức                                                                          | Khi nào đúng                                               | Ví dụ trong khoá                                                            |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| **Augment** — AI gợi ý, người quyết                               | Sai thì đắt (kiến thức sai đến học viên, điểm số) | Quiz AI sinh, giảng viên duyệt từng câu                                   |
+| **Conditional** — AI tự làm case chắc, chuyển người case mơ hồ | Đa số case lành, số ít hiểm                             | Trợ lý trả lời khi có căn cứ trong tài liệu; không có → chuyển TA |
+| **Automate** — AI tự làm                                             | Sai thì rẻ, user tự thấy và sửa được                 | Sinh chapter/timestamp cho video                                               |
 
 Lý do trong spec viết theo cost-of-error: *sai thì ai chịu gì, sửa đắt hay rẻ* — không viết "vì tiện".
 
@@ -79,10 +80,12 @@ Lý do trong spec viết theo cost-of-error: *sai thì ai chịu gì, sửa đ�
 *(Tra bản gốc khi cần: microsoft.com/haxtoolkit/ai-guidelines · pair.withgoogle.com/guidebook. Mỗi nguyên tắc khai báo phải chỉ ra được vị trí áp dụng cụ thể trong prototype — TA kiểm tra tại CP4.)*
 
 **Nhóm khởi đầu (chọn ≥1):**
+
 - **G1 — Làm rõ hệ thống làm được gì.** Câu đầu tiên user thấy có nói đúng phạm vi không? (Tutor chào bằng cả đoạn văn — có ai đọc?)
 - **G2 — Làm rõ nó làm tốt đến đâu.** User biết khi nào nên tin, khi nào nên kiểm lại? ("Trả lời dựa trên tài liệu buổi 2; ngoài tài liệu mình sẽ nói rõ.")
 
 **Khi không chắc / khi sai (G10 bắt buộc + ≥1 trong G8/G9/G11):**
+
 - **G10 — Thu hẹp phạm vi khi nghi ngờ.** Không chắc → hỏi lại một câu, hoặc trả lời kèm giới hạn — không làm liều.
 - **G8 — Gạt bỏ dễ dàng.** User bỏ qua câu trả lời/gợi ý có dễ không, hay bị chặn flow?
 - **G9 — Sửa dễ dàng.** User sửa/hỏi lại được ngay trên output không?
@@ -95,6 +98,7 @@ Lý do trong spec viết theo cost-of-error: *sai thì ai chịu gì, sửa đ�
 ## 2.5 Bốn lớp chỗ khó + kịch bản rủi ro *(≥8 kịch bản — TA soát tại CP4)*
 
 Tự cụ thể hoá 4 lớp cho lát cắt của mình bằng 4 câu hỏi:
+
 - ① **Nguồn sự thật** — chỗ nào AI bịa được? Không có căn cứ thì làm gì?
 - ② **Mơ hồ / thiếu thông tin** — input không đủ chắc: hỏi lại, đoán có báo, hay từ chối?
 - ③ **Ngoài phạm vi / thẩm quyền** — user sẽ đòi gì mà feature không được phép làm?
@@ -124,11 +128,11 @@ Spec đủ §1-§9 theo `03-template-ai-spec.md` · evidence đạt chuẩn A/B 
 
 ## 3.2 Ba mức prototype — chọn theo sức nhóm
 
-| Mức | Là gì | Đủ để |
-|---|---|---|
-| Sketch | Màn hình dựng nhanh + 1 AI call chạy demo được | Chứng minh concept + hành vi khi sai |
-| Mock | Flow bấm được, data giả, AI thật ở lõi | Demo trọn 4 đường đi trải nghiệm |
-| Working | Chạy end-to-end với data pack thật | Đưa cho user thật dùng thử |
+| Mức    | Là gì                                               | Đủ để                               |
+| ------- | ----------------------------------------------------- | --------------------------------------- |
+| Sketch  | Màn hình dựng nhanh + 1 AI call chạy demo được | Chứng minh concept + hành vi khi sai  |
+| Mock    | Flow bấm được, data giả, AI thật ở lõi        | Demo trọn 4 đường đi trải nghiệm |
+| Working | Chạy end-to-end với data pack thật                 | Đưa cho user thật dùng thử         |
 
 **Mức nào cũng bắt buộc có ≥1 lời gọi AI chạy thật.** Một bản Sketch làm kỹ được đánh giá cao hơn một bản Working làm vội — rubric chấm chuỗi quyết định, không chấm mức độ hoành tráng.
 

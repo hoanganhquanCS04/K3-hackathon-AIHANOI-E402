@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-003",
+  "section_title": "Bài toán nào dùng được LLM: case lập kế hoạch du lịch",
+  "section_order": 3,
+  "abstract": "Bài giảng thảo luận về việc xác định các bài toán phù hợp với mô hình LLM, đặc biệt là trong việc lập kế hoạch du lịch cho gia đình.",
+  "key_points": [
+    {
+      "text": "Một AI agent có thể hỗ trợ lập kế hoạch du lịch cho gia đình dựa trên các yêu cầu cụ thể của họ.",
+      "citations": [
+        "T03-024"
+      ]
+    },
+    {
+      "text": "Cần xem xét liệu chỉ sử dụng LLM model có đủ để giải quyết bài toán hay không.",
+      "citations": [
+        "T03-025"
+      ]
+    },
+    {
+      "text": "Sử dụng hệ cơ sở tri thức có thể hợp lý hơn trong việc truy xuất thông tin dựa trên yêu cầu của người dùng.",
+      "citations": [
+        "T03-027"
+      ]
+    },
+    {
+      "text": "LLM mạnh về suy luận ngữ nghĩa dựa trên văn bản hội thoại, nhưng khó khăn trong việc biểu diễn hệ logic cho bài toán.",
+      "citations": [
+        "T03-030"
+      ]
+    },
+    {
+      "text": "Không nên quá tham vọng trong việc hoàn thiện toàn bộ yêu cầu của người dùng ngay từ đầu.",
+      "citations": [
+        "T03-031"
+      ]
+    },
+    {
+      "text": "Cần cẩn thận khi chọn bài toán để đảm bảo sức mạnh của LLM model đủ để giải quyết vấn đề.",
+      "citations": [
+        "T03-033"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI agent",
+    "LLM model",
+    "graph",
+    "Markov model",
+    "state graph",
+    "graph traversal"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-024",
+    "T03-025",
+    "T03-026",
+    "T03-027",
+    "T03-028",
+    "T03-029",
+    "T03-030",
+    "T03-031",
+    "T03-032",
+    "T03-033"
+  ],
+  "covered_chunk_ids": [
+    "T03-024",
+    "T03-025",
+    "T03-027",
+    "T03-030",
+    "T03-031",
+    "T03-033"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [
+    "T03-026"
+  ],
+  "content_hash": "015138372f78c448c4a490b3ecf8a951aba34b42aa07d7366ce192493ea9fe46",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:32.747768Z"
+}

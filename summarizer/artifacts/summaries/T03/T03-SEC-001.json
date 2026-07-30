@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-001",
+  "section_title": "Giới thiệu giảng viên và định hướng khoá học",
+  "section_order": 1,
+  "abstract": "Giảng viên giới thiệu về bản thân và định hướng khóa học, nhấn mạnh tầm quan trọng của việc áp dụng lý thuyết vào thực tiễn trong lĩnh vực AI.",
+  "key_points": [
+    {
+      "text": "Giảng viên là AI Research Engineer tại một startup của Mỹ chuyên về AI design platform.",
+      "citations": [
+        "T03-002"
+      ]
+    },
+    {
+      "text": "Khóa học sẽ tập trung vào kỹ thuật thực hành và kinh nghiệm làm việc thực tế.",
+      "citations": [
+        "T03-005"
+      ]
+    },
+    {
+      "text": "Việc sử dụng AI trong công việc hiện nay là cần thiết và không thể tránh khỏi.",
+      "citations": [
+        "T03-007"
+      ]
+    },
+    {
+      "text": "Khóa học sẽ giúp học viên phát triển một hệ thống công nghệ đáp ứng nhu cầu người dùng.",
+      "citations": [
+        "T03-009"
+      ]
+    },
+    {
+      "text": "AI system đang bùng nổ và có nhiều ứng dụng trong các lĩnh vực khác nhau.",
+      "citations": [
+        "T03-011"
+      ]
+    },
+    {
+      "text": "Việc phổ cập AI đang diễn ra rộng rãi, không chỉ giới hạn cho một nhóm người.",
+      "citations": [
+        "T03-013"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI Research Engineer",
+    "computer vision",
+    "Generative AI",
+    "agent system",
+    "robotics"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-001",
+    "T03-002",
+    "T03-003",
+    "T03-004",
+    "T03-005",
+    "T03-006",
+    "T03-007",
+    "T03-008",
+    "T03-009",
+    "T03-010",
+    "T03-011",
+    "T03-012",
+    "T03-013"
+  ],
+  "covered_chunk_ids": [
+    "T03-002",
+    "T03-005",
+    "T03-007",
+    "T03-009",
+    "T03-011",
+    "T03-013"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-003"
+  ],
+  "activity_chunk_ids": [
+    "T03-001",
+    "T03-004"
+  ],
+  "content_hash": "51ef33650faed232e50b21d6850c98b3afde20e8050897520d87f800e434c4e8",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:33.318308Z"
+}

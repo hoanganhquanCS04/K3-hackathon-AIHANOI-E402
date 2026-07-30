@@ -1,0 +1,97 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-007",
+  "section_title": "Mổ xẻ mô hình ngôn ngữ lớn: dự đoán token và context",
+  "section_order": 7,
+  "abstract": "Phần này giải thích cách hoạt động cơ bản của mô hình ngôn ngữ lớn (LLM) dựa trên dự đoán token tiếp theo trong ngữ cảnh, khái niệm token và context cùng những giới hạn của chúng.",
+  "key_points": [
+    {
+      "text": "Các sản phẩm như ChatGPT, Claude, Gemini được xây dựng dựa trên mô hình ngôn ngữ lớn, với chatbot chỉ là lớp giao diện bên ngoài.",
+      "citations": [
+        "T04-046"
+      ]
+    },
+    {
+      "text": "Bản chất của mô hình Transformer là dự đoán token tiếp theo dựa trên xác suất học được từ hàng triệu câu, rồi sinh ra token đó và tiếp tục dự đoán token kế tiếp trong vòng lặp.",
+      "citations": [
+        "T04-047"
+      ]
+    },
+    {
+      "text": "Mô hình LLM chỉ dự đoán và nối token tiếp theo nên có thể sinh ra thông tin sai lệch (hallucination), không phải là tri thức chính xác.",
+      "citations": [
+        "T04-048"
+      ]
+    },
+    {
+      "text": "Token là đơn vị tính của mô hình, không phải từ hay chữ cái, có thể chẻ nhỏ từ thành token và số lượng token cho tiếng Việt thường nhiều hơn tiếng Anh do dấu.",
+      "citations": [
+        "T04-049"
+      ]
+    },
+    {
+      "text": "Context là lượng thông tin mô hình có thể xử lý trong một lần, context càng lớn thì mô hình có thể tiêu thụ nhiều thông tin hơn, ví dụ context 1 triệu token tương đương vài cuốn sách.",
+      "citations": [
+        "T04-051"
+      ]
+    },
+    {
+      "text": "Context rot là hiện tượng khi context quá lớn làm mô hình quên thông tin đầu vào, không phải context lớn luôn tốt hơn.",
+      "citations": [
+        "T04-052"
+      ]
+    }
+  ],
+  "concepts": [
+    "mô hình ngôn ngữ lớn",
+    "ChatGPT",
+    "Transformer",
+    "token",
+    "context",
+    "context window",
+    "hallucination",
+    "streaming"
+  ],
+  "examples": [
+    {
+      "text": "Một đoạn văn bản có 282 ký tự được chia thành 52 token.",
+      "citations": [
+        "T04-050"
+      ]
+    },
+    {
+      "text": "Context 1 triệu token tương đương khoảng bốn đến năm cuốn sách một lúc.",
+      "citations": [
+        "T04-051"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-046",
+    "T04-047",
+    "T04-048",
+    "T04-049",
+    "T04-050",
+    "T04-051",
+    "T04-052"
+  ],
+  "covered_chunk_ids": [
+    "T04-046",
+    "T04-047",
+    "T04-048",
+    "T04-049",
+    "T04-050",
+    "T04-051",
+    "T04-052"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "7d12ccd99f0e216c10e901b3b310409cfb6ea7e7be0ca8138c635a61d05a5e9e",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:20.272221Z"
+}

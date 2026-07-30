@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-005",
+  "section_title": "Ba cấp độ kỹ thuật: rule-based, workflow, agent",
+  "section_order": 5,
+  "abstract": "Giảng viên trình bày ba cấp độ kỹ thuật trong việc áp dụng công nghệ AI, từ đơn giản đến phức tạp, và nhấn mạnh tầm quan trọng của việc bắt đầu từ các giải pháp đơn giản.",
+  "key_points": [
+    {
+      "text": "Có ba cấp độ kỹ thuật chính trong việc áp dụng công nghệ: rule-based, workflow, và agent.",
+      "citations": [
+        "T02-035"
+      ]
+    },
+    {
+      "text": "Cấp độ rule-based sử dụng các quy tắc rõ ràng, dễ triển khai và an toàn hơn so với các cấp độ phức tạp hơn.",
+      "citations": [
+        "T02-036"
+      ]
+    },
+    {
+      "text": "Cấp độ workflow cho phép chia công việc thành các bước lớn hoặc phân nhánh, với sự hỗ trợ của AI agent hoặc LLM.",
+      "citations": [
+        "T02-037"
+      ]
+    },
+    {
+      "text": "Cấp độ agent là mức độ phức tạp nhất, yêu cầu xây dựng các agent có khả năng tự động suy nghĩ và chia task, nhưng cũng đi kèm với chi phí cao và khó khăn trong việc kiểm soát.",
+      "citations": [
+        "T02-038"
+      ]
+    },
+    {
+      "text": "Việc xây dựng các hệ thống phức tạp như agent đòi hỏi sự cẩn thận và cần bắt đầu từ các giải pháp đơn giản để dễ kiểm soát và debug.",
+      "citations": [
+        "T02-039"
+      ]
+    }
+  ],
+  "concepts": [
+    "rule-based",
+    "workflow",
+    "agent",
+    "AI agent",
+    "LLM",
+    "debug",
+    "Anthropic"
+  ],
+  "examples": [
+    {
+      "text": "Hệ thống scoring của ngân hàng sử dụng 30–40 quy tắc if nối với nhau mà không cần AI.",
+      "citations": [
+        "T02-036"
+      ]
+    },
+    {
+      "text": "Workflow có thể bao gồm các bước tuần tự như tóm tắt và viết bài, hoặc phân nhánh và xử lý song song.",
+      "citations": [
+        "T02-037"
+      ]
+    },
+    {
+      "text": "Một hệ thống agent có thể spawn hơn 100 agent và tiêu tốn hàng triệu token.",
+      "citations": [
+        "T02-038"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-035",
+    "T02-036",
+    "T02-037",
+    "T02-038",
+    "T02-039",
+    "T02-040",
+    "T02-041",
+    "T02-042",
+    "T02-043"
+  ],
+  "covered_chunk_ids": [
+    "T02-035",
+    "T02-036",
+    "T02-037",
+    "T02-038",
+    "T02-039"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T02-038",
+    "T02-040",
+    "T02-041"
+  ],
+  "activity_chunk_ids": [
+    "T02-043"
+  ],
+  "content_hash": "eace11c77b04efddd3b3d963c06126027a8fa2e4646c42dfaac2188ce1e1c690",
+  "prompt_version": "v1",
+  "model": "gpt-4o",
+  "generated_at": "2026-07-30T09:20:44.356520Z"
+}

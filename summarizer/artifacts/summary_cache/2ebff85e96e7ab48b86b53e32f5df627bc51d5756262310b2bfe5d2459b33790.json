@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-016",
+  "section_title": "Bảo mật dữ liệu nhạy cảm khi làm việc với khách hàng",
+  "section_order": 16,
+  "abstract": "Nội dung chính của mục này là về bảo mật dữ liệu nhạy cảm khi làm việc với khách hàng, bao gồm các quy định và yêu cầu cần tuân thủ.",
+  "key_points": [
+    {
+      "text": "Việc bảo mật dữ liệu nhạy cảm phụ thuộc vào thỏa thuận ký kết với khách hàng.",
+      "citations": [
+        "T03-138"
+      ]
+    },
+    {
+      "text": "Khách hàng có thể cho phép hệ thống AI đọc thông tin bảo mật với điều kiện thông tin đó phải được censor.",
+      "citations": [
+        "T03-139"
+      ]
+    },
+    {
+      "text": "Khi xử lý hình ảnh từ CCTV, cần phải censor khuôn mặt của người xuất hiện.",
+      "citations": [
+        "T03-140"
+      ]
+    },
+    {
+      "text": "Trong lĩnh vực ngân hàng, cần tuân thủ nghiêm ngặt quy tắc bảo mật và có thể bị phạt nếu lộ thông tin.",
+      "citations": [
+        "T03-141"
+      ]
+    }
+  ],
+  "concepts": [
+    "bảo mật dữ liệu nhạy cảm",
+    "hệ thống AI",
+    "mô hình LLM",
+    "censor",
+    "thông tin nội bộ",
+    "thông tin số cá nhân",
+    "quy tắc bảo mật"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-138",
+    "T03-139",
+    "T03-140",
+    "T03-141"
+  ],
+  "covered_chunk_ids": [
+    "T03-138",
+    "T03-139",
+    "T03-140",
+    "T03-141"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-141"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "9b39128f43bd401e8a4458b0746876e790993847db27cc12fd1022c526c70174",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:45.672672Z"
+}
