@@ -143,6 +143,12 @@ def retrieve(
         if retriever is None:
             continue
         with trace.stage(name) as tdata:
+            if name != "bm25" and not toggles.bat(name):
+                ket[name] = []
+                tdata["gop_vao_fusion"] = False
+                tdata["bo_qua"] = f"Nhánh {name} đã bị tắt bằng Toggle"
+                tdata["ms"] = 0.0
+                continue
             ranked = safe_rank(retriever, q, session=session, k=CAND)
             loc = [(ma, d) for ma, d in ranked.ranking if ma in ma_hop_le]
             ket[name] = loc
