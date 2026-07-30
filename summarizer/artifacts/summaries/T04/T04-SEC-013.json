@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-013",
+  "section_title": "Các lớp bao quanh LLM và tầm quan trọng của evaluation",
+  "section_order": 13,
+  "abstract": "Nội dung chính của mục này đề cập đến các lớp bao quanh LLM và tầm quan trọng của việc đánh giá (evaluation) trong quá trình phát triển sản phẩm AI.",
+  "key_points": [
+    {
+      "text": "LLM cần các lớp lớn hơn bên ngoài như context, memory và guardrail để phát huy hết năng lực.",
+      "citations": [
+        "T04-074"
+      ]
+    },
+    {
+      "text": "Evaluation quyết định đến 80% thành công sản phẩm và phần lớn các công ty dành 80% nguồn lực để xây dựng hạ tầng evaluation tự động.",
+      "citations": [
+        "T04-075"
+      ]
+    },
+    {
+      "text": "Cần xây dựng bộ dataset benchmark để đánh giá hiệu quả hoạt động của hệ thống.",
+      "citations": [
+        "T04-075"
+      ]
+    },
+    {
+      "text": "Hệ thống evaluation giúp xác định sai sót và tốc độ phát triển sản phẩm.",
+      "citations": [
+        "T04-075"
+      ]
+    },
+    {
+      "text": "Nếu không có hệ thống evaluation tốt, việc đưa sản phẩm ra thế giới thực sẽ gặp khó khăn.",
+      "citations": [
+        "T04-075"
+      ]
+    }
+  ],
+  "concepts": [
+    "LLM",
+    "context",
+    "memory",
+    "guardrail",
+    "evaluation",
+    "dataset benchmark"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-074",
+    "T04-075"
+  ],
+  "covered_chunk_ids": [
+    "T04-074",
+    "T04-075"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "1d0af6fb55ed6d3f34c6ed799d5c0e0be4261d071b37f2fa3fad81b67ee89a41",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:21.790754Z"
+}

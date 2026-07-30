@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-002",
+  "section_title": "Nội dung ngày học và bức tranh tổng quan về AI",
+  "section_order": 2,
+  "abstract": "Buổi học này tập trung vào tổng quan về AI, lịch sử phát triển và cơ chế hoạt động của các mô hình ngôn ngữ lớn.",
+  "key_points": [
+    {
+      "text": "Buổi học sẽ bao gồm tổng quan về AI và lịch sử phát triển của nó.",
+      "citations": [
+        "T04-013"
+      ]
+    },
+    {
+      "text": "AI hiện nay cho phép mọi người tương tác với các mô hình AI bằng ngôn ngữ tự nhiên.",
+      "citations": [
+        "T04-013"
+      ]
+    },
+    {
+      "text": "Cuối buổi sẽ có một quiz ngắn trên Kahoot và sáng hôm sau sẽ có bài lab liên quan đến cài đặt môi trường và gọi API.",
+      "citations": [
+        "T04-014"
+      ]
+    },
+    {
+      "text": "AI là hệ thống có trí thông minh, bao gồm các khái niệm như machine learning, deep learning và generative AI.",
+      "citations": [
+        "T04-015"
+      ]
+    },
+    {
+      "text": "Generative AI là công nghệ nằm đằng sau các chatbot thông minh như ChatGPT.",
+      "citations": [
+        "T04-015"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI",
+    "machine learning",
+    "deep learning",
+    "generative AI"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-013",
+    "T04-014",
+    "T04-015"
+  ],
+  "covered_chunk_ids": [
+    "T04-013",
+    "T04-014",
+    "T04-015"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "496378a09f5ce76575295baa9712fc627eb3e1baec26a4cb63cafa824482131a",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:11.208324Z"
+}

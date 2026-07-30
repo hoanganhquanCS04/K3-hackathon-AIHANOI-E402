@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-017",
+  "section_title": "Test AI system — chuẩn bị kịch bản hỏng",
+  "section_order": 17,
+  "abstract": "Nội dung chính của mục này là tầm quan trọng của việc chuẩn bị các kịch bản hỏng trong quá trình kiểm thử hệ thống AI.",
+  "key_points": [
+    {
+      "text": "Việc kiểm thử trong phát triển hệ thống AI không thể chỉ dựa vào việc chờ lỗi xảy ra để sửa chữa.",
+      "citations": [
+        "T03-142"
+      ]
+    },
+    {
+      "text": "Cần chuẩn bị các kịch bản hỏng để có thể ứng phó kịp thời khi sự cố xảy ra.",
+      "citations": [
+        "T03-143"
+      ]
+    },
+    {
+      "text": "Các bạn cần có chỉ số metric để báo cáo với cấp trên.",
+      "citations": [
+        "T03-144"
+      ]
+    },
+    {
+      "text": "Quy trình làm việc cần được cập nhật thường xuyên do công nghệ thay đổi nhanh chóng.",
+      "citations": [
+        "T03-145"
+      ]
+    }
+  ],
+  "concepts": [
+    "test case",
+    "happy case",
+    "backup plan",
+    "rollback",
+    "metric"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-142",
+    "T03-143",
+    "T03-144",
+    "T03-145"
+  ],
+  "covered_chunk_ids": [
+    "T03-142",
+    "T03-143",
+    "T03-144",
+    "T03-145"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "e71f071c07340278855cc299ec12419ca9c571aac70624a9d84fe70f581c9ea4",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:46.702589Z"
+}

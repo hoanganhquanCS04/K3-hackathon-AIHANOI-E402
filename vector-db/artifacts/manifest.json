@@ -1,0 +1,58 @@
+{
+  "collection_name": "vlearn_transcripts_openai_small_768_v1",
+  "schema_version": "1.0",
+  "embedding": {
+    "provider": "openai",
+    "model": "text-embedding-3-small",
+    "dimensions": 768,
+    "encoding_format": "float",
+    "distance": "cosine"
+  },
+  "point_counts": {
+    "atomic_chunk": 700,
+    "section_parent": 96,
+    "session_toc": 6,
+    "total": 802,
+    "exact_collection_count": 802
+  },
+  "session_count": 6,
+  "section_count": 96,
+  "payload_indexes": [
+    "content_type",
+    "has_unclear",
+    "is_activity",
+    "point_type",
+    "section_id",
+    "session_day",
+    "session_id",
+    "session_period",
+    "speaker_role"
+  ],
+  "parent_embedding_strategy": "normalized_mean_of_child_vectors_v1",
+  "source": {
+    "file_count": 6,
+    "source_hashes": {
+      "transcript-01-clean.md": "ea3619b31566ada7c4fad78d65b6ddb22dc44c8d851cf69fb2f03ac853df65f5",
+      "transcript-02-clean.md": "2bfc3eee0d933f8f265399c6e8df572256063fe681c25323e23c9212d074dcad",
+      "transcript-03-clean.md": "0c43a58ab61e6b03c523dafc7020b792722265e8ac9e0a73c38746eb3e11e80d",
+      "transcript-04-clean.md": "92ae162746e1ed015c628ef8b904ef0f8e49222e930e78b1f0159139e9f88526",
+      "transcript-05-clean.md": "65a7c2872c687b5427048be32ad9532e06f9c82040d4d1ef1dd1af42996007cb",
+      "transcript-06-clean.md": "0bf0e220bf6e26d08bbf4be12fa68d619face7df788fb013036c494912eebe8c"
+    }
+  },
+  "build": {
+    "created_at": "2026-07-30T08:08:19.475066+00:00",
+    "git_commit": "288a42d77b1c70bcc4aa3ff7914c96f6f399564d",
+    "python_version": "3.13.5",
+    "uv_lock_hash": "a27f75272b8651b52b12a68b7c60516aeb34993d6460cded3e7b5b9425e01dc5",
+    "dry_run": false
+  },
+  "embedding_usage": {
+    "model": "text-embedding-3-small",
+    "dimensions": 768,
+    "api_requests": 0,
+    "api_inputs": 0,
+    "api_tokens": 0,
+    "cache_hits": 706
+  }
+}

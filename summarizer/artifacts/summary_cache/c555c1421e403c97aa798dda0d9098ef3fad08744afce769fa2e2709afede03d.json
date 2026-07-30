@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-019",
+  "section_title": "Cơ bản về gọi API mô hình LLM",
+  "section_order": 19,
+  "abstract": "Nội dung chính của mục này là hướng dẫn cơ bản về cách gọi API của mô hình LLM, bao gồm các nguyên tắc chi phí và cấu trúc của prompt.",
+  "key_points": [
+    {
+      "text": "Khi gọi API của một mô hình LLM, luôn có đầu vào và đầu ra, với input là câu hỏi và output là câu trả lời của AI.",
+      "citations": [
+        "T04-087"
+      ]
+    },
+    {
+      "text": "Khi lưu trữ toàn bộ lịch sử hội thoại, mỗi lần gọi sẽ cộng thêm vào toàn bộ lịch sử trước đó.",
+      "citations": [
+        "T04-088"
+      ]
+    },
+    {
+      "text": "Cấu trúc của một lần gọi API bao gồm system prompt, user input và ngữ cảnh bổ sung.",
+      "citations": [
+        "T04-089"
+      ]
+    },
+    {
+      "text": "System prompt có hiệu lực tuyệt đối và yêu cầu mô hình hành động theo quy tắc tổng quát.",
+      "citations": [
+        "T04-089"
+      ]
+    },
+    {
+      "text": "Khi nhận response từ AI, cần xử lý để extract thông tin và tính toán số token đã tiêu thụ.",
+      "citations": [
+        "T04-089"
+      ]
+    }
+  ],
+  "concepts": [
+    "API",
+    "LLM",
+    "system prompt",
+    "user input",
+    "context",
+    "prompt engineering"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-087",
+    "T04-088",
+    "T04-089",
+    "T04-090"
+  ],
+  "covered_chunk_ids": [
+    "T04-087",
+    "T04-088",
+    "T04-089"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [
+    "T04-090"
+  ],
+  "content_hash": "35aaed1f83ec4978a2a3b41acc91953ed534fa496d36a53ee0a2eb9aea7e9689",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:27.090118Z"
+}

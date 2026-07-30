@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-011",
+  "section_title": "Scope, chi phí và đạo đức nghề nghiệp",
+  "section_order": 11,
+  "abstract": "Nội dung chính của mục này tập trung vào việc xác định phạm vi công việc và chi phí trong các dự án công nghệ, đồng thời nhấn mạnh tầm quan trọng của đạo đức nghề nghiệp trong lĩnh vực lập trình và AI.",
+  "key_points": [
+    {
+      "text": "Cái scope giúp đảm bảo chi phí hoàn thành thấp nhất.",
+      "citations": [
+        "T03-110"
+      ]
+    },
+    {
+      "text": "Người dùng spam có thể gây tốn kém cho công ty nếu không có quy tắc kiểm soát.",
+      "citations": [
+        "T03-110"
+      ]
+    },
+    {
+      "text": "Đạo đức nghề nghiệp của kỹ sư lập trình là đảm bảo an toàn cho người dùng.",
+      "citations": [
+        "T03-111"
+      ]
+    },
+    {
+      "text": "Các quyết định trong ngành tài chính, luật pháp hay y tế có thể ảnh hưởng đến tính mạng con người.",
+      "citations": [
+        "T03-111"
+      ]
+    },
+    {
+      "text": "Việc xây dựng quy tắc cho robot giao hàng tự động ở Việt Nam là một thách thức pháp lý.",
+      "citations": [
+        "T03-111"
+      ]
+    }
+  ],
+  "concepts": [
+    "scope",
+    "cost",
+    "user experience",
+    "đạo đức nghề nghiệp",
+    "an toàn thông tin",
+    "robot giao hàng tự động"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-110",
+    "T03-111"
+  ],
+  "covered_chunk_ids": [
+    "T03-110",
+    "T03-111"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "b33342ae76fdcc2a5ec4c4e021e812c85050622df61197b5f54e306d27809309",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:42.848051Z"
+}

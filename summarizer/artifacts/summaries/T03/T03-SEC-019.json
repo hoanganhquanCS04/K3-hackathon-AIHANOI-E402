@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-019",
+  "section_title": "Q&A: cách chọn project của chương trình",
+  "section_order": 19,
+  "abstract": "Nội dung chính của mục này là hướng dẫn học viên về cách chọn dự án nhóm trong chương trình, bao gồm việc sử dụng checklist và khả năng tự đề xuất dự án.",
+  "key_points": [
+    {
+      "text": "Trường sẽ chọn project theo checklist của chương trình chứ không phải theo ý tưởng cá nhân của nhóm.",
+      "citations": [
+        "T03-150"
+      ]
+    },
+    {
+      "text": "Chương trình sẽ cung cấp một danh sách các vấn đề gặp phải của tập đoàn Vingroup cho các nhóm.",
+      "citations": [
+        "T03-151"
+      ]
+    },
+    {
+      "text": "Các nhóm có thể tự tạo thêm những dự án riêng nếu dự án đó có ý nghĩa và được mentor approve.",
+      "citations": [
+        "T03-151"
+      ]
+    },
+    {
+      "text": "Danh sách đề bài sẽ được phổ biến trong buổi kick-off và các bạn sẽ nhận được trước 1 đến 2 ngày.",
+      "citations": [
+        "T03-153"
+      ]
+    },
+    {
+      "text": "Danh sách đề bài chỉ giới hạn trong một domain cụ thể nhưng các nhóm có thể mở rộng chủ đề ra thành những chủ đề nhỏ.",
+      "citations": [
+        "T03-153"
+      ]
+    }
+  ],
+  "concepts": [],
+  "examples": [],
+  "student_questions": [
+    {
+      "text": "Học viên hỏi khi nào sẽ nhận được checklist đó?",
+      "citations": [
+        "T03-152"
+      ]
+    }
+  ],
+  "source_chunk_ids": [
+    "T03-150",
+    "T03-151",
+    "T03-152",
+    "T03-153",
+    "T03-154"
+  ],
+  "covered_chunk_ids": [
+    "T03-150",
+    "T03-151",
+    "T03-152",
+    "T03-153"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-153"
+  ],
+  "activity_chunk_ids": [
+    "T03-154"
+  ],
+  "content_hash": "2b27632f9b6de21d979f3dc65283f10834adc7a8c4965f4316557c593360844b",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:48.965563Z"
+}

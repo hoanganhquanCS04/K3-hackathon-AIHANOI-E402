@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-005",
+  "section_title": "AlphaGo và kiến trúc Transformer",
+  "section_order": 5,
+  "abstract": "Mục này trình bày về AlphaGo và kiến trúc Transformer, nhấn mạnh sự đột phá của AlphaGo trong cờ vây và sự phát triển của mô hình Transformer trong xử lý ngôn ngữ tự nhiên.",
+  "key_points": [
+    {
+      "text": "AlphaGo là sản phẩm của một team đã gia nhập Google, tiền thân của Google DeepMind.",
+      "citations": [
+        "T04-034"
+      ]
+    },
+    {
+      "text": "AlphaGo nổi tiếng với nước đi số 37, khiến kỳ thủ Lee Sedol không thể hiểu nổi.",
+      "citations": [
+        "T04-036"
+      ]
+    },
+    {
+      "text": "Chiến thắng của AlphaGo vào năm 2016 đã tạo ra cú sốc với Trung Quốc, dẫn đến việc họ xây dựng chiến lược quốc gia về AI.",
+      "citations": [
+        "T04-037"
+      ]
+    },
+    {
+      "text": "Bài báo \"Attention Is All You Need\" xuất bản năm 2017 là khởi điểm cho kiến trúc transformer.",
+      "citations": [
+        "T04-038"
+      ]
+    },
+    {
+      "text": "Transformer có khả năng nhận diện mối liên kết giữa nhiều từ trong một câu, thay vì chỉ xử lý từng chữ một.",
+      "citations": [
+        "T04-040"
+      ]
+    }
+  ],
+  "concepts": [
+    "AlphaGo",
+    "Google DeepMind",
+    "Transformer",
+    "Attention Is All You Need",
+    "recurrent neural network (RNN)"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-034",
+    "T04-035",
+    "T04-036",
+    "T04-037",
+    "T04-038",
+    "T04-039",
+    "T04-040"
+  ],
+  "covered_chunk_ids": [
+    "T04-034",
+    "T04-036",
+    "T04-037",
+    "T04-038",
+    "T04-040"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-035"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "f0b52dde54075e6213fbd7f90cf4b0019ff2d88fe885b85cc103502a78e11bbc",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:11.944993Z"
+}

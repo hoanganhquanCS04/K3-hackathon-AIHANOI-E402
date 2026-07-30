@@ -1,0 +1,60 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-004",
+  "section_title": "Automation và augmentation: chọn mức độ tự động hoá",
+  "section_order": 4,
+  "abstract": "Bài giảng tập trung vào việc lựa chọn mức độ tự động hóa trong việc áp dụng AI vào sản phẩm, phân biệt giữa automation và augmentation.",
+  "key_points": [
+    {
+      "text": "Bước đầu tiên trong việc quyết định đưa AI vào sử dụng là xác định nhu cầu và thế mạnh của AI.",
+      "citations": [
+        "T02-031"
+      ]
+    },
+    {
+      "text": "Có hai thang mức độ tự động hóa: automation (tự động) và augmentation (tăng cường).",
+      "citations": [
+        "T02-032"
+      ]
+    },
+    {
+      "text": "Người ta thường bắt đầu với augmentation trước, tức là có con người giám sát, rồi mới tăng dần mức độ automation.",
+      "citations": [
+        "T02-033"
+      ]
+    },
+    {
+      "text": "Cần ưu tiên xử lý các công việc có impact lớn trước và chú ý đến độ hậu quả của công việc khi quyết định mức độ tự động hóa.",
+      "citations": [
+        "T02-034"
+      ]
+    }
+  ],
+  "concepts": [
+    "automation",
+    "augmentation"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-031",
+    "T02-032",
+    "T02-033",
+    "T02-034"
+  ],
+  "covered_chunk_ids": [
+    "T02-031",
+    "T02-032",
+    "T02-033",
+    "T02-034"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "248d49b8c10b9cc98b8ff8d1d99ee5d8a871d65fbfba7e24580e668e16f3d86c",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:41:47.044183Z"
+}

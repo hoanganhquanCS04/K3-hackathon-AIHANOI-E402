@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-002",
+  "section_title": "Ba track nghề nghiệp: AI Engineer, MLOps và AI PM",
+  "section_order": 2,
+  "abstract": "Buổi học này tập trung vào ba track nghề nghiệp trong lĩnh vực AI: AI Engineer, MLOps và AI PM, cùng với những yêu cầu và kỹ năng cần thiết cho từng track.",
+  "key_points": [
+    {
+      "text": "Có ba track nghề nghiệp trong lĩnh vực AI: AI Engineer, MLOps và AI PM.",
+      "citations": [
+        "T03-014"
+      ]
+    },
+    {
+      "text": "MLOps liên quan đến việc triển khai kết quả của AI Engineer lên hệ thống thực tế.",
+      "citations": [
+        "T03-015"
+      ]
+    },
+    {
+      "text": "AI PM không cần giỏi code nhưng phải có khả năng quản lý dự án và giao tiếp giữa khách hàng và kỹ sư.",
+      "citations": [
+        "T03-016"
+      ]
+    },
+    {
+      "text": "AI PM cần có cái nhìn tổng quát để nhận diện rủi ro và vấn đề trong hệ thống.",
+      "citations": [
+        "T03-017"
+      ]
+    },
+    {
+      "text": "Mỗi cá nhân trong thời đại hiện nay có thể giống như một giám đốc công ty, sử dụng AI để xây dựng hệ thống riêng.",
+      "citations": [
+        "T03-021"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI Engineer",
+    "MLOps",
+    "AI PM"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-014",
+    "T03-015",
+    "T03-016",
+    "T03-017",
+    "T03-018",
+    "T03-019",
+    "T03-020",
+    "T03-021",
+    "T03-022",
+    "T03-023"
+  ],
+  "covered_chunk_ids": [
+    "T03-014",
+    "T03-015",
+    "T03-016",
+    "T03-017",
+    "T03-021"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [
+    "T03-023"
+  ],
+  "content_hash": "7d8b0ae53bccc997778138009868f2d76d48180e15f21a1ed45a36d7b8c85795",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:33.389963Z"
+}

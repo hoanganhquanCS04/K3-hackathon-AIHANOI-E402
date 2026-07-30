@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T02",
+  "section_id": "T02-SEC-003",
+  "section_title": "Chỉ số thành công và đo lường sản phẩm",
+  "section_order": 3,
+  "abstract": "Nội dung chính của mục này là về việc đo lường hiệu quả sản phẩm thông qua các chỉ số thành công và cách thiết kế các chỉ số này để đánh giá hiệu quả học tập hoặc trải nghiệm người dùng.",
+  "key_points": [
+    {
+      "text": "Đo lường hiệu quả sản phẩm cần xác định các chỉ số cụ thể như số lượng user và thời gian sử dụng.",
+      "citations": [
+        "T02-019"
+      ]
+    },
+    {
+      "text": "Chỉ số user không đủ để chứng minh hiệu quả học tập, cần đánh giá hành vi quay lại của người dùng.",
+      "citations": [
+        "T02-021"
+      ]
+    },
+    {
+      "text": "Sản phẩm học tập cần thiết kế các metric để đo lường hiệu quả học tập như điểm quiz.",
+      "citations": [
+        "T02-024"
+      ]
+    },
+    {
+      "text": "North Star Metric là chỉ số cuối cùng mà sản phẩm hướng tới, cần xây dựng các giả thuyết để đo lường.",
+      "citations": [
+        "T02-025"
+      ]
+    },
+    {
+      "text": "A/B testing là phương pháp chia tệp để kiểm tra hiệu quả của các tính năng.",
+      "citations": [
+        "T02-028"
+      ]
+    },
+    {
+      "text": "Khi thực hiện A/B test, chỉ nên thay đổi một biến tại một thời điểm để đánh giá chính xác.",
+      "citations": [
+        "T02-029"
+      ]
+    }
+  ],
+  "concepts": [
+    "North Star Metric",
+    "A/B testing",
+    "Google Analytics",
+    "visitor",
+    "user",
+    "metric"
+  ],
+  "examples": [
+    {
+      "text": "Ví dụ về việc sử dụng Google Analytics để đo lường visitor.",
+      "citations": [
+        "T02-020"
+      ]
+    },
+    {
+      "text": "Công cụ Transformer Explainer được thử nghiệm với nhiều nhóm sinh viên để đo điểm quiz.",
+      "citations": [
+        "T02-026"
+      ]
+    },
+    {
+      "text": "Netflix xây dựng hệ thống A/B test để tối ưu hóa ảnh cover phim.",
+      "citations": [
+        "T02-030"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T02-019",
+    "T02-020",
+    "T02-021",
+    "T02-022",
+    "T02-023",
+    "T02-024",
+    "T02-025",
+    "T02-026",
+    "T02-027",
+    "T02-028",
+    "T02-029",
+    "T02-030"
+  ],
+  "covered_chunk_ids": [
+    "T02-019",
+    "T02-020",
+    "T02-021",
+    "T02-024",
+    "T02-025",
+    "T02-026",
+    "T02-028",
+    "T02-029",
+    "T02-030"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T02-019",
+    "T02-021",
+    "T02-023",
+    "T02-025",
+    "T02-026",
+    "T02-027",
+    "T02-028"
+  ],
+  "activity_chunk_ids": [
+    "T02-022"
+  ],
+  "content_hash": "d549aeda36bc53b69c55a489ce7c9cdab670716af97ad5d2347161cceec9582f",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:41:49.124104Z"
+}
