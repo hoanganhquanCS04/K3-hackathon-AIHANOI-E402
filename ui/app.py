@@ -73,8 +73,18 @@ def open_session(sid: str) -> None:
     st.session_state.update(sid=sid, msgs=[], done={}, slide_part=1, pending=None)
 
 
-def say(role: str, kind: str, payload) -> None:
-    st.session_state.msgs.append({"role": role, "kind": kind, "payload": payload})
+def stream_text(text: str, delay: float = 0.01):
+    import time
+    if not text:
+        return
+    words = text.split(" ")
+    for i, w in enumerate(words):
+        yield w + (" " if i < len(words) - 1 else "")
+        time.sleep(delay)
+
+
+def say(role: str, kind: str, payload, is_new: bool = False) -> None:
+    st.session_state.msgs.append({"role": role, "kind": kind, "payload": payload, "is_new": is_new})
 
 
 def handle(query: str, session: dict, toggles: Toggles | None = None) -> None:
@@ -83,7 +93,7 @@ def handle(query: str, session: dict, toggles: Toggles | None = None) -> None:
     intent = r["intent"]
 
     if intent in ("logistics", "ngoai_pham_vi", "chao_hoi"):
-        say("ai", "text", refusal(intent, session))
+        say("ai", "text", refusal(intent, session), is_new=True)
         return
 
     if intent == "xem_muc_luc":
@@ -93,26 +103,26 @@ def handle(query: str, session: dict, toggles: Toggles | None = None) -> None:
     if intent == "tom_tat_thieu_slot":
         say("ai", "text",
             f"Bạn muốn tóm phần nào? Buổi này có {len(session['parts'])} phần — "
-            "bấm gợi ý bên dưới, hoặc nói “tóm cả buổi”.")
+            "bấm gợi ý bên dưới, hoặc nói “tóm cả buổi”.", is_new=True)
         return
 
     if intent == "tom_tat_buoi":
         if not st.session_state.done:
             say("ai", "text",
                 "Chưa có phần nào được tóm. Sổ tay được gộp từ các phần đã tóm — "
-                "bắt đầu bằng phần 1 nhé.")
+                "bắt đầu bằng phần 1 nhé.", is_new=True)
             say("ai", "outline", session)
             return
         with st.spinner("Đang gộp sổ tay..."):
             recap = build_recap(session, st.session_state.done)
         recap["_stats"] = last_stats()
-        say("ai", "recap", recap)
+        say("ai", "recap", recap, is_new=True)
         return
 
     if intent == "tom_tat_phan":
         idx, why = resolve_part(r["part_ref"], session, st.session_state.done)
         if idx is None:
-            say("ai", "text", f"Mình chưa xác định được phần nào ({why}).")
+            say("ai", "text", f"Mình chưa xác định được phần nào ({why}).", is_new=True)
             say("ai", "outline", session)
             return
         n_sec = len(session["parts"][idx - 1]["section_titles"])
@@ -121,12 +131,12 @@ def handle(query: str, session: dict, toggles: Toggles | None = None) -> None:
         result["_stats"] = last_stats()
         st.session_state.done[idx] = result
         st.session_state.slide_part = idx
-        say("ai", "part", result)
+        say("ai", "part", result, is_new=True)
         return
 
     ans = answer_query(session, query, toggles=toggles)
     ans["_stats"] = last_stats()
-    say("ai", "answer", ans)
+    say("ai", "answer", ans, is_new=True)
 
 
 def screen_list() -> None:
@@ -235,9 +245,14 @@ def render_stats(stats) -> None:
 
 def render_msg(m: dict) -> None:
     kind, p = m["kind"], m["payload"]
+    is_new = m.get("is_new", False)
     with st.chat_message("user" if m["role"] == "user" else "assistant"):
         if kind == "text":
-            st.write(p)
+            if is_new:
+                st.write_stream(stream_text(p))
+                m["is_new"] = False
+            else:
+                st.write(p)
 
         elif kind == "outline":
             st.write(f"**Buổi {p['id']}** có **{len(p['parts'])} phần**:")
@@ -264,14 +279,19 @@ def render_msg(m: dict) -> None:
             for i, kp in enumerate(p["key_points"], 1):
                 tag = ' <b>· một học viên nêu</b>' if kp["has_student_speech"] else ""
                 cites = " ".join(f'<span class="cite">{c}</span>' for c in kp["cite"])
-                st.markdown(
-                    f'{i}. {claim_html(kp)} {cites}{tag}'
-                    f'<blockquote class="q">“{kp["quote"]}”</blockquote>',
-                    unsafe_allow_html=True,
-                )
+                if is_new and kp.get("claim"):
+                    st.write_stream(stream_text(f"{i}. {claim_html(kp)}"))
+                    st.markdown(f"{cites}{tag}", unsafe_allow_html=True)
+                else:
+                    st.markdown(
+                        f'{i}. {claim_html(kp)} {cites}{tag}',
+                        unsafe_allow_html=True,
+                    )
+                st.markdown(f'<blockquote class="q">“{kp["quote"]}”</blockquote>', unsafe_allow_html=True)
             for g in p["gaps"]:
                 st.caption(f"⚠ Chỗ bản ghi thiếu: {g}")
             render_stats(p.get("_stats"))
+            m["is_new"] = False
 
         elif kind == "recap":
             s = p["session"]
@@ -285,7 +305,11 @@ def render_msg(m: dict) -> None:
             st.markdown("**Ý chính**")
             for i, kp in enumerate(p["key_points"], 1):
                 cites = " ".join(f'<span class="cite">{c}</span>' for c in kp["cite"])
-                st.markdown(f"{i}. {claim_html(kp)} {cites}", unsafe_allow_html=True)
+                if is_new and kp.get("claim"):
+                    st.write_stream(stream_text(f"{i}. {claim_html(kp)}"))
+                    st.markdown(f"{cites}", unsafe_allow_html=True)
+                else:
+                    st.markdown(f"{i}. {claim_html(kp)} {cites}", unsafe_allow_html=True)
             if p["student_points"]:
                 st.markdown("**Câu hỏi học viên nêu trong buổi**")
                 for kp in p["student_points"]:
@@ -300,18 +324,28 @@ def render_msg(m: dict) -> None:
                         "sổ tay mới gộp bằng code từ các phần đã tóm. Tóm đủ mọi phần "
                         "thì mới chạy bước REDUCE để viết lại thành một mạch.")
             render_stats(p.get("_stats"))
+            m["is_new"] = False
 
         elif kind == "answer":
             if p.get("claims"):
                 for c in p["claims"]:
-                    st.markdown(
-                        f'- {claim_html(c)} <span class="cite">{c["cite"][0]}</span>'
-                        f'<blockquote class="q">“{c["quote"]}”</blockquote>',
-                        unsafe_allow_html=True,
-                    )
+                    cite_code = c["cite"][0] if c.get("cite") else ""
+                    if is_new and c.get("claim"):
+                        st.write_stream(stream_text(f"• {claim_html(c)}"))
+                        st.markdown(f'<span class="cite">{cite_code}</span>', unsafe_allow_html=True)
+                    else:
+                        st.markdown(
+                            f'- {claim_html(c)} <span class="cite">{cite_code}</span>',
+                            unsafe_allow_html=True,
+                        )
+                    st.markdown(f'<blockquote class="q">“{c["quote"]}”</blockquote>', unsafe_allow_html=True)
             if p.get("note"):
-                st.caption(p["note"])
+                if is_new:
+                    st.write_stream(stream_text(p["note"]))
+                else:
+                    st.caption(p["note"])
             render_stats(p.get("_stats"))
+            m["is_new"] = False
 
 
 def render_suggestions(session: dict) -> None:
