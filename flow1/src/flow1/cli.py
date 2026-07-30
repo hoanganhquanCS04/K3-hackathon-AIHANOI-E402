@@ -1,16 +1,15 @@
-"""Giao diện dòng lệnh của luồng 1. Chủ: M2 → M4.
+"""Giao diện dòng lệnh của hệ thống Sổ tay buổi học (Luồng 1 + Luồng 2).
 
     python -m flow1 index                          # dựng BM25, chạy một lần
     python -m flow1 ask "cơ chế attention là gì"
     python -m flow1 ask "chỉ số thành công" --session 02    # đường correction
+    python -m flow1 build 03                       # luồng 2: tóm tắt cả buổi 03
+    python -m flow1 build 07                       # từ chối + liệt kê 6 buổi có sẵn
 
 Mã thoát:
     0  trả lời được, HOẶC từ chối/hỏi lại đúng — từ chối đúng cũng là thành công
     1  lỗi gọi model
     3  chưa dựng index, hoặc thiếu data pack
-
-Ba biến `_*_CALL` mặc định None (tức là dùng provider thật). Test monkeypatch chúng
-để chạy offline — không cần mạng, không cần API key.
 """
 
 from __future__ import annotations
@@ -73,18 +72,60 @@ def _run_index() -> int:
     return 0
 
 
+def _run_build(session_id: str) -> int:
+    sid = str(session_id).zfill(2)
+    if sid not in ("01", "02", "03", "04", "05", "06"):
+        print(
+            f"Buổi {session_id} không có trong 6 buổi đã ghi. "
+            f"Hệ thống có bản ghi cho 6 buổi: 01, 02, 03, 04, 05, 06."
+        )
+        return 0
+
+    try:
+        from helpers import branch_table  # noqa: F401
+        from live import build_recap, get_session, load_outline, summarize_part
+    except ImportError:
+        from flow1.app.live import build_recap, get_session, load_outline, summarize_part
+
+    sessions = load_outline()
+    session = get_session(sessions, sid)
+    if not session:
+        print(f"Không tìm thấy cấu trúc buổi {sid} trong outline.")
+        return 3
+
+    print(f"=== SỔ TAY BUỔI {session['id']} — {session['title']} ===")
+    done = {}
+    for idx in range(1, len(session["parts"]) + 1):
+        print(f"Đang đọc và tóm tắt phần {idx}/{len(session['parts'])}...")
+        done[idx] = summarize_part(session, idx)
+
+    recap = build_recap(session, done)
+    print("\n--- Ý CHÍNH CẢ BUỔI ---")
+    for i, kp in enumerate(recap.get("key_points", []), 1):
+        cites = ", ".join(kp.get("cite", []))
+        claim = kp.get("claim") or kp.get("quote") or ""
+        print(f"{i}. {claim} [{cites}]")
+
+    if recap.get("gaps"):
+        print("\n--- ⚠ CHỖ BẢN GHI THIẾU ---")
+        for g in recap["gaps"]:
+            print(f"- {g}")
+
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
 
     parser = argparse.ArgumentParser(
-        prog="flow1", description="Tra cứu nội dung buổi học, có 4 cổng từ chối."
+        prog="flow1", description="Tra cứu và tóm tắt nội dung buổi học (Luồng 1 & Luồng 2)."
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
     sub.add_parser("index", help="Dựng BM25 index từ data pack.")
 
-    ask_parser = sub.add_parser("ask", help="Hỏi một câu về nội dung khoá.")
+    ask_parser = sub.add_parser("ask", help="Hỏi một câu về nội dung khoá (Luồng 1).")
     ask_parser.add_argument("question", help="Câu hỏi, đặt trong ngoặc kép.")
     ask_parser.add_argument(
         "--session", default=None,
@@ -95,8 +136,13 @@ def main(argv: list[str] | None = None) -> int:
         help="In bang chi tiet tung chang ra stderr va ghi JSON vao flow1/trace/.",
     )
 
+    build_parser = sub.add_parser("build", help="Sinh sổ tay 1 trang cho cả buổi học (Luồng 2).")
+    build_parser.add_argument("session_id", help="Mã buổi học, ví dụ 03 hoặc 07.")
+
     args = parser.parse_args(argv)
 
     if args.command == "index":
         return _run_index()
+    if args.command == "build":
+        return _run_build(args.session_id)
     return _run_ask(args.question, args.session, args.trace)

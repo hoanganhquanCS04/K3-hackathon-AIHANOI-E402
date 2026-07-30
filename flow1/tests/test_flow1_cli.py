@@ -148,6 +148,15 @@ def test_index_reports_a_missing_data_pack_instead_of_a_traceback(monkeypatch, c
     assert "data pack" in capsys.readouterr().out
 
 
+# --- build ---------------------------------------------------------------
+
+def test_build_invalid_session_prints_refusal(capsys):
+    assert main(["build", "07"]) == 0
+    out = capsys.readouterr().out
+    assert "07 không có trong 6 buổi đã ghi" in out
+    assert "01, 02, 03, 04, 05, 06" in out
+
+
 # --- Hình dạng CLI -------------------------------------------------------
 
 def test_a_command_is_required():
@@ -158,3 +167,4 @@ def test_a_command_is_required():
 def test_an_unknown_command_exits_nonzero():
     with pytest.raises(SystemExit):
         main(["khong-co-lenh"])
+
