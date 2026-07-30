@@ -33,6 +33,33 @@ _SENTENCE_RE = re.compile(r"(?<=[.!?…])\s+")
 _JOIN_OVERHEAD = len("\n\n")
 
 
+def _split_oversized_run(text: str) -> list[str]:
+    """Tách một CÂU (giữa hai dấu kết câu) mà tự nó đã vượt CAP_CHARS, theo
+    khoảng trắng, thành các mảnh <= CAP_CHARS.
+
+    Nếu một "từ" đơn (không có khoảng trắng để tách tiếp) tự nó đã vượt trần
+    thì giữ nguyên — cùng luật miễn trừ như `split_giant`: thà một mảnh quá
+    trần còn hơn cắt ngang giữa từ hoặc rơi vào vòng lặp vô hạn.
+    """
+    words = [w for w in text.split(" ") if w]
+    pieces: list[str] = []
+    current = ""
+
+    for word in words:
+        candidate = f"{current} {word}".strip() if current else word
+        if current and len(candidate) > CAP_CHARS:
+            pieces.append(current)
+            current = word
+        else:
+            current = candidate
+    if current:
+        pieces.append(current)
+    if not pieces:
+        pieces = [text]
+
+    return pieces
+
+
 def _make_chunk(segs: list[Seg], *, chunk_id: str | None = None, text: str | None = None) -> Chunk:
     """Dựng Chunk từ các đoạn liền kề. `text` chỉ truyền khi tách đoạn khổng lồ."""
     head = segs[0]
@@ -53,12 +80,24 @@ def split_giant(seg: Seg) -> list[Chunk]:
 
     Không tách được (không có dấu câu nào) → trả về đúng 1 mảnh nguyên đoạn. Thà
     có một chunk quá trần còn hơn cắt ngang giữa từ hoặc rơi vào vòng lặp vô hạn.
+
+    Một câu ĐƠN (giữa hai dấu kết câu) có thể tự nó đã vượt CAP_CHARS — bản đầu
+    chỉ kiểm tra `len(candidate) > CAP_CHARS` khi `current` đã có nội dung, nên
+    câu đơn khổng lồ đầu tiên lọt qua kiểm tra và bị đẩy nguyên xi thành một
+    mảnh vượt trần. Sửa: mọi câu tự nó vượt trần được tách tiếp theo khoảng
+    trắng (`_split_oversized_run`) trước khi được xếp vào `pieces`.
     """
     sentences = [s for s in _SENTENCE_RE.split(seg.text) if s]
     pieces: list[str] = []
     current = ""
 
     for sentence in sentences:
+        if len(sentence) > CAP_CHARS:
+            if current:
+                pieces.append(current)
+                current = ""
+            pieces.extend(_split_oversized_run(sentence))
+            continue
         candidate = f"{current} {sentence}".strip() if current else sentence
         if current and len(candidate) > CAP_CHARS:
             pieces.append(current)
@@ -80,11 +119,16 @@ def _chunk_one_section(segs: list[Seg]) -> list[Chunk]:
     """Gộp trong một section. `segs` đã theo đúng thứ tự `order`."""
     chunks: list[Chunk] = []
     i = 0
+    # True khi `i` hiện tại là đoạn overlap mượn lại từ chunk vừa phát ra —
+    # nếu nhóm bắt đầu từ đây không gộp thêm được đoạn nào mới thì nhóm đó chỉ
+    # là bản sao của đuôi chunk trước, không thêm nội dung gì cho index BM25.
+    overlap_start = False
 
     while i < len(segs):
         if segs[i].n_chars > CAP_CHARS:
             chunks.extend(split_giant(segs[i]))       # luật 5 — không gộp, không overlap
             i += 1
+            overlap_start = False
             continue
 
         group = [segs[i]]
@@ -100,10 +144,22 @@ def _chunk_one_section(segs: list[Seg]) -> list[Chunk]:
             size += _JOIN_OVERHEAD + segs[j].n_chars
             j += 1
 
+        if overlap_start and len(group) == 1:
+            # Đoạn overlap một mình không gộp thêm được đoạn nào mới — bỏ qua,
+            # không phát chunk trùng lặp hoàn toàn với đuôi chunk liền trước.
+            i = j
+            overlap_start = False
+            continue
+
         chunks.append(_make_chunk(group))
 
         # Overlap 1 đoạn — CHỈ khi group có ≥2 đoạn, nếu không vòng lặp không tiến.
-        i = j - 1 if len(group) > 1 and j < len(segs) else j
+        if len(group) > 1 and j < len(segs):
+            i = j - 1
+            overlap_start = True
+        else:
+            i = j
+            overlap_start = False
 
     return chunks
 

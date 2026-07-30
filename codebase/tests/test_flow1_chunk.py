@@ -124,6 +124,20 @@ def test_a_single_unsplittable_sentence_over_the_cap_still_yields_one_piece():
     assert pieces[0].seg_codes == ["T09-001"]
 
 
+def test_an_oversized_sentence_inside_a_giant_segment_is_still_split_below_the_cap():
+    # Một câu ĐƠN (giữa hai dấu kết câu) tự nó đã vượt CAP_CHARS, nằm cạnh vài
+    # câu bình thường khác. Bản gốc chỉ kiểm tra vượt trần khi `current` đã có
+    # nội dung, nên câu khổng lồ đứng đầu lọt qua kiểm tra không bị tách tiếp.
+    giant_sentence = ("từ " * 700).strip() + "."
+    assert len(giant_sentence) > CAP_CHARS
+    text = giant_sentence + " Câu hai bình thường. Câu ba cũng bình thường."
+    pieces = split_giant(seg("T09-001", text))
+    assert len(pieces) >= 2
+    for piece in pieces:
+        assert piece.n_chars <= CAP_CHARS
+        assert piece.seg_codes == ["T09-001"]
+
+
 # --- Cờ và metadata --------------------------------------------------------
 
 def test_a_chunk_has_gap_when_any_of_its_segments_has_a_gap():
@@ -189,3 +203,24 @@ def test_no_real_chunk_mixes_two_sections():
     for chunk in chunk_all(content_segs(parse_all())):
         idxs = {by_code[c].section_idx for c in chunk.seg_codes}
         assert len(idxs) == 1, f"{chunk.chunk_id} trộn section {idxs}"
+
+
+def test_no_real_chunk_is_a_subset_of_its_immediate_predecessor():
+    # Đoạn overlap một mình (không gộp thêm được đoạn mới nào) không mang nội
+    # dung mới nào so với chunk liền trước — nếu nó vẫn được phát ra, index
+    # BM25 bị nhân bản nội dung đó, làm lệch điểm retrieval.
+    #
+    # Loại trừ các mảnh #a/#b/#c của một đoạn khổng lồ: chúng CỐ Ý cùng
+    # seg_codes (mã gốc, luật 5) nhưng mang nội dung THẬT KHÁC NHAU (mỗi mảnh
+    # là một khúc câu riêng) — không phải trường hợp trùng lặp cần chặn ở đây.
+    if not TRANSCRIPT_DIR.exists():
+        pytest.skip("data pack không có mặt")
+    chunks = chunk_all(content_segs(parse_all()))
+    dups = [
+        (prev.chunk_id, cur.chunk_id)
+        for prev, cur in zip(chunks, chunks[1:])
+        if "#" not in prev.chunk_id
+        and "#" not in cur.chunk_id
+        and set(cur.seg_codes) <= set(prev.seg_codes)
+    ]
+    assert dups == []
