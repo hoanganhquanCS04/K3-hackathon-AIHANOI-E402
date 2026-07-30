@@ -27,7 +27,9 @@ def test_requirements_khop_voi_bien_ma_qdrant_that_su_doi():
 
     Neu ai do them mot bien bat buoc vao QdrantStore ma quen cap nhat
     REQUIREMENTS thi check_env.py se bao 'OK' nham — dung loi ma task nay
-    ton tai de chan.
+    ton tai de chan. Luu y: test nay chi kiem tra mot chieu (REQUIREMENTS toi code),
+    khong kiem tra chieu nguoc (code toi REQUIREMENTS), vi vector-db khong co
+    danh sach canonical _REQUIRED like graph-db co.
     """
     from pathlib import Path
 
@@ -41,17 +43,20 @@ def test_requirements_khop_voi_bien_ma_qdrant_that_su_doi():
 
 
 def test_requirements_khop_voi_bien_ma_graph_db_that_su_doi():
-    from pathlib import Path
+    """REQUIREMENTS phai khop chinh xac set bien bat buoc cua graph_db.connection._REQUIRED.
 
+    Kiem tra hai chieu: neu ai do them bien vao _REQUIRED ma quen cap nhat
+    REQUIREMENTS, hoac xoa khoi _REQUIRED ma quen xoa REQUIREMENTS, thi test
+    se bao. Dung set equality thay vi substring check de phat hien ca hai
+    huong drift.
+    """
+    from graph_db.connection import _REQUIRED
     from scripts.check_env import REQUIREMENTS
 
-    conn = (
-        Path(__file__).resolve().parents[2]
-        / "graph-db" / "src" / "graph_db" / "connection.py"
+    assert set(REQUIREMENTS["graph-db"]) == set(_REQUIRED), (
+        f"REQUIREMENTS['graph-db'] = {set(REQUIREMENTS['graph-db'])}, "
+        f"but graph_db.connection._REQUIRED = {set(_REQUIRED)}"
     )
-    text = conn.read_text(encoding="utf-8")
-    for name in REQUIREMENTS["graph-db"]:
-        assert name in text, f"REQUIREMENTS khai {name} ma connection.py khong doc"
 
 
 def test_neo4j_database_co_trong_env_example_du_khong_bat_buoc():
