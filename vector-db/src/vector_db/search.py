@@ -110,10 +110,10 @@ def find_chunks(
     *,
     exclude_activities: bool = True,
 ) -> tuple[SearchHit, ...]:
-    """Tim doan nguyen tu.
+    """Tìm đoạn nguyên tử.
 
-    session_id=None nghia la tim xuyen ca 6 buoi — cong 1 cua flow1 can the de
-    phat hien chu de nam o nhieu buoi va hoi lai thay vi doan.
+    session_id=None nghĩa là tìm xuyên cả 6 buổi — cổng 1 của flow1 cần thế để
+    phát hiện chủ đề nằm ở nhiều buổi và hỏi lại thay vì đoán.
     """
     if session_id is not None and not session_id.strip():
         raise ValueError("session_id must not be empty")

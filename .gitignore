@@ -64,6 +64,7 @@ data/vlearn-pack/
 
 vector-db/artifacts/embedding_cache.sqlite3
 vector-db/artifacts/rejected_records.jsonl
+summarizer/artifacts/
 
 # Data (keep structure, ignore content)
 data/raw/*

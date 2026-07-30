@@ -17,7 +17,7 @@ def test_invalid_top_k_is_rejected_without_api_call() -> None:
 
 def test_empty_session_is_rejected_without_api_call() -> None:
     with pytest.raises(ValueError, match="session_id"):
-        find_chunks("RAG", "")
+        find_chunks("RAG", "   ")
 
 
 def test_retrieve_returns_structured_clarification(
@@ -46,7 +46,7 @@ def test_retrieve_returns_structured_clarification(
 
 
 def test_find_chunks_khong_can_session_id(monkeypatch):
-    """Cong 1 cua flow1 tim xuyen buoi de phat hien mo ho da buoi."""
+    """Cổng 1 của flow1 tìm xuyên buổi để phát hiện mơ hồ đa buổi."""
     ghi = {}
 
     def fake(query, **kwargs):

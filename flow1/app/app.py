@@ -49,8 +49,6 @@ try:
     from helpers import branch_table
 except ImportError:
     from flow1.app.helpers import branch_table
-
-
 def claim_html(kp: dict) -> str:
     """Luồng tóm tắt đã thật; luồng tra cứu thì chưa. Chỗ nào chưa có thì vẫn để
     trống nhìn rõ là trống, đúng tinh thần ban đầu của bản giả lập."""
@@ -162,7 +160,11 @@ def screen_list() -> None:
             '<div class="mock-banner"><b>Luồng TÓM TẮT đã chạy thật.</b> Gõ “tóm phần 1” '
             "là gọi AI ngay lúc đó trên chính bản ghi của buổi. Mục lục, mã đoạn, câu "
             "nguyên văn và mọi con số đọc trực tiếp từ transcript. "
+<<<<<<< HEAD:flow1/app/app.py
             "<b>Luồng TRA CỨU</b> sử dụng RRF 3 nhánh (BM25, Qdrant, Neo4j).</div>",
+=======
+            "Riêng <b>luồng TRA CỨU vẫn là chỗ trống</b>, chưa nối.</div>",
+>>>>>>> origin/quan:codebase/app.py
             unsafe_allow_html=True,
         )
         if uri is None:
@@ -230,7 +232,29 @@ def render_slide(session: dict) -> None:
         )
 
 
+<<<<<<< HEAD:flow1/app/app.py
 def render_stats(stats) -> None:
+=======
+def render_quote(kp: dict) -> None:
+    """Nguyên văn đoạn được trích, thu lại sau một cái bấm.
+
+    Trước đây blockquote này mở sẵn dưới MỌI ý. Đo trên phần 2 buổi 01: 1312 ký
+    tự tóm tắt so với 7230 ký tự nguyên văn — 85% màn hình là transcript thô, và
+    bản tóm tắt bị chôn ở giữa. Vẫn phải giữ nguyên văn (đó là cách người đọc
+    kiểm chứng mã đoạn), nhưng để nó nằm sau một cái bấm.
+    """
+
+    with st.expander(f"nguyên văn · {kp['cite'][0]}"):
+        st.markdown(
+            f'<blockquote class="q">“{kp["quote"]}”</blockquote>',
+            unsafe_allow_html=True,
+        )
+
+
+def render_stats(stats) -> None:
+    """Cho thấy AI có thật sự chạy trong lượt đó không — số lời gọi và thời gian."""
+
+>>>>>>> origin/quan:codebase/app.py
     if stats is None:
         return
     bits = []
@@ -242,6 +266,13 @@ def render_stats(stats) -> None:
         bits.append(f"{stats.seconds:.1f}s")
     if bits:
         st.caption(" · ".join(bits))
+<<<<<<< HEAD:flow1/app/app.py
+=======
+    if getattr(stats, "router", ""):
+        st.caption(f"🧭 router: {stats.router}")
+    if getattr(stats, "outline", ""):
+        st.caption(f"🕸 {stats.outline}")
+>>>>>>> origin/quan:codebase/app.py
     for w in stats.warnings[:3]:
         st.caption(f"⚠ {w}")
 
@@ -272,14 +303,21 @@ def render_msg(m: dict) -> None:
                 st.warning(f"Phần này mình không tóm. {p['reason']}")
                 render_stats(p.get("_stats"))
                 return
+            if p.get("abstract"):
+                st.info(p["abstract"])
             for i, kp in enumerate(p["key_points"], 1):
                 tag = ' <b>· một học viên nêu</b>' if kp["has_student_speech"] else ""
                 cites = " ".join(f'<span class="cite">{c}</span>' for c in kp["cite"])
+<<<<<<< HEAD:flow1/app/app.py
                 st.markdown(
                     f'{i}. {claim_html(kp)} {cites}{tag}'
                     f'<blockquote class="q">“{kp["quote"]}”</blockquote>',
                     unsafe_allow_html=True,
                 )
+=======
+                st.markdown(f'{i}. {claim_html(kp)} {cites}{tag}', unsafe_allow_html=True)
+                render_quote(kp)
+>>>>>>> origin/quan:codebase/app.py
             for g in p["gaps"]:
                 st.caption(f"⚠ Chỗ bản ghi thiếu: {g}")
             render_stats(p.get("_stats"))
@@ -288,8 +326,8 @@ def render_msg(m: dict) -> None:
             s = p["session"]
             st.markdown(f"### Sổ tay buổi {s['id']} — {s['title']}")
             st.caption(
-                f"Gộp từ {p['n_parts_done']}/{p['n_parts_total']} phần đã tóm · "
-                f"độ tin cậy định vị buổi: {s['locate_confidence'].upper()}"
+                f"Tổng hợp từ toàn bộ {s['n_sections']} mục · {s['n_segments']} đoạn "
+                f"đã đọc · độ tin cậy định vị buổi: {s['locate_confidence'].upper()}"
             )
             if p.get("tldr"):
                 st.info(p["tldr"])
@@ -306,10 +344,13 @@ def render_msg(m: dict) -> None:
                 st.markdown("**⚠ Chỗ bản ghi thiếu**")
                 for g in p["gaps"]:
                     st.markdown(f"- {g}")
+<<<<<<< HEAD:flow1/app/app.py
             if p["n_parts_done"] < p["n_parts_total"]:
                 st.info(f"Còn {p['n_parts_total'] - p['n_parts_done']} phần chưa tóm — "
                         "sổ tay mới gộp bằng code từ các phần đã tóm. Tóm đủ mọi phần "
                         "thì mới chạy bước REDUCE để viết lại thành một mạch.")
+=======
+>>>>>>> origin/quan:codebase/app.py
             render_stats(p.get("_stats"))
 
         elif kind == "answer":
@@ -368,6 +409,7 @@ def screen_session(session: dict, toggles: Toggles) -> None:
 
 # ─────────────────────────────────────────────────────────────────────────────
 
+<<<<<<< HEAD:flow1/app/app.py
 def run_app():
     with st.sidebar:
         st.markdown("#### Nhanh truy van (RRF)")
@@ -375,6 +417,31 @@ def run_app():
         use_qdrant = st.toggle("Qdrant (vector)", value=True)
         use_neo4j = st.toggle("Neo4j (graph)", value=True)
         toggles = Toggles(bm25=use_bm25, qdrant=use_qdrant, neo4j=use_neo4j)
+=======
+with st.sidebar:
+    st.markdown("#### Chế độ chạy")
+    st.caption(backend_label())
+    force = st.toggle(
+        "Bỏ qua cache",
+        value=False,
+        help="Bật thì mỗi lần tóm đều gọi LLM mới, kể cả phần đã tóm rồi. "
+        "Dùng để tự kiểm chứng là AI chạy thật chứ không đọc file có sẵn.",
+    )
+    set_force(force)
+    if force:
+        st.warning("Mỗi lượt tóm đều tốn API.")
+    st.caption(
+        "Luồng tóm tắt: **thật**. Luồng tra cứu: **chưa nối**."
+    )
+
+if st.session_state.sid is None:
+    screen_list()
+else:
+    session = get_session(SESSIONS, st.session_state.sid)
+    if session is None:
+        st.session_state.sid = None
+        st.rerun()
+>>>>>>> origin/quan:codebase/app.py
 
         st.markdown("---")
         st.markdown("#### Che do chay")
