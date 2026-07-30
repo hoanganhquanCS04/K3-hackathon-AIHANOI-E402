@@ -1,9 +1,13 @@
-"""Sổ tay buổi học — Giao diện chính (Streamlit Web UI).
+import sys
+from pathlib import Path
 
-Chạy:  uv run streamlit run ui/app.py
-"""
+ROOT_DIR = Path(__file__).resolve().parents[1]
+UI_DIR = Path(__file__).resolve().parent
 
-from __future__ import annotations
+if str(ROOT_DIR) not in sys.path:
+    sys.path.insert(0, str(ROOT_DIR))
+if str(UI_DIR) not in sys.path:
+    sys.path.insert(0, str(UI_DIR))
 
 import streamlit as st
 from flow1.retrieve import Toggles

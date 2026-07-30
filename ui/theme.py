@@ -123,3 +123,26 @@ BASE_CSS = f"""
   }}
 </style>
 """
+
+
+def hero_css(uri: str | None) -> str:
+    layer = (
+        f"linear-gradient(180deg, rgba(10,31,66,.30) 0%, rgba(10,31,66,.62) 62%,"
+        f" rgba(237,242,248,.97) 100%), url('{uri}') center 32% / cover no-repeat fixed"
+        if uri
+        else "linear-gradient(180deg,#15325F 0%,#0A1F42 45%,#EDF2F8 100%)"
+    )
+    return f"""
+    <style>
+      .stApp {{ background: {layer}; }}
+      .hero-title {{
+        font-size: 2.5rem; font-weight: 800; color:#fff; line-height:1.12;
+        letter-spacing:-.02em; text-shadow: 0 2px 14px rgba(6,20,44,.55);
+      }}
+      .hero-sub {{ color: rgba(255,255,255,.86); font-size:1rem; margin-top:6px;
+                   text-shadow: 0 1px 8px rgba(6,20,44,.5); }}
+      .hero-kicker {{ color:#FF9AA0; font-size:.76rem; font-weight:800;
+                      letter-spacing:.17em; text-transform:uppercase;
+                      text-shadow: 0 1px 8px rgba(6,20,44,.6); }}
+    </style>
+    """
