@@ -4,7 +4,7 @@ QUYẾT ĐỊNH THIẾT KẾ QUAN TRỌNG NHẤT của file này:
 
   `top1_abs` và `ratio` LUÔN tính trên điểm BM25 THÔ, không bao giờ trên điểm đã
   fuse. Điểm RRF là 1/(K+rank) — một dãy gần như cố định (1/61, 1/62, 1/63...),
-  nên `ratio` tính sau fuse sẽ luôn ≈ 1,02 bất kể câu hỏi là gì, và cổng 1 chết
+  nếu `ratio` tính sau fuse sẽ luôn ≈ 1,02 bất kể câu hỏi là gì, và cổng 1 chết
   im lặng đúng vào lúc bật hybrid.
 
   Hệ quả tốt: hiệu chỉnh T1 MỘT LẦN là dùng được cho cả chế độ bật và tắt
@@ -34,20 +34,11 @@ from flow1.models import Chunk, Hit, Retrieval
 
 TOP_K = 5
 _RATIO_WINDOW = 5      # ratio = top1 / mean(top2..top5)
+CAND = 10              # số ứng viên lấy từ mỗi retriever trước khi fuse
 
 
 def gate_stats(bm25_desc: list[float]) -> tuple[float, float]:
-    """Trả (top1_abs, ratio) từ danh sách điểm BM25 THÔ ĐÃ SẮP GIẢM DẦN.
-
-    Guard tiền điều kiện: raise ValueError nếu đầu vào không giảm dần TRONG
-    CỬA SỔ được dùng thật (index 0.._RATIO_WINDOW), thay vì tự sort hộ. Chỉ
-    xét trong cửa sổ vì mọi thứ sau rank 5 vốn dĩ bị bỏ qua (xem test
-    `test_gate_stats_ignores_scores_beyond_rank_five`) nên không có tiền điều
-    kiện gì để vi phạm ở đó. Đây là nơi duy nhất phát hiện được nếu Task 13 lỡ
-    truyền danh sách điểm đã fuse (RRF) vào thay vì BM25 thô — hỏng đó nếu
-    không chặn ở đây sẽ chỉ lộ ra dưới dạng `ratio` gần như hằng số 1,02, và
-    cổng 1 mất tác dụng trong im lặng.
-    """
+    """Trả (top1_abs, ratio) từ danh sách điểm BM25 THÔ ĐÃ SẮP GIẢM DẦN."""
     window = bm25_desc[:_RATIO_WINDOW]
     for i in range(len(window) - 1):
         if window[i] < window[i + 1]:
@@ -83,11 +74,15 @@ def retrieve(
     k: int = TOP_K,
     store: tuple[list[Chunk], object] | None = None,
     path: Path = BM25_PATH,
+    embeddings=None,
+    query_vector=None,
 ) -> Retrieval:
-    """Retrieve top-k chunk. `store` inject được để test không cần file trên đĩa.
+    """Retrieve top-k chunk.
 
-    `session` lọc theo buổi — đây là đường "correction": người dùng được hỏi lại
-    "buổi 2 hay buổi 5?" thì trả lời được bằng cờ này.
+    `embeddings` là ma trận vector của TOÀN BỘ chunk, hoặc None để chạy BM25 thuần.
+    Mặc định tự thử nạp store/emb.npy; thiếu file thì lùi êm.
+
+    top1_abs và ratio LUÔN tính trên BM25 thô, kể cả khi fuse — xem docstring module.
     """
     chunks, bm25 = store if store is not None else load(path)
 
@@ -96,24 +91,52 @@ def retrieve(
         return Retrieval(hits=[], top1_abs=0.0, ratio=0.0)
 
     all_scores = bm25.get_scores(tokens)
-    # `bm25_ranked` là điểm BM25 THÔ, sắp giảm dần — dùng để chấm cổng 1. Khi
-    # Task 13 thêm RRF, thứ tự dùng để dựng `hits` hiển thị sẽ đến từ MỘT danh
-    # sách khác (đã fuse) — không được lẫn hai danh sách này vào nhau, đó là
-    # đúng lỗi mà guard trong `gate_stats` được viết để bắt.
-    bm25_ranked = [
-        (chunk, float(score))
-        for chunk, score in zip(chunks, all_scores)
+    keep = [
+        i for i, chunk in enumerate(chunks)
         if session is None or chunk.session == session
     ]
-    if not bm25_ranked:
+    if not keep:
         return Retrieval(hits=[], top1_abs=0.0, ratio=0.0)
 
-    bm25_ranked.sort(key=lambda pair: pair[1], reverse=True)
-    bm25_scores_desc = [score for _, score in bm25_ranked]
-    top1_abs, ratio = gate_stats(bm25_scores_desc)
+    bm25_scores = {i: float(all_scores[i]) for i in keep}
+    bm25_order = sorted(keep, key=lambda i: bm25_scores[i], reverse=True)
+
+    # Hai chỉ số của cổng 1 — trên BM25 THÔ, trước và độc lập với mọi fusion.
+    top1_abs, ratio = gate_stats([bm25_scores[i] for i in bm25_order])
+
+    if embeddings is None and store is None:
+        try:
+            from flow1.embed import load_embeddings
+            embeddings = load_embeddings()
+        except ImportError:
+            embeddings = None
+
+    emb_scores: dict[int, float] = {}
+    if embeddings is not None:
+        if query_vector is None:
+            from flow1.embed import embed_query
+            query_vector = embed_query(query)
+        emb_scores = {i: float(embeddings[i] @ query_vector) for i in keep}
+        emb_order = sorted(keep, key=lambda i: emb_scores[i], reverse=True)
+
+        from flow1.embed import rrf
+        from flow1.thresholds import RRF_K
+
+        fused = rrf([bm25_order[:CAND], emb_order[:CAND]], RRF_K)
+        final_order = sorted(fused, key=lambda i: fused[i], reverse=True)
+        final_score = fused
+    else:
+        final_order = bm25_order
+        final_score = bm25_scores
 
     hits = [
-        Hit(chunk=chunk, bm25=score, emb=None, rank=rank, score=score)
-        for rank, (chunk, score) in enumerate(bm25_ranked[:k])
+        Hit(
+            chunk=chunks[i],
+            bm25=bm25_scores[i],
+            emb=emb_scores.get(i) if embeddings is not None else None,
+            rank=rank,
+            score=final_score[i],
+        )
+        for rank, i in enumerate(final_order[:k])
     ]
     return Retrieval(hits=hits, top1_abs=top1_abs, ratio=ratio)

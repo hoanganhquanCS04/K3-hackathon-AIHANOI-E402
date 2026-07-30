@@ -44,11 +44,11 @@ def retrieval(pairs, *, top1_abs=None, ratio=None):
 def strong_single_session():
     """Điểm cao, phân bố nhọn, cùng một buổi → phải qua."""
     return retrieval(
-        [("03", "RAG và tool calling", T1_ABS * 4),
-         ("03", "Ba track nghề nghiệp", T1_ABS * 0.5),
-         ("03", "Chọn dự án", T1_ABS * 0.5),
-         ("03", "Giới thiệu", T1_ABS * 0.5),
-         ("03", "Metric", T1_ABS * 0.5)],
+        [("03", "RAG và tool calling", 20.0),
+         ("03", "Ba track nghề nghiệp", 2.5),
+         ("03", "Chọn dự án", 2.5),
+         ("03", "Giới thiệu", 2.5),
+         ("03", "Metric", 2.5)],
     )
 
 
@@ -68,7 +68,7 @@ def test_passing_carries_the_retrieval_forward_untouched():
 def test_a_low_absolute_score_is_refused_even_when_the_ratio_is_huge():
     # Ca "token hiếm": đúng 1 chunk khớp → ratio = inf nhưng abs bé tí.
     # Chỉ sàn tuyệt đối chặn được — đây là lý do cổng 1 có HAI ngưỡng.
-    r = retrieval([("03", "RAG và tool calling", T1_ABS * 0.4),
+    r = retrieval([("03", "RAG và tool calling", -1.0),
                    ("03", "Ba track", 0.0), ("01", "Bài toán", 0.0)],
                   ratio=math.inf)
     assert gate1(r).action == "refuse"
@@ -87,7 +87,7 @@ def test_an_empty_retrieval_is_refused_and_does_not_crash():
 # --- Từ chối cứng: tỷ số --------------------------------------------------
 
 def test_a_flat_distribution_is_refused_even_when_absolute_scores_are_high():
-    flat = T1_ABS * 4
+    flat = 20.0
     r = retrieval([("03", "RAG", flat), ("01", "Bài toán", flat),
                    ("02", "Metric", flat), ("05", "Dữ liệu", flat),
                    ("06", "Attention", flat)])
@@ -103,7 +103,7 @@ def test_the_refusal_says_plainly_that_the_content_is_not_in_the_six_sessions():
 
 
 def test_the_refusal_lists_the_three_nearest_headings():
-    flat = T1_ABS * 4
+    flat = 20.0
     r = retrieval([("03", "RAG và tool calling", flat), ("01", "Bài toán mơ hồ", flat),
                    ("02", "Chỉ số thành công", flat), ("05", "Dữ liệu", flat),
                    ("06", "Attention", flat)])
@@ -113,7 +113,7 @@ def test_the_refusal_lists_the_three_nearest_headings():
 
 
 def test_the_refusal_names_the_session_of_each_nearest_heading():
-    flat = T1_ABS * 4
+    flat = 20.0
     r = retrieval([("03", "RAG", flat), ("01", "Bài toán", flat), ("02", "Metric", flat),
                    ("05", "Dữ liệu", flat), ("06", "Attention", flat)])
     message = gate1(r).message
@@ -140,7 +140,7 @@ def test_a_refusal_with_no_hits_at_all_still_produces_a_usable_message():
 # --- Hỏi lại: mơ hồ đa buổi ----------------------------------------------
 
 def test_two_close_hits_in_DIFFERENT_sessions_trigger_a_clarifying_question():
-    top = T1_ABS * 4
+    top = 20.0
     r = retrieval([("02", "Chỉ số thành công", top),
                    ("05", "Đánh giá đầu ra", top * AMBIG_BAND),
                    ("03", "RAG", top * 0.2), ("03", "Ba track", top * 0.2),
@@ -150,7 +150,7 @@ def test_two_close_hits_in_DIFFERENT_sessions_trigger_a_clarifying_question():
 
 
 def test_the_clarifying_question_names_both_candidate_sessions():
-    top = T1_ABS * 4
+    top = 20.0
     r = retrieval([("02", "Chỉ số thành công", top),
                    ("05", "Đánh giá đầu ra", top * AMBIG_BAND),
                    ("03", "RAG", top * 0.2), ("03", "Ba track", top * 0.2),
@@ -162,7 +162,7 @@ def test_the_clarifying_question_names_both_candidate_sessions():
 def test_the_clarifying_question_tells_the_user_how_to_answer_it():
     # Hỏi lại mà người dùng không có cách trả lời thì đường "correction" chỉ có
     # trên giấy. Câu hỏi phải chỉ ra cờ --session.
-    top = T1_ABS * 4
+    top = 20.0
     r = retrieval([("02", "Chỉ số", top), ("05", "Đánh giá", top * AMBIG_BAND),
                    ("03", "RAG", top * 0.2), ("03", "Ba track", top * 0.2),
                    ("01", "Bài toán", top * 0.2)])
@@ -170,7 +170,7 @@ def test_the_clarifying_question_tells_the_user_how_to_answer_it():
 
 
 def test_two_close_hits_in_the_SAME_session_do_not_trigger_a_question():
-    top = T1_ABS * 4
+    top = 20.0
     r = retrieval([("03", "RAG", top), ("03", "Ba track", top * AMBIG_BAND),
                    ("03", "Metric", top * 0.2), ("03", "Giới thiệu", top * 0.2),
                    ("03", "Chọn dự án", top * 0.2)])
@@ -180,13 +180,13 @@ def test_two_close_hits_in_the_SAME_session_do_not_trigger_a_question():
 def test_the_refusal_check_runs_BEFORE_the_ambiguity_check():
     # Điểm thấp + hai buổi gần nhau: phải TỪ CHỐI, không phải hỏi lại. Hỏi lại một
     # câu mà mình vốn không có căn cứ trả lời là làm người dùng mất thêm một lượt.
-    r = retrieval([("02", "Chỉ số", T1_ABS * 0.3), ("05", "Đánh giá", T1_ABS * 0.3 * AMBIG_BAND),
+    r = retrieval([("02", "Chỉ số", -1.5), ("05", "Đánh giá", -1.5 * AMBIG_BAND),
                    ("03", "RAG", 0.0), ("03", "Ba track", 0.0), ("01", "Bài toán", 0.0)])
     assert gate1(r).action == "refuse"
 
 
 def test_a_single_hit_never_triggers_the_ambiguity_check():
-    r = retrieval([("03", "RAG", T1_ABS * 4)], ratio=math.inf)
+    r = retrieval([("03", "RAG", 20.0)], ratio=math.inf)
     assert gate1(r).action == "pass"
 
 

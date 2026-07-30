@@ -51,9 +51,67 @@ _ORDINALS = {
 
 _RE_PART = re.compile(r"ph[ầâ]n\s+([ivx]+|\d+|một|hai|ba|bốn|năm|sáu|đầu tiên|đầu|nhất)", re.I)
 
-_LOGISTICS = ("deadline", "nộp bài", "hạn nộp", "link zoom", "điểm số", "lịch học", "đáp án")
-_OUT_OF_SCOPE = ("gpt", "claude", "gemini", "bạn là ai", "model nào", "pretrain")
-_GREETING = ("xin chào", "hello", "hi ", "chào bạn")
+_LOGISTICS = ("deadline", "nộp bài", "hạn nộp", "link zoom", "điểm số", "lịch học")
+
+# RULE_EVIDENCE: nhãn → turn_id chatlog thật đã thúc rule đó ra đời (rubric R4:
+# phương pháp phải kiểm lại được — rule bịa thì không ai kiểm được).
+# Nguồn: data/vlearn-pack/chatlog/chat_history_anonymized_for_hackathon.csv,
+# 1.261 lượt học viên, conversation_mode toàn bộ "in_class". Đọc chi tiết ở
+# .superpowers/sdd/2026-07-30-luong-1-tra-cuu-tu-choi/task-6-brief.md.
+RULE_EVIDENCE: dict[str, tuple[str, ...]] = {
+    "ngoai_pham_vi": (
+        # hỏi về chính con bot (~19 lượt)
+        "T0733", "T0664", "T1237", "T0072", "T0790", "T0171", "T0407",
+        "T0527", "T1241", "T0414", "T0928", "T0594", "T0537", "T0134",
+        # jailbreak / nhập vai (3 lượt)
+        "T0148", "T0470", "T0874",
+        # xin đáp án bài tập (1 lượt)
+        "T0837",
+    ),
+    "chao_hoi": ("T0495", "T0327", "T0402", "T0438", "T0271", "T1104"),
+    # 0/1261 lượt chatlog — rule suy từ non-goal #1 của canvas §1, KHÔNG từ data.
+    # Không đếm nhãn này vào "case từ chatlog thật".
+    "logistics": (),
+}
+
+# Lớp bọc bôi đen: học viên bôi đen 1 đoạn trên slide → nền tảng tự thêm
+# "Giải thích/Tóm tắt/Dịch ..." phía trước câu hỏi thật. Đây LÀ câu hỏi nội
+# dung (thường chứa ChatGPT/Claude/model vì đó là nội dung bài giảng) — phải
+# loại trừ khỏi mọi rule meta TRƯỚC khi xét, không được bắt oan.
+_RE_HIGHLIGHT_WRAPPER = re.compile(r"^\s*(giải thích|giai thich|tóm tắt|tom tat|dịch|dich)\b", re.I)
+
+# Jailbreak / nhập vai để dò hỏi model — đặt TRƯỚC rule meta vì câu jailbreak
+# thường lồng câu hỏi "model gì" bên trong, cần chặn ở tầng ý đồ chứ không
+# chỉ ở từ khoá con.
+_RE_JAILBREAK = re.compile(
+    r"bỏ qua (các )?(cảnh báo|ràng buộc|guardrail|giới hạn|quy tắc)"
+    r"|ignore (all )?(previous|prior) instruction"
+    r"|giả sử bạn là",
+    re.I,
+)
+
+# Hỏi về chính con bot — hai chiều, cửa sổ ký tự có giới hạn, không vượt qua
+# dấu kết câu (theo brief mục 4). [^.!?\n]{0,40} giữ hai vế trong cùng một
+# câu, đủ rộng để bắt "b là model nào v" (T0171, 1 chữ "b") mà không lan sang
+# câu bên cạnh của lớp bọc bôi đen.
+_BOT_SELF = r"(bạn|ban|\bb\b|you|your|tutor)"
+_MODEL_WORD = r"(model|gpt|claude|gemini|chatgpt|pretrain)"
+_RE_ASK_BOT_MODEL = re.compile(
+    rf"{_BOT_SELF}[^.!?\n]{{0,40}}{_MODEL_WORD}|{_MODEL_WORD}[^.!?\n]{{0,40}}{_BOT_SELF}",
+    re.I,
+)
+
+# Xin đáp án bài tập — 2 vế gần nhau, không vượt dấu kết câu.
+_RE_ASK_ANSWER = re.compile(
+    r"(đáp án|dap an|lời giải|loi giai|solution)[^.!?\n]{0,40}(lab|bài tập|bai tap|quiz|assignment)"
+    r"|(lab|bài tập|bai tap|quiz|assignment)[^.!?\n]{0,40}(đáp án|dap an|lời giải|loi giai|solution)",
+    re.I,
+)
+
+# chao_hoi CHỈ khi câu CHỈ gồm lời chào (brief mục 6) — fullmatch, cho phép
+# dấu câu/khoảng trắng đầu-cuối, KHÔNG cho phép nội dung đi kèm (loại
+# "hi, cơ chế attention là gì").
+_RE_GREETING_ONLY = re.compile(r"^\s*(xin chào|chào bạn|chào|hello|hi)\s*[!.,;]*\s*$", re.I)
 
 
 def route(query: str, state: dict) -> dict:
@@ -61,15 +119,33 @@ def route(query: str, state: dict) -> dict:
 
     Điểm quan trọng giữ nguyên khi thay: router CHỈ trả `part_ref` THÔ.
     Việc quy `part_ref` thành số phần là của resolve_part() — CODE, không phải LLM.
+
+    Thứ tự kiểm (có ý nghĩa, xem RULE_EVIDENCE và task-6-brief.md mục 8):
+      1. rỗng / chỉ toàn khoảng trắng / CHỈ gồm lời chào → chao_hoi
+      2. jailbreak (ý đồ vượt rào, có thể lồng câu hỏi model bên trong)
+      3. loại trừ lớp bọc bôi đen ("giải thích/tóm tắt/dịch ...") → KHÔNG xét
+         rule meta nữa, câu này là nội dung thật, nhường cho retrieval
+      4. hỏi về chính con bot (hai chiều, cửa sổ ký tự giới hạn)
+      5. xin đáp án bài tập
+      6. logistics
+      7. phần còn lại đi tiếp xuống logic tóm tắt/mục lục hiện có
     """
     q = query.lower().strip()
 
+    if q == "" or _RE_GREETING_ONLY.match(q):
+        return {"intent": "chao_hoi", "part_ref": None}
+
+    if _RE_JAILBREAK.search(q):
+        return {"intent": "ngoai_pham_vi", "part_ref": None}
+
+    if not _RE_HIGHLIGHT_WRAPPER.match(q):
+        if _RE_ASK_BOT_MODEL.search(q):
+            return {"intent": "ngoai_pham_vi", "part_ref": None}
+        if _RE_ASK_ANSWER.search(q):
+            return {"intent": "ngoai_pham_vi", "part_ref": None}
+
     if any(k in q for k in _LOGISTICS):
         return {"intent": "logistics", "part_ref": None}
-    if any(k in q for k in _OUT_OF_SCOPE):
-        return {"intent": "ngoai_pham_vi", "part_ref": None}
-    if any(q.startswith(k.strip()) for k in _GREETING):
-        return {"intent": "chao_hoi", "part_ref": None}
 
     m = _RE_PART.search(q)
     is_summary = any(k in q for k in ("tóm", "tổng kết", "recap", "sổ tay"))
