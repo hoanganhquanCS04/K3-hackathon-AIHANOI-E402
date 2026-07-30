@@ -1,0 +1,105 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-008",
+  "section_title": "First Principle Thinking",
+  "section_order": 8,
+  "abstract": "Mục này trình bày về tư duy từ nguyên bản (First Principle Thinking) và cách áp dụng nó trong việc giải quyết vấn đề kinh doanh, đặc biệt là trong bối cảnh công nghệ và đổi mới.",
+  "key_points": [
+    {
+      "text": "Elon Musk sử dụng First Principle Thinking để giải quyết vấn đề bằng cách bóc tách vấn đề về những nguyên lý nguyên bản nhất.",
+      "citations": [
+        "T01-062"
+      ]
+    },
+    {
+      "text": "Để giải quyết vấn đề tốt, cần xác định vấn đề và tìm ra lời giải cho nó.",
+      "citations": [
+        "T01-064"
+      ]
+    },
+    {
+      "text": "Kinh nghiệm của người cũ chỉ mang tính tham khảo, cần xây dựng mental model riêng để tìm kiếm giải pháp.",
+      "citations": [
+        "T01-068"
+      ]
+    },
+    {
+      "text": "Tư duy kiểu First Principle Thinking giúp xây dựng nền tảng vững chắc trong một thế giới biến động.",
+      "citations": [
+        "T01-063"
+      ]
+    },
+    {
+      "text": "Cách làm cũ có thể không còn phù hợp, cần tìm kiếm giải pháp mới.",
+      "citations": [
+        "T01-067"
+      ]
+    }
+  ],
+  "concepts": [
+    "First Principle Thinking",
+    "mental model",
+    "database",
+    "API",
+    "low-code",
+    "workflow"
+  ],
+  "examples": [
+    {
+      "text": "Công ty của bạn thân giảng viên có một app coach tiếng Anh cho người lớn và robot cho trẻ con, luôn theo đuổi sự đổi mới.",
+      "citations": [
+        "T01-064"
+      ]
+    },
+    {
+      "text": "Giảng viên đã từng sử dụng low-code để xây dựng sản phẩm, chỉ cần lắp các khối như lắp Lego.",
+      "citations": [
+        "T01-065"
+      ]
+    },
+    {
+      "text": "Giảng viên đã xây dựng một sản phẩm cho phép AI tự động plan và sinh ra workflow.",
+      "citations": [
+        "T01-066"
+      ]
+    },
+    {
+      "text": "Bên Shopee đã sử dụng một hệ thống để cập nhật các chiến dịch quảng cáo mà không cần phải build luồng mới mỗi lần.",
+      "citations": [
+        "T01-067"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-062",
+    "T01-063",
+    "T01-064",
+    "T01-065",
+    "T01-066",
+    "T01-067",
+    "T01-068"
+  ],
+  "covered_chunk_ids": [
+    "T01-062",
+    "T01-063",
+    "T01-064",
+    "T01-065",
+    "T01-066",
+    "T01-067",
+    "T01-068"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T01-063",
+    "T01-064",
+    "T01-067"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "018e7486d75ef9d8e0953fc7705ee3630a116c703357fb3b3977b3e0a373a1d0",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:41:00.062603Z"
+}

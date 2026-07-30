@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-006",
+  "section_title": "Tri thức ẩn của chuyên gia và việc tìm đúng vấn đề",
+  "section_order": 6,
+  "abstract": "Mục này tập trung vào việc xác định vấn đề thực sự trong kinh doanh và vai trò của tri thức ẩn của chuyên gia trong quá trình này.",
+  "key_points": [
+    {
+      "text": "Don Norman nhấn mạnh rằng không nên chỉ giải quyết những vấn đề được đưa ra mà cần tìm hiểu vấn đề thực sự phía sau.",
+      "citations": [
+        "T01-045"
+      ]
+    },
+    {
+      "text": "AI có thể hỗ trợ trong việc học và tạo ra nhiều cách làm mới, nhưng việc xây dựng tư duy là điều quan trọng hơn.",
+      "citations": [
+        "T01-046"
+      ]
+    },
+    {
+      "text": "Sự khác biệt giữa chuyên gia và người mới nằm ở khả năng tinh chỉnh và điều chỉnh trong từng bước nhỏ khi làm việc với AI.",
+      "citations": [
+        "T01-047"
+      ]
+    },
+    {
+      "text": "Tri thức ẩn của chuyên gia cho phép họ đưa ra quyết định nhanh chóng mà không cần lý giải, điều mà người mới thường không làm được.",
+      "citations": [
+        "T01-048"
+      ]
+    }
+  ],
+  "concepts": [
+    "tri thức ẩn",
+    "AI",
+    "tư duy",
+    "chuyên gia",
+    "điểm đau"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-044",
+    "T01-045",
+    "T01-046",
+    "T01-047",
+    "T01-048"
+  ],
+  "covered_chunk_ids": [
+    "T01-045",
+    "T01-046",
+    "T01-047",
+    "T01-048"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T01-044",
+    "T01-046"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "b1c146826d5408c4181eae7b71fdb723bf19cace715316d0307f271fc798519f",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:40:55.399798Z"
+}

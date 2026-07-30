@@ -1,0 +1,67 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-004",
+  "section_title": "Từ đề bài mơ hồ đến vấn đề thực sự",
+  "section_order": 4,
+  "abstract": "Nội dung chính của mục này là xác định và làm rõ các vấn đề thực sự trong bài toán kinh doanh khi xây dựng AI, tránh việc nhảy vào giải pháp mà không hiểu rõ mục tiêu và pain point.",
+  "key_points": [
+    {
+      "text": "Đề bài xây dựng AI chatbot thường mơ hồ và cần phải xác định mục tiêu thực sự phía sau.",
+      "citations": [
+        "T01-030"
+      ]
+    },
+    {
+      "text": "Nhiều lãnh đạo có thể không hiểu rõ năng lực của AI, dẫn đến việc đưa ra giải pháp không tối ưu.",
+      "citations": [
+        "T01-032"
+      ]
+    },
+    {
+      "text": "Cần phải phân tích sâu vào vấn đề để xác định pain point và tìm ra giải pháp phù hợp.",
+      "citations": [
+        "T01-033"
+      ]
+    },
+    {
+      "text": "Giảng viên khuyên nên chậm lại và không đưa ra giải pháp ngay lập tức khi nhận đề bài.",
+      "citations": [
+        "T01-031"
+      ]
+    },
+    {
+      "text": "Việc xác định mức độ đau của vấn đề là quan trọng để quyết định có nên sử dụng AI hay không.",
+      "citations": [
+        "T01-033"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI chatbot",
+    "Five Whys",
+    "low-code no-code"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-030",
+    "T01-031",
+    "T01-032",
+    "T01-033"
+  ],
+  "covered_chunk_ids": [
+    "T01-030",
+    "T01-031",
+    "T01-032",
+    "T01-033"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "e95d2f3f49fc2ac564d5c3118cccc91444a36f54015da9784e12b60b3a74a4bc",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:40:51.099595Z"
+}

@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-010",
+  "section_title": "Ma trận tác động – nỗ lực (impact-effort matrix)",
+  "section_order": 10,
+  "abstract": "Nội dung chính của mục này là giới thiệu về ma trận tác động – nỗ lực, một công cụ giúp xác định ưu tiên trong việc giải quyết các vấn đề kinh doanh liên quan đến AI.",
+  "key_points": [
+    {
+      "text": "Ma trận tác động và nỗ lực giúp xác định tác động và công sức cần bỏ ra để giải quyết vấn đề.",
+      "citations": [
+        "T01-074"
+      ]
+    },
+    {
+      "text": "Tác động được đánh giá dựa trên lợi ích đạt được sau khi giải quyết vấn đề.",
+      "citations": [
+        "T01-078"
+      ]
+    },
+    {
+      "text": "Nỗ lực được xác định dựa trên số lượng người và thời gian cần thiết để thực hiện giải pháp.",
+      "citations": [
+        "T01-078"
+      ]
+    },
+    {
+      "text": "Ma trận cho phép phân loại các vấn đề theo mức độ tác động và công sức, giúp xác định ưu tiên giải quyết.",
+      "citations": [
+        "T01-079"
+      ]
+    },
+    {
+      "text": "Việc nhóm và bỏ phiếu trong team có thể giúp chọn ra các vấn đề cần giải quyết.",
+      "citations": [
+        "T01-080"
+      ]
+    }
+  ],
+  "concepts": [
+    "ma trận tác động – nỗ lực",
+    "impact-effort matrix",
+    "problem statement",
+    "Five Whys",
+    "nhật ký hành vi",
+    "phân tích dữ liệu",
+    "sơ đồ đồng cảm"
+  ],
+  "examples": [
+    {
+      "text": "Ví dụ bạn có một pain point là cứ hàng tuần phải tổng hợp báo cáo, mất 2 tiếng một tuần; bạn giải được thì coi như tiết kiệm 2 tiếng một tuần, nhân 4 tuần là 8 tiếng một tháng.",
+      "citations": [
+        "T01-078"
+      ]
+    },
+    {
+      "text": "Các bạn có thể vẽ một cái bảng — trục ngang, trục dọc — sau đấy để hết nó lên và sắp xếp vào các cung.",
+      "citations": [
+        "T01-079"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-074",
+    "T01-075",
+    "T01-076",
+    "T01-077",
+    "T01-078",
+    "T01-079",
+    "T01-080"
+  ],
+  "covered_chunk_ids": [
+    "T01-074",
+    "T01-078",
+    "T01-079",
+    "T01-080"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "aa34190fe956e347b61489d9f06ceb05306d625d2ef7e2eef2c2d5d0247c274e",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:41:00.291329Z"
+}

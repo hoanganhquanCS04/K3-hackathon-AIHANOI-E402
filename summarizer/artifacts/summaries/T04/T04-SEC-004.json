@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-004",
+  "section_title": "Deep learning và sức mạnh của dữ liệu",
+  "section_order": 4,
+  "abstract": "Nội dung chính của mục này là khám phá cách deep learning hoạt động và tầm quan trọng của dữ liệu trong quá trình học của máy móc.",
+  "key_points": [
+    {
+      "text": "Deep learning là nền tảng cho việc máy móc học từ dữ liệu thông qua việc tái tạo mạng neuron thần kinh giống như con người.",
+      "citations": [
+        "T04-030"
+      ]
+    },
+    {
+      "text": "Bộ dữ liệu đầu tiên của ngành AI được tạo ra bởi bà Fei-Fei Li, giúp thúc đẩy sự phát triển của deep learning.",
+      "citations": [
+        "T04-031"
+      ]
+    },
+    {
+      "text": "Trước deep learning, machine learning yêu cầu người dùng phải tự gán nhãn từng dữ liệu, trong khi deep learning cho phép máy tự học từ dữ liệu.",
+      "citations": [
+        "T04-032"
+      ]
+    },
+    {
+      "text": "Deep learning đạt được thành tựu đầu tiên vào năm 2012 khi một team chiến thắng cuộc thi nhận diện hình ảnh nhờ vào một mạng neuron tự động nhận diện.",
+      "citations": [
+        "T04-033"
+      ]
+    }
+  ],
+  "concepts": [
+    "deep learning",
+    "mạng neuron",
+    "dữ liệu chất lượng",
+    "ImageNet",
+    "machine learning"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-030",
+    "T04-031",
+    "T04-032",
+    "T04-033"
+  ],
+  "covered_chunk_ids": [
+    "T04-030",
+    "T04-031",
+    "T04-032",
+    "T04-033"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-031"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "feb269584c581b560b1ff5bacc61af56234e5d70a17e676468bd343aacbeb33b",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:11.015665Z"
+}

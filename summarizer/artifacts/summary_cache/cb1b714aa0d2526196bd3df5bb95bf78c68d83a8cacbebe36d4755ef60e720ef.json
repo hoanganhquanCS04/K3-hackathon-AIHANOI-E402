@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-014",
+  "section_title": "Hệ thống nhiều thành phần: khoanh vùng lỗi và UI/UX",
+  "section_order": 14,
+  "abstract": "Nội dung bài giảng tập trung vào việc xây dựng hệ thống AI hiệu quả, nhấn mạnh tầm quan trọng của việc khoanh vùng lỗi và cải thiện trải nghiệm người dùng (UI/UX).",
+  "key_points": [
+    {
+      "text": "Một hệ thống AI cần có khả năng xử lý lỗi và thông báo cho người dùng khi có vấn đề xảy ra.",
+      "citations": [
+        "T03-123"
+      ]
+    },
+    {
+      "text": "Hệ thống không tốt sẽ không thông báo lỗi cho người dùng, dẫn đến trải nghiệm kém.",
+      "citations": [
+        "T03-124"
+      ]
+    },
+    {
+      "text": "UI tốt giúp người dùng dễ dàng nhận biết lỗi và tương tác hiệu quả với hệ thống.",
+      "citations": [
+        "T03-125"
+      ]
+    },
+    {
+      "text": "Cần có thông điệp cảnh báo cho người dùng khi hệ thống gặp vấn đề để họ có thể sử dụng cẩn thận.",
+      "citations": [
+        "T03-127"
+      ]
+    },
+    {
+      "text": "Phân biệt giữa rule script, LLM và agent để hiểu rõ cách thức hoạt động của hệ thống.",
+      "citations": [
+        "T03-128"
+      ]
+    },
+    {
+      "text": "Cần có sự xác nhận của người dùng trong những tình huống có rủi ro để đảm bảo an toàn.",
+      "citations": [
+        "T03-130"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI system",
+    "UI",
+    "UX",
+    "rule script",
+    "LLM",
+    "agent"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-123",
+    "T03-124",
+    "T03-125",
+    "T03-126",
+    "T03-127",
+    "T03-128",
+    "T03-129",
+    "T03-130"
+  ],
+  "covered_chunk_ids": [
+    "T03-123",
+    "T03-124",
+    "T03-125",
+    "T03-127",
+    "T03-128",
+    "T03-130"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "f30ffe06ea5ac97873545f466b2f2c83d205c842d40ede280bc9f4b6b378a590",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:44.735962Z"
+}

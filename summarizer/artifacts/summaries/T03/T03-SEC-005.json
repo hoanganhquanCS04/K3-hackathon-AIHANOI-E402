@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-005",
+  "section_title": "Chọn dự án: giá trị cạnh tranh, metric và mindset đi làm",
+  "section_order": 5,
+  "abstract": "Nội dung bài giảng tập trung vào việc xác định và chọn dự án AI có giá trị cạnh tranh, cũng như phát triển mindset làm việc trong môi trường thực tế.",
+  "key_points": [
+    {
+      "text": "Các bạn cần xác định khả năng cạnh tranh của sản phẩm với các đối thủ trên thị trường.",
+      "citations": [
+        "T03-037"
+      ]
+    },
+    {
+      "text": "Một hệ thống AI giúp người dùng học tiếng Anh có thể tiết kiệm thời gian và công sức cho người dùng.",
+      "citations": [
+        "T03-038"
+      ]
+    },
+    {
+      "text": "Việc chọn dự án có khả năng đưa ra kết quả là rất quan trọng để tránh tình trạng bị stuck.",
+      "citations": [
+        "T03-039"
+      ]
+    },
+    {
+      "text": "Mindset đi làm cần phải chủ động và rõ ràng về đầu ra của dự án.",
+      "citations": [
+        "T03-040"
+      ]
+    },
+    {
+      "text": "Cần xác định xem có thể sử dụng AI system để giải quyết bài toán hay không.",
+      "citations": [
+        "T03-041"
+      ]
+    },
+    {
+      "text": "AI làm tốt những tác vụ lặp đi lặp lại với số lượng lớn.",
+      "citations": [
+        "T03-045"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI system",
+    "LLM",
+    "metric",
+    "mindset"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-037",
+    "T03-038",
+    "T03-039",
+    "T03-040",
+    "T03-041",
+    "T03-042",
+    "T03-043",
+    "T03-044",
+    "T03-045"
+  ],
+  "covered_chunk_ids": [
+    "T03-037",
+    "T03-038",
+    "T03-039",
+    "T03-040",
+    "T03-041",
+    "T03-045"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T03-041"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "dc1b7cfb23ffeb3e20d0c26c526766aeb0f941814c65156276d698210745a58d",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:33.354532Z"
+}

@@ -55,6 +55,20 @@ artifacts/summary_cache/{key}.json
 artifacts/summary_manifest.json
 ```
 
+## Demo Streamlit
+
+```powershell
+uv run streamlit run app.py
+```
+
+App chỉ **đọc** artifact đã precompute — render không gọi LLM. Ba tab:
+
+- **Tóm tắt buổi** — tldr, ý chính, mục lục; bấm vào nguồn để mở đúng đoạn
+  transcript gốc kèm vai người nói.
+- **Tóm tắt từng mục** — bản tóm tắt mục cạnh transcript gốc để đối chiếu.
+- **Kiểm chứng** — tính lại tại thời điểm render: citation không tồn tại,
+  citation chéo buổi, mục thiếu trong outline. Không tin validator lúc build.
+
 ## Test
 
 ```powershell

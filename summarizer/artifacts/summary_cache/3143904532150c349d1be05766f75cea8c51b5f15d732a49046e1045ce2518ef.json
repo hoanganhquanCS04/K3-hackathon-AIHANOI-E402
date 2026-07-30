@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-015",
+  "section_title": "Workflow pattern: chaining, routing, parallel và agent",
+  "section_order": 15,
+  "abstract": "Nội dung chính của buổi học là giới thiệu về các mẫu workflow như chaining, routing, parallel và agent trong tự động hóa quy trình.",
+  "key_points": [
+    {
+      "text": "Workflow pattern có thể được xem như những khối Lego block để xây dựng hệ thống lớn hơn.",
+      "citations": [
+        "T03-131"
+      ]
+    },
+    {
+      "text": "Routing giúp tiết kiệm chi phí và thời gian cho người dùng bằng cách phân tích yêu cầu và lựa chọn phương thức xử lý phù hợp.",
+      "citations": [
+        "T03-132"
+      ]
+    },
+    {
+      "text": "Parallel cho phép xử lý nhiều yêu cầu cùng lúc, giúp tiết kiệm thời gian và tài nguyên.",
+      "citations": [
+        "T03-133"
+      ]
+    },
+    {
+      "text": "Agent system có thể được xây dựng để chia việc và gọi tool call, tương tự như một đội ngũ nhân viên.",
+      "citations": [
+        "T03-134"
+      ]
+    },
+    {
+      "text": "Khi đánh giá một ý tưởng, cần xem xét độ phức tạp của nó để đảm bảo có thể áp dụng mô hình phù hợp.",
+      "citations": [
+        "T03-135"
+      ]
+    },
+    {
+      "text": "Việc xác định nhóm đối tượng mục tiêu là rất quan trọng trong phát triển sản phẩm.",
+      "citations": [
+        "T03-136"
+      ]
+    }
+  ],
+  "concepts": [
+    "workflow pattern",
+    "chaining",
+    "routing",
+    "parallel",
+    "agent",
+    "multi-agent system",
+    "MLOps",
+    "mixture of experts (MoE)"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-131",
+    "T03-132",
+    "T03-133",
+    "T03-134",
+    "T03-135",
+    "T03-136",
+    "T03-137"
+  ],
+  "covered_chunk_ids": [
+    "T03-131",
+    "T03-132",
+    "T03-133",
+    "T03-134",
+    "T03-135",
+    "T03-136"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "f617cdf5b179a24c84c27896fd034138d5d51f8d7fc37604bd235719e53b4dba",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:47.452250Z"
+}

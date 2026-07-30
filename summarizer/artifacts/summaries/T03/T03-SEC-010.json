@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-010",
+  "section_title": "Scope vận hành và ODD: hệ thống chạy đúng trong điều kiện nào",
+  "section_order": 10,
+  "abstract": "Nội dung chính của buổi giảng là về việc xác định phạm vi hoạt động (scope) và điều kiện thiết kế vận hành (ODD) cho các hệ thống tự động, đặc biệt là trong lĩnh vực xe tự hành và các ứng dụng công nghệ khác.",
+  "key_points": [
+    {
+      "text": "Cần xác định rõ phạm vi hoạt động của hệ thống để đảm bảo hoạt động tốt trong điều kiện nhất định.",
+      "citations": [
+        "T03-105"
+      ]
+    },
+    {
+      "text": "Khi có sự cố xảy ra, trách nhiệm đầu tiên không thuộc về hệ thống mà là việc xác định rủi ro.",
+      "citations": [
+        "T03-106"
+      ]
+    },
+    {
+      "text": "Việc định nghĩa rõ ràng scope giúp giảm thiểu các vấn đề phát sinh khi khách hàng gặp sự cố.",
+      "citations": [
+        "T03-107"
+      ]
+    },
+    {
+      "text": "Cần thu hẹp phạm vi hoạt động của hệ thống để đảm bảo độ chính xác và hiệu quả.",
+      "citations": [
+        "T03-109"
+      ]
+    }
+  ],
+  "concepts": [
+    "scope",
+    "Operational Design Domain (ODD)",
+    "ADAS",
+    "backup plan",
+    "constraint"
+  ],
+  "examples": [
+    {
+      "text": "Dự án sử dụng điện thoại di động để phát hiện khoảng cách bị lệch giữa các tấm xe ô tô tại nhà máy Hyundai.",
+      "citations": [
+        "T03-108"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-105",
+    "T03-106",
+    "T03-107",
+    "T03-108",
+    "T03-109"
+  ],
+  "covered_chunk_ids": [
+    "T03-105",
+    "T03-106",
+    "T03-107",
+    "T03-108",
+    "T03-109"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "ad94331594041187c9e1febd5fab234ede3f91f5ee2f561fce52adb03dfae708",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:38.291925Z"
+}
