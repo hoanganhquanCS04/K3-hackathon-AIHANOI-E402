@@ -159,7 +159,23 @@ Chunk(chunk_id, session, session_title, section_idx, section_title,
 
 `seg_codes` là **mã gốc đã dedupe** — cổng 3 dùng nó để kiểm `cite ∈ context`.
 
-Số chunk thực tế do script in ra khi chạy; canvas ước ~400 (đo lúc chưa bật overlap ra ~340). **Không hardcode con số này vào test** — assert khoảng `[300, 500]` và ghi số thật vào spec.
+**Số đo thật sau khi thi công** (canvas ước ~400; đo thật bằng `chunk_all(content_segs(parse_all()))`):
+
+| Chỉ số | Giá trị |
+|---|---|
+| Số chunk | **419** |
+| Ký tự/chunk: median · p90 | 1.319 · 1.686 |
+| Đoạn/chunk (median) | 2 |
+| Mảnh tách `#a`/`#b` từ 18 đoạn khổng lồ | 38 |
+| Cặp chunk liền kề còn overlap 1 đoạn | 165 |
+| Đoạn nội dung được phủ | **645/645** — không mất đoạn nào |
+
+**Không hardcode con số này vào test** — assert khoảng `[300, 550]`.
+
+Hai luật bổ sung phát hiện khi thi công, cả hai đã có test trên corpus thật:
+
+7. **Tính cả overhead nối chuỗi khi quyết định gộp.** `Chunk.text` nối bằng `"\n\n"`, nên bỏ qua 2 ký tự đó làm `T04-016` ra chunk 1.806 ký tự — vượt trần cứng. Cộng `len("\n\n")` vào phép tính kích thước.
+8. **Không phát chunk chỉ chứa đúng đoạn overlap.** Khi đoạn overlap một mình đã ≥ target, hoặc bị chặn không gộp tiếp vì hàng xóm là đoạn khổng lồ, thuật toán gốc sinh ra một chunk không mang nội dung mới nào — **49 chunk** như vậy trên corpus, tức ~12% index BM25 bị nhân bản và một đoạn được đánh trọng số hai lần. Bất biến: không chunk nào có `seg_codes` là tập con của chunk liền trước, *trừ* các mảnh `#a`/`#b` cùng mã gốc.
 
 ### 3.3 `index.py`
 
