@@ -32,7 +32,7 @@ class Settings(BaseModel):
     openai_base_url: str = ""
     embedding_model: str = "text-embedding-3-small"
     embedding_dimensions: int = 768
-    qdrant_timeout_seconds: int = 60
+    qdrant_timeout_seconds: int = 5
     embedding_batch_size: int = 32
     transcript_dir: Path = Field(
         default=REPOSITORY_ROOT / "data" / "vlearn-pack" / "transcript"

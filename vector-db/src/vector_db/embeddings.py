@@ -54,6 +54,7 @@ class EmbeddingService:
         self.client = OpenAI(
             api_key=app_settings.openai_api_key,
             base_url=app_settings.openai_base_url or None,
+            timeout=10.0,
         )
         app_settings.artifact_dir.mkdir(parents=True, exist_ok=True)
         self.cache_path = (
