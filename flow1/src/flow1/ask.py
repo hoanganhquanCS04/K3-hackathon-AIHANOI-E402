@@ -135,7 +135,6 @@ def ask(
                         {"role": "system", "content": system},
                         {"role": "user", "content": user},
                     ],
-                    response_format={"type": "json_object"},
                     stream=True,
                     temperature=0.0,
                 )
@@ -148,7 +147,15 @@ def ask(
                             stream_callback(delta)
                         except Exception:
                             pass
-                return schema.model_validate_json(full_text)
+                clean_json = full_text.strip()
+                if clean_json.startswith("```"):
+                    parts = clean_json.split("```")
+                    if len(parts) >= 2:
+                        clean_json = parts[1]
+                        if clean_json.startswith("json"):
+                            clean_json = clean_json[4:]
+                clean_json = clean_json.strip()
+                return schema.model_validate_json(clean_json)
             else:
                 from summarizer.llm import OpenAIStructuredLLM
                 llm = OpenAIStructuredLLM()
