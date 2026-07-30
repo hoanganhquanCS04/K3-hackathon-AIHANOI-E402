@@ -17,7 +17,7 @@
 | # | Canvas khai | Data thật | Hệ quả thiết kế |
 |---|---|---|---|
 | 1 | *(không nêu)* | Regex trong plan luồng 2 **hút dòng `## ` vào thân đoạn cuối mỗi section** — 10/89 đoạn ở buổi 01, ~90 đoạn toàn corpus | `flow1/parse.py` lấy `## ` làm biên. **Báo M1 sửa `sotay/ingest.py` cho khớp** — bug này cũng làm bẩn prompt luồng 2 |
-| 2 | `69 speaker=student` | **51** đoạn *bắt đầu* bằng `[Học viên]`; **18** đoạn có marker *ở giữa* (trộn hai giọng); tổng 69. Ngoài ra **59** chỗ `[học viên]` chữ thường là tên đã ẩn danh, **khác hoàn toàn** | Tách 2 field: `speaker="student"` (51) và `has_student_voice` (69). 18 đoạn trộn giọng là ca lớp ④ nguy hiểm hơn cả — xử ở §4 cổng 3. Regex **phân biệt hoa/thường** |
+| 2 | `69 speaker=student` | **ĐÚNG — 69.** Marker có **hai dạng**: `[Học viên]:` trần (51 đoạn) và `**[Học viên]:**` in đậm (18 đoạn). Cả hai đều mở đầu đoạn. **0 đoạn** có marker chỉ ở giữa. Thêm: **18 đoạn** mở đầu `**Giảng viên:**`. Ngoài ra **59** chỗ `[học viên]` chữ thường là tên đã ẩn danh, **khác hoàn toàn** | Regex nhận `^\*{0,2}\[Học viên\]` — bỏ `\*{0,2}` là mất 18 đoạn. **Phân biệt hoa/thường.** Chỉ cần **một** field `speaker`, không có ca "trộn giọng" nào trên corpus này |
 | 3 | *"có **1** đoạn ~5.000 ký tự vượt trần → tách `#a`/`#b`"* | **18 đoạn** vượt trần 1.800. Max 4.999 (`T06-059`), kế đó 3.601 (`T03-124`) | Tách đoạn khổng lồ là **đường code chạy thường xuyên**, không phải ngoại lệ hiếm — phải có test riêng, sinh ~25-30 mảnh |
 
 Số đo tham chiếu, dùng làm assertion:
@@ -28,8 +28,10 @@ Số đo tham chiếu, dùng làm assertion:
 | Đoạn nội dung (bỏ hoạt động lớp) | 645 |
 | Đoạn `[Hoạt động lớp: ...]` | 55 |
 | Đoạn chứa `[không nghe rõ]` | 103 |
-| Đoạn `speaker="student"` | 51 |
-| Đoạn `has_student_voice` | 69 |
+| Đoạn `speaker="student"` | **69** (51 marker trần + 18 marker in đậm) |
+| — theo buổi 01·02·03·04·05·06 | 8 · 0 · 19 · 0 · 21 · 21 |
+| Đoạn mở đầu `**Giảng viên:**` | 18 |
+| Đoạn có marker học viên **chỉ ở giữa** | **0** — không có ca trộn giọng |
 | Section (`## `) toàn bộ 6 buổi | 96 (11·5·19·21·19·21) |
 | Ký tự/đoạn nội dung: median · p90 · max | 606 · 1.268 · 4.999 |
 | Đoạn nội dung < 300 ký tự | 147 = 23% |
@@ -125,7 +127,6 @@ section_title       str
 order               int    # thứ tự trong buổi, 1-based
 text                str
 speaker             str    # "instructor" | "student"
-has_student_voice   bool
 has_gap             bool
 is_activity         bool
 n_chars             int
@@ -137,8 +138,8 @@ Bốn luật parse, mỗi luật một test:
 |---|---|
 | **Biên đoạn** | Đoạn kết thúc ở mã kế tiếp **hoặc dòng `## `** hoặc hết file. Assert `T01-006` không chứa `##` — đây là chỗ sửa bug §0.1 |
 | **Front matter** | Bỏ mọi dòng `> ` trước khi đếm gap: chú giải front matter *có chứa* `[không nghe rõ]`. Trích `locate_confidence` từ `độ tin cậy: X`; buổi 05/06 dùng `**Buổi:**` không có trường này → `"—"` |
-| **Giọng nói** | `[Học viên]` **hoa** ở đầu đoạn → `speaker="student"`. Marker xuất hiện bất cứ đâu → `has_student_voice=True`. `[học viên]` **thường** = tên đã ẩn danh, bỏ qua |
-| **Section** | Dòng `## ` tăng `section_idx`, đặt `section_title` cho mọi đoạn sau nó |
+| **Giọng nói** | `^\*{0,2}\[Học viên\]` → `speaker="student"` (69 đoạn). Marker có **hai dạng** — `[Học viên]:` trần và `**[Học viên]:**` in đậm — bỏ `\*{0,2}` là mất 18 đoạn. `[học viên]` **thường** = tên đã ẩn danh, bỏ qua. Có test khoá: **0 đoạn** được phép có marker chỉ ở giữa; test này nổ nếu data đổi và ca trộn giọng xuất hiện |
+| **Section** | Dòng `## ` tăng `section_idx`, đặt `section_title` cho mọi đoạn sau nó. **Vùng trước heading đầu tiên không rỗng** — `T02-001` và `T05-001` nằm ở đó; chúng nhận `section_idx = 0`. Bỏ vùng này là tổng ra 698/53 thay vì 700/55 |
 
 Assert đủ bộ số §0. Cộng **một test đối chiếu ngang**: `flow1.parse` và `sotay.ingest` phải ra **danh sách mã đoạn y hệt nhau** — lệch một mã là fail. Đây cũng là câu trả lời gọn cho TA ở CP5 khi bị hỏi "sao có hai bộ parse".
 
@@ -285,13 +286,12 @@ Context = 5 chunk, mỗi chunk gắn nhãn mã đoạn gốc của nó. Prompt n
 |---|---|---|
 | Mã ∈ 700 mã thật | `sotay.verify.check_citations` | **Loại claim đó**, ghi lại, **không tự sửa** |
 | Mã ∈ tập chunk đã đưa vào context | union `seg_codes` của 5 hit | Loại claim, kind `outside_context` |
-| Đoạn `speaker="student"` | 51 đoạn | **Buộc** gắn nhãn *"một học viên nêu"* |
-| Đoạn `has_student_voice` | 18 đoạn trộn giọng | Cảnh báo mềm *"đoạn này có cả lời học viên"* |
+| Đoạn `speaker="student"` | 69 đoạn | **Buộc** gắn nhãn *"một học viên nêu"* |
 | Đoạn `has_gap` | 103 đoạn | Chèn *"⚠ bản ghi đoạn này thiếu"* |
 
 Kiểm thứ hai là **riêng của luồng 1** — luồng 2 nạp cả buổi nên "∈ context" trùng với "∈ 700 mã"; luồng 1 chỉ đưa 5 chunk nên mã thật *nhưng không có trong context* vẫn là bịa.
 
-Hai mức nhãn giọng học viên là chỗ 18 đoạn trộn giọng được xử tử tế. Đây là lớp ④ cụ thể hoá bằng code, không phải bằng một dòng trong prompt.
+Nhãn giọng học viên do **code** quyết định, không do model tự khai — model khai `speaker` gì thì `speaker` trong `Seg` vẫn thắng. Đây là lớp ④ cụ thể hoá bằng kỹ thuật, không phải bằng một dòng trong prompt. 69/645 đoạn nội dung là lời học viên (10,7%), nên đây không phải ca hiếm.
 
 **Loại hết claim → `status` chuyển `insufficient`.** Không được trả về danh sách rỗng rồi im lặng.
 
@@ -390,7 +390,23 @@ Test kiến trúc — chúng giữ cho §2 không mục theo thời gian:
 
 ---
 
-## 9. Rủi ro đã biết
+## 9. Quyết định: KHÔNG nối luồng 1 vào graph Neo4j
+
+Nhóm có một instance Neo4j Aura chứa transcript dưới dạng node `Turn` (`id` = mã đoạn `Txx-NNN`, `speaker_role`, `is_question`, `content`). Nó trùng phạm vi với tầng dữ liệu ở §3, nên phải nói rõ vì sao luồng 1 không dùng.
+
+**Ba lý do, theo thứ tự sức nặng:**
+
+1. **Bản sao trong graph đã mất dữ liệu.** `T03-062` trong Neo4j là `"**** Em nghĩ..."`, transcript thật là `"**[Học viên]:** Em nghĩ..."` — bước nạp đã nuốt marker `[Học viên]`. Luồng 1 in **nguyên văn đoạn ngay dưới mỗi khẳng định** để người đọc kiểm tại chỗ; in `****` là hỏng đúng chiều đo *truy vết* của quality bar. Đáng chú ý: chính marker in đậm này là thứ làm bộ đếm của tôi sai ở §0.2 — nó khó thấy ở cả hai phía.
+2. **Canvas §4.2 đã chốt ngược lại, bằng lý do có tên:** *"Với ~400 chunk thì mọi thứ chạy trong RAM. Không dựng Chroma/FAISS/Docker — thêm 2 tiếng setup, không thêm điểm nào, và CP5 lại phải giải thích thứ mình không viết."*
+3. **Bảo mật data — cần nhóm tự quyết.** `data/vlearn-pack/transcript/README.md` mục "Luật dùng & bảo mật": *"chỉ dùng trong phạm vi hackathon · không chia sẻ ra ngoài khoá · không commit nguyên file vào repo nộp bài"*. Một instance hosted chứa toàn văn 700 đoạn là transcript nằm trên hạ tầng bên thứ ba. Có vi phạm hay không tuỳ instance đó có được tính là "trong phạm vi khoá" — nhóm biết, tài liệu này không.
+
+**Chỗ graph có ích:** phía **M3**, không phải luồng 1. Truy vấn kiểu *"đoạn nào là lời học viên trong buổi 03"* hoặc *"đoạn nào là câu hỏi"* bằng Cypher nhanh hơn viết script — hữu ích khi M5 gán nhãn 18 ý vàng và khi M3 dựng golden set.
+
+**Ranh giới cứng:** nguồn sự thật cho **mã trích dẫn** vẫn là 6 file `.md`. `flow1.check` kiểm mã bằng `parse_all()` đọc file, không qua mạng. Nếu graph và file lệch nhau thì **file đúng**.
+
+---
+
+## 10. Rủi ro đã biết
 
 | Rủi ro | Dấu hiệu | Đường lùi |
 |---|---|---|
