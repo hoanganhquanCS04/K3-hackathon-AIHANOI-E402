@@ -311,6 +311,7 @@ name = "flow1"
 version = "0.1.0"
 source = { editable = "flow1" }
 dependencies = [
+    { name = "graph-db" },
     { name = "numpy" },
     { name = "pydantic" },
     { name = "rank-bm25" },
@@ -320,6 +321,7 @@ dependencies = [
 
 [package.metadata]
 requires-dist = [
+    { name = "graph-db", editable = "graph-db" },
     { name = "numpy" },
     { name = "pydantic" },
     { name = "rank-bm25" },

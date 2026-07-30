@@ -1,0 +1,120 @@
+{
+  "run_id": "2026-07-30T16-15-00.000000Z-a1b2c3d4",
+  "goc": "cơ chế attention là gì",
+  "stages": [
+    {
+      "name": "rule_gate",
+      "data": {
+        "nhan": null,
+        "chan": false
+      }
+    },
+    {
+      "name": "agent",
+      "data": {
+        "tool_da_chon": "tra_cuu",
+        "tham_so": {
+          "query": "cơ chế attention là gì"
+        }
+      }
+    },
+    {
+      "name": "rewrite",
+      "data": {
+        "goc": "cơ chế attention là gì",
+        "keywords": ["cơ chế attention", "chú ý", "attention"],
+        "cau_hoi": "Cơ chế attention trong mô hình transformer hoạt động như thế nào?",
+        "thuc_the": ["attention", "transformer"]
+      }
+    },
+    {
+      "name": "bm25",
+      "data": {
+        "gop_vao_fusion": true,
+        "top10": [
+          ["T04-072", 12.85],
+          ["T04-071", 11.20]
+        ],
+        "ms": 1.2,
+        "bo_ma_ngoai_store": 0
+      }
+    },
+    {
+      "name": "qdrant",
+      "data": {
+        "gop_vao_fusion": true,
+        "top10": [
+          ["T04-072", 0.91],
+          ["T04-071", 0.87]
+        ],
+        "ms": 45.3,
+        "bo_ma_ngoai_store": 0
+      }
+    },
+    {
+      "name": "neo4j",
+      "data": {
+        "gop_vao_fusion": true,
+        "top10": [
+          ["T04-072", 3.2],
+          ["T04-071", 1.6]
+        ],
+        "ms": 32.1,
+        "bo_ma_ngoai_store": 0
+      }
+    },
+    {
+      "name": "gate_stats",
+      "data": {
+        "nguon": "BM25 tho, doc lap voi fusion va voi toggle",
+        "top1_abs": 12.85,
+        "ratio": 1.21
+      }
+    },
+    {
+      "name": "gate1",
+      "data": {
+        "top1_abs": 12.85,
+        "ratio": 1.21,
+        "pass": true
+      }
+    },
+    {
+      "name": "fuse",
+      "data": {
+        "nhanh_gop": ["bm25", "qdrant", "neo4j"],
+        "bang": [
+          {"ma": "T04-072", "rank_bm25": 0, "rank_qdrant": 0, "rank_neo4j": 0, "rrf": 0.04918},
+          {"ma": "T04-071", "rank_bm25": 1, "rank_qdrant": 1, "rank_neo4j": 1, "rrf": 0.04838}
+        ],
+        "chi_mot_nhanh_tim_ra": {
+          "bm25": [],
+          "qdrant": [],
+          "neo4j": []
+        }
+      }
+    },
+    {
+      "name": "context",
+      "data": {
+        "chunk_ids": ["T04-072", "T04-071"],
+        "n_chars": 1420
+      }
+    },
+    {
+      "name": "generate",
+      "data": {
+        "status": "answered",
+        "n_claims": 1,
+        "cite_codes": ["T04-072"]
+      }
+    },
+    {
+      "name": "gate3",
+      "data": {
+        "pass": true,
+        "n_findings": 0
+      }
+    }
+  ]
+}

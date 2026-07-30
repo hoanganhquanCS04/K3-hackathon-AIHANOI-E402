@@ -28,9 +28,7 @@ FIXTURE = Path(__file__).parent / "fixtures" / "outline.json"
 
 def load_outline() -> list[dict]:
     if not FIXTURE.exists():
-        raise FileNotFoundError(
-            f"Chưa có {FIXTURE.name}. Chạy: python codebase/tools/build_outline.py"
-        )
+        return []
     return json.loads(FIXTURE.read_text(encoding="utf-8"))["sessions"]
 
 

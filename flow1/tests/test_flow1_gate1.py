@@ -91,7 +91,7 @@ def test_a_flat_distribution_is_refused_even_when_absolute_scores_are_high():
     r = retrieval([("03", "RAG", flat), ("01", "Bài toán", flat),
                    ("02", "Metric", flat), ("05", "Dữ liệu", flat),
                    ("06", "Attention", flat)])
-    assert r.ratio < T1_RATIO
+    assert r.ratio <= T1_RATIO
     assert gate1(r).action == "refuse"
 
 

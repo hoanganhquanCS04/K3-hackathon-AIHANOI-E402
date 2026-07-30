@@ -2,10 +2,11 @@
 name = "flow1"
 version = "0.1.0"
 requires-python = ">=3.13"
-dependencies = ["pydantic", "rank_bm25", "numpy", "streamlit", "vector-db"]
+dependencies = ["pydantic", "rank_bm25", "numpy", "streamlit", "vector-db", "graph-db"]
 
 [tool.uv.sources]
 vector-db = { workspace = true }
+graph-db = { workspace = true }
 
 [build-system]
 requires = ["uv_build>=0.12.0,<0.13.0"]
@@ -13,4 +14,4 @@ build-backend = "uv_build"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-pythonpath = ["app"]
+pythonpath = ["src", "app"]

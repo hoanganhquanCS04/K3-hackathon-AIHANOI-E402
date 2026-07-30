@@ -4,9 +4,12 @@ import math
 
 import pytest
 
+from flow1.atomic import build_code_map
 from flow1.index import build
 from flow1.models import Chunk
 from flow1.retrieve import gate_stats, retrieve
+from flow1.retrievers import BM25Retriever, NullRetriever
+from flow1.store import Store
 
 
 def chunk(chunk_id, text, *, session="09", section_title="S1"):
@@ -18,7 +21,15 @@ def chunk(chunk_id, text, *, session="09", section_title="S1"):
 
 
 def store_of(chunks):
-    return (chunks, build(chunks))
+    return Store(atomics=chunks, contexts=chunks, code_to_contexts=build_code_map(chunks), bm25=build(chunks))
+
+
+def _only_bm25(store):
+    return {
+        "bm25": BM25Retriever(store),
+        "qdrant": NullRetriever("qdrant", "tat trong test"),
+        "neo4j": NullRetriever("neo4j", "tat trong test"),
+    }
 
 
 CORPUS = [
@@ -85,66 +96,66 @@ def test_gate_stats_raises_when_input_is_not_sorted_descending():
 # --- retrieve --------------------------------------------------------------
 
 def test_retrieve_returns_at_most_k_hits():
-    result = retrieve("attention transformer", k=3, store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("attention transformer", k=3, store=st, retrievers=_only_bm25(st))
     assert len(result.hits) <= 3
 
 
 def test_retrieve_ranks_the_best_match_first():
-    result = retrieve("attention transformer query key value", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("attention transformer query key value", store=st, retrievers=_only_bm25(st))
     assert result.hits[0].chunk.chunk_id == "C1"
 
 
 def test_retrieve_numbers_the_ranks_from_zero():
-    result = retrieve("bài toán", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("bài toán", store=st, retrievers=_only_bm25(st))
     assert [h.rank for h in result.hits] == list(range(len(result.hits)))
 
 
 def test_retrieve_reports_top1_abs_as_the_raw_bm25_score():
-    result = retrieve("attention transformer", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("attention transformer", store=st, retrievers=_only_bm25(st))
     assert result.top1_abs == result.hits[0].bm25
 
 
-def test_retrieve_leaves_emb_none_until_embedding_is_enabled():
-    result = retrieve("attention", store=store_of(CORPUS))
-    assert all(h.emb is None for h in result.hits)
-
-
-def test_retrieve_score_equals_bm25_when_there_is_no_embedding():
-    result = retrieve("attention", store=store_of(CORPUS))
-    assert all(h.score == h.bm25 for h in result.hits)
-
-
 def test_retrieve_on_a_query_matching_nothing_reports_zero_and_refusable_stats():
-    result = retrieve("kubernetes helm istio", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("kubernetes helm istio", store=st, retrievers=_only_bm25(st))
     assert result.top1_abs == 0.0
     assert result.ratio == 0.0
 
 
 def test_retrieve_on_an_empty_query_does_not_crash():
-    result = retrieve("   ", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("   ", store=st, retrievers=_only_bm25(st))
     assert result.top1_abs == 0.0
     assert result.ratio == 0.0
 
 
 def test_retrieve_exposes_the_session_of_every_hit_for_the_ambiguity_check():
-    result = retrieve("bài toán", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("bài toán", store=st, retrievers=_only_bm25(st))
     assert result.sessions == [h.chunk.session for h in result.hits]
 
 
 # --- Lọc buổi: đường "correction" của 4 đường đi trải nghiệm ---------------
 
 def test_a_session_filter_keeps_only_chunks_from_that_session():
-    result = retrieve("bài toán", session="02", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("bài toán", session="02", store=st, retrievers=_only_bm25(st))
     assert {h.session for h in result.hits} == {"02"}
 
 
 def test_stats_are_computed_within_the_filtered_session_only():
-    unfiltered = retrieve("bài toán", store=store_of(CORPUS))
-    filtered = retrieve("bài toán", session="02", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    unfiltered = retrieve("bài toán", store=st, retrievers=_only_bm25(st))
+    filtered = retrieve("bài toán", session="02", store=st, retrievers=_only_bm25(st))
     assert filtered.top1_abs <= unfiltered.top1_abs
 
 
 def test_a_session_filter_that_matches_no_chunk_returns_refusable_stats():
-    result = retrieve("bài toán", session="99", store=store_of(CORPUS))
+    st = store_of(CORPUS)
+    result = retrieve("bài toán", session="99", store=st, retrievers=_only_bm25(st))
     assert result.hits == []
     assert (result.top1_abs, result.ratio) == (0.0, 0.0)

@@ -1,26 +1,8 @@
-"""Test embedding + RRF. Chủ: M2. KHÔNG tải model trong test — vector dựng tay."""
+"""Test RRF + bao mat data."""
 
-import numpy as np
 import pytest
 
-from flow1.embed import load_embeddings, rrf
-from flow1.index import build
-from flow1.models import Chunk
-from flow1.retrieve import retrieve
-
-
-def chunk(chunk_id, text, *, session="09"):
-    return Chunk(
-        chunk_id=chunk_id, session=session, session_title="Buổi thử",
-        section_idx=1, section_title="S1", parts=[(chunk_id, text)], has_gap=False,
-    )
-
-
-CORPUS = [
-    chunk("C1", "Cơ chế attention trong transformer"),
-    chunk("C2", "Xác định bài toán kinh doanh cho AI"),
-    chunk("C3", "RAG và tool calling"),
-]
+from flow1.embed import rrf
 
 
 # --- RRF -----------------------------------------------------------------
@@ -53,72 +35,25 @@ def test_rrf_on_empty_rankings_returns_an_empty_mapping():
     assert rrf([], k=60) == {}
 
 
-# --- Lùi êm khi thiếu emb.npy -------------------------------------------
-
-def test_load_embeddings_returns_none_when_the_file_is_absent(tmp_path):
-    assert load_embeddings(tmp_path / "khong-co.npy") is None
-
-
-def test_retrieve_works_normally_when_embeddings_are_absent():
-    result = retrieve("attention transformer", store=(CORPUS, build(CORPUS)), embeddings=None)
-    assert result.hits
-    assert all(h.emb is None for h in result.hits)
-    assert all(h.score == h.bm25 for h in result.hits)
-
-
-# --- Bật embedding ------------------------------------------------------
-
-def test_retrieve_fills_in_the_emb_score_when_embeddings_are_supplied():
-    # Vector dựng tay: C3 gần truy vấn nhất. Không tải model trong test.
-    embeddings = np.array([[1.0, 0.0], [0.0, 1.0], [0.7, 0.7]], dtype="float32")
-    result = retrieve(
-        "attention transformer", store=(CORPUS, build(CORPUS)),
-        embeddings=embeddings, query_vector=np.array([0.7, 0.7], dtype="float32"),
-    )
-    assert all(h.emb is not None for h in result.hits)
-
-
-def test_gate_stats_stay_on_raw_bm25_even_when_embeddings_are_on():
-    # Ngưỡng T1 hiệu chỉnh ở Task 11 KHÔNG được mất hiệu lực khi bật hybrid.
-    store = (CORPUS, build(CORPUS))
-    plain = retrieve("attention transformer", store=store, embeddings=None)
-    embeddings = np.array([[0.0, 1.0], [1.0, 0.0], [0.7, 0.7]], dtype="float32")
-    hybrid = retrieve(
-        "attention transformer", store=store, embeddings=embeddings,
-        query_vector=np.array([1.0, 0.0], dtype="float32"),
-    )
-    assert hybrid.top1_abs == plain.top1_abs
-    assert hybrid.ratio == plain.ratio
-
-
-def test_embedding_can_change_the_order_of_the_hits():
-    store = (CORPUS, build(CORPUS))
-    plain = retrieve("attention", store=store, embeddings=None)
-    embeddings = np.array([[0.0, 1.0], [0.0, 1.0], [1.0, 0.0]], dtype="float32")
-    hybrid = retrieve(
-        "attention", store=store, embeddings=embeddings,
-        query_vector=np.array([1.0, 0.0], dtype="float32"),
-    )
-    assert [h.chunk.chunk_id for h in hybrid.hits] != [] and plain.hits
-
-
-def test_a_session_filter_still_applies_with_embeddings_on():
-    mixed = [chunk("C1", "attention", session="06"), chunk("C2", "attention", session="01")]
-    embeddings = np.array([[1.0, 0.0], [1.0, 0.0]], dtype="float32")
-    result = retrieve(
-        "attention", store=(mixed, build(mixed)), session="01",
-        embeddings=embeddings, query_vector=np.array([1.0, 0.0], dtype="float32"),
-    )
-    assert {h.session for h in result.hits} == {"01"}
-
-
 # --- Bảo mật data -------------------------------------------------------
 
-def test_embed_module_names_a_local_model_and_no_remote_endpoint():
-    import flow1.embed as embed_module
+def test_flow1_khong_co_duong_nao_embed_hang_loat_qua_api():
+    """Dieu 4 bao mat data: gui ca corpus ra provider ngoai KHONG phai
+    'phan toi thieu can thiet'. Corpus da embed mot lan boi vector-db va ket
+    qua nam trong Qdrant. flow1 chi duoc embed DUNG CAU HOI.
 
-    source = open(embed_module.__file__, encoding="utf-8").read()
-    assert "multilingual-e5-small" in source
-    assert "api.openai.com" not in source
-    assert "anthropic" not in source
-    assert "requests.post" not in source
+    Test nay thay cho test_embed_module_names_a_local_model_and_no_remote_endpoint:
+    quyet dinh 'model phai local' da bi spec 2026-07-30-agent-2-tool lat, nhung
+    bao dam ben duoi no thi khong.
+    """
+    from pathlib import Path
+
+    src = Path(__file__).resolve().parents[1] / "src" / "flow1"
+    cam = ("build_embeddings", "embed_all", "embed_corpus", ".encode(")
+    for file in src.rglob("*.py"):
+        text = file.read_text(encoding="utf-8")
+        for tu in cam:
+            assert tu not in text, (
+                f"{file.name} co '{tu}' — flow1 chi duoc embed cau hoi, khong "
+                f"duoc embed hang loat. Xem canvas §4.3."
+            )

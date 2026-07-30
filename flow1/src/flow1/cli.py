@@ -27,16 +27,19 @@ _CLASSIFY_CALL = None
 _CHECK_CITATIONS = None
 
 
-def _run_ask(question: str, session: str | None) -> int:
+def _run_ask(question: str, session: str | None, want_trace: bool = False) -> int:
     from flow1.parse import TRANSCRIPT_DIR, parse_all
+    from flow1.trace import new_trace
 
     segs = parse_all() if TRANSCRIPT_DIR.exists() else None
+    trace = new_trace(question, enabled=want_trace)
 
     try:
         result = ask(
             question,
             session=session,
             segs=segs,
+            trace=trace,
             classify_call=_CLASSIFY_CALL,
             answer_call=_ANSWER_CALL,
             check_citations=_CHECK_CITATIONS,
@@ -46,10 +49,17 @@ def _run_ask(question: str, session: str | None) -> int:
         return 3
 
     print(render(result, segs or []))
+
+    if want_trace:
+        from flow1.trace_render import render_trace
+
+        print(render_trace(trace), file=sys.stderr)
+        print(f"Trace da ghi: {trace.save()}", file=sys.stderr)
+
     return 1 if result.outcome == "error" else 0
 
 
-def _run_index(with_embedding: bool = False) -> int:
+def _run_index() -> int:
     try:
         count = build_from_data()
     except FileNotFoundError as exc:
@@ -58,17 +68,8 @@ def _run_index(with_embedding: bool = False) -> int:
             f"có mặt để dựng index."
         )
         return 3
-    print(f"Đã index {count} chunk.")
-
-    if with_embedding:
-        from flow1.embed import EMB_PATH, MODEL_NAME, build_embeddings
-        from flow1.index import load
-
-        chunks, _ = load()
-        print(f"Đang embed bằng {MODEL_NAME} (chạy local, không gửi data ra ngoài)...")
-        n = build_embeddings(chunks)
-        print(f"Đã ghi {n} vector → {EMB_PATH}")
-
+    print(f"Da index {count} doan nguyen tu.")
+    print("Nhanh semantic lay tu Qdrant va Neo4j luc chay — khong can build them.")
     return 0
 
 
@@ -81,11 +82,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     sub = parser.add_subparsers(dest="command", required=True)
 
-    index_parser = sub.add_parser("index", help="Dựng BM25 index từ data pack.")
-    index_parser.add_argument(
-        "--with-embedding", action="store_true",
-        help="Thêm embedding local (multilingual-e5-small). Chậm hơn, chất lượng khớp tốt hơn.",
-    )
+    sub.add_parser("index", help="Dựng BM25 index từ data pack.")
 
     ask_parser = sub.add_parser("ask", help="Hỏi một câu về nội dung khoá.")
     ask_parser.add_argument("question", help="Câu hỏi, đặt trong ngoặc kép.")
@@ -93,9 +90,13 @@ def main(argv: list[str] | None = None) -> int:
         "--session", default=None,
         help="Giới hạn trong một buổi, ví dụ 02. Dùng khi hệ thống hỏi lại buổi nào.",
     )
+    ask_parser.add_argument(
+        "--trace", action="store_true",
+        help="In bang chi tiet tung chang ra stderr va ghi JSON vao flow1/trace/.",
+    )
 
     args = parser.parse_args(argv)
 
     if args.command == "index":
-        return _run_index(args.with_embedding)
-    return _run_ask(args.question, args.session)
+        return _run_index()
+    return _run_ask(args.question, args.session, args.trace)

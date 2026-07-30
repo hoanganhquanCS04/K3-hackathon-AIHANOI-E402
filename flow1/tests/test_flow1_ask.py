@@ -39,7 +39,18 @@ CHUNKS = [chunk_of(s) for s in SEGS]
 
 
 def store():
-    return (CHUNKS, build(CHUNKS))
+    from flow1.atomic import build_code_map
+    from flow1.store import Store
+    return Store(atomics=CHUNKS, contexts=CHUNKS, code_to_contexts=build_code_map(CHUNKS), bm25=build(CHUNKS))
+
+
+def _only_bm25(st):
+    from flow1.retrievers import BM25Retriever, NullRetriever
+    return {
+        "bm25": BM25Retriever(st),
+        "qdrant": NullRetriever("qdrant", "tat trong test"),
+        "neo4j": NullRetriever("neo4j", "tat trong test"),
+    }
 
 
 def content_intent(*_args, **_kwargs):
@@ -63,8 +74,10 @@ def no_findings(points, segments):
 
 
 def run(question, **kwargs):
+    st = kwargs.get("store") or store()
     kwargs.setdefault("segs", SEGS)
-    kwargs.setdefault("store", store())
+    kwargs.setdefault("store", st)
+    kwargs.setdefault("retrievers", _only_bm25(st))
     kwargs.setdefault("classify_call", content_intent)
     kwargs.setdefault("answer_call", one_claim())
     kwargs.setdefault("check_citations", no_findings)

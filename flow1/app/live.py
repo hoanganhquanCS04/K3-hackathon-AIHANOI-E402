@@ -19,13 +19,22 @@ from __future__ import annotations
 import time
 from dataclasses import dataclass, field
 
-from stubs import (  # noqa: F401  — phần đã thật sẵn thì dùng lại nguyên
-    get_session,
-    load_outline,
-    refusal,
-    resolve_part,
-    route,
-)
+try:
+    from stubs import (  # noqa: F401
+        get_session,
+        load_outline,
+        refusal,
+        resolve_part,
+        route,
+    )
+except ImportError:
+    from flow1.app.stubs import (  # noqa: F401
+        get_session,
+        load_outline,
+        refusal,
+        resolve_part,
+        route,
+    )
 
 from summarizer.cache import SummaryCache
 from summarizer.config import settings

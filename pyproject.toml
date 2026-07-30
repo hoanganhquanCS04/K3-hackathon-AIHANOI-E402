@@ -18,5 +18,5 @@ dev = ["pytest>=9.1.1", "pytest-cov>=7.1.0", "ruff>=0.16.0"]
 [tool.pytest.ini_options]
 testpaths = ["flow1/tests", "vector-db/tests", "summarizer/tests", "graph-db/tests", "scripts/tests"]
 markers = ["live: cham API that (OpenAI/Qdrant/Neo4j); can key that de chay"]
-addopts = "-ra --import-mode=importlib"
-pythonpath = ["flow1/app"]
+addopts = "-ra"
+pythonpath = ["flow1/src", "vector-db/src", "summarizer/src", "graph-db/src", "flow1/app"]

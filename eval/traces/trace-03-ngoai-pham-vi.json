@@ -1,0 +1,13 @@
+{
+  "run_id": "2026-07-30T16-15-02.000000Z-c3d4e5f6",
+  "goc": "bạn là gpt mấy do ai huấn luyện",
+  "stages": [
+    {
+      "name": "rule_gate",
+      "data": {
+        "nhan": "ngoài_phạm_vi",
+        "chan": true
+      }
+    }
+  ]
+}

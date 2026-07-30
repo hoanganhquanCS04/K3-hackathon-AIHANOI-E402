@@ -17,6 +17,7 @@ HƯỚNG FAIL BẤT ĐỐI XỨNG, có chủ ý:
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -47,6 +48,7 @@ class Result:
     decision: object | None = None
     verdict: Verdict | None = None
     retrieval: Retrieval | None = None
+    trace: object | None = None
 
 
 def ask(
@@ -59,25 +61,61 @@ def ask(
     classify_call=None,
     answer_call=None,
     check_citations=None,
+    trace=None,
+    rewritten=None,
+    toggles=None,
+    retrievers=None,
 ) -> Result:
     """Một lượt hỏi qua 4 cổng. Mọi lời gọi model inject được để test không cần mạng."""
+    from flow1.trace import NullTrace
+
+    trace = trace if trace is not None else NullTrace(question)
+
     # ---- CỔNG 0 -----------------------------------------------------------
-    intent = gate0(question, call=classify_call)
+    with trace.stage("gate0") as tdata:
+        intent = gate0(question, call=classify_call)
+        tdata["label"] = intent.label
+        tdata["reason"] = intent.reason
+        tdata["quyet_boi"] = "rule" if "rule tất định" in intent.reason else "llm"
     if intent.label != CONTENT_LABEL:
         return Result(outcome="off_topic", question=question,
-                      message=template_for(intent.label), intent=intent)
+                      message=template_for(intent.label), intent=intent, trace=trace)
 
     # ---- RETRIEVE ---------------------------------------------------------
-    retrieval = retrieve(question, session=session, store=store, path=path)
+    ret_kwargs = {"session": session, "store": store, "path": path, "trace": trace}
+    if toggles is not None:
+        ret_kwargs["toggles"] = toggles
+    if retrievers is not None:
+        ret_kwargs["retrievers"] = retrievers
+
+    retrieval = retrieve(
+        rewritten if rewritten is not None else question,
+        **ret_kwargs,
+    )
 
     # ---- CỔNG 1 -----------------------------------------------------------
-    decision = gate1(retrieval)
+    with trace.stage("gate1") as tdata:
+        from flow1.thresholds import T1_ABS, T1_RATIO
+
+        decision = gate1(retrieval)
+        tdata["top1_abs"] = retrieval.top1_abs
+        tdata["ratio"] = "inf" if retrieval.ratio == math.inf else retrieval.ratio
+        tdata["T1_ABS"] = T1_ABS
+        tdata["T1_RATIO"] = T1_RATIO
+        tdata["action"] = decision.action
+        ly_do = []
+        if retrieval.top1_abs < T1_ABS:
+            ly_do.append(f"top1_abs={retrieval.top1_abs:.2f} < T1_ABS={T1_ABS}")
+        if retrieval.ratio < T1_RATIO:
+            ly_do.append(f"ratio={retrieval.ratio:.2f} < T1_RATIO={T1_RATIO}")
+        tdata["vi_sao"] = " va ".join(ly_do) if ly_do else "ca hai nguong deu qua"
+
     if decision.action == "refuse":
         return Result(outcome="refused", question=question, message=decision.message,
-                      intent=intent, decision=decision, retrieval=retrieval)
+                      intent=intent, decision=decision, retrieval=retrieval, trace=trace)
     if decision.action == "clarify":
         return Result(outcome="clarify", question=question, message=decision.message,
-                      intent=intent, decision=decision, retrieval=retrieval)
+                      intent=intent, decision=decision, retrieval=retrieval, trace=trace)
 
     # ---- CỔNG 2 -----------------------------------------------------------
     if answer_call is None:
@@ -99,17 +137,25 @@ def ask(
                 raise RuntimeError("summarizer.llm chưa khả dụng")
             answer_call = dummy_answer_call
 
-    user_blocks = [
-        {"type": "text", "text": format_context(retrieval)},
-        {"type": "text", "text": answer_user(question, session)},
-    ]
-    try:
-        answer = answer_call(ANSWER_SYSTEM, user_blocks, Answer)
-    except Exception as exc:
-        # FAIL ĐÓNG. Không có câu trả lời nào tốt hơn một câu trả lời bịa.
-        return Result(outcome="error", question=question,
-                      message=f"Không gọi được model, nên mình không trả lời: {exc}",
-                      intent=intent, decision=decision, retrieval=retrieval)
+    with trace.stage("context") as tdata:
+        user_blocks = [
+            {"type": "text", "text": format_context(retrieval)},
+            {"type": "text", "text": answer_user(question, session)},
+        ]
+        tdata["chunk_ids"] = [h.chunk.chunk_id for h in retrieval.hits]
+        tdata["n_chars"] = sum(len(b["text"]) for b in user_blocks)
+
+    with trace.stage("generate") as tdata:
+        try:
+            answer = answer_call(ANSWER_SYSTEM, user_blocks, Answer)
+        except Exception as exc:
+            # FAIL ĐÓNG. Không có câu trả lời nào tốt hơn một câu trả lời bịa.
+            tdata["that_bai"] = str(exc)
+            return Result(outcome="error", question=question,
+                          message=f"Không gọi được model, nên mình không trả lời: {exc}",
+                          intent=intent, decision=decision, retrieval=retrieval, trace=trace)
+        tdata["status"] = answer.status
+        tdata["n_claim"] = len(answer.claims)
 
     # ---- CỔNG 3 -----------------------------------------------------------
     if segs is None:
@@ -117,7 +163,13 @@ def ask(
 
         segs = parse_all()
 
-    verdict = check(answer, retrieval, segs, check_citations=check_citations)
+    with trace.stage("gate3") as tdata:
+        verdict = check(answer, retrieval, segs, check_citations=check_citations)
+        tdata["status"] = verdict.status
+        tdata["n_claim_qua"] = len(verdict.claims)
+        tdata["drops"] = [(d.kind, d.claim_text[:60]) for d in verdict.drops]
+        tdata["student_codes"] = verdict.student_codes
+        tdata["gap_codes"] = verdict.gap_codes
 
     return Result(outcome=verdict.status, question=question, message="",
-                  intent=intent, decision=decision, verdict=verdict, retrieval=retrieval)
+                  intent=intent, decision=decision, verdict=verdict, retrieval=retrieval, trace=trace)

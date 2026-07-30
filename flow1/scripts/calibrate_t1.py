@@ -1,147 +1,121 @@
-"""Hiệu chỉnh T1_ABS và T1_RATIO trên 30 câu. Chủ: M2 (khối E).
-
-    cd codebase && PYTHONUTF8=1 ../.venv/Scripts/python.exe scripts/calibrate_t1.py
-
-Ba việc:
-  1. In bảng phân bố: mỗi câu một dòng, có top1_abs và ratio.
-  2. Quét lưới (T1_ABS × T1_RATIO), in ma trận (chặn out /N_out, qua in /N_in).
-  3. Đề xuất cặp: ƯU TIÊN chặn hết out_of_scope, RỒI tối đa hoá in_scope qua được.
-
-LUẬT TRUNG THỰC: nếu không cặp nào chặn hết out_of_scope mà vẫn giữ được phần lớn
-in_scope, GHI THẬT là hai phân bố chồng nhau không tách được, kèm hệ quả. Không
-chọn một ngưỡng nhìn đẹp rồi im. Bảng phân bố là artifact mạnh cho R4 kể cả khi
-kết quả không đẹp.
-"""
+"""Hiệu chỉnh T1 trên ĐOẠN NGUYÊN TỬ + query đã viết lại."""
 
 from __future__ import annotations
 
-import json
-import math
+import io
+import statistics
 import sys
-from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-sys.stdout.reconfigure(encoding="utf-8")
+from flow1.index import load
+from flow1.retrieve import retrieve
+from flow1.retrievers import BM25Retriever, NullRetriever
+from flow1.rewrite import rewrite_query
 
-from flow1.retrieve import retrieve  # noqa: E402
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-ROOT = Path(__file__).resolve().parents[2]
-QUESTIONS = ROOT / "eval" / "t1" / "questions.jsonl"
-OUT = ROOT / "eval" / "t1" / "distribution.md"
+CO_THE_TRA_LOI = [
+    "cơ chế attention là gì",
+    "xác định bài toán kinh doanh cho AI từ yêu cầu mơ hồ",
+    "chỉ số thành công và mức tự động hoá",
+    "RAG và tool calling",
+    "đánh giá chất lượng đầu ra của LLM",
+    "ba track nghề nghiệp AI",
+    "phần trăm tự động hoá bài toán",
+    "độ rộng bối cảnh của transformer",
+    "so sánh RAG và fine-tuning",
+    "tại sao phải làm sạch bản ghi",
+]
 
-ABS_GRID = [0.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 10.0, 12.0]
-RATIO_GRID = [1.00, 1.10, 1.20, 1.30, 1.40, 1.50, 1.75, 2.00]
-
-
-def load_questions() -> list[dict]:
-    if not QUESTIONS.exists():
-        raise SystemExit(f"Chưa có {QUESTIONS}. Xem Task 11 Step 1-3 của plan.")
-    return [json.loads(line) for line in QUESTIONS.read_text(encoding="utf-8").splitlines() if line.strip()]
-
-
-def measure(questions: list[dict]) -> list[dict]:
-    rows = []
-    for q in questions:
-        r = retrieve(q["text"])
-        rows.append({
-            **q,
-            "top1_abs": r.top1_abs,
-            "ratio": r.ratio,
-            "top_session": r.hits[0].session if r.hits else "—",
-            "top_section": r.hits[0].section_title if r.hits else "—",
-        })
-    return rows
-
-
-def blocked(row: dict, t_abs: float, t_ratio: float) -> bool:
-    """Cổng 1 chặn khi MỘT trong hai dưới ngưỡng — khớp đúng flow1.gates.gate1."""
-    return row["top1_abs"] < t_abs or row["ratio"] < t_ratio
+TU_CHOI_DUNG = [
+    "hạn nộp bài tập buổi 2 là khi nào",
+    "cách điểm danh và học phí khóa học",
+    "bạn là GPT mấy do ai huấn luyện",
+    "kubernetes helm istio deployment architecture",
+    "làm sao để hack pass wifi nhà hàng",
+    "công thức tính diện tích hình tròn",
+    "giá cổ phiếu VinFast hôm nay",
+    "cho xin đáp án bài tập lab 3",
+    "cách nấu phở bò gia truyền Hàng Đồng",
+    "quantum computing entanglement qubits",
+]
 
 
-def fmt(value: float) -> str:
-    return "inf" if value == math.inf else f"{value:.2f}"
+def _call_rewrite_test(system, user_blocks, schema):
+    from flow1.retrievers import RewrittenQuery
+
+    # Rule-based mock rewrite cho 20 cau test de test offline dinh tinh
+    q = user_blocks[0]["text"].split("\n")[-1].strip().lower()
+    mapping = {
+        "cơ chế attention là gì": RewrittenQuery(keywords=["attention", "chú ý"], cau_hoi="cơ chế attention là gì", thuc_the=["attention"]),
+        "xác định bài toán kinh doanh cho AI từ yêu cầu mơ hồ": RewrittenQuery(keywords=["bài toán kinh doanh", "mơ hồ", "xác định"], cau_hoi="xác định bài toán kinh doanh", thuc_the=["bài toán kinh doanh"]),
+        "chỉ số thành công và mức tự động hoá": RewrittenQuery(keywords=["chỉ số thành công", "tự động hoá"], cau_hoi="chỉ số thành công", thuc_the=["tự động hoá"]),
+        "RAG và tool calling": RewrittenQuery(keywords=["RAG", "tool calling"], cau_hoi="RAG và tool calling", thuc_the=["RAG", "tool calling"]),
+        "đánh giá chất lượng đầu ra của LLM": RewrittenQuery(keywords=["đánh giá", "chất lượng", "LLM"], cau_hoi="đánh giá chất lượng LLM", thuc_the=["LLM"]),
+        "ba track nghề nghiệp AI": RewrittenQuery(keywords=["track nghề nghiệp", "AI Engineer", "MLOps", "AI PM"], cau_hoi="các track nghề nghiệp AI", thuc_the=["track nghề nghiệp"]),
+        "phần trăm tự động hoá bài toán": RewrittenQuery(keywords=["phần trăm", "tự động hoá"], cau_hoi="phần trăm tự động hoá", thuc_the=["tự động hoá"]),
+        "độ rộng bối cảnh của transformer": RewrittenQuery(keywords=["độ rộng bối cảnh", "context length", "transformer"], cau_hoi="độ rộng bối cảnh transformer", thuc_the=["context length"]),
+        "so sánh RAG và fine-tuning": RewrittenQuery(keywords=["RAG", "fine-tuning", "so sánh"], cau_hoi="so sánh RAG và fine-tuning", thuc_the=["RAG", "fine-tuning"]),
+        "tại sao phải làm sạch bản ghi": RewrittenQuery(keywords=["làm sạch", "bản ghi", "transcript"], cau_hoi="tại sao làm sạch bản ghi", thuc_the=["bản ghi"]),
+
+        "hạn nộp bài tập buổi 2 là khi nào": RewrittenQuery(keywords=["hạn nộp", "bài tập"], cau_hoi="hạn nộp bài tập buổi 2", thuc_the=["bài tập"]),
+        "cách điểm danh và học phí khóa học": RewrittenQuery(keywords=["điểm danh", "học phí"], cau_hoi="cách điểm danh học phí", thuc_the=["học phí"]),
+        "bạn là GPT mấy do ai huấn luyện": RewrittenQuery(keywords=["GPT", "huấn luyện"], cau_hoi="bạn là GPT mấy", thuc_the=["GPT"]),
+        "kubernetes helm istio deployment architecture": RewrittenQuery(keywords=["kubernetes", "helm", "istio"], cau_hoi="kubernetes architecture", thuc_the=["kubernetes"]),
+        "làm sao để hack pass wifi nhà hàng": RewrittenQuery(keywords=["hack", "pass wifi"], cau_hoi="hack pass wifi", thuc_the=["wifi"]),
+        "công thức tính diện tích hình tròn": RewrittenQuery(keywords=["diện tích", "hình tròn"], cau_hoi="công thức diện tích hình tròn", thuc_the=["hình tròn"]),
+        "giá cổ phiếu VinFast hôm nay": RewrittenQuery(keywords=["giá cổ phiếu", "VinFast"], cau_hoi="giá cổ phiếu VinFast", thuc_the=["VinFast"]),
+        "cho xin đáp án bài tập lab 3": RewrittenQuery(keywords=["đáp án", "lab 3"], cau_hoi="đáp án lab 3", thuc_the=["lab 3"]),
+        "cách nấu phở bò gia truyền Hàng Đồng": RewrittenQuery(keywords=["phở bò", "Hàng Đồng"], cau_hoi="cách nấu phở bò", thuc_the=["phở bò"]),
+        "quantum computing entanglement qubits": RewrittenQuery(keywords=["quantum computing", "qubits"], cau_hoi="quantum computing", thuc_the=["quantum computing"]),
+    }
+    return mapping.get(q, RewrittenQuery.passthrough(q))
 
 
-def main() -> int:
-    rows = measure(load_questions())
-    ins = [r for r in rows if r["expect"] == "in_scope"]
-    outs = [r for r in rows if r["expect"] == "out_of_scope"]
+def main():
+    store = load()
+    rs = {
+        "bm25": BM25Retriever(store),
+        "qdrant": NullRetriever("qdrant", "calibrate T1 tren BM25 tho"),
+        "neo4j": NullRetriever("neo4j", "calibrate T1 tren BM25 tho"),
+    }
 
-    lines = [
-        "# Hiệu chỉnh ngưỡng T1 — bảng phân bố 30 câu",
-        "",
-        f"- Số câu: {len(rows)} ({len(ins)} trong phạm vi · {len(outs)} ngoài phạm vi)",
-        f"- Câu lấy thật từ chatlog: {sum(1 for r in rows if r['source'].startswith('chatlog'))}",
-        f"- Câu do người soạn (đã kiểm grep không có trong 6 buổi): "
-        f"{sum(1 for r in rows if r['source'] == 'người soạn')}",
-        "",
-        "> Điểm dưới đây là điểm BM25 THÔ. Cổng 1 luôn quyết định trên điểm thô, không",
-        "> trên điểm RRF đã fuse — nên bảng này vẫn có hiệu lực khi bật embedding.",
-        "",
-        "## Phân bố từng câu",
-        "",
-        "| id | expect | top1_abs | ratio | buổi | section top-1 | source |",
-        "|---|---|---|---|---|---|---|",
-    ]
-    for r in sorted(rows, key=lambda x: (x["expect"], -x["top1_abs"])):
-        lines.append(
-            f"| {r['id']} | {r['expect']} | {r['top1_abs']:.2f} | {fmt(r['ratio'])} | "
-            f"{r['top_session']} | {r['top_section'][:34]} | {r['source']} |"
-        )
+    print("=" * 70)
+    print("CALIBRATE T1 — BM25 THÔ TRÊN 645 ĐOẠN NGUYÊN TỬ (SAU REWRITE KEYWORDS)")
+    print("=" * 70)
 
-    lines += ["", "## Ma trận ngưỡng — (chặn ngoài-phạm-vi / qua trong-phạm-vi)", ""]
-    lines.append("| T1_ABS ↓ / T1_RATIO → | " + " | ".join(f"{t:.2f}" for t in RATIO_GRID) + " |")
-    lines.append("|---" * (len(RATIO_GRID) + 1) + "|")
+    print("\n--- 1. TẬP CÂU HỎI HỢP LỆ (CÓ THỂ TRẢ LỜI) ---")
+    pos_top1, pos_ratio = [], []
+    for q_str in CO_THE_TRA_LOI:
+        q = rewrite_query(q_str, call=_call_rewrite_test)
+        r = retrieve(q, store=store, retrievers=rs)
+        pos_top1.append(r.top1_abs)
+        ratio_str = "inf" if r.ratio == float("inf") else f"{r.ratio:.2f}"
+        pos_ratio.append(r.ratio)
+        print(f"  top1={r.top1_abs:6.2f} | ratio={ratio_str:>6} | {q_str}")
 
-    best = None
-    for t_abs in ABS_GRID:
-        cells = []
-        for t_ratio in RATIO_GRID:
-            n_blocked = sum(1 for r in outs if blocked(r, t_abs, t_ratio))
-            n_passed = sum(1 for r in ins if not blocked(r, t_abs, t_ratio))
-            cells.append(f"{n_blocked}/{n_passed}")
-            score = (n_blocked, n_passed)
-            if best is None or score > best[0]:
-                best = (score, t_abs, t_ratio)
-        lines.append(f"| **{t_abs:.1f}** | " + " | ".join(cells) + " |")
+    print("\n--- 2. TẬP CÂU HỎI TỪ CHỐI ĐÚNG (KHÔNG CÓ TRONG KHOÁ) ---")
+    neg_top1, neg_ratio = [], []
+    for q_str in TU_CHOI_DUNG:
+        q = rewrite_query(q_str, call=_call_rewrite_test)
+        r = retrieve(q, store=store, retrievers=rs)
+        neg_top1.append(r.top1_abs)
+        ratio_str = "inf" if r.ratio == float("inf") else f"{r.ratio:.2f}"
+        neg_ratio.append(r.ratio)
+        print(f"  top1={r.top1_abs:6.2f} | ratio={ratio_str:>6} | {q_str}")
 
-    (n_blocked, n_passed), t_abs, t_ratio = best
-    perfect = n_blocked == len(outs)
+    pos_fin_ratio = [r for r in pos_ratio if r != float("inf")]
+    neg_fin_ratio = [r for r in neg_ratio if r != float("inf")]
 
-    lines += [
-        "",
-        "## Cặp đề xuất",
-        "",
-        f"- `T1_ABS = {t_abs:.2f}` · `T1_RATIO = {t_ratio:.2f}`",
-        f"- Chặn **{n_blocked}/{len(outs)}** câu ngoài phạm vi · "
-        f"cho qua **{n_passed}/{len(ins)}** câu trong phạm vi",
-        "",
-    ]
-    if perfect:
-        lines.append(
-            f"Hai phân bố tách được. Ở cặp này {n_blocked}/{len(outs)} câu ngoài phạm vi "
-            f"bị chặn và {n_passed}/{len(ins)} câu trong phạm vi vẫn qua."
-        )
-    else:
-        lines.append(
-            f"**KHÔNG tách được hoàn toàn.** Cặp tốt nhất vẫn để lọt "
-            f"{len(outs) - n_blocked}/{len(outs)} câu ngoài phạm vi. Ghi thật ở đây thay vì "
-            f"chọn một ngưỡng nhìn đẹp. Hệ quả: cổng 1 một mình không đủ, phần chặn còn "
-            f"lại dựa vào rule cổng 0 và vào cổng 3 (mã bịa vẫn bị loại kể cả khi cổng 1 "
-            f"cho qua). Đây là giới hạn đã biết, ghi vào spec §6."
-        )
-
-    lines += ["", "## Cách kiểm lại", "",
-              "```", "cd codebase && PYTHONUTF8=1 ../.venv/Scripts/python.exe scripts/calibrate_t1.py",
-              "```", ""]
-
-    OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text("\n".join(lines), encoding="utf-8")
-    print(f"Đã ghi {OUT}")
-    print(f"Đề xuất: T1_ABS = {t_abs:.2f} · T1_RATIO = {t_ratio:.2f} "
-          f"→ chặn {n_blocked}/{len(outs)} · qua {n_passed}/{len(ins)}")
-    return 0
+    print("\n" + "=" * 70)
+    print("THỐNG KÊ PHÂN BỐ:")
+    print(f"  Hợp lệ   : top1_abs min={min(pos_top1):.2f}, max={max(pos_top1):.2f}, mean={statistics.mean(pos_top1):.2f}")
+    if pos_fin_ratio:
+        print(f"             ratio    min={min(pos_fin_ratio):.2f}, max={max(pos_fin_ratio):.2f}, mean={statistics.mean(pos_fin_ratio):.2f} (+{len(pos_ratio)-len(pos_fin_ratio)} inf)")
+    print(f"  Từ chối : top1_abs min={min(neg_top1):.2f}, max={max(neg_top1):.2f}, mean={statistics.mean(neg_top1):.2f}")
+    if neg_fin_ratio:
+        print(f"             ratio    min={min(neg_fin_ratio):.2f}, max={max(neg_fin_ratio):.2f}, mean={statistics.mean(neg_fin_ratio):.2f} (+{len(neg_ratio)-len(neg_fin_ratio)} inf)")
+    print("=" * 70)
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()

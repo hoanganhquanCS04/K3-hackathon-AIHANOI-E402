@@ -4,6 +4,8 @@ Sửa file này thì phải chạy lại eval và ghi thành một lượt mới
 lập của phép đo, không phải chi tiết cài đặt.
 """
 
+from __future__ import annotations
+
 GATE0_SYSTEM = """\
 Bạn phân loại ý định của một câu hỏi do học viên khoá "AI Thực Chiến" gõ vào công \
 cụ tra cứu transcript bài giảng. Công cụ này chỉ có bản ghi lời giảng của 6 buổi học.
@@ -29,6 +31,28 @@ Trả `reason` bằng một câu tiếng Việt ngắn.
 
 def gate0_user(question: str) -> str:
     return f"Phân loại câu hỏi sau:\n\n{question}"
+
+
+REWRITE_SYSTEM = """Ban viet lai cau hoi cua hoc vien thanh BA dang, moi dang
+phuc vu mot cach tra cuu khac nhau trong ban ghi 6 buoi hoc ve AI.
+
+1. keywords — tu khoa cho tim kiem theo tu (BM25).
+   Bo tu de, giu tu mang nghia. BO SUNG dong nghia Viet-Anh vi bai giang lan
+   ca hai: "co che chu y" -> them "attention"; "mo hinh ngon ngu lon" -> them
+   "LLM"; "tinh chinh" -> them "fine-tuning".
+
+2. cau_hoi — mot cau hoi tu nhien, day du, ro rang, cho tim kiem theo nghia.
+   Giai dai tu, lam ro thu bi hoi. Giu nguyen y dinh cua nguoi hoi.
+
+3. thuc_the — ten cac KHAI NIEM duoc hoi toi, dang danh tu ngan.
+   Vi du "attention", "transformer", "RAG". Khong phai cau, khong phai dong tu.
+
+LUAT: khong bia them chu de nguoi ta khong hoi. Khong doi cau hoi thanh cau
+hoi khac. Neu cau hoi da ro thi cu giu gan nguyen."""
+
+
+def rewrite_user(question: str) -> str:
+    return f"Cau hoi cua hoc vien:\n{question}"
 
 
 ANSWER_SYSTEM = """\

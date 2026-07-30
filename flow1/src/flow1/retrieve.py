@@ -1,40 +1,39 @@
-"""Truy vấn → Retrieval. Chủ: M1 (khối B), dùng bởi cổng 1 của M2.
+"""Truy van -> Retrieval. Fuse ba nhanh bang RRF tren MA DOAN.
 
-QUYẾT ĐỊNH THIẾT KẾ QUAN TRỌNG NHẤT của file này:
+QUYET DINH THIET KE QUAN TRONG NHAT cua file nay:
 
-  `top1_abs` và `ratio` LUÔN tính trên điểm BM25 THÔ, không bao giờ trên điểm đã
-  fuse. Điểm RRF là 1/(K+rank) — một dãy gần như cố định (1/61, 1/62, 1/63...),
-  nếu `ratio` tính sau fuse sẽ luôn ≈ 1,02 bất kể câu hỏi là gì, và cổng 1 chết
-  im lặng đúng vào lúc bật hybrid.
+  `top1_abs` va `ratio` LUON tinh tren diem BM25 THO, khong bao gio tren diem
+  da fuse. Diem RRF la 1/(K+rank) — mot day gan nhu co dinh (1/61, 1/62...),
+  neu `ratio` tinh sau fuse se luon ~1,02 bat ke cau hoi la gi, va cong 1 chet
+  im lang dung vao luc bat hybrid.
 
-  Hệ quả tốt: hiệu chỉnh T1 MỘT LẦN là dùng được cho cả chế độ bật và tắt
-  embedding. RRF chỉ đổi *thứ tự nạp chunk vào context*, không đổi *quyết định có
-  đủ căn cứ hay không*.
+  He qua tot: hieu chinh T1 MOT LAN la dung duoc cho moi to hop toggle.
 
-Ba ca biên của `ratio`, mỗi ca một test:
-  - mọi điểm = 0  → (0.0, 0.0) → cổng 1 chặn
-  - mean(top2..5) = 0 mà top1 > 0 (đúng 1 chunk khớp, thường là câu chứa token
-    hiếm như "lab" hay "pretrain") → ratio = inf, QUA cổng ratio. Chỉ sàn tuyệt
-    đối chặn được ca này — đó là lý do cổng 1 có hai ngưỡng chứ không một.
-  - ít hơn 5 hit → mean tính trên số hit có thật, không chia cho 5.
+BAT BIEN §5.1 CUA SPEC: BM25 LUON CHAY, ke ca khi toggles.bm25 = False.
+Toggle chi dieu khien BM25 co gop vao FUSION hay khong. Neu toggle tat luon
+cong 1 thi bat "chi Qdrant" de do se vo tinh tat mat lop tu choi — dung thu
+ca san pham dang phong.
 
-Tiền điều kiện: `gate_stats` CHỈ nhận điểm BM25 thô đã sắp giảm dần — không
-bao giờ điểm đã fuse (RRF). Vi phạm bị `gate_stats` raise ngay (xem guard bên
-dưới) thay vì tự sort hộ, vì tự sort hộ sẽ che mất đúng lỗi truyền nhầm danh
-sách mà cảnh báo này đang nói tới.
+Tien dieu kien: `gate_stats` CHI nhan diem BM25 tho da sap giam dan.
 """
 
 from __future__ import annotations
 
 import math
+from dataclasses import dataclass
 from pathlib import Path
 
-from flow1.index import BM25_PATH, load, tokenize
-from flow1.models import Chunk, Hit, Retrieval
+from flow1.embed import rrf
+from flow1.index import BM25_PATH, load
+from flow1.models import Hit, Retrieval
+from flow1.retrievers import RewrittenQuery, safe_rank
+from flow1.store import Store
+from flow1.thresholds import RRF_K
 
 TOP_K = 5
-_RATIO_WINDOW = 5      # ratio = top1 / mean(top2..top5)
-CAND = 10              # số ứng viên lấy từ mỗi retriever trước khi fuse
+_RATIO_WINDOW = 5
+CAND = 10
+_NHANH = ("bm25", "qdrant", "neo4j")
 
 
 def gate_stats(bm25_desc: list[float]) -> tuple[float, float]:
@@ -67,76 +66,174 @@ def gate_stats(bm25_desc: list[float]) -> tuple[float, float]:
     return top1, top1 / mean_rest
 
 
+@dataclass(frozen=True)
+class Toggles:
+    """Bat/tat tung nhanh KHOI FUSION. BM25 van luon chay cho cong 1."""
+
+    bm25: bool = True
+    qdrant: bool = True
+    neo4j: bool = True
+
+    def bat(self, name: str) -> bool:
+        return bool(getattr(self, name))
+
+
+def default_retrievers(store: Store) -> dict[str, object]:
+    """Ba retriever that. Thieu cau hinh thi nhanh do thanh NullRetriever."""
+    import os
+
+    from flow1.retrievers import (
+        BM25Retriever,
+        Neo4jRetriever,
+        NullRetriever,
+        QdrantRetriever,
+    )
+
+    def _co(*names: str) -> str:
+        thieu = [n for n in names if not os.getenv(n, "").strip()]
+        return ", ".join(thieu)
+
+    thieu_qdrant = _co("QDRANT_URL", "QDRANT_API_KEY", "OPENAI_API_KEY")
+    thieu_neo4j = _co("NEO4J_URL", "NEO4J_USERNAME", "NEO4J_PASSWORD")
+
+    return {
+        "bm25": BM25Retriever(store),
+        "qdrant": (
+            NullRetriever("qdrant", f"thieu bien moi truong: {thieu_qdrant}")
+            if thieu_qdrant else QdrantRetriever()
+        ),
+        "neo4j": (
+            NullRetriever("neo4j", f"thieu bien moi truong: {thieu_neo4j}")
+            if thieu_neo4j else Neo4jRetriever()
+        ),
+    }
+
+
 def retrieve(
-    query: str,
+    query,
     *,
     session: str | None = None,
     k: int = TOP_K,
-    store: tuple[list[Chunk], object] | None = None,
+    store: Store | None = None,
     path: Path = BM25_PATH,
+    toggles: Toggles | None = None,
+    retrievers: dict | None = None,
+    trace=None,
     embeddings=None,
     query_vector=None,
 ) -> Retrieval:
-    """Retrieve top-k chunk.
+    """Fuse ba nhanh bang RRF tren ma doan, roi no len chunk ngu canh.
 
-    `embeddings` là ma trận vector của TOÀN BỘ chunk, hoặc None để chạy BM25 thuần.
-    Mặc định tự thử nạp store/emb.npy; thiếu file thì lùi êm.
-
-    top1_abs và ratio LUÔN tính trên BM25 thô, kể cả khi fuse — xem docstring module.
+    `query` nhan ca str lan RewrittenQuery — str duoc passthrough vao ca ba truong.
     """
-    chunks, bm25 = store if store is not None else load(path)
+    from flow1.trace import NullTrace
 
-    tokens = tokenize(query)
-    if not tokens:
+    q = query if isinstance(query, RewrittenQuery) else RewrittenQuery.passthrough(str(query))
+    trace = trace if trace is not None else NullTrace(q.cau_hoi)
+    store = store if store is not None else load(path)
+    toggles = toggles if toggles is not None else Toggles()
+    retrievers = retrievers if retrievers is not None else default_retrievers(store)
+
+    ma_hop_le = {atomic.chunk_id for atomic in store.atomics}
+
+    # ---- Chay ca ba nhanh. BM25 chay du toggle tat — xem docstring. --------
+    ket: dict[str, object] = {}
+    for name in _NHANH:
+        retriever = retrievers.get(name)
+        if retriever is None:
+            continue
+        with trace.stage(name) as tdata:
+            ranked = safe_rank(retriever, q, session=session, k=CAND)
+            loc = [(ma, d) for ma, d in ranked.ranking if ma in ma_hop_le]
+            ket[name] = loc
+            tdata["gop_vao_fusion"] = toggles.bat(name)
+            tdata["top10"] = [(ma, round(d, 4)) for ma, d in loc[:10]]
+            tdata["ms"] = round(ranked.ms, 2)
+            if ranked.error:
+                tdata["loi"] = ranked.error
+                tdata["hau_qua"] = "bo qua nhanh nay, cac nhanh con lai van chay"
+            elif ranked.skipped_reason:
+                tdata["bo_qua"] = ranked.skipped_reason
+            tdata["bo_ma_ngoai_store"] = len(ranked.ranking) - len(loc)
+            if name == "bm25" and not toggles.bm25:
+                tdata["luu_y"] = (
+                    "BM25 da tat khoi fusion nhung VAN CHAY: cong 1 quyet dinh "
+                    "tren diem BM25 tho, tat no di la tat lop tu choi."
+                )
+
+    # ---- Cong 1 lay so lieu tu BM25 THO, doc lap toggle va fusion ---------
+    bm25_pairs = ket.get("bm25", [])
+    with trace.stage("gate_stats") as tdata:
+        top1_abs, ratio = gate_stats([d for _, d in bm25_pairs])
+        tdata["nguon"] = "BM25 tho, doc lap voi fusion va voi toggle"
+        tdata["top1_abs"] = round(top1_abs, 3)
+        tdata["ratio"] = "inf" if ratio == math.inf else round(ratio, 3)
+
+    if not bm25_pairs and not any(ket.get(n) for n in _NHANH):
         return Retrieval(hits=[], top1_abs=0.0, ratio=0.0)
 
-    all_scores = bm25.get_scores(tokens)
-    keep = [
-        i for i, chunk in enumerate(chunks)
-        if session is None or chunk.session == session
-    ]
-    if not keep:
-        return Retrieval(hits=[], top1_abs=0.0, ratio=0.0)
+    # ---- Fuse chi cac nhanh dang bat --------------------------------------
+    with trace.stage("fuse") as tdata:
+        thu_hang = {
+            name: {ma: r for r, (ma, _) in enumerate(ket.get(name, []))}
+            for name in _NHANH
+        }
+        bang_xep = [
+            [ma for ma, _ in ket.get(name, [])[:CAND]]
+            for name in _NHANH
+            if toggles.bat(name) and ket.get(name)
+        ]
+        if bang_xep:
+            fused = rrf(bang_xep, RRF_K)
+        else:
+            fused = {ma: 1.0 / (RRF_K + r + 1) for r, (ma, _) in enumerate(bm25_pairs)}
+        thu_tu = sorted(fused, key=lambda ma: fused[ma], reverse=True)
 
-    bm25_scores = {i: float(all_scores[i]) for i in keep}
-    bm25_order = sorted(keep, key=lambda i: bm25_scores[i], reverse=True)
+        tdata["nhanh_gop"] = [n for n in _NHANH if toggles.bat(n) and ket.get(n)]
+        tdata["bang"] = [
+            {
+                "ma": ma,
+                "rank_bm25": thu_hang["bm25"].get(ma),
+                "rank_qdrant": thu_hang["qdrant"].get(ma),
+                "rank_neo4j": thu_hang["neo4j"].get(ma),
+                "rrf": round(fused[ma], 5),
+            }
+            for ma in thu_tu[:10]
+        ]
+        tdata["chi_mot_nhanh_tim_ra"] = {
+            n: [
+                ma for ma in thu_tu[:10]
+                if thu_hang[n].get(ma) is not None
+                and all(thu_hang[o].get(ma) is None for o in _NHANH if o != n)
+            ]
+            for n in _NHANH
+        }
 
-    # Hai chỉ số của cổng 1 — trên BM25 THÔ, trước và độc lập với mọi fusion.
-    top1_abs, ratio = gate_stats([bm25_scores[i] for i in bm25_order])
+    diem_bm25 = dict(bm25_pairs)
 
-    if embeddings is None and store is None:
-        try:
-            from flow1.embed import load_embeddings
-            embeddings = load_embeddings()
-        except ImportError:
-            embeddings = None
+    # ---- No len chunk ngu canh --------------------------------------------
+    with trace.stage("context") as tdata:
+        hits: list[Hit] = []
+        da_lay: set[int] = set()
+        for ma in thu_tu:
+            for idx in store.code_to_contexts.get(ma, ()):
+                if idx in da_lay:
+                    continue
+                da_lay.add(idx)
+                hits.append(
+                    Hit(
+                        chunk=store.contexts[idx],
+                        bm25=diem_bm25.get(ma, 0.0),
+                        emb=dict(ket.get("qdrant", [])).get(ma),
+                        rank=len(hits),
+                        score=fused[ma],
+                    )
+                )
+                if len(hits) >= k:
+                    break
+            if len(hits) >= k:
+                break
+        tdata["chunk_ids"] = [h.chunk.chunk_id for h in hits]
+        tdata["n_chars"] = sum(h.chunk.n_chars for h in hits)
 
-    emb_scores: dict[int, float] = {}
-    if embeddings is not None:
-        if query_vector is None:
-            from flow1.embed import embed_query
-            query_vector = embed_query(query)
-        emb_scores = {i: float(embeddings[i] @ query_vector) for i in keep}
-        emb_order = sorted(keep, key=lambda i: emb_scores[i], reverse=True)
-
-        from flow1.embed import rrf
-        from flow1.thresholds import RRF_K
-
-        fused = rrf([bm25_order[:CAND], emb_order[:CAND]], RRF_K)
-        final_order = sorted(fused, key=lambda i: fused[i], reverse=True)
-        final_score = fused
-    else:
-        final_order = bm25_order
-        final_score = bm25_scores
-
-    hits = [
-        Hit(
-            chunk=chunks[i],
-            bm25=bm25_scores[i],
-            emb=emb_scores.get(i) if embeddings is not None else None,
-            rank=rank,
-            score=final_score[i],
-        )
-        for rank, i in enumerate(final_order[:k])
-    ]
     return Retrieval(hits=hits, top1_abs=top1_abs, ratio=ratio)

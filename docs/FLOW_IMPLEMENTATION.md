@@ -3005,3 +3005,63 @@ NEO4J_PASSWORD=your-password
 | Version | Date | Changes |
 |---------|------|---------|
 | 1.0 | 2026-07-30 | Initial document |
+| 2.0 | 2026-07-30 | Added 3-retriever RRF Hybrid (BM25 + Qdrant + Neo4j), Agent Tool-Calling, and Graph Schema v4 |
+
+---
+
+## 14. Hybrid RRF Retrieval & Agent Architecture (Update v2.0)
+
+### 14.1 3-Retriever Reciprocal Rank Fusion (RRF) Architecture
+
+Chi tiết kiến trúc 3 nhánh gộp bằng Reciprocal Rank Fusion (RRF) với hằng số $k = 60$:
+
+$$\text{RRF}(d) = \sum_{m \in \{\text{bm25}, \text{qdrant}, \text{neo4j}\}} \frac{w_m}{60 + \text{rank}_m(d)}$$
+
+```
+                            ┌────────────────────────┐
+                            │      User Query        │
+                            └────────────────────────┘
+                                         │
+                                         ▼
+                            ┌────────────────────────┐
+                            │    LLM Query Rewriter  │
+                            │    (Single API Call)   │
+                            └────────────────────────┘
+                                         │
+                 ┌───────────────────────┼───────────────────────┐
+                 ▼                       ▼                       ▼
+      ┌────────────────────┐  ┌────────────────────┐  ┌────────────────────┐
+      │   BM25Retriever    │  │  QdrantRetriever   │  │   Neo4jRetriever   │
+      │  (Keyword Query)   │  │  (Vector Query)    │  │  (Concept Fulltext)│
+      └────────────────────┘  └────────────────────┘  └────────────────────┘
+                 │                       │                       │
+                 │ [Txx-NNN]             │ [Txx-NNN]             │ [Txx-NNN]
+                 └───────────────────────┼───────────────────────┘
+                                         │
+                                         ▼
+                            ┌────────────────────────┐
+                            │ Reciprocal Rank Fusion │
+                            │     (RRF k = 60)       │
+                            └────────────────────────┘
+                                         │
+                                         ▼
+                            ┌────────────────────────┐
+                            │ Atomic Context Map     │
+                            │  (Txx-NNN -> Context)  │
+                            └────────────────────────┘
+```
+
+1. **Đơn vị nguyên tử**: Tất cả 3 retrievers trả về cùng mã đoạn nguyên tử `Txx-NNN` (ví dụ `T04-072`).
+2. **Nguyên tắc bảo toàn Cổng 1 (§5.1 Invariant)**: Cổng 1 (`top1_abs` và `ratio`) LUÔN LUÔN được tính trên điểm thô của BM25, độc lập với việc bật/tắt các nhánh trong RRF fusion.
+3. **Neo4j Cypher & Ranh giới Thẩm quyền**: `Neo4jRetriever` sử dụng fulltext index `concept_name_ft` trên `(c:Concept)` để tìm khái niệm từ `thuc_the`, lan rộng $1..2$ hops đến node `Turn` và chỉ trả về `Turn.id` (`ma`) kèm score. Nội dung `Concept.description` KHÔNG được đưa vào prompt để tránh trích xuất thông tin LLM làm dữ liệu gốc.
+
+### 14.2 Agent Tool-Calling Architecture
+
+Agent tự động quyết định công cụ tra cứu hoặc tóm tắt:
+
+- **Tools**: `tra_cuu(query, session_id)` và `tom_tat(session_id, part_idx)`.
+- **0-Token Rule Pre-filtering**: Trước khi gọi LLM cho Tool Calling, hệ thống lọc bằng Rule-based Regex:
+  - Lời chào (`chao_hoi`): Trả lời ngay 0 token.
+  - Ngoài phạm vi (`ngoai_pham_vi`): Trả lời mẫu từ chối cứng 0 token.
+  - Hỏi thông tin hành chính (`logistics`): Trả lời mẫu 0 token.
+

@@ -1,37 +1,54 @@
 """Sổ tay buổi học — giao diện demo.
 
-Chạy:  streamlit run codebase/app.py
-
-Hai màn hình:
-  1. Danh sách 6 buổi học
-  2. Buổi đang mở:  slide bên trái  |  chat bên phải  (mục lục nằm trong gợi ý chat)
-
-Hai điểm vào — bấm gợi ý, hoặc gõ câu hỏi — đi vào CÙNG một handler `handle()`.
-Đó là chủ đích: nút để demo không bị gõ sai, ô chat để chứng minh router hoạt động.
+Chạy:  streamlit run flow1/app/app.py
 """
 
 from __future__ import annotations
 
 import streamlit as st
-from live import (
-    answer_query,
-    backend_label,
-    build_recap,
-    get_session,
-    last_stats,
-    load_outline,
-    refusal,
-    resolve_part,
-    route,
-    set_force,
-    summarize_part,
-)
-from theme import BASE_CSS, campus_data_uri, hero_css
+from flow1.retrieve import Toggles
+try:
+    from live import (
+        answer_query,
+        backend_label,
+        build_recap,
+        get_session,
+        last_stats,
+        load_outline,
+        refusal,
+        resolve_part,
+        route,
+        set_force,
+        summarize_part,
+    )
+    from theme import BASE_CSS, campus_data_uri, hero_css
+except ImportError:
+    from flow1.app.live import (
+        answer_query,
+        backend_label,
+        build_recap,
+        get_session,
+        last_stats,
+        load_outline,
+        refusal,
+        resolve_part,
+        route,
+        set_force,
+        summarize_part,
+    )
+    from flow1.app.theme import BASE_CSS, campus_data_uri, hero_css
 
-st.set_page_config(page_title="Sổ tay buổi học · VLearn", page_icon="📓", layout="wide")
-st.markdown(BASE_CSS, unsafe_allow_html=True)
+if st.runtime.exists():
+    st.set_page_config(page_title="Sổ tay buổi học · VLearn", page_icon="📓", layout="wide")
+    st.markdown(BASE_CSS, unsafe_allow_html=True)
 
 BLANK = '<span class="blank">ý tóm tắt do AI sinh sẽ nằm ở đây</span>'
+
+
+try:
+    from helpers import branch_table
+except ImportError:
+    from flow1.app.helpers import branch_table
 
 
 def claim_html(kp: dict) -> str:
@@ -45,12 +62,17 @@ def claim_html(kp: dict) -> str:
 # State  — chính là {session, outline, done} trong sơ đồ luồng
 # ─────────────────────────────────────────────────────────────────────────────
 
-SESSIONS = load_outline()
-st.session_state.setdefault("sid", None)      # buổi đang mở
-st.session_state.setdefault("msgs", [])       # lịch sử hội thoại
-st.session_state.setdefault("done", {})       # {part_idx: kết quả tóm}
-st.session_state.setdefault("slide_part", 1)  # phần slide đang hiển thị
-st.session_state.setdefault("pending", None)  # query chờ xử lý (từ nút hoặc ô chat)
+try:
+    SESSIONS = load_outline()
+except Exception:
+    SESSIONS = []
+
+if st.runtime.exists():
+    st.session_state.setdefault("sid", None)      # buổi đang mở
+    st.session_state.setdefault("msgs", [])       # lịch sử hội thoại
+    st.session_state.setdefault("done", {})       # {part_idx: kết quả tóm}
+    st.session_state.setdefault("slide_part", 1)  # phần slide đang hiển thị
+    st.session_state.setdefault("pending", None)  # query chờ xử lý (từ nút hoặc ô chat)
 
 
 def open_session(sid: str) -> None:
@@ -66,7 +88,7 @@ def say(role: str, kind: str, payload) -> None:
 # ─────────────────────────────────────────────────────────────────────────────
 
 
-def handle(query: str, session: dict) -> None:
+def handle(query: str, session: dict, toggles: Toggles | None = None) -> None:
     say("user", "text", query)
     r = route(query, st.session_state)
     intent = r["intent"]
@@ -140,7 +162,7 @@ def screen_list() -> None:
             '<div class="mock-banner"><b>Luồng TÓM TẮT đã chạy thật.</b> Gõ “tóm phần 1” '
             "là gọi AI ngay lúc đó trên chính bản ghi của buổi. Mục lục, mã đoạn, câu "
             "nguyên văn và mọi con số đọc trực tiếp từ transcript. "
-            "Riêng <b>luồng TRA CỨU vẫn là chỗ trống</b>, chưa nối.</div>",
+            "<b>Luồng TRA CỨU</b> sử dụng RRF 3 nhánh (BM25, Qdrant, Neo4j).</div>",
             unsafe_allow_html=True,
         )
         if uri is None:
@@ -158,7 +180,6 @@ def screen_list() -> None:
                     unsafe_allow_html=True,
                 )
             with body:
-                # HAX G2 — nói thẳng buổi nào mình không chắc là buổi nào
                 conf = s["locate_confidence"].lower()
                 warn = (
                     ""
@@ -185,12 +206,6 @@ def screen_list() -> None:
 
 
 def render_slide(session: dict) -> None:
-    """Chỗ giữ chỗ cho slide bài giảng.
-
-    Khi có slide thật: bỏ khối HTML này, thay bằng
-        st.image(f"slides/{session['id']}-{part['idx']:02d}.png")
-    Bố cục xung quanh không cần đổi.
-    """
     part = session["parts"][st.session_state.slide_part - 1]
     st.markdown(
         f"""
@@ -216,8 +231,6 @@ def render_slide(session: dict) -> None:
 
 
 def render_stats(stats) -> None:
-    """Cho thấy AI có thật sự chạy trong lượt đó không — số lời gọi và thời gian."""
-
     if stats is None:
         return
     bits = []
@@ -310,18 +323,12 @@ def render_msg(m: dict) -> None:
 
 
 def render_suggestions(session: dict) -> None:
-    """Một gợi ý duy nhất: mở mục lục.
-
-    Cố ý KHÔNG có nút "tóm phần 1/2/3…". Mục lục do bước này in ra đã liệt kê đủ các
-    phần; từ đó người dùng gõ tiếp. Giữ đúng một cửa vào bằng ngôn ngữ tự nhiên nghĩa
-    là router phải thật sự hoạt động — không có nút nào đi đường tắt qua nó.
-    """
     if st.button("🔎 Buổi này có mấy phần?", key="sgtoc", width="stretch"):
         st.session_state.pending = "buổi này có mấy phần?"
         st.rerun()
 
 
-def screen_session(session: dict) -> None:
+def screen_session(session: dict, toggles: Toggles) -> None:
     top = st.columns([0.1, 0.9], vertical_alignment="center")
     with top[0]:
         if st.button("← Buổi khác", width="stretch"):
@@ -361,33 +368,41 @@ def screen_session(session: dict) -> None:
 
 # ─────────────────────────────────────────────────────────────────────────────
 
-with st.sidebar:
-    st.markdown("#### Chế độ chạy")
-    st.caption(backend_label())
-    force = st.toggle(
-        "Bỏ qua cache",
-        value=False,
-        help="Bật thì mỗi lần tóm đều gọi LLM mới, kể cả phần đã tóm rồi. "
-        "Dùng để tự kiểm chứng là AI chạy thật chứ không đọc file có sẵn.",
-    )
-    set_force(force)
-    if force:
-        st.warning("Mỗi lượt tóm đều tốn API.")
-    st.caption(
-        "Luồng tóm tắt: **thật**. Luồng tra cứu: **chưa nối**."
-    )
+def run_app():
+    with st.sidebar:
+        st.markdown("#### Nhanh truy van (RRF)")
+        use_bm25 = st.toggle("BM25 (offline)", value=True)
+        use_qdrant = st.toggle("Qdrant (vector)", value=True)
+        use_neo4j = st.toggle("Neo4j (graph)", value=True)
+        toggles = Toggles(bm25=use_bm25, qdrant=use_qdrant, neo4j=use_neo4j)
 
-if st.session_state.sid is None:
-    screen_list()
-else:
-    session = get_session(SESSIONS, st.session_state.sid)
-    if session is None:
-        st.session_state.sid = None
-        st.rerun()
+        st.markdown("---")
+        st.markdown("#### Che do chay")
+        st.caption(backend_label())
+        force = st.toggle(
+            "Bỏ qua cache",
+            value=False,
+            help="Bật thì mỗi lần tóm đều gọi LLM mới, kể cả phần đã tóm rồi. "
+            "Dùng để tự kiểm chứng là AI chạy thật chứ không đọc file có sẵn.",
+        )
+        set_force(force)
+        if force:
+            st.warning("Mỗi lượt tóm đều tốn API.")
 
-    # xử lý query đang chờ TRƯỚC khi vẽ, để tin nhắn mới hiện ngay trong lượt này
-    if st.session_state.pending:
-        q, st.session_state.pending = st.session_state.pending, None
-        handle(q, session)
+    if st.session_state.sid is None:
+        screen_list()
+    else:
+        session = get_session(SESSIONS, st.session_state.sid)
+        if session is None:
+            st.session_state.sid = None
+            st.rerun()
 
-    screen_session(session)
+        if st.session_state.pending:
+            q, st.session_state.pending = st.session_state.pending, None
+            handle(q, session, toggles=toggles)
+
+        screen_session(session, toggles=toggles)
+
+
+if st.runtime.exists():
+    run_app()

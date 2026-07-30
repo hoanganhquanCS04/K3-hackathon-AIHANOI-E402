@@ -368,6 +368,19 @@ def create_schema(driver, database: str):
             except Exception as e:
                 # Index might already exist
                 pass
+
+        # Full-text index cho nhanh KG cua tool tra cuu. Khop ten concept voi
+        # `thuc_the` do buoc viet lai query trich ra. Dung full-text thay vi embed
+        # ten concept: tat dinh, khong ton API, va khong them mot chieu vector nua
+        # phai dong bo voi Qdrant.
+        try:
+            session.run(
+                "CREATE FULLTEXT INDEX concept_name_ft IF NOT EXISTS "
+                "FOR (c:Concept) ON EACH [c.name, c.name_en]"
+            )
+            print("  Created fulltext index: concept_name_ft")
+        except Exception:
+            pass
     
     print("Schema created!")
     print()

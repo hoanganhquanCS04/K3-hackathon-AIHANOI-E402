@@ -19,7 +19,8 @@ from pathlib import Path
 
 from rank_bm25 import BM25Okapi
 
-from flow1.models import Chunk
+from flow1.models import Chunk, Seg
+from flow1.store import Store
 
 STORE_DIR = Path(__file__).resolve().parents[2] / "store"
 BM25_PATH = STORE_DIR / "bm25.pkl"
@@ -41,30 +42,62 @@ def build(chunks: list[Chunk]) -> BM25Okapi:
     return BM25Okapi([tokenize(c.index_text) for c in chunks])
 
 
-def save(chunks: list[Chunk], path: Path = BM25_PATH) -> None:
-    """Ghi chunk + index vào một file pickle. Nạp lại cần rank_bm25 đã cài."""
+def save(store: Store, path: Path = BM25_PATH) -> None:
+    """Ghi ca Store vao mot file pickle. Nap lai can rank_bm25 da cai."""
     path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("wb") as handle:
-        pickle.dump({"chunks": chunks, "bm25": build(chunks)}, handle)
+        pickle.dump(
+            {
+                "atomics": store.atomics,
+                "contexts": store.contexts,
+                "code_to_contexts": store.code_to_contexts,
+                "bm25": store.bm25,
+            },
+            handle,
+        )
 
 
-def load(path: Path = BM25_PATH) -> tuple[list[Chunk], BM25Okapi]:
-    """Nạp lại (chunks, bm25) đã lưu. Ném `IndexMissing` kèm lệnh sửa nếu thiếu file."""
+def load(path: Path = BM25_PATH) -> Store:
+    """Nap lai Store da luu. Nem `IndexMissing` kem lenh sua neu thieu/cu."""
     if not path.exists():
         raise IndexMissing(
-            f"Chưa có index tại {path}. Dựng trước bằng:  python -m flow1 index"
+            f"Chua co index tai {path}. Dung truoc bang:  python -m flow1 index"
         )
     with path.open("rb") as handle:
         blob = pickle.load(handle)
-    return blob["chunks"], blob["bm25"]
+    if "atomics" not in blob:
+        raise IndexMissing(
+            f"Index tai {path} theo dinh dang cu (chi co chunk gop). Dung lai "
+            f"bang:  python -m flow1 index"
+        )
+    return Store(
+        atomics=blob["atomics"],
+        contexts=blob["contexts"],
+        code_to_contexts=blob["code_to_contexts"],
+        bm25=blob["bm25"],
+    )
+
+
+def build_store(segs: list[Seg]) -> Store:
+    """Seg -> Store. Atomic de xep hang, chunk gop de lam ngu canh."""
+    from flow1.atomic import atomic_chunks, build_code_map
+    from flow1.chunk import chunk_all
+
+    contexts = chunk_all(segs)
+    atomics = atomic_chunks(segs)
+    return Store(
+        atomics=atomics,
+        contexts=contexts,
+        code_to_contexts=build_code_map(contexts),
+        bm25=build(atomics),
+    )
 
 
 def build_from_data(data_dir: Path | None = None, path: Path = BM25_PATH) -> int:
-    """Đọc data pack → parse → chunk → index → ghi đĩa. Trả số chunk đã index."""
-    from flow1.chunk import chunk_all
+    """Doc data pack -> parse -> build store -> ghi dia. Tra so doan nguyen tu."""
     from flow1.parse import TRANSCRIPT_DIR, content_segs, parse_all
 
-    segs = parse_all(data_dir or TRANSCRIPT_DIR)
-    chunks = chunk_all(content_segs(segs))
-    save(chunks, path)
-    return len(chunks)
+    segs = content_segs(parse_all(data_dir or TRANSCRIPT_DIR))
+    store = build_store(segs)
+    save(store, path)
+    return len(store.atomics)

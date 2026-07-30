@@ -190,7 +190,7 @@ def _clarify_message(r: Retrieval) -> str:
 
 def gate1(r: Retrieval) -> Decision:
     """Cổng 1. THỨ TỰ KIỂM CÓ Ý NGHĨA: từ chối trước, hỏi lại sau."""
-    if r.top1_abs < T1_ABS or r.ratio < T1_RATIO:
+    if r.top1_abs < T1_ABS or r.ratio <= T1_RATIO:
         return Decision(action="refuse", message=refusal_message(r), retrieval=r)
 
     if len(r.hits) >= 2:

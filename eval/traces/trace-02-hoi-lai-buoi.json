@@ -1,0 +1,62 @@
+{
+  "run_id": "2026-07-30T16-15-01.000000Z-b2c3d4e5",
+  "goc": "bài toán kinh doanh",
+  "stages": [
+    {
+      "name": "rule_gate",
+      "data": {
+        "nhan": null,
+        "chan": false
+      }
+    },
+    {
+      "name": "agent",
+      "data": {
+        "tool_da_chon": "tra_cuu",
+        "tham_so": {
+          "query": "bài toán kinh doanh"
+        }
+      }
+    },
+    {
+      "name": "rewrite",
+      "data": {
+        "goc": "bài toán kinh doanh",
+        "keywords": ["bài toán kinh doanh", "business problem"],
+        "cau_hoi": "Xác định bài toán kinh doanh cho AI trong bài giảng?",
+        "thuc_the": ["bài toán kinh doanh"]
+      }
+    },
+    {
+      "name": "bm25",
+      "data": {
+        "gop_vao_fusion": true,
+        "top10": [
+          ["T01-015", 14.20],
+          ["T02-008", 13.90]
+        ],
+        "ms": 1.1,
+        "bo_ma_ngoai_store": 0
+      }
+    },
+    {
+      "name": "gate_stats",
+      "data": {
+        "nguon": "BM25 tho, doc lap voi fusion va voi toggle",
+        "top1_abs": 14.20,
+        "ratio": 1.25
+      }
+    },
+    {
+      "name": "gate1",
+      "data": {
+        "pass": false,
+        "reason": "ambiguous_cross_session",
+        "candidate_sessions": [
+          {"session_id": "T01", "score": 14.20},
+          {"session_id": "T02", "score": 13.90}
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "run_id": "2026-07-30T16-15-03.000000Z-d4e5f6a7",
+  "goc": "tóm tắt buổi 3 cho mình",
+  "stages": [
+    {
+      "name": "rule_gate",
+      "data": {
+        "nhan": null,
+        "chan": false
+      }
+    },
+    {
+      "name": "agent",
+      "data": {
+        "tool_da_chon": "tom_tat",
+        "tham_so": {
+          "session_id": "T03"
+        }
+      }
+    },
+    {
+      "name": "tom_tat",
+      "data": {
+        "session_id": "T03",
+        "xin_ban_dau": "T03",
+        "n_y_chinh": 5
+      }
+    }
+  ]
+}

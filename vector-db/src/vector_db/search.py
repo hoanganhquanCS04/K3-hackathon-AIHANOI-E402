@@ -104,13 +104,18 @@ def find_sections(
 
 def find_chunks(
     query: str,
-    session_id: str,
+    session_id: str | None = None,
     section_id: str | None = None,
     top_k: int = 5,
     *,
     exclude_activities: bool = True,
 ) -> tuple[SearchHit, ...]:
-    if not session_id.strip():
+    """Tim doan nguyen tu.
+
+    session_id=None nghia la tim xuyen ca 6 buoi — cong 1 cua flow1 can the de
+    phat hien chu de nam o nhieu buoi va hoi lai thay vi doan.
+    """
+    if session_id is not None and not session_id.strip():
         raise ValueError("session_id must not be empty")
     return _semantic_search(
         query,
@@ -192,11 +197,9 @@ def main() -> None:
             top_k=args.top_k,
         )
     else:
-        if not args.session_id:
-            parser.error("--session-id is required for chunk search")
         hits = find_chunks(
             args.query,
-            args.session_id,
+            session_id=args.session_id,
             section_id=args.section_id,
             top_k=args.top_k,
         )

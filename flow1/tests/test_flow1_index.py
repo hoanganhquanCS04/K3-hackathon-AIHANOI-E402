@@ -82,16 +82,20 @@ def test_the_session_title_is_searchable_too():
 # --- Lưu / nạp -------------------------------------------------------------
 
 def test_save_then_load_round_trips_the_chunks(tmp_path):
+    from flow1.atomic import build_code_map
+    from flow1.store import Store
+
     chunks = [
         chunk("C1", "Cơ chế attention"),
         chunk("C2", "bài toán kinh doanh"),
         chunk("C3", "buổi tổng kết cuối khoá"),
     ]
     path = tmp_path / "bm25.pkl"
-    save(chunks, path)
-    loaded, bm25 = load(path)
-    assert [c.chunk_id for c in loaded] == ["C1", "C2", "C3"]
-    assert bm25.get_scores(tokenize("attention"))[0] > 0
+    store = Store(atomics=chunks, contexts=chunks, code_to_contexts=build_code_map(chunks), bm25=build(chunks))
+    save(store, path)
+    loaded_store = load(path)
+    assert [c.chunk_id for c in loaded_store.atomics] == ["C1", "C2", "C3"]
+    assert loaded_store.bm25.get_scores(tokenize("attention"))[0] > 0
 
 
 def test_load_raises_a_typed_error_with_the_fix_command_when_the_index_is_missing(tmp_path):
@@ -101,8 +105,13 @@ def test_load_raises_a_typed_error_with_the_fix_command_when_the_index_is_missin
 
 
 def test_save_creates_the_store_directory_if_it_does_not_exist(tmp_path):
+    from flow1.atomic import build_code_map
+    from flow1.store import Store
+
     path = tmp_path / "chua" / "co" / "bm25.pkl"
-    save([chunk("C1", "abc")], path)
+    c = [chunk("C1", "abc")]
+    store = Store(atomics=c, contexts=c, code_to_contexts=build_code_map(c), bm25=build(c))
+    save(store, path)
     assert path.exists()
 
 
