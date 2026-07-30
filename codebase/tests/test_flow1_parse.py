@@ -2,7 +2,15 @@
 
 import pytest
 
-from flow1.parse import SESSIONS, TRANSCRIPT_DIR, content_segs, parse_all, parse_session, parse_text
+from flow1.parse import (
+    SESSIONS,
+    STUDENT_MARKER,
+    TRANSCRIPT_DIR,
+    content_segs,
+    parse_all,
+    parse_session,
+    parse_text,
+)
 
 # Mẫu dựng tay: có front matter (chứa "[không nghe rõ]" như CHÚ GIẢI, không phải chỗ
 # khuyết thật), 2 section, đoạn hoạt động lớp, và CẢ HAI dạng marker học viên —
@@ -188,7 +196,16 @@ def test_real_corpus_totals():
     assert sum(s.is_activity for s in segs) == 55
     assert sum(s.has_gap for s in segs) == 103
     assert sum(s.speaker == "student" for s in segs) == 69
-    assert sum(REAL_SECTIONS.values()) == 96
+
+    # Tổng số section đếm được TRỰC TIẾP từ parse_all() — không phải cộng lại
+    # dict hằng số REAL_SECTIONS khai ở trên (assertion đó không đụng tới
+    # segs/parse_all() nên không thể fail dù parser sai thế nào).
+    max_section_per_session: dict[str, int] = {}
+    for s in segs:
+        max_section_per_session[s.session] = max(
+            max_section_per_session.get(s.session, 0), s.section_idx
+        )
+    assert sum(max_section_per_session.values()) == 96
 
 
 def test_real_student_segments_per_session():
@@ -205,9 +222,11 @@ def test_no_real_segment_has_the_student_marker_ONLY_in_the_middle():
     _need_data()
     import re
 
-    starts = re.compile(r"^\*{0,2}\[Học viên\]")
+    # Cùng logic với _STUDENT_START_RE trong flow1/parse.py, dựng lại từ
+    # STUDENT_MARKER thay vì khai một literal riêng — một nguồn sự thật.
+    starts = re.compile(r"^\*{0,2}" + re.escape(STUDENT_MARKER))
     mid_only = [s.code for s in parse_all()
-                if "[Học viên]" in s.text and not starts.match(s.text)]
+                if STUDENT_MARKER in s.text and not starts.match(s.text)]
     assert mid_only == [], f"xuất hiện đoạn trộn giọng: {mid_only}"
 
 

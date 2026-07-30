@@ -1,4 +1,4 @@
-"""6 file transcript .md → list[Seg]. Chủ: M1 (khối B).
+r"""6 file transcript .md → list[Seg]. Chủ: M1 (khối B).
 
 BẢN MỞ RỘNG của sotay/ingest.py, thêm section + giọng nói + độ tin cậy định vị.
 
@@ -32,8 +32,9 @@ GAP_MARKER = "[không nghe rõ]"
 ACTIVITY_PREFIX = "[Hoạt động lớp"
 STUDENT_MARKER = "[Học viên]"     # PHÂN BIỆT HOA/THƯỜNG — xem docstring
 PRELUDE_TITLE = "(mở đầu buổi)"   # section_idx 0 — vùng trước heading `##` đầu tiên
-# Khớp cả "[Học viên]:" trần lẫn "**[Học viên]:**" in đậm ở ĐẦU đoạn.
-_STUDENT_START_RE = re.compile(r"^\*{0,2}\[Học viên\]")
+# Khớp cả "[Học viên]:" trần lẫn "**[Học viên]:**" in đậm ở ĐẦU đoạn. Dựng từ
+# STUDENT_MARKER (re.escape) để chỉ có MỘT nguồn sự thật cho chuỗi marker.
+_STUDENT_START_RE = re.compile(r"^\*{0,2}" + re.escape(STUDENT_MARKER))
 
 _TITLE_RE = re.compile(r"^#\s*Transcript bài giảng \(bản sạch\)\s*—\s*(.+?)\s*$", re.MULTILINE)
 _CONF_RE = re.compile(r"độ tin cậy:\s*([^\s(]+)")
