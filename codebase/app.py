@@ -13,15 +13,17 @@ Hai điểm vào — bấm gợi ý, hoặc gõ câu hỏi — đi vào CÙNG m�
 from __future__ import annotations
 
 import streamlit as st
-
-from stubs import (
+from live import (
     answer_query,
+    backend_label,
     build_recap,
     get_session,
+    last_stats,
     load_outline,
     refusal,
     resolve_part,
     route,
+    set_force,
     summarize_part,
 )
 from theme import BASE_CSS, campus_data_uri, hero_css
@@ -30,6 +32,13 @@ st.set_page_config(page_title="Sổ tay buổi học · VLearn", page_icon="📓
 st.markdown(BASE_CSS, unsafe_allow_html=True)
 
 BLANK = '<span class="blank">ý tóm tắt do AI sinh sẽ nằm ở đây</span>'
+
+
+def claim_html(kp: dict) -> str:
+    """Luồng tóm tắt đã thật; luồng tra cứu thì chưa. Chỗ nào chưa có thì vẫn để
+    trống nhìn rõ là trống, đúng tinh thần ban đầu của bản giả lập."""
+
+    return kp["claim"] if kp.get("claim") else BLANK
 
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -83,7 +92,10 @@ def handle(query: str, session: dict) -> None:
                 "bắt đầu bằng phần 1 nhé.")
             say("ai", "outline", session)
             return
-        say("ai", "recap", build_recap(session, st.session_state.done))
+        with st.spinner("Đang gộp sổ tay..."):
+            recap = build_recap(session, st.session_state.done)
+        recap["_stats"] = last_stats()
+        say("ai", "recap", recap)
         return
 
     if intent == "tom_tat_phan":
@@ -92,7 +104,10 @@ def handle(query: str, session: dict) -> None:
             say("ai", "text", f"Mình chưa xác định được phần nào ({why}).")
             say("ai", "outline", session)
             return
-        result = summarize_part(session, idx)
+        n_sec = len(session["parts"][idx - 1]["section_titles"])
+        with st.spinner(f"Đang đọc {n_sec} mục của phần {idx} và gọi AI..."):
+            result = summarize_part(session, idx)
+        result["_stats"] = last_stats()
         st.session_state.done[idx] = result
         st.session_state.slide_part = idx
         say("ai", "part", result)
@@ -122,9 +137,10 @@ def screen_list() -> None:
 
     with st.container(border=True):
         st.markdown(
-            '<div class="mock-banner"><b>Bản giả lập giao diện.</b> Mục lục, mã đoạn, '
-            "câu nguyên văn và mọi con số là <b>thật</b> — đọc trực tiếp từ transcript. "
-            "Riêng <b>câu tóm tắt còn là chỗ trống</b>, chưa gọi AI.</div>",
+            '<div class="mock-banner"><b>Luồng TÓM TẮT đã chạy thật.</b> Gõ “tóm phần 1” '
+            "là gọi AI ngay lúc đó trên chính bản ghi của buổi. Mục lục, mã đoạn, câu "
+            "nguyên văn và mọi con số đọc trực tiếp từ transcript. "
+            "Riêng <b>luồng TRA CỨU vẫn là chỗ trống</b>, chưa nối.</div>",
             unsafe_allow_html=True,
         )
         if uri is None:
@@ -199,6 +215,24 @@ def render_slide(session: dict) -> None:
         )
 
 
+def render_stats(stats) -> None:
+    """Cho thấy AI có thật sự chạy trong lượt đó không — số lời gọi và thời gian."""
+
+    if stats is None:
+        return
+    bits = []
+    if stats.llm_calls:
+        bits.append(f"🔴 gọi LLM **{stats.llm_calls}** lần")
+    if stats.cache_hits:
+        bits.append(f"⚡ dùng cache {stats.cache_hits} lần")
+    if stats.seconds:
+        bits.append(f"{stats.seconds:.1f}s")
+    if bits:
+        st.caption(" · ".join(bits))
+    for w in stats.warnings[:3]:
+        st.caption(f"⚠ {w}")
+
+
 def render_msg(m: dict) -> None:
     kind, p = m["kind"], m["payload"]
     with st.chat_message("user" if m["role"] == "user" else "assistant"):
@@ -223,16 +257,19 @@ def render_msg(m: dict) -> None:
             st.markdown(f"**Phần {part['idx']} · {part['title']}**")
             if p["skipped"]:
                 st.warning(f"Phần này mình không tóm. {p['reason']}")
+                render_stats(p.get("_stats"))
                 return
             for i, kp in enumerate(p["key_points"], 1):
                 tag = ' <b>· một học viên nêu</b>' if kp["has_student_speech"] else ""
+                cites = " ".join(f'<span class="cite">{c}</span>' for c in kp["cite"])
                 st.markdown(
-                    f'{i}. {BLANK} <span class="cite">{kp["cite"][0]}</span>{tag}'
+                    f'{i}. {claim_html(kp)} {cites}{tag}'
                     f'<blockquote class="q">“{kp["quote"]}”</blockquote>',
                     unsafe_allow_html=True,
                 )
             for g in p["gaps"]:
                 st.caption(f"⚠ Chỗ bản ghi thiếu: {g}")
+            render_stats(p.get("_stats"))
 
         elif kind == "recap":
             s = p["session"]
@@ -241,31 +278,31 @@ def render_msg(m: dict) -> None:
                 f"Gộp từ {p['n_parts_done']}/{p['n_parts_total']} phần đã tóm · "
                 f"độ tin cậy định vị buổi: {s['locate_confidence'].upper()}"
             )
+            if p.get("tldr"):
+                st.info(p["tldr"])
             st.markdown("**Ý chính**")
             for i, kp in enumerate(p["key_points"], 1):
-                st.markdown(
-                    f'{i}. {BLANK} <span class="cite">{kp["cite"][0]}</span>',
-                    unsafe_allow_html=True,
-                )
+                cites = " ".join(f'<span class="cite">{c}</span>' for c in kp["cite"])
+                st.markdown(f"{i}. {claim_html(kp)} {cites}", unsafe_allow_html=True)
             if p["student_points"]:
-                st.markdown("**Học viên nêu trong buổi**")
+                st.markdown("**Câu hỏi học viên nêu trong buổi**")
                 for kp in p["student_points"]:
-                    st.markdown(
-                        f'- {BLANK} <span class="cite">{kp["cite"][0]}</span>',
-                        unsafe_allow_html=True,
-                    )
+                    cites = " ".join(f'<span class="cite">{c}</span>' for c in kp["cite"])
+                    st.markdown(f"- {claim_html(kp)} {cites}", unsafe_allow_html=True)
             if p["gaps"]:
                 st.markdown("**⚠ Chỗ bản ghi thiếu**")
                 for g in p["gaps"]:
                     st.markdown(f"- {g}")
             if p["n_parts_done"] < p["n_parts_total"]:
                 st.info(f"Còn {p['n_parts_total'] - p['n_parts_done']} phần chưa tóm — "
-                        "sổ tay sẽ đầy hơn khi tóm tiếp.")
+                        "sổ tay mới gộp bằng code từ các phần đã tóm. Tóm đủ mọi phần "
+                        "thì mới chạy bước REDUCE để viết lại thành một mạch.")
+            render_stats(p.get("_stats"))
 
         elif kind == "answer":
             for c in p["claims"]:
                 st.markdown(
-                    f'- {BLANK} <span class="cite">{c["cite"][0]}</span>'
+                    f'- {claim_html(c)} <span class="cite">{c["cite"][0]}</span>'
                     f'<blockquote class="q">“{c["quote"]}”</blockquote>',
                     unsafe_allow_html=True,
                 )
@@ -323,6 +360,22 @@ def screen_session(session: dict) -> None:
 
 
 # ─────────────────────────────────────────────────────────────────────────────
+
+with st.sidebar:
+    st.markdown("#### Chế độ chạy")
+    st.caption(backend_label())
+    force = st.toggle(
+        "Bỏ qua cache",
+        value=False,
+        help="Bật thì mỗi lần tóm đều gọi LLM mới, kể cả phần đã tóm rồi. "
+        "Dùng để tự kiểm chứng là AI chạy thật chứ không đọc file có sẵn.",
+    )
+    set_force(force)
+    if force:
+        st.warning("Mỗi lượt tóm đều tốn API.")
+    st.caption(
+        "Luồng tóm tắt: **thật**. Luồng tra cứu: **chưa nối**."
+    )
 
 if st.session_state.sid is None:
     screen_list()
