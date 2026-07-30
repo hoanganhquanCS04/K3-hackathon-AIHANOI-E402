@@ -13,9 +13,14 @@ from pathlib import Path
 ASSETS = Path(__file__).parent / "assets"
 CAMPUS_NAMES = ("campus.jpg", "campus.jpeg", "campus.png", "campus.webp")
 
+# Thứ tự rất quan trọng: đặt font CÓ ĐẦY ĐỦ glyph tiếng Việt TRƯỚC. Nếu xếp
+# "Segoe UI Variable Display" đầu thì một số máy Windows render ô vuông với chữ
+# có dấu ("chiều", "định vị", "tóm"…) vì bản Variable Display thiếu glyph Việt.
+# Đẩy "Segoe UI" (bản gốc) lên trước, rồi thêm các phông phổ biến có đủ Việt làm
+# phao: Arial / Tahoma / Verdana đều có bộ glyph Latin Extended-A đầy đủ.
 FONT_STACK = (
-    '"Segoe UI Variable Display","Segoe UI",-apple-system,"Nunito Sans",'
-    '"Helvetica Neue",Arial,sans-serif'
+    '"Segoe UI","Segoe UI Variable Text","Segoe UI Variable Display",'
+    '"Nunito Sans","Helvetica Neue",Arial,Tahoma,Verdana,sans-serif'
 )
 
 
@@ -41,6 +46,45 @@ BASE_CSS = f"""
   }}
   html, body, .stApp, [class*="css"] {{ font-family: {FONT_STACK}; }}
   .stApp {{ background: #EDF2F8; }}
+
+  /* Đè font cho TIÊU ĐỀ — mặc định Streamlit/theme khác có thể đang dùng
+     "Segoe UI Variable Display" (bản Display thiếu glyph Việt). Ép về cùng
+     {FONT_STACK} cho mọi h1–h6 + markdown + utility class của Streamlit. */
+  h1, h2, h3, h4, h5, h6,
+  .stMarkdown h1, .stMarkdown h2, .stMarkdown h3,
+  .stMarkdown h4, .stMarkdown h5, .stMarkdown h6,
+  [data-testid="stHeading"] h1, [data-testid="stHeading"] h2,
+  [data-testid="stHeading"] h3, [data-testid="stHeading"] h4,
+  [data-testid="stHeading"] h5, [data-testid="stHeading"] h6,
+  [data-testid="stMarkdownContainer"] h1, [data-testid="stMarkdownContainer"] h2,
+  [data-testid="stMarkdownContainer"] h3, [data-testid="stMarkdownContainer"] h4,
+  [data-testid="stMarkdownContainer"] h5, [data-testid="stMarkdownContainer"] h6 {{
+    font-family: {FONT_STACK} !important;
+  }}
+
+  /* Đè font cho MỌI thẻ sinh ra từ st.markdown (chữ đậm, danh sách, link, đoạn…).
+     Markdown **…** ra <strong> chứ không ra <h1> nên rule trên không bắt được.
+     selector * hơi rộng nhưng cần thiết — nếu thiếu thì chữ "Day 2 — Chỉ số thành
+     công & mức tự động hoá" do st.markdown("**…**") sinh ra vẫn bị lấy font
+     "Variable Display" (thiếu glyph Việt) và hiện ô vuông. */
+  .stMarkdown, .stMarkdown p, .stMarkdown strong, .stMarkdown b,
+  .stMarkdown em, .stMarkdown i, .stMarkdown a, .stMarkdown li,
+  .stMarkdown ul, .stMarkdown ol, .stMarkdown blockquote,
+  .stMarkdown code, .stMarkdown pre,
+  [data-testid="stMarkdownContainer"],
+  [data-testid="stMarkdownContainer"] p,
+  [data-testid="stMarkdownContainer"] strong,
+  [data-testid="stMarkdownContainer"] b,
+  [data-testid="stMarkdownContainer"] li,
+  [data-testid="stMarkdownContainer"] a {{
+    font-family: {FONT_STACK} !important;
+  }}
+
+  /* slide-title và hero-title cũng là tiêu đề lớn, riêng đã có font-family trong
+     rule của nó — ép thêm để chắc. */
+  .slide-title, .hero-title {{
+    font-family: {FONT_STACK} !important;
+  }}
 
   /* thẻ trắng cho mọi st.container(border=True) */
   [data-testid="stVerticalBlockBorderWrapper"]:has(> div > [data-testid="stVerticalBlock"]) {{
@@ -105,6 +149,51 @@ BASE_CSS = f"""
             border-radius:4px; padding:1px 6px; white-space:nowrap; }}
   blockquote.q {{ margin:6px 0 0 0; padding-left:11px; border-left:2px solid #C6D4E6;
                   font-size:.88rem; color:#3C5876; }}
+
+  /* ── khung chat composer (ô nhập câu hỏi) ──
+     Lý do có khối này: st.chat_input và st.text_input mặc định đều có khung
+     hơi thô và font không hiển thị đúng dấu tiếng Việt. Bọc text_input trong
+     shell này vừa đẹp vừa đảm bảo Unicode dùng được. */
+  .chat-composer {{
+    margin-top: 10px; padding: 10px;
+    background: linear-gradient(180deg, #ffffff 0%, #F4F8FD 100%);
+    border: 1px solid var(--line); border-radius: 14px;
+    box-shadow: 0 6px 18px rgba(15,43,91,.07);
+    display: flex; align-items: center; gap: 10px;
+  }}
+  .chat-composer .avatar {{
+    flex: 0 0 36px; width:36px; height:36px; border-radius:50%;
+    background: var(--navy); color:#fff; display:flex; align-items:center;
+    justify-content:center; font-size:.95rem; box-shadow: 0 2px 6px rgba(15,43,91,.3);
+  }}
+  .chat-composer .input-slot {{ flex: 1; min-width: 0; }}
+  /* bỏ viền + nền mặc định của text_input để nó nằm gọn trong slot */
+  .chat-composer .input-slot .stTextInput > div > div > input {{
+    border: none !important; background: transparent !important;
+    padding: 8px 6px !important; font-size: .98rem !important;
+    color: var(--ink) !important; box-shadow: none !important;
+  }}
+  .chat-composer .input-slot .stTextInput label {{ display:none; }}
+  /* nút gửi làm tròn, gradient giống nút bấm chính */
+  .chat-composer .send-slot .stButton > button {{
+    border-radius: 999px !important; padding: 6px 16px !important;
+    background: linear-gradient(180deg, var(--navy-soft) 0%, var(--navy) 100%) !important;
+    border: none !important; color: #fff !important; font-weight: 700 !important;
+    box-shadow: 0 4px 10px rgba(15,43,91,.25) !important;
+  }}
+  .chat-composer .send-slot .stButton > button:hover {{
+    background: linear-gradient(180deg, #2A5BB0 0%, #1D4A8F 100%) !important;
+    transform: translateY(-1px);
+  }}
+  .chat-hint {{
+    margin-top: 6px; font-size: .75rem; color: var(--muted);
+    display:flex; align-items:center; gap:6px;
+  }}
+  .chat-hint kbd {{
+    background:#fff; border:1px solid var(--line); border-bottom-width:2px;
+    border-radius:5px; padding: 1px 6px; font-size:.72rem; color: var(--navy);
+    font-family: ui-monospace, monospace;
+  }}
 </style>
 """
 

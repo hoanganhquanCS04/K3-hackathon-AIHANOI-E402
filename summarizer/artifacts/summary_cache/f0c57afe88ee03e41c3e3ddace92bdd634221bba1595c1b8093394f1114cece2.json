@@ -1,0 +1,42 @@
+{
+  "abstract": "Phần này đi từ việc phân rã vấn đề về các nguyên lý cơ bản để tránh lệ thuộc vào cách làm cũ, sang quy trình mở rộng, kiểm chứng và thu hẹp các phương án dựa trên hiểu biết về người dùng. Cuối cùng, các vấn đề và giải pháp được làm rõ nguyên nhân, gom nhóm và ưu tiên bằng ma trận tác động – nỗ lực để lựa chọn hướng triển khai phù hợp.",
+  "key_points": [
+    {
+      "text": "First Principle Thinking yêu cầu phân rã vấn đề và sản phẩm thành những cấu phần cơ bản, thay vì sao chép kinh nghiệm có sẵn. Cách tiếp cận này tạo điều kiện điều chỉnh linh hoạt, xây dựng mô hình tư duy riêng và tìm ra giải pháp đổi mới phù hợp với bối cảnh.",
+      "citations": [
+        "T01-062",
+        "T01-064",
+        "T01-065",
+        "T01-066",
+        "T01-068"
+      ]
+    },
+    {
+      "text": "Quá trình thiết kế giải pháp cần luân phiên giữa phân kỳ để tạo nhiều ứng cử viên và hội tụ để chọn phương án tốt nhất. AI có thể hỗ trợ mở rộng lựa chọn, phân tích và phát triển nhiều prototype, qua đó tăng xác suất tìm được giải pháp có chất lượng.",
+      "citations": [
+        "T01-069",
+        "T01-070"
+      ]
+    },
+    {
+      "text": "Quan sát, phỏng vấn, khảo sát và phân tích dữ liệu hành vi giúp xác định đúng vấn đề từ thực tế sử dụng, thay vì dựa trên giả định. Các hiểu biết này có thể được ghi thành nhật ký hành vi, sau đó kết hợp với Five Whys để tìm nguyên nhân sâu xa và gom nhóm các vấn đề liên quan.",
+      "citations": [
+        "T01-071",
+        "T01-072",
+        "T01-075",
+        "T01-076",
+        "T01-077",
+        "T01-079"
+      ]
+    },
+    {
+      "text": "Ma trận tác động – nỗ lực giúp đánh giá giá trị và công sức của từng vấn đề hoặc giải pháp để xác định thứ tự ưu tiên triển khai. Sau khi sắp xếp ưu tiên, làm việc nhóm hỗ trợ tương tác và thống nhất phương án đáng thực hiện trước.",
+      "citations": [
+        "T01-075",
+        "T01-076",
+        "T01-078",
+        "T01-080"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "abstract": "Phần này tập trung vào việc rèn luyện kỹ năng xác định bài toán từ các yêu cầu mơ hồ trong bối cảnh ứng dụng trí tuệ nhân tạo và sự khác biệt giữa vai trò của product manager và project manager trong phát triển sản phẩm. Ngoài ra, phần này cũng hướng đến việc cải thiện văn hóa làm sản phẩm tại Việt Nam, nhấn mạnh tầm quan trọng của việc phát triển tư duy sản phẩm và khuyến khích sự đóng góp ý kiến từ mọi thành viên.",
+  "key_points": [
+    {
+      "text": "Việc ứng dụng AI hiệu quả phụ thuộc 70% vào con người và quy trình, do đó cần làm rõ vấn đề trước khi triển khai công nghệ, đặc biệt là từ những yêu cầu mơ hồ. Người làm cần có kỹ năng bóc tách vấn đề và hỏi lại để đảm bảo hiểu đúng yêu cầu từ cấp trên.",
+      "citations": [
+        "T01-001",
+        "T01-002",
+        "T01-003",
+        "T01-004",
+        "T01-005",
+        "T01-006"
+      ]
+    },
+    {
+      "text": "Product manager và project manager có điểm khác biệt: product manager tìm kiếm cơ hội và giải pháp cho sản phẩm; trong khi project manager tập trung vào hoàn thành đúng tiến độ, ngân sách của dự án.",
+      "citations": [
+        "T01-008",
+        "T01-009",
+        "T01-010",
+        "T01-011"
+      ]
+    },
+    {
+      "text": "Văn hóa làm sản phẩm tại Việt Nam còn hạn chế do thiếu sự đóng góp ý kiến và chỉ tuân theo yêu cầu, nhưng văn hóa ở Sài Gòn được đánh giá tốt hơn nhờ sự mở cửa và hiện diện của nhiều công ty trẻ.",
+      "citations": [
+        "T01-012",
+        "T01-013",
+        "T01-014"
+      ]
+    },
+    {
+      "text": "Để phát triển tư duy sản phẩm, cần thực hành đặt câu hỏi liên tục và chấp nhận sự chuyển đổi từ tư duy phản xạ nhanh sang tư duy chậm hơn.",
+      "citations": [
+        "T01-015",
+        "T01-016"
+      ]
+    }
+  ]
+}

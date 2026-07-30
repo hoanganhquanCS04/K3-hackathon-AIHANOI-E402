@@ -90,15 +90,21 @@ class OpenAIStructuredLLM:
             reraise=True,
         )
         def _call() -> DraftT:
-            completion = self.client.chat.completions.parse(
-                model=model,
-                temperature=temperature,
-                messages=[
+            # Proxy gateway nhu OpenAI Compatible API chi ho tro temperature = 1.0 (default).
+            # Tat ca gia tri khac (0.0, 0.2, 0.3, ...) deu tra loi loi.
+            # Chi truyen temperature khi no = 1.0 (default/duoc ho tro).
+            # Khong truyen gi khi 0.0 < temperature < 1.0 (se su dung default cua model).
+            kwargs = {
+                "model": model,
+                "messages": [
                     {"role": "system", "content": system},
                     {"role": "user", "content": user},
                 ],
-                response_format=schema,
-            )
+                "response_format": schema,
+            }
+            if temperature == 1.0:
+                kwargs["temperature"] = temperature
+            completion = self.client.chat.completions.parse(**kwargs)
             message = completion.choices[0].message
             if getattr(message, "refusal", None):
                 raise EmptyCompletionError(f"Model từ chối trả lời: {message.refusal}")

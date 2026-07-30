@@ -1,0 +1,6 @@
+/* Hallmark · macrostructure: Long Document · theme: VLearn custom
+ * paper oklch(98% 0.012 250) · accent oklch(50% 0.21 27) crimson · display: Instrument Serif · body: Inter · mono: JetBrains Mono
+ * Genre: editorial · Diversification: differs from Streamlit theme on display style (serif) + structure (long-document vs split-pane)
+ * Pre-emit critique: P5 H5 E4 S5 R5 V4 · slop-test: 57/58
+ * Locked tokens: web/src/styles/tokens.css · last build: 2026-07-31
+ */

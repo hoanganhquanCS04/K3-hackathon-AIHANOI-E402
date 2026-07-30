@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-001",
+  "section_title": "Kỹ năng xác định bài toán từ yêu cầu mơ hồ",
+  "section_order": 1,
+  "abstract": "Mục này bàn về kỹ năng xác định bài toán kinh doanh từ những yêu cầu mơ hồ trong bối cảnh ứng dụng AI, nhấn mạnh tầm quan trọng của việc làm rõ vấn đề trước khi triển khai công nghệ.",
+  "key_points": [
+    {
+      "text": "Kỹ năng xác định bài toán từ yêu cầu mơ hồ là rất quan trọng trong các công ty muốn ứng dụng AI, vì nhiều nơi thiếu người có khả năng tìm ra và cụ thể hóa vấn đề cần giải quyết cho team phát triển. [T01-001, T01-002]},{",
+      "citations": [
+        "T01-003",
+        "T01-004"
+      ]
+    },
+    {
+      "text": "Việc ứng dụng AI trong doanh nghiệp có khoảng 70% thành công đến từ con người và quy trình vận hành, không chỉ từ công nghệ, cho thấy cần phải xác định rõ vấn đề trước khi triển khai AI. [T01-003, T01-004]},{",
+      "citations": [
+        "T01-005",
+        "T01-006"
+      ]
+    },
+    {
+      "text": "Cần rèn luyện tư duy biến những yêu cầu mơ hồ thành các mục tiêu cụ thể có thể triển khai nhanh chóng, vì thường các yêu cầu từ stakeholder không rõ ràng và cần được làm rõ. [T01-005, T01-006]},{",
+      "citations": [
+        "T01-006"
+      ]
+    },
+    {
+      "text": "Khi nhận yêu cầu mơ hồ từ cấp trên, cần chủ động hỏi lại và bóc tách thành các lựa chọn cụ thể để xác nhận và đảm bảo hiểu đúng ý của người giao việc. [T01-006] }],",
+      "citations": [
+        "T01-001",
+        "T01-002",
+        "T01-003",
+        "T01-004",
+        "T01-005",
+        "T01-006"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI engineer",
+    "stakeholder",
+    "tư duy phản biện",
+    "bóc tách vấn đề"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-001",
+    "T01-002",
+    "T01-003",
+    "T01-004",
+    "T01-005",
+    "T01-006"
+  ],
+  "covered_chunk_ids": [
+    "T01-001",
+    "T01-002",
+    "T01-003",
+    "T01-004",
+    "T01-005",
+    "T01-006"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "5b9c8047e3c5e880f517ec1e07afd5142c18a909155c588b24ac081d4b0e0063",
+  "prompt_version": "v2",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T18:40:52.511323Z"
+}

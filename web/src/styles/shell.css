@@ -1,0 +1,189 @@
+/* ============================================================
+   SESSION SHELL — layout cho trang SessionPage
+   Long-document pattern: [ main reader-grid ] [ inspector rail ]
+   ============================================================ */
+
+.session-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1fr)
+    var(--sidebar-w, 320px);
+  align-items: start;
+  padding: var(--space-7) var(--space-7) var(--space-9);
+  max-width: 1560px;
+  margin: 0 auto;
+  width: 100%;
+  gap: var(--space-7);
+  transition: grid-template-columns 320ms var(--ease-out);
+}
+
+.session-main {
+  min-width: 0;
+}
+
+/* ── Top toolbar (breadcrumb + actions) ── */
+.session-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.session-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-small);
+  color: var(--color-muted);
+  text-decoration: none;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  background: var(--color-paper);
+  transition: all 200ms var(--ease-out);
+  font-weight: 500;
+}
+.session-breadcrumb:hover {
+  color: var(--color-crimson-deep);
+  border-color: var(--color-crimson);
+  transform: translateX(-2px);
+  box-shadow: 0 4px 10px -4px color-mix(in oklch, var(--color-crimson-deep) 24%, transparent);
+}
+.session-breadcrumb-glyph {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: var(--color-paper-3);
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  transition: all 200ms var(--ease-out);
+}
+.session-breadcrumb:hover .session-breadcrumb-glyph {
+  background: var(--color-crimson);
+  color: var(--color-paper);
+}
+
+/* ── Session banner hero ── */
+.session-banner {
+  position: relative;
+  padding: var(--space-7) var(--space-7) var(--space-7);
+  border-radius: var(--radius-lg);
+  background-color: var(--color-paper-2);
+  background-image: var(--image-cover);
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: multiply;
+  color: var(--color-paper);
+  margin-bottom: var(--space-7);
+  overflow: hidden;
+  isolation: isolate;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.session-banner::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(135deg,
+      color-mix(in oklch, var(--color-navy-deep) 92%, transparent) 0%,
+      color-mix(in oklch, var(--color-navy) 60%, transparent) 100%);
+  z-index: 0;
+}
+.session-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at top right,
+      color-mix(in oklch, var(--color-crimson) 16%, transparent),
+      transparent 60%);
+  z-index: 0;
+}
+.session-banner > * { position: relative; z-index: 1; }
+
+.session-banner .eyebrow {
+  color: color-mix(in oklch, var(--color-paper) 70%, transparent);
+}
+
+.session-banner h1 {
+  font-size: var(--text-display);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: var(--space-1) 0 var(--space-2);
+  color: var(--color-paper);
+  line-height: 1.1;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.18);
+}
+
+.session-banner-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  font-size: var(--text-small);
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+.session-banner-meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: color-mix(in oklch, var(--color-paper) 85%, transparent);
+}
+.session-banner-meta-item strong {
+  color: var(--color-paper);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Reader grid (slide + outline) | chat ── */
+.reader-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: var(--space-7);
+  align-items: start;
+}
+
+.chat-column {
+  position: sticky;
+  top: var(--space-5);
+  min-width: 0;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .session-shell {
+    --sidebar-w: 300px;
+    gap: var(--space-6);
+    padding: var(--space-6) var(--space-5);
+  }
+  .reader-grid { gap: var(--space-6); }
+}
+
+@media (max-width: 1000px) {
+  .session-shell {
+    grid-template-columns: minmax(0, 1fr);
+    --sidebar-w: 100%;
+  }
+  .session-shell .sbar {
+    position: static;
+    height: auto;
+    max-height: none;
+    border-radius: var(--radius-lg);
+    margin-top: var(--space-5);
+  }
+  .chat-column { position: static; }
+}
+
+@media (max-width: 880px) {
+  .reader-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

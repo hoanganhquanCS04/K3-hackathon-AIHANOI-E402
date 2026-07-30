@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-002",
+  "section_title": "Product manager, project manager và văn hoá làm product",
+  "section_order": 2,
+  "abstract": "Mục này bàn về vai trò và sự khác biệt giữa product manager và project manager trong môi trường phát triển sản phẩm, cũng như văn hóa làm sản phẩm tại Việt Nam.",
+  "key_points": [
+    {
+      "text": "Sự phát triển của các nhóm năng lực trong môi trường AI đang dẫn đến việc các vị trí trong team trở nên mờ nhạt, với xu hướng hình thành những người generalist có khả năng làm nhiều việc khác nhau nhưng vẫn chuyên sâu ở một lĩnh vực nhất định.",
+      "citations": [
+        "T01-007"
+      ]
+    },
+    {
+      "text": "Product manager và project manager có bộ kỹ năng và tư duy khác nhau: product manager tìm kiếm cơ hội và giải pháp cho sản phẩm, trong khi project manager tập trung vào việc hoàn thành dự án đúng tiến độ và ngân sách.",
+      "citations": [
+        "T01-008",
+        "T01-009",
+        "T01-010",
+        "T01-011"
+      ]
+    },
+    {
+      "text": "Văn hóa làm sản phẩm tại Việt Nam còn nhiều hạn chế, với nhiều người cảm thấy không thể đóng góp ý kiến và chỉ thực hiện theo yêu cầu, dẫn đến việc không phát triển được tư duy sản phẩm và chất lượng sản phẩm.",
+      "citations": [
+        "T01-012",
+        "T01-013"
+      ]
+    },
+    {
+      "text": "Văn hóa làm sản phẩm ở Sài Gòn được cho là tốt hơn Hà Nội, nhờ vào sự mở cửa và sự hiện diện của nhiều công ty trẻ, tạo ra môi trường thuận lợi cho việc phát triển sản phẩm.",
+      "citations": [
+        "T01-014"
+      ]
+    },
+    {
+      "text": "Để phát triển tư duy sản phẩm, cần phải luyện tập và đặt câu hỏi liên tục, chấp nhận sự khó khăn trong quá trình thay đổi tư duy từ phản xạ nhanh sang tư duy chậm, nhằm hình thành thói quen mới trong công việc.",
+      "citations": [
+        "T01-015",
+        "T01-016"
+      ]
+    }
+  ],
+  "concepts": [
+    "product manager",
+    "project manager",
+    "generalist",
+    "user-centered",
+    "mindset",
+    "framework"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-007",
+    "T01-008",
+    "T01-009",
+    "T01-010",
+    "T01-011",
+    "T01-012",
+    "T01-013",
+    "T01-014",
+    "T01-015",
+    "T01-016",
+    "T01-017"
+  ],
+  "covered_chunk_ids": [
+    "T01-007",
+    "T01-008",
+    "T01-009",
+    "T01-010",
+    "T01-011",
+    "T01-012",
+    "T01-013",
+    "T01-014",
+    "T01-015",
+    "T01-016"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T01-012",
+    "T01-016"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "c26853e3e41e59fbe1c7f5f1583a7ad96d267343393f58338f4fd0e967516c24",
+  "prompt_version": "v2",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T18:40:52.379438Z"
+}

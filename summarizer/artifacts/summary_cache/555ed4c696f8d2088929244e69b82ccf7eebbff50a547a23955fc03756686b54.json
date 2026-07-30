@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-008",
+  "section_title": "First Principle Thinking",
+  "section_order": 8,
+  "abstract": "Mục này bàn về tư duy từ nguyên bản (First Principle Thinking) và vai trò của nó trong việc tìm kiếm giải pháp sáng tạo cho các vấn đề kinh doanh, lấy ví dụ từ những người như Elon Musk.",
+  "key_points": [
+    {
+      "text": "First principle thinking giúp phân tích các vấn đề đến nguyên lý cơ bản nhất thay vì sao chép các cách làm có sẵn, như làm việc của Elon Musk trong việc giảm chi phí sản xuất tên lửa bằng cách tái sử dụng các bộ phận. [T01-062]",
+      "citations": [
+        "T01-062"
+      ]
+    },
+    {
+      "text": "Để giải quyết vấn đề hiệu quả, cần xác định và tìm ra lời giải cho vấn đề đó, trong đó first principle thinking là một khung tư duy hữu ích được nhiều công ty áp dụng để khuyến khích đổi mới và sáng tạo. [T01-064]",
+      "citations": [
+        "T01-064"
+      ]
+    },
+    {
+      "text": "Khi xây dựng sản phẩm, việc hiểu rõ các cấu phần cơ bản giúp dễ dàng điều chỉnh và thay thế chúng một cách linh hoạt, từ đó tạo ra giải pháp phù hợp hơn mà không bị gò bó theo cách làm cũ. [T01-065, T01-066]",
+      "citations": [
+        "T01-065",
+        "T01-066"
+      ]
+    },
+    {
+      "text": "Kinh nghiệm của những người đi trước chỉ nên được coi là tham khảo, bên cạnh đó cần phát triển cách tư duy riêng (mental model) để tự tìm ra và phân loại các giải pháp trong bối cảnh luôn thay đổi của thế giới hiện tại. [T01-068]",
+      "citations": [
+        "T01-068"
+      ]
+    }
+  ],
+  "concepts": [
+    "First Principle Thinking",
+    "Mental Model",
+    "Đổi mới sáng tạo"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-062",
+    "T01-063",
+    "T01-064",
+    "T01-065",
+    "T01-066",
+    "T01-067",
+    "T01-068"
+  ],
+  "covered_chunk_ids": [
+    "T01-062",
+    "T01-064",
+    "T01-065",
+    "T01-066",
+    "T01-068"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T01-063",
+    "T01-064",
+    "T01-067"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "018e7486d75ef9d8e0953fc7705ee3630a116c703357fb3b3977b3e0a373a1d0",
+  "prompt_version": "v2",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T19:44:58.959174Z"
+}

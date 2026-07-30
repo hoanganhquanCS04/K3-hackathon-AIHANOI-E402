@@ -1,0 +1,537 @@
+/* Hallmark · macrostructure: Long Document · theme: VLearn custom
+ * paper oklch(98% 0.012 250) · accent oklch(50% 0.21 27) crimson · display: Instrument Serif · body: Inter · mono: JetBrains Mono
+ * Diversification: differs from Streamlit theme on display style (serif) + structure (long-document vs split-pane).
+ */
+
+:root {
+  /* Paper — chọn paper nhạt-xanh-lam để không lẫn với Streamlit theme #EDF2F8 */
+  --color-paper:        oklch(98% 0.012 250);
+  --color-paper-2:      oklch(96% 0.014 250);
+  --color-paper-3:      oklch(93% 0.018 248);
+  --color-ink:          oklch(20% 0.03 255);
+  --color-ink-2:        oklch(35% 0.02 255);
+  --color-muted:        oklch(55% 0.015 250);
+  --color-line:         oklch(88% 0.01 250);
+  --color-line-strong:  oklch(78% 0.015 250);
+
+  /* VLearn brand: navy + crimson (anchor hue: warm-red) */
+  --color-navy:         oklch(28% 0.08 265);
+  --color-navy-deep:    oklch(20% 0.07 265);
+  --color-navy-soft:    oklch(42% 0.10 262);
+  --color-crimson:      oklch(50% 0.21 27);    /* primary accent */
+  --color-crimson-deep: oklch(40% 0.20 27);
+  --color-crimson-soft: oklch(92% 0.04 27);
+
+  /* Functional */
+  --color-success:      oklch(58% 0.16 145);
+  --color-warning:      oklch(75% 0.15 75);
+  --color-error:        oklch(55% 0.22 25);
+  --color-focus:        oklch(60% 0.18 250);
+
+  /* Type — anti-italic-headers discipline: chỉ italic trong blockquote/quote nguyên văn */
+  --font-body:    "Inter", -apple-system, "Segoe UI", "Segoe UI Variable Text",
+                  "Segoe UI Variable Display", Tahoma, Verdana, Arial, system-ui,
+                  sans-serif;
+  --font-display: var(--font-body);
+  --font-mono:    "JetBrains Mono", ui-monospace, "SF Mono", Consolas, monospace;
+
+  --text-display-xl: clamp(2.5rem, 5vw + 1rem, 4.2rem);
+  --text-display:    clamp(2rem, 3vw + 1rem, 3rem);
+  --text-h1:         clamp(1.75rem, 2vw + 0.8rem, 2.4rem);
+  --text-h2:         clamp(1.4rem, 1.5vw + 0.6rem, 1.8rem);
+  --text-h3:         1.25rem;
+  --text-body:       1rem;
+  --text-small:      0.875rem;
+  --text-micro:      0.78rem;
+
+  /* 4pt scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 40px;
+  --space-9: 56px;
+  --space-10: 72px;
+  --space-11: 96px;
+
+  /* Easings — three named only, never default 'ease' */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in:  cubic-bezier(0.7, 0, 0.84, 0);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+  /* Durations */
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 380ms;
+
+  /* Rules + radii */
+  --rule:        1px solid var(--color-line);
+  --rule-strong: 1px solid var(--color-line-strong);
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+
+  /* Layout */
+  --max-prose: 68ch;
+  --max-wide:  1240px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;          /* gate 34 — no horizontal scroll */
+}
+
+body { min-height: 100vh; }
+
+/* Headings — dùng chung --font-body (Inter) để có đủ glyph tiếng Việt.
+   Phân cấp bằng font-weight. Instrument Serif đã bỏ — nó là font serif
+   không có đủ glyph Latin Extended-A nên mọi chữ có dấu ("Chỉ số thành
+   công", "tự động hoá", "buổi") render ra ô vuông. */
+h1, h2, h3, h4, h5 {
+  font-family: var(--font-body);
+  color: var(--color-navy);
+  letter-spacing: -0.012em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+h1 { font-size: var(--text-h1); font-weight: 800; }
+h2 { font-size: var(--text-h2); font-weight: 700; }
+h3 { font-size: var(--text-h3); font-weight: 700; letter-spacing: 0; }
+h4 { font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+
+p { margin: 0 0 var(--space-3); }
+
+a {
+  color: var(--color-navy);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-line-strong);
+  transition: text-decoration-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+}
+a:hover { text-decoration-color: var(--color-crimson); color: var(--color-crimson-deep); }
+a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; border-radius: 2px; }
+
+/* Buttons — 8 states */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 600;
+  line-height: 1.2;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-paper);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              border-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out);
+}
+.btn:hover, .btn.is-hover  { background: var(--color-paper-2); border-color: var(--color-navy-soft); }
+.btn:focus-visible, .btn.is-focus { outline: 2px solid var(--color-focus); outline-offset: 2px; }
+.btn:active, .btn.is-active { transform: translateY(1px); background: var(--color-paper-3); }
+.btn:disabled, .btn.is-disabled { opacity: 0.5; cursor: not-allowed; }
+.btn.is-loading { cursor: wait; }
+.btn.is-error  { border-color: var(--color-error); color: var(--color-error); }
+.btn.is-success { border-color: var(--color-success); color: var(--color-success); }
+
+.btn-primary {
+  background: var(--color-navy);
+  border-color: var(--color-navy);
+  color: var(--color-paper);
+}
+.btn-primary:hover, .btn-primary.is-hover { background: var(--color-navy-soft); border-color: var(--color-navy-soft); }
+.btn-primary:active, .btn-primary.is-active { background: var(--color-navy-deep); }
+.btn-primary:disabled { background: var(--color-muted); border-color: var(--color-muted); color: var(--color-paper); }
+
+/* Citations — mono chip inline */
+.cite {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  background: var(--color-crimson-soft);
+  color: var(--color-crimson-deep);
+  border-radius: 4px;
+  padding: 1px 7px;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  border: 1px solid color-mix(in oklch, var(--color-crimson) 22%, transparent);
+  transition: background var(--dur-fast) var(--ease-out);
+}
+.cite:hover { background: color-mix(in oklch, var(--color-crimson-soft) 70%, white); }
+
+/* Quote nguyên văn — italic được phép ở đây vì là body copy, không phải heading */
+blockquote.q {
+  margin: var(--space-2) 0 var(--space-3);
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--color-line-strong);
+  color: var(--color-ink-2);
+  font-family: var(--font-display);
+  font-style: italic;        /* allowed — body copy, not header */
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* Cards */
+.card {
+  background: var(--color-paper);
+  border: var(--rule);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: border-color var(--dur-base) var(--ease-out),
+              transform var(--dur-base) var(--ease-out);
+}
+.card:hover { border-color: var(--color-line-strong); }
+.card-link:hover { transform: translateY(-2px); border-color: var(--color-navy-soft); }
+
+/* Layout containers */
+.container-narrow { max-width: 720px; margin: 0 auto; padding: 0 var(--space-5); }
+.container-wide   { max-width: var(--max-wide); margin: 0 auto; padding: 0 var(--space-5); }
+
+/* Section heads — vertical stack: eyebrow above, heading below (gate 54) */
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+  margin-bottom: var(--space-2);
+}
+
+/* Animations — only transform/opacity (gate 36) */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fade-up var(--dur-slow) var(--ease-out) both; }
+
+/* Stagger helpers — dùng inline style="--i: N" */
+.stagger > * {
+  animation: fade-up 520ms var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 70ms);
+}
+
+/* Pulse for copy success */
+@keyframes pulse-once {
+  0%   { background: var(--color-crimson-soft); }
+  100% { background: var(--color-paper); }
+}
+.pulse-once { animation: pulse-once 800ms var(--ease-out); }
+
+/* Hero ken-burns — slow zoom + pan ảnh nền hero */
+@keyframes ken-burns {
+  0%   { transform: scale(1.0)  translate3d(0, 0, 0); }
+  100% { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+}
+
+/* Subtle drift cho ảnh phụ (slide-cover, card-thumb hover) */
+@keyframes drift {
+  0%   { transform: scale(1.05) translate3d(0, 0, 0); }
+  50%  { transform: scale(1.08) translate3d(-0.6%, -0.4%, 0); }
+  100% { transform: scale(1.05) translate3d(0, 0, 0); }
+}
+
+/* Shimmer — overlay sáng lướt qua */
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(120%); }
+}
+.shimmer::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(110deg,
+    transparent 30%,
+    rgba(255,255,255,0.18) 50%,
+    transparent 70%);
+  transform: translateX(-100%);
+  animation: shimmer 2.6s var(--ease-in-out) infinite;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Float — eyebrow nhô lên xuống */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+/* Reveal underline — gạch chân chạy từ trái sang khi vào viewport */
+@keyframes underline-grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* Image cover — rotation pool of 7 campus images.
+   Slot theo kích thước file:
+     hero (154KB) — to nhất, dùng cho hero trang chủ
+     campus-1..3 (37-68KB) — dùng cho card thumbnail & session banner rotation
+     campus-7..9 (29-53KB) — backup rotation
+   Tên file .jpg đặt trong web/public/img/. */
+:root {
+  --image-hero:     url("/img/hero.jpg");
+  --image-cover-1:  url("/img/campus-1.jpg");
+  --image-cover-2:  url("/img/campus-2.jpg");
+  --image-cover-3:  url("/img/campus-3.jpg");
+  --image-cover-7:  url("/img/campus-7.jpg");
+  --image-cover-8:  url("/img/campus-8.jpg");
+  --image-cover-9:  url("/img/campus-9.jpg");
+  /* Legacy alias — giữ để không vỡ rule cũ. */
+  --image-cover: var(--image-cover-1);
+}
+
+/* Image variants — dùng inline style="--img: var(--image-cover-N)" để chọn ảnh */
+.image-cover-1 { --image-cover: var(--image-cover-1); }
+.image-cover-2 { --image-cover: var(--image-cover-2); }
+.image-cover-3 { --image-cover: var(--image-cover-3); }
+.image-cover-7 { --image-cover: var(--image-cover-7); }
+.image-cover-8 { --image-cover: var(--image-cover-8); }
+.image-cover-9 { --image-cover: var(--image-cover-9); }
+
+/* Hero cover — trang chủ (HomePage). Ảnh full-bleed + overlay navy → paper.
+   Background là --image-hero (ảnh to nhất). Ken-burns chậm 24s để không gây chóng mặt. */
+.hero-cover {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  padding: var(--space-10) var(--space-7) var(--space-9);
+  margin-bottom: var(--space-9);
+  color: #fff;
+  background: var(--color-navy-deep) var(--image-hero) center 38% / cover no-repeat;
+  will-change: transform;
+}
+.hero-cover::before {
+  content: "";
+  position: absolute; inset: -4%; z-index: -2;
+  background: var(--image-hero) center 38% / cover no-repeat;
+  animation: ken-burns 24s var(--ease-in-out) infinite alternate;
+}
+.hero-cover::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse at 18% 22%, rgba(255,154,160,0.18), transparent 55%),
+    linear-gradient(180deg, rgba(10,31,66,.55) 0%, rgba(10,31,66,.88) 100%);
+}
+.hero-cover .eyebrow { color: #FF9AA0; display: inline-block; animation: float 4s ease-in-out infinite; }
+.hero-cover h1 {
+  color: #fff; max-width: 18ch;
+  text-shadow: 0 2px 18px rgba(0,0,0,0.35);
+}
+.hero-cover p {
+  color: rgba(255,255,255,.92); max-width: 52ch;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.25);
+}
+.hero-cover .eyebrow,
+.hero-cover h1,
+.hero-cover p {
+  opacity: 0;
+  animation: fade-up 700ms var(--ease-out) forwards;
+}
+.hero-cover .eyebrow { animation-delay: 80ms; }
+.hero-cover h1      { animation-delay: 220ms; }
+.hero-cover p       { animation-delay: 360ms; }
+
+/* Hero slideshow — lớp slide overlay (4 lớp ảnh cross-fade, dùng cho HomePage
+   khi muốn ảnh thay đổi theo thời gian. Ảnh đặt vào ::before của 4 lớp .hero-slide-N. */
+.hero-slides { position: absolute; inset: -4%; z-index: -3; pointer-events: none; }
+.hero-slides > div {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center 38%;
+  opacity: 0;
+  animation: hero-fade 24s var(--ease-in-out) infinite;
+  will-change: opacity, transform;
+}
+.hero-slides > div:nth-child(1) {
+  background-image: var(--image-hero);
+  animation-delay: 0s;
+}
+.hero-slides > div:nth-child(2) {
+  background-image: var(--image-cover-3);
+  animation-delay: 6s;
+}
+.hero-slides > div:nth-child(3) {
+  background-image: var(--image-cover-8);
+  animation-delay: 12s;
+}
+.hero-slides > div:nth-child(4) {
+  background-image: var(--image-cover-1);
+  animation-delay: 18s;
+}
+@keyframes hero-fade {
+  0%, 100% { opacity: 0; transform: scale(1.04); }
+  6%, 24%  { opacity: 1; transform: scale(1.08); }
+  30%, 95% { opacity: 0; transform: scale(1.12); }
+}
+
+/* Session banner — đầu trang buổi (SessionPage). Full-width nhưng không full-height.
+   Mỗi buổi inline style --image-cover để random ảnh từ pool. */
+.session-banner {
+  position: relative;
+  isolation: isolate;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 220px;
+  padding: var(--space-7) var(--space-7);
+  margin-bottom: var(--space-7);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: var(--color-navy-deep) var(--image-cover) center 38% / cover no-repeat;
+}
+.session-banner::before {
+  content: "";
+  position: absolute; inset: -2%; z-index: -2;
+  background: var(--image-cover) center 38% / cover no-repeat;
+  animation: drift 14s var(--ease-in-out) infinite;
+  will-change: transform;
+}
+.session-banner::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(180deg, rgba(10,31,66,.55) 0%, rgba(10,31,66,.92) 100%);
+}
+.session-banner .eyebrow { color: #FF9AA0; }
+.session-banner h1 { color: #fff; max-width: 22ch; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+.session-banner p  { color: rgba(255,255,255,.78); margin: 0; }
+
+/* Slide cover — nền ảnh mờ trong SlideFrame (gradient navy vẫn là base).
+   Mỗi slide inline --image-cover để random ảnh từ pool. */
+.slide-cover {
+  position: relative;
+  overflow: hidden;
+}
+.slide-cover::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: var(--image-cover) center 38% / cover no-repeat;
+  opacity: 0.22;
+  filter: blur(2px);
+  pointer-events: none;
+  animation: drift 18s var(--ease-in-out) infinite;
+  will-change: transform;
+}
+.slide-cover > * { position: relative; z-index: 1; }
+
+/* Card thumbnail — buổi ở mục lục (SessionCard). 16:9, ảnh campus, có overlay nhẹ.
+   Class .card-thumb--N (1..9) hoặc inline style --image-cover để chọn ảnh. */
+.card-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-navy-deep) var(--image-cover) center 38% / cover no-repeat;
+  isolation: isolate;
+}
+.card-thumb::before {
+  content: "";
+  position: absolute; inset: -2%;
+  background: var(--image-cover) center 38% / cover no-repeat;
+  transform: scale(1.04);
+  transition: transform 700ms var(--ease-out);
+  z-index: -1;
+}
+.card-thumb::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(10,31,66,0) 55%, rgba(10,31,66,.55) 100%);
+  pointer-events: none;
+}
+/* Hover effect — khi card cha hover thì thumb zoom + overlay đỏ nhạt */
+.card-link:hover .card-thumb::before { transform: scale(1.12); }
+.card-link:hover .card-thumb::after {
+  background: linear-gradient(180deg, rgba(10,31,66,0) 35%, rgba(155,30,40,0.45) 100%);
+}
+
+/* Buổi card lift effect — nâng cao hơn + shadow */
+.card-link {
+  position: relative;
+  transition: transform 260ms var(--ease-out),
+              border-color 260ms var(--ease-out),
+              box-shadow 260ms var(--ease-out);
+}
+.card-link:hover {
+  transform: translateY(-6px);
+  border-color: var(--color-navy-soft);
+  box-shadow: 0 18px 40px -16px color-mix(in oklch, var(--color-navy-deep) 35%, transparent),
+              0 4px 12px -4px color-mix(in oklch, var(--color-crimson-deep) 18%, transparent);
+}
+.card-link h3 {
+  background-image: linear-gradient(90deg, var(--color-crimson), var(--color-crimson));
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+  transition: background-size 320ms var(--ease-out);
+}
+.card-link:hover h3 { background-size: 60% 2px; }
+
+@media (max-width: 640px) {
+  .hero-cover { padding: var(--space-9) var(--space-5) var(--space-7); }
+  .session-banner { height: 180px; padding: var(--space-5); }
+}
+
+/* Hero stats strip — 3 chip ở đáy hero, fade-up theo stagger */
+.hero-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3) var(--space-7);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+  border-top: 1px solid rgba(255,255,255,0.18);
+  position: relative;
+  z-index: 2;
+}
+.hero-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  line-height: 1.1;
+}
+.hero-stat-k {
+  font-family: var(--font-mono);
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #FF9AA0;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.hero-stat-label {
+  font-size: var(--text-micro);
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

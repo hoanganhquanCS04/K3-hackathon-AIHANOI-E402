@@ -10,9 +10,10 @@ from __future__ import annotations
 import atexit
 import os
 from functools import lru_cache
+from typing import Any
 
 from dotenv import load_dotenv
-from neo4j import Driver, GraphDatabase
+from neo4j import GraphDatabase
 
 load_dotenv()
 
@@ -38,7 +39,7 @@ def _read_env() -> tuple[str, str, str]:
 
 
 @lru_cache(maxsize=1)
-def get_driver() -> Driver:
+def get_driver() -> Any:
     """Driver dùng chung. verify_connectivity() để sai URL/mật khẩu là báo ngay tại đây,
     không phải đợi đến câu Cypher đầu tiên mới lộ."""
     url, user, password = _read_env()

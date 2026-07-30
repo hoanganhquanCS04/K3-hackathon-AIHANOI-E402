@@ -1,0 +1,66 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-009",
+  "section_title": "Phân kỳ – hội tụ và các kỹ thuật khám phá vấn đề",
+  "section_order": 9,
+  "abstract": "Mục này thảo luận về quy trình phân kỳ và hội tụ trong việc xác định vấn đề khi ứng dụng AI, nhấn mạnh vai trò của việc mở rộng nhìn nhận vấn đề và áp dụng AI để thu thập thông tin hiệu quả.",
+  "key_points": [
+    {
+      "text": "Quá trình giải quyết vấn đề trong thiết kế giải pháp cần có hai pha là phân kỳ (mở rộng) và hội tụ (thu hẹp) để khám phá nhiều ứng cử viên và lựa chọn giải pháp tốt nhất; điều này giúp tăng xác suất tìm ra giải pháp đúng. [T01-069]",
+      "citations": [
+        "T01-069"
+      ]
+    },
+    {
+      "text": "AI hỗ trợ trong việc mở rộng vấn đề và lựa chọn giải pháp bằng cách cung cấp nhiều tùy chọn và phân tích nhằm nâng cao chất lượng các prototype; sử dụng nhiều mẫu thử giúp nâng cao chất lượng sản phẩm và sự hài lòng của người dùng cuối. [T01-070]",
+      "citations": [
+        "T01-070"
+      ]
+    },
+    {
+      "text": "Các kỹ thuật khám phá như quan sát, phỏng vấn, khảo sát và phân tích hành vi người dùng đóng vai trò quan trọng trong việc tìm ra vấn đề chính xác cần giải quyết, do đó cần thu thập nhiều hiểu biết từ người dùng. [T01-071]",
+      "citations": [
+        "T01-071"
+      ]
+    },
+    {
+      "text": "Quan sát thực tế là kỹ thuật hiệu quả trong việc xây dựng sản phẩm, có thể đạt được thông tin giá trị từ đối tượng sử dụng; ví dụ như dự án NotebookLM của Google đã phát triển nhờ vào sự gần gũi với người dùng mục tiêu. [T01-072]",
+      "citations": [
+        "T01-072"
+      ]
+    }
+  ],
+  "concepts": [
+    "phân kỳ",
+    "hội tụ",
+    "design thinking",
+    "AI",
+    "prototype",
+    "quan sát",
+    "khảo sát"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-069",
+    "T01-070",
+    "T01-071",
+    "T01-072",
+    "T01-073"
+  ],
+  "covered_chunk_ids": [
+    "T01-069",
+    "T01-070",
+    "T01-071",
+    "T01-072"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "a2d2e88bba130b88ff3862ecde8012bb7111bcc6216d8d869734b59a1f0e9e5a",
+  "prompt_version": "v2",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T19:44:59.133859Z"
+}

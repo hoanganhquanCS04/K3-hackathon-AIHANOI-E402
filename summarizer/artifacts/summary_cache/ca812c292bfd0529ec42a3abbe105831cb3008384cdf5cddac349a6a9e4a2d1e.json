@@ -1,0 +1,71 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-010",
+  "section_title": "Ma trận tác động – nỗ lực (impact-effort matrix)",
+  "section_order": 10,
+  "abstract": "Mục này trình bày các kỹ thuật để xác định vấn đề và ưu tiên giải pháp trong quá trình phát triển AI, với trọng tâm vào ma trận tác động – nỗ lực, nhằm xác định giá trị và công sức của từng vấn đề.",
+  "key_points": [
+    {
+      "text": "Ma trận tác động – nỗ lực giúp doanh nghiệp ưu tiên các vấn đề bằng cách đánh giá tác động và công sức cần thiết để giải quyết vấn đề, từ đó nhanh chóng xác định giải pháp nào xứng đáng được thực hiện trước. [T01-074, T01-078]},{",
+      "citations": [
+        "T01-075",
+        "T01-076"
+      ]
+    },
+    {
+      "text": "Các kỹ thuật như quan sát người dùng, phỏng vấn và phân tích dữ liệu là thiết yếu trong việc tạo ra nhật ký hành vi, từ đó phát hiện vấn đề và triển khai các giải pháp phù hợp. [T01-075, T01-076]},{",
+      "citations": [
+        "T01-077",
+        "T01-079"
+      ]
+    },
+    {
+      "text": "Trong quá trình liệt kê và gom nhóm vấn đề, việc sử dụng các phương pháp như Five Whys giúp xác định nguyên nhân sâu xa và các mối liên hệ giữa các vấn đề, tạo điều kiện cho việc tổng hợp danh sách vấn đề một cách hiệu quả hơn. [T01-077, T01-079]},{",
+      "citations": [
+        "T01-078",
+        "T01-080"
+      ]
+    },
+    {
+      "text": "Các bạn có thể làm việc nhóm để tương tác và chọn ra giải pháp, sau khi đã xác định ưu tiên thông qua ma trận tác động – nỗ lực.",
+      "citations": [
+        "T01-080"
+      ]
+    }
+  ],
+  "concepts": [
+    "Five Whys",
+    "impact-effort matrix",
+    "problem statement",
+    "user observation",
+    "behavior log"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-074",
+    "T01-075",
+    "T01-076",
+    "T01-077",
+    "T01-078",
+    "T01-079",
+    "T01-080"
+  ],
+  "covered_chunk_ids": [
+    "T01-075",
+    "T01-076",
+    "T01-077",
+    "T01-078",
+    "T01-079",
+    "T01-080"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "aa34190fe956e347b61489d9f06ceb05306d625d2ef7e2eef2c2d5d0247c274e",
+  "prompt_version": "v2",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T19:45:00.014572Z"
+}

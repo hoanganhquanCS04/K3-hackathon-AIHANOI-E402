@@ -369,7 +369,29 @@ def screen_session(session: dict) -> None:
 
         render_suggestions(session)
 
-        if typed := st.chat_input("Ví dụ: tóm tắt phần I cho tôi"):
+        # Composer chat — đã được style trong theme.py (khung gradient + avatar + nút
+        # gửi bo tròn). Dùng st.text_input bên trong khung này thay cho
+        # st.chat_input, vì widget chat_input render font không hỗ trợ tiếng Việt
+        # (placeholder và giá trị nhập đều ra ô vuông).
+        st.markdown('<div class="chat-composer">'
+                    '<div class="avatar">V</div>'
+                    '<div class="input-slot">', unsafe_allow_html=True)
+        with st.form(key="chat", clear_on_submit=True):
+            typed = st.text_input(
+                "Câu hỏi",
+                placeholder="Hỏi gì về buổi này…  (ví dụ: tóm phần 1)",
+                label_visibility="collapsed",
+            )
+            sent = st.form_submit_button("Gửi", type="primary")
+        st.markdown('</div>'
+                    '<div class="send-slot">', unsafe_allow_html=True)
+        # nút phụ rỗng để Streamlit dành chỗ cho layout; nút thật đã nằm trong form ở trên
+        st.markdown('</div></div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="chat-hint">'
+            'Nhấn <kbd>Enter</kbd> để gửi · hoặc bấm một gợi ý ở trên.'
+            '</div>', unsafe_allow_html=True)
+        if sent and typed:
             st.session_state.pending = typed
             st.rerun()
 
