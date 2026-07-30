@@ -36,7 +36,7 @@ from pathlib import Path
 from typing import Optional
 from dataclasses import dataclass, field
 
-sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from neo4j import GraphDatabase
 from dotenv import load_dotenv
