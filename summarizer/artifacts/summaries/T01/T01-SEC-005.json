@@ -1,0 +1,96 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-005",
+  "section_title": "Bài tập: bài toán trợ giảng cho lớp 1000 học viên",
+  "section_order": 5,
+  "abstract": "Mục này trình bày một bài tập về việc sử dụng AI để hỗ trợ lớp học có 1000 học viên với số lượng trợ giảng hạn chế.",
+  "key_points": [
+    {
+      "text": "Lớp học có khoảng 1000 học viên và số lượng trợ giảng có hạn.",
+      "citations": [
+        "T01-034"
+      ]
+    },
+    {
+      "text": "Một số giải pháp đề xuất bao gồm tự động chấm bài, tổng hợp báo cáo lớp học, và hỗ trợ thảo luận.",
+      "citations": [
+        "T01-036"
+      ]
+    },
+    {
+      "text": "Cần xác định rõ pain point của học viên để phát triển giải pháp hiệu quả.",
+      "citations": [
+        "T01-039"
+      ]
+    },
+    {
+      "text": "Xây dựng sản phẩm cho chính mình là điểm khởi đầu tốt để hiểu rõ nhu cầu và vấn đề.",
+      "citations": [
+        "T01-040"
+      ]
+    },
+    {
+      "text": "Dogfooding là chiến lược xây dựng sản phẩm mà bạn là người dùng chính của sản phẩm đó.",
+      "citations": [
+        "T01-042"
+      ]
+    }
+  ],
+  "concepts": [
+    "AI",
+    "dogfood"
+  ],
+  "examples": [],
+  "student_questions": [
+    {
+      "text": "Khi học viên đặt câu hỏi, em sẽ phân tích nội dung: nếu câu dễ thì tự trả lời, nếu phức tạp thì tách chủ đề chuyển trợ giảng có chuyên môn.",
+      "citations": [
+        "T01-037"
+      ]
+    },
+    {
+      "text": "Tại sao lại cần AI, khâu nào đang tốn nhiều nhân lực nhất, điều gì có thể tối ưu trước khi áp dụng AI?",
+      "citations": [
+        "T01-038"
+      ]
+    },
+    {
+      "text": "Xây dựng cho ai?",
+      "citations": [
+        "T01-038"
+      ]
+    }
+  ],
+  "source_chunk_ids": [
+    "T01-034",
+    "T01-035",
+    "T01-036",
+    "T01-037",
+    "T01-038",
+    "T01-039",
+    "T01-040",
+    "T01-041",
+    "T01-042",
+    "T01-043"
+  ],
+  "covered_chunk_ids": [
+    "T01-034",
+    "T01-036",
+    "T01-037",
+    "T01-038",
+    "T01-039",
+    "T01-040",
+    "T01-042"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [
+    "T01-035"
+  ],
+  "content_hash": "a610e87d6ae6b2512499da17525370adb3fb6789f2e379c8477772819a513d73",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:40:53.015735Z"
+}

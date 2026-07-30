@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T01",
+  "section_id": "T01-SEC-009",
+  "section_title": "Phân kỳ – hội tụ và các kỹ thuật khám phá vấn đề",
+  "section_order": 9,
+  "abstract": "Mục này trình bày về quy trình phân kỳ và hội tụ trong thiết kế giải pháp, cùng với vai trò của AI trong việc khám phá và xác định vấn đề kinh doanh.",
+  "key_points": [
+    {
+      "text": "Quy trình thiết kế giải pháp bao gồm hai pha: phân kỳ để mở rộng không gian khám phá và hội tụ để tìm ra giải pháp.",
+      "citations": [
+        "T01-069"
+      ]
+    },
+    {
+      "text": "AI có thể hỗ trợ trong việc mở rộng và phân tích các giải pháp, giúp tăng khả năng tìm ra lựa chọn tốt hơn.",
+      "citations": [
+        "T01-070"
+      ]
+    },
+    {
+      "text": "Các kỹ thuật khám phá như quan sát, phỏng vấn và khảo sát giúp thu thập nhiều insight từ người dùng.",
+      "citations": [
+        "T01-071"
+      ]
+    },
+    {
+      "text": "Quan sát thực tế là kỹ năng quan trọng, giúp hiểu rõ hơn về hành vi của người dùng.",
+      "citations": [
+        "T01-072"
+      ]
+    },
+    {
+      "text": "Nhiều startup thành công nhờ vào việc quan sát thực tế để phát triển sản phẩm phù hợp với nhu cầu của người dùng.",
+      "citations": [
+        "T01-073"
+      ]
+    }
+  ],
+  "concepts": [
+    "phân kỳ",
+    "hội tụ",
+    "design thinking",
+    "prototype",
+    "insight",
+    "quan sát"
+  ],
+  "examples": [
+    {
+      "text": "Một nghiên cứu cho thấy một team phát triển sản phẩm xây ba prototype và đưa cho người dùng thì chất lượng tốt hơn so với chỉ xây một cái.",
+      "citations": [
+        "T01-070"
+      ]
+    },
+    {
+      "text": "NotebookLM là một sản phẩm nổi tiếng của Google, xuất phát từ một dự án Google Labs, với cách tiếp cận giúp người dùng chọn lọc dữ liệu.",
+      "citations": [
+        "T01-072"
+      ]
+    },
+    {
+      "text": "Một startup đã xây dựng một app gọi món cho nhà hàng bằng cách làm việc thực tế tại nhà hàng để hiểu ngành.",
+      "citations": [
+        "T01-073"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T01-069",
+    "T01-070",
+    "T01-071",
+    "T01-072",
+    "T01-073"
+  ],
+  "covered_chunk_ids": [
+    "T01-069",
+    "T01-070",
+    "T01-071",
+    "T01-072",
+    "T01-073"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "a2d2e88bba130b88ff3862ecde8012bb7111bcc6216d8d869734b59a1f0e9e5a",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:40:59.626917Z"
+}

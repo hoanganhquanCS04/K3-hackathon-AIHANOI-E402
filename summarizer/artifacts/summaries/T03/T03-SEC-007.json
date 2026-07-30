@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T03",
+  "section_id": "T03-SEC-007",
+  "section_title": "Lời giải: tách phần deterministic ra khỏi LLM",
+  "section_order": 7,
+  "abstract": "Nội dung chính của buổi giảng là tách biệt phần deterministic ra khỏi LLM trong việc giải quyết bài toán, nhấn mạnh tầm quan trọng của logic và công thức toán trong việc đảm bảo tính chính xác.",
+  "key_points": [
+    {
+      "text": "Bài toán đơn giản có thể được giải bằng công thức toán, và là deterministic.",
+      "citations": [
+        "T03-074"
+      ]
+    },
+    {
+      "text": "Cần xác định tính chất của bài toán để có giải pháp hiệu quả.",
+      "citations": [
+        "T03-076"
+      ]
+    },
+    {
+      "text": "Bài toán khó là tập hợp của những bài toán dễ.",
+      "citations": [
+        "T03-077"
+      ]
+    },
+    {
+      "text": "Model là mô hình xác suất thống kê, không phải thứ gì đó chắc chắn.",
+      "citations": [
+        "T03-078"
+      ]
+    },
+    {
+      "text": "Cần lưu tâm đến pain point, workflow, cost và người phê duyệt trong dự án.",
+      "citations": [
+        "T03-081"
+      ]
+    }
+  ],
+  "concepts": [
+    "deterministic",
+    "LLM",
+    "tool call",
+    "function code",
+    "safety"
+  ],
+  "examples": [
+    {
+      "text": "Ví dụ bài toán: bạn Nam có hai cái kẹo, mẹ bạn ấy cho thêm hai cái kẹo nữa, hỏi bạn ấy có mấy cái kẹo.",
+      "citations": [
+        "T03-075"
+      ]
+    },
+    {
+      "text": "Ví dụ hỏi 'hãy cho tôi biết số lượng ký tự R trong chữ strawberry'.",
+      "citations": [
+        "T03-078"
+      ]
+    },
+    {
+      "text": "Giống như một cái xe tự hành, phải có thêm một lớp safety.",
+      "citations": [
+        "T03-080"
+      ]
+    }
+  ],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T03-074",
+    "T03-075",
+    "T03-076",
+    "T03-077",
+    "T03-078",
+    "T03-079",
+    "T03-080",
+    "T03-081",
+    "T03-082"
+  ],
+  "covered_chunk_ids": [
+    "T03-074",
+    "T03-075",
+    "T03-076",
+    "T03-077",
+    "T03-078",
+    "T03-080",
+    "T03-081"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [
+    "T03-082"
+  ],
+  "content_hash": "dd03a9fc1bd3f05fc21434b888de05f388a74b874b5a70f430c3f046394cd8b3",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:42:39.979830Z"
+}

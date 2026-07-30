@@ -1,0 +1,76 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-006",
+  "section_title": "Cuộc đua AI sau ChatGPT",
+  "section_order": 6,
+  "abstract": "Bài giảng trình bày về sự phát triển của AI sau sự ra đời của ChatGPT, sự cạnh tranh giữa các công ty như Google và OpenAI, cũng như các chiến lược của Trung Quốc trong lĩnh vực này.",
+  "key_points": [
+    {
+      "text": "OpenAI là công ty đầu tiên đưa ChatGPT ra thị trường đại chúng.",
+      "citations": [
+        "T04-041"
+      ]
+    },
+    {
+      "text": "ChatGPT đã tạo ra một sự thay đổi lớn trong ngành AI và các team nghiên cứu đã chuyển dịch theo hướng này.",
+      "citations": [
+        "T04-042"
+      ]
+    },
+    {
+      "text": "Google đã thành lập team làm Google Bard ngay sau khi ChatGPT ra đời, nhưng dự án này không thành công.",
+      "citations": [
+        "T04-043"
+      ]
+    },
+    {
+      "text": "Trung Quốc sử dụng chiến thuật chưng cất từ các mô hình lớn để phát triển AI.",
+      "citations": [
+        "T04-044"
+      ]
+    },
+    {
+      "text": "Người dùng có thể ứng dụng AI để cải thiện công việc và xây dựng sản phẩm AI.",
+      "citations": [
+        "T04-045"
+      ]
+    }
+  ],
+  "concepts": [
+    "trí tuệ nhân tạo tổng quát",
+    "Google Bard",
+    "Gemini",
+    "Claude",
+    "Kimi",
+    "chưng cất mô hình lớn"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-041",
+    "T04-042",
+    "T04-043",
+    "T04-044",
+    "T04-045"
+  ],
+  "covered_chunk_ids": [
+    "T04-041",
+    "T04-042",
+    "T04-043",
+    "T04-044",
+    "T04-045"
+  ],
+  "has_unclear": true,
+  "unclear_chunk_ids": [
+    "T04-041",
+    "T04-042",
+    "T04-043"
+  ],
+  "activity_chunk_ids": [],
+  "content_hash": "685e3f6759d97020ecc5743cb59038c210d8e10dd28b6f20f0a594b735df3350",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:15.494070Z"
+}

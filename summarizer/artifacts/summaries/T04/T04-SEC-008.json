@@ -1,0 +1,63 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-008",
+  "section_title": "Attention, multi-head và bài học quản lý context",
+  "section_order": 8,
+  "abstract": "Nội dung chính của mục này là khái niệm attention trong mô hình Transformer và tầm quan trọng của việc quản lý context khi làm việc với AI.",
+  "key_points": [
+    {
+      "text": "Attention trong kiến trúc Transformer giúp mô hình chú ý đến những thông tin quan trọng trong ngữ cảnh.",
+      "citations": [
+        "T04-053"
+      ]
+    },
+    {
+      "text": "Mô hình Transformer có khả năng nhận diện các từ quan trọng và tạo ra ma trận trọng số để xác định mối liên hệ giữa các từ.",
+      "citations": [
+        "T04-054"
+      ]
+    },
+    {
+      "text": "Multi-head là kỹ thuật cho phép mô hình nhìn nhận từ nhiều góc độ khác nhau để phát hiện các đặc trưng khác nhau trong văn bản.",
+      "citations": [
+        "T04-056"
+      ]
+    },
+    {
+      "text": "Quản lý sự chú ý và context là rất quan trọng để tối ưu hóa hiệu suất và tiết kiệm chi phí khi làm việc với AI.",
+      "citations": [
+        "T04-057"
+      ]
+    }
+  ],
+  "concepts": [
+    "attention",
+    "Transformer",
+    "multi-head",
+    "context"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-053",
+    "T04-054",
+    "T04-055",
+    "T04-056",
+    "T04-057"
+  ],
+  "covered_chunk_ids": [
+    "T04-053",
+    "T04-054",
+    "T04-056",
+    "T04-057"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [],
+  "content_hash": "2b3fd53110cd07902a34feec5a2bcca71ab193d3f96cc05c78f2ab25b0244907",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:15.491595Z"
+}

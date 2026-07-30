@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "summary_type": "section",
+  "session_id": "T04",
+  "section_id": "T04-SEC-010",
+  "section_title": "Thí nghiệm bàn cờ, giới hạn kiến thức và các mức tiếp cận mô hình",
+  "section_order": 10,
+  "abstract": "Nội dung chính của mục này là thí nghiệm bàn cờ nhằm kiểm tra khả năng hiểu biết của mô hình LLM và giới hạn kiến thức của nó.",
+  "key_points": [
+    {
+      "text": "Thí nghiệm bàn cờ 8x8 được thiết kế để kiểm tra khả năng dự đoán nước đi tiếp theo của mô hình LLM.",
+      "citations": [
+        "T04-064"
+      ]
+    },
+    {
+      "text": "Mô hình LLM có thể dựng được một bàn cờ trong đầu để dự đoán, không chỉ đơn thuần dựa vào xác suất.",
+      "citations": [
+        "T04-066"
+      ]
+    },
+    {
+      "text": "Mô hình LLM chỉ được đào tạo dựa trên dữ liệu có sẵn và không có khả năng cập nhật thông tin mới nhất.",
+      "citations": [
+        "T04-067"
+      ]
+    },
+    {
+      "text": "Để kiểm soát mô hình LLM tốt hơn, người dùng cần phải đối diện với sự phức tạp hơn trong việc sử dụng API.",
+      "citations": [
+        "T04-068"
+      ]
+    },
+    {
+      "text": "Nền tảng tương tác giúp người dùng hiểu về kiến trúc Transformer và cách nó hoạt động dựa trên xác suất.",
+      "citations": [
+        "T04-070"
+      ]
+    },
+    {
+      "text": "Temperature và sampling là các chỉ số quan trọng trong việc điều chỉnh độ sáng tạo của mô hình LLM.",
+      "citations": [
+        "T04-071"
+      ]
+    }
+  ],
+  "concepts": [
+    "LLM",
+    "black box",
+    "context",
+    "API",
+    "temperature",
+    "sampling",
+    "top k",
+    "top p"
+  ],
+  "examples": [],
+  "student_questions": [],
+  "source_chunk_ids": [
+    "T04-064",
+    "T04-065",
+    "T04-066",
+    "T04-067",
+    "T04-068",
+    "T04-069",
+    "T04-070",
+    "T04-071"
+  ],
+  "covered_chunk_ids": [
+    "T04-064",
+    "T04-066",
+    "T04-067",
+    "T04-068",
+    "T04-070",
+    "T04-071"
+  ],
+  "has_unclear": false,
+  "unclear_chunk_ids": [],
+  "activity_chunk_ids": [
+    "T04-065",
+    "T04-069"
+  ],
+  "content_hash": "30a5a6f5eafa2edac97d34308eaae8bbd89fa43960e1a1788a6ce5f549a6d089",
+  "prompt_version": "v1",
+  "model": "gpt-4o-mini",
+  "generated_at": "2026-07-30T09:44:17.640541Z"
+}
