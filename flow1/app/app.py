@@ -133,7 +133,7 @@ def handle(query: str, session: dict, toggles: Toggles | None = None) -> None:
         say("ai", "part", result)
         return
 
-    say("ai", "answer", answer_query(session, query))
+    say("ai", "answer", answer_query(session, query, toggles=toggles))
 
 
 # ─────────────────────────────────────────────────────────────────────────────
