@@ -46,7 +46,7 @@
 - Create: `pyproject.toml`, `conftest.py`
 - Modify: `.python-version`, `.gitignore`
 - Move: `codebase/` → `flow1/` (src-layout) · `src/graph_db/` + `neo4j/` → `graph-db/` · `scripts/test_qdrant.py`, `scripts/test_exist_collection.py` → `vector-db/scripts/` · `scripts/check_neo4j.py` → `graph-db/scripts/`
-- Delete: `PROJECT_STRUCTURE.md`, `requirements.txt`, `src/`
+- Delete: `PROJECT_STRUCTURE.md`, `requirements.txt`, `src/`, `FLOW_IMPLEMENTATION.md` ở gốc (bản trùng của `docs/FLOW_IMPLEMENTATION.md`)
 
 **Interfaces:**
 - Consumes: không có (task đầu)
@@ -83,6 +83,14 @@ git mv scripts/test_qdrant.py scripts/test_exist_collection.py vector-db/scripts
 git rm -r --cached src neo4j 2>/dev/null; rm -rf src neo4j
 git rm PROJECT_STRUCTURE.md requirements.txt
 ```
+
+`FLOW_IMPLEMENTATION.md` tồn tại ở **cả hai nơi** (gốc và `docs/`). Giữ bản `docs/`, xoá bản gốc — nhưng so trước:
+
+```bash
+diff FLOW_IMPLEMENTATION.md docs/FLOW_IMPLEMENTATION.md && git rm FLOW_IMPLEMENTATION.md
+```
+
+Nếu `diff` báo khác nhau thì **dừng lại báo**, đừng đoán bản nào mới hơn.
 
 - [ ] **Step 4: Viết `pyproject.toml` ở gốc**
 
@@ -1992,6 +2000,41 @@ Trong `_run_index`, bỏ nhánh `with_embedding` và bỏ argument tương ứng
 - [ ] **Step 5: Sửa test cũ theo hợp đồng mới**
 
 Trong `flow1/tests/test_flow1_index.py` và `flow1/tests/test_flow1_retrieve.py`, đổi mọi chỗ `chunks, bm25 = load(...)` thành `store = load(...)` rồi dùng `store.atomics` / `store.bm25`. Mọi lời gọi `retrieve(..., store=(chunks, bm25))` đổi thành `store=build_store(segs)`. Mọi test kỳ vọng `retrieve` trả chunk gộp theo thứ tự BM25 thuần phải thêm `backend=NullBackend("test")` để không chạm mạng.
+
+- [ ] **Step 5b: Viết lại `test_flow1_embed.py`**
+
+File này có 12 test, **6 test dựa vào nhánh e5 local mà task này gỡ bỏ**: `load_embeddings`, `retrieve(embeddings=...)`, `retrieve(query_vector=...)`. Giữ 5 test của `rrf` (hàm đó sống sót), xoá 6 test kia — chúng đã chuyển thành `test_flow1_hybrid.py`.
+
+Test thứ 12 cần xử riêng:
+
+```python
+def test_embed_module_names_a_local_model_and_no_remote_endpoint():
+```
+
+Test này khoá cứng quyết định *"embedding phải chạy local"* — đúng thứ spec mới cố ý lật. **Không xoá trắng.** Điều thật sự cần bảo vệ theo [canvas §4.3](docs/superpowers/specs/canvas-va-luong-du-lieu.md) không phải "model phải local" mà là **"không embed lại cả corpus qua API"**. Thay bằng:
+
+```python
+def test_flow1_khong_co_duong_nao_embed_hang_loat_qua_api():
+    """Dieu 4 bao mat data: gui ca corpus ra provider ngoai KHONG phai
+    'phan toi thieu can thiet'. Corpus da embed mot lan boi vector-db va
+    ket qua nam trong Qdrant. flow1 chi duoc embed DUNG CAU HOI.
+
+    Test nay thay cho test_embed_module_names_a_local_model_and_no_remote_endpoint:
+    quyet dinh 'model phai local' da bi spec 2026-07-30-hybrid-rag lat, nhung
+    bao dam ben duoi no thi khong.
+    """
+    from pathlib import Path
+
+    src = Path(__file__).resolve().parents[1] / "src" / "flow1"
+    cam = ("build_embeddings", "embed_all", "embed_corpus", "encode(")
+    for file in src.rglob("*.py"):
+        text = file.read_text(encoding="utf-8")
+        for tu in cam:
+            assert tu not in text, (
+                f"{file.name} co '{tu}' — flow1 chi duoc embed cau hoi, "
+                f"khong duoc embed hang loat. Xem canvas §4.3."
+            )
+```
 
 - [ ] **Step 6: Chạy test**
 
