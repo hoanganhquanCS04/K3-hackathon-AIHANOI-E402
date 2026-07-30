@@ -2,6 +2,8 @@
 
 import math
 
+import pytest
+
 from flow1.index import build
 from flow1.models import Chunk
 from flow1.retrieve import gate_stats, retrieve
@@ -70,6 +72,14 @@ def test_gate_stats_uses_the_real_count_when_fewer_than_five_scores():
 def test_a_flat_distribution_gives_a_ratio_near_one():
     top1, ratio = gate_stats([4.0, 4.0, 4.0, 4.0, 4.0])
     assert ratio == 1.0
+
+
+def test_gate_stats_raises_when_input_is_not_sorted_descending():
+    # Bảo vệ tiền điều kiện: nếu Task 13 lỡ truyền danh sách điểm đã fuse (RRF)
+    # thay vì BM25 thô đã sắp giảm dần, phải nổ ngay tại đây, không được lặng
+    # lẽ trả về ratio ~hằng số 1.02 rồi cổng 1 mất tác dụng trong im lặng.
+    with pytest.raises(ValueError):
+        gate_stats([1.0, 5.0, 3.0, 2.0, 1.0])
 
 
 # --- retrieve --------------------------------------------------------------
