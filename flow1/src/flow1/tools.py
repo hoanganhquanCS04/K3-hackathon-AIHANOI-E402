@@ -92,16 +92,19 @@ def tra_cuu(
     from flow1.rewrite import rewrite_query
 
     q = rewrite_query(query, call=rewrite_call, trace=trace)
-    return ask(
-        query,
-        session=session,
-        store=store,
-        trace=trace,
-        rewritten=q,
-        toggles=toggles,
-        retrievers=retrievers,
-        **kw,
-    )
+    ask_kwargs = {
+        "session": session,
+        "store": store,
+        "trace": trace,
+        "rewritten": q,
+        "toggles": toggles,
+        "retrievers": retrievers,
+    }
+    for k in ("segs", "path", "classify_call", "answer_call", "check_citations"):
+        if k in kw:
+            ask_kwargs[k] = kw[k]
+
+    return ask(query, **ask_kwargs)
 
 
 def _load_summary_that(session_id: str) -> dict[str, Any]:

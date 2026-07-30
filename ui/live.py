@@ -279,7 +279,8 @@ def answer_query(session: dict, query: str, toggles=None) -> dict:
 
     agent_res = agent_run(
         query,
-        tool_kwargs={"session": session["id"], "toggles": toggles},
+        session=session["id"],
+        toggles=toggles,
         trace=trace,
     )
     elapsed = time.perf_counter() - started
