@@ -1,0 +1,2081 @@
+{
+  "sessions": [
+    {
+      "id": "01",
+      "title": "Day 2 (sáng) — Xác định bài toán kinh doanh cho AI",
+      "locate_confidence": "cao",
+      "locate_confidence_note": "cao (khớp title bài học trong chatlog tutor)",
+      "n_sections": 11,
+      "n_segments": 89,
+      "n_activity": 2,
+      "n_unclear": 14,
+      "n_student": 8,
+      "parts": [
+        {
+          "idx": 1,
+          "title": "Kỹ năng xác định bài toán từ yêu cầu mơ hồ → Product manager, project manager và văn hoá làm product",
+          "title_auto": true,
+          "section_titles": [
+            "Kỹ năng xác định bài toán từ yêu cầu mơ hồ",
+            "Product manager, project manager và văn hoá làm product"
+          ],
+          "section_range": [
+            1,
+            2
+          ],
+          "n_chars": 13515,
+          "n_segments": 17,
+          "seg_ids": [
+            "T01-001",
+            "T01-002",
+            "T01-003",
+            "T01-004",
+            "T01-005",
+            "T01-006",
+            "T01-007",
+            "T01-008",
+            "T01-009",
+            "T01-010",
+            "T01-011",
+            "T01-012",
+            "T01-013",
+            "T01-014",
+            "T01-015",
+            "T01-016",
+            "T01-017"
+          ],
+          "n_activity": 0,
+          "n_unclear": 2,
+          "n_student": 1,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T01-016",
+              "text": "Theo nghiên cứu về não bộ thì não bộ của chúng ta hay đi theo thói quen.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T01-017",
+              "text": "Rồi, hôm nay mình sẽ đi vào ý chính với câu hỏi trọng tâm: xác định một bài toán thực sự có cần với ai hay không — một bài toán đáng để làm — chọn một giải pháp phù…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-011",
+              "text": "Khi làm product, không có ai đến bảo bạn \"hãy làm cái đấy đi\".",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 2,
+          "title": "Phát triển sản phẩm AI có gì khác → Từ đề bài mơ hồ đến vấn đề thực sự",
+          "title_auto": true,
+          "section_titles": [
+            "Phát triển sản phẩm AI có gì khác",
+            "Từ đề bài mơ hồ đến vấn đề thực sự"
+          ],
+          "section_range": [
+            3,
+            4
+          ],
+          "n_chars": 14215,
+          "n_segments": 16,
+          "seg_ids": [
+            "T01-018",
+            "T01-019",
+            "T01-020",
+            "T01-021",
+            "T01-022",
+            "T01-023",
+            "T01-024",
+            "T01-025",
+            "T01-026",
+            "T01-027",
+            "T01-028",
+            "T01-029",
+            "T01-030",
+            "T01-031",
+            "T01-032",
+            "T01-033"
+          ],
+          "n_activity": 0,
+          "n_unclear": 4,
+          "n_student": 1,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T01-029",
+              "text": "Có một tài liệu của Google — People + AI Guidebook — mọi người click vào cái link.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-033",
+              "text": "Có những việc, ví dụ như có những bài toán mỗi tuần sẽ phải làm cái report một lần.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-020",
+              "text": "Mọi người cứ thử nhớ lại mà xem: cách đây 4 năm chưa có ChatGPT, con người đâu có kỳ vọng về việc là tôi có thể hỏi một cỗ máy và nó trả lời mọi thứ đâu, đúng không?",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 3,
+          "title": "Bài tập → Mô hình Double Diamond",
+          "title_auto": true,
+          "section_titles": [
+            "Bài tập: bài toán trợ giảng cho lớp 1000 học viên",
+            "Tri thức ẩn của chuyên gia và việc tìm đúng vấn đề",
+            "Mô hình Double Diamond: làm đúng cái sai hay làm sai cái đúng?"
+          ],
+          "section_range": [
+            5,
+            7
+          ],
+          "n_chars": 14736,
+          "n_segments": 28,
+          "seg_ids": [
+            "T01-034",
+            "T01-035",
+            "T01-036",
+            "T01-037",
+            "T01-038",
+            "T01-039",
+            "T01-040",
+            "T01-041",
+            "T01-042",
+            "T01-043",
+            "T01-044",
+            "T01-045",
+            "T01-046",
+            "T01-047",
+            "T01-048",
+            "T01-049",
+            "T01-050",
+            "T01-051",
+            "T01-052",
+            "T01-053",
+            "T01-054",
+            "T01-055",
+            "T01-056",
+            "T01-057",
+            "T01-058",
+            "T01-059",
+            "T01-060",
+            "T01-061"
+          ],
+          "n_activity": 1,
+          "n_unclear": 4,
+          "n_student": 6,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T01-040",
+              "text": "Đấy thường là một trong những cách mà rất nhiều sản phẩm thành công trên thị trường xuất phát điểm chỉ là một tool nội bộ: họ thực sự trải nghiệm được cái nỗi đau…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-042",
+              "text": "Dogfooding là một cách thức xây dựng sản phẩm mà bạn là user và bạn dùng chính sản phẩm của bạn — bạn làm ra xong bạn \"ăn\" chính nó.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-039",
+              "text": "Mình nghĩ đầu tiên là chúng ta đang có một câu hỏi vẫn khá rộng: câu hỏi phía trên chỉ đơn giản là lớp đông và số lượng trợ giảng có hạn — chưa phải là một bài toán…",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 4,
+          "title": "First Principle Thinking → Ma trận tác động – nỗ lực (impact-effort matrix)",
+          "title_auto": true,
+          "section_titles": [
+            "First Principle Thinking",
+            "Phân kỳ – hội tụ và các kỹ thuật khám phá vấn đề",
+            "Ma trận tác động – nỗ lực (impact-effort matrix)"
+          ],
+          "section_range": [
+            8,
+            10
+          ],
+          "n_chars": 15470,
+          "n_segments": 19,
+          "seg_ids": [
+            "T01-062",
+            "T01-063",
+            "T01-064",
+            "T01-065",
+            "T01-066",
+            "T01-067",
+            "T01-068",
+            "T01-069",
+            "T01-070",
+            "T01-071",
+            "T01-072",
+            "T01-073",
+            "T01-074",
+            "T01-075",
+            "T01-076",
+            "T01-077",
+            "T01-078",
+            "T01-079",
+            "T01-080"
+          ],
+          "n_activity": 0,
+          "n_unclear": 3,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T01-072",
+              "text": "Trong này có kỹ năng liên quan đến quan sát — mình nghĩ nó rất quan trọng.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-078",
+              "text": "Còn ma trận tác động – nỗ lực là bạn đánh giá sau khi gom xong rồi: bạn gom thành các đầu mục lớn, thành các cụm; các cụm liên quan đến nhau có thể cùng giải quyết…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-077",
+              "text": "Bên trái là chúng ta mở rộng và ra được một list rất nhiều; cái bên phải là một số kỹ thuật để xử lý.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 5,
+          "title": "Vòng lặp HCD và bài tập cá nhân",
+          "title_auto": true,
+          "section_titles": [
+            "Vòng lặp HCD và bài tập cá nhân"
+          ],
+          "section_range": [
+            11,
+            11
+          ],
+          "n_chars": 6164,
+          "n_segments": 9,
+          "seg_ids": [
+            "T01-081",
+            "T01-082",
+            "T01-083",
+            "T01-084",
+            "T01-085",
+            "T01-086",
+            "T01-087",
+            "T01-088",
+            "T01-089"
+          ],
+          "n_activity": 1,
+          "n_unclear": 1,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T01-083",
+              "text": "Mình xác định được đối tượng rồi đúng không, xong mình sẽ quan sát.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-086",
+              "text": "Cái này quay trở lại những câu hỏi nguyên bản — nó cũng là một không gian, một cách để tạo ra những ý tưởng mới.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T01-085",
+              "text": "Thế thì mình nghĩ cái khiến chúng ta có thể nhanh chóng xây dựng được sản phẩm và tối ưu, đấy là bạn quay cái vòng lặp này nhiều nhất có thể — mỗi lần chúng ta sẽ học…",
+              "has_student_speech": false,
+              "has_unclear": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "02",
+      "title": "Day 2 — Chỉ số thành công & mức tự động hoá (phần sau buổi)",
+      "locate_confidence": "vừa",
+      "locate_confidence_note": "vừa",
+      "n_sections": 5,
+      "n_segments": 43,
+      "n_activity": 6,
+      "n_unclear": 10,
+      "n_student": 0,
+      "parts": [
+        {
+          "idx": 1,
+          "title": "Nhận xét bài tập ma trận tác động – nỗ lực",
+          "title_auto": true,
+          "section_titles": [
+            "Nhận xét bài tập ma trận tác động – nỗ lực"
+          ],
+          "section_range": [
+            1,
+            1
+          ],
+          "n_chars": 2911,
+          "n_segments": 8,
+          "seg_ids": [
+            "T02-001",
+            "T02-002",
+            "T02-003",
+            "T02-004",
+            "T02-005",
+            "T02-006",
+            "T02-007",
+            "T02-008"
+          ],
+          "n_activity": 4,
+          "n_unclear": 0,
+          "n_student": 0,
+          "activity_heavy": true,
+          "quotes": [
+            {
+              "seg_id": "T02-006",
+              "text": "Cái này thì đúng là build được nhanh, nhưng có win được không thì không biết.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T02-007",
+              "text": "Về ý bật báo thức xong lại tắt để ngủ tiếp: có một cái app — mình quên mất tên rồi — ý tưởng là bạn cài báo thức, nhưng khi dậy bạn phải chơi một cái game, hoặc cài…",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 2,
+          "title": "Từ quick win đến phát biểu bài toán",
+          "title_auto": true,
+          "section_titles": [
+            "Từ quick win đến phát biểu bài toán"
+          ],
+          "section_range": [
+            2,
+            2
+          ],
+          "n_chars": 7192,
+          "n_segments": 10,
+          "seg_ids": [
+            "T02-009",
+            "T02-010",
+            "T02-011",
+            "T02-012",
+            "T02-013",
+            "T02-014",
+            "T02-015",
+            "T02-016",
+            "T02-017",
+            "T02-018"
+          ],
+          "n_activity": 0,
+          "n_unclear": 0,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T02-017",
+              "text": "Đây là một ví dụ đã điền — hơi nhỏ xíu — một phác thảo rất đơn giản đầu tiên khi bạn xác định ra đề bài và bắt đầu có ý rất nhanh về các chỉ số để đánh giá việc đấy…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T02-018",
+              "text": "Và cái quan trọng nhất — việc này nãy các bạn cũng vừa làm thử — là chúng ta phải định lượng được bài toán đấy.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T02-015",
+              "text": "Đây là một ví dụ về cái khung để viết một phát biểu vấn đề — bài toán đầu tiên.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 3,
+          "title": "Chỉ số thành công và đo lường sản phẩm",
+          "title_auto": true,
+          "section_titles": [
+            "Chỉ số thành công và đo lường sản phẩm"
+          ],
+          "section_range": [
+            3,
+            3
+          ],
+          "n_chars": 8123,
+          "n_segments": 12,
+          "seg_ids": [
+            "T02-019",
+            "T02-020",
+            "T02-021",
+            "T02-022",
+            "T02-023",
+            "T02-024",
+            "T02-025",
+            "T02-026",
+            "T02-027",
+            "T02-028",
+            "T02-029",
+            "T02-030"
+          ],
+          "n_activity": 1,
+          "n_unclear": 7,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T02-025",
+              "text": "Trong tracking sản phẩm sẽ có các chỉ số bạn đặt ra mục tiêu.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T02-026",
+              "text": "Giống như ngày hôm qua có công cụ Transformer Explainer mọi người xem ấy.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T02-028",
+              "text": "Một trong những nguyên lý của A/B testing là bạn chia thành hai tệp: một tệp control không có tác động gì, một tệp có tác động.",
+              "has_student_speech": false,
+              "has_unclear": true
+            }
+          ]
+        },
+        {
+          "idx": 4,
+          "title": "Automation và augmentation: chọn mức độ tự động hoá",
+          "title_auto": true,
+          "section_titles": [
+            "Automation và augmentation: chọn mức độ tự động hoá"
+          ],
+          "section_range": [
+            4,
+            4
+          ],
+          "n_chars": 2827,
+          "n_segments": 4,
+          "seg_ids": [
+            "T02-031",
+            "T02-032",
+            "T02-033",
+            "T02-034"
+          ],
+          "n_activity": 0,
+          "n_unclear": 0,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T02-032",
+              "text": "Automation nghĩa là tự động, augmentation là tăng cường — buổi 5 mọi người học sẽ có thêm phần kỹ hơn về automation và augmentation.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T02-033",
+              "text": "Thường người ta sẽ bắt đầu với augmentation trước — tăng cường trước, tức là luôn có con người giám sát ở đấy — sau đấy mới tăng dần mức độ automate lên theo cái phổ đấy.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T02-034",
+              "text": "Trong ma trận impact các bạn vừa làm cũng thế: việc nào impact lớn thì mình hoàn toàn có thể ưu tiên xử lý trước, xây dựng những automation trước.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 5,
+          "title": "Ba cấp độ kỹ thuật: rule-based, workflow, agent",
+          "title_auto": true,
+          "section_titles": [
+            "Ba cấp độ kỹ thuật: rule-based, workflow, agent"
+          ],
+          "section_range": [
+            5,
+            5
+          ],
+          "n_chars": 5984,
+          "n_segments": 9,
+          "seg_ids": [
+            "T02-035",
+            "T02-036",
+            "T02-037",
+            "T02-038",
+            "T02-039",
+            "T02-040",
+            "T02-041",
+            "T02-042",
+            "T02-043"
+          ],
+          "n_activity": 1,
+          "n_unclear": 3,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T02-037",
+              "text": "Lúc này, mặc dù rule-based không xử lý được nữa, nhưng nhìn chung nó vẫn có thể chia thành các bước lớn, thiết kế được thành workflow, và trong từng nút đấy chúng ta…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T02-040",
+              "text": "Còn xài thì cứ agent mà xài mọi người ạ — người ta đã build mạnh như thế rồi thì mình cứ xài thôi.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T02-039",
+              "text": "Và một cái quan trọng nữa: khi bạn đi một luồng phức tạp thì bạn sẽ rất khó kiểm soát, rất dễ bị sai.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "03",
+      "title": "Day 2 (chiều) — Soi bài toán các nhóm · tự động hoá & ràng buộc",
+      "locate_confidence": "vừa",
+      "locate_confidence_note": "vừa",
+      "n_sections": 19,
+      "n_segments": 154,
+      "n_activity": 10,
+      "n_unclear": 11,
+      "n_student": 19,
+      "parts": [
+        {
+          "idx": 1,
+          "title": "Giới thiệu giảng viên và định hướng khoá học → Bài toán nào dùng được LLM",
+          "title_auto": true,
+          "section_titles": [
+            "Giới thiệu giảng viên và định hướng khoá học",
+            "Ba track nghề nghiệp: AI Engineer, MLOps và AI PM",
+            "Bài toán nào dùng được LLM: case lập kế hoạch du lịch"
+          ],
+          "section_range": [
+            1,
+            3
+          ],
+          "n_chars": 20919,
+          "n_segments": 33,
+          "seg_ids": [
+            "T03-001",
+            "T03-002",
+            "T03-003",
+            "T03-004",
+            "T03-005",
+            "T03-006",
+            "T03-007",
+            "T03-008",
+            "T03-009",
+            "T03-010",
+            "T03-011",
+            "T03-012",
+            "T03-013",
+            "T03-014",
+            "T03-015",
+            "T03-016",
+            "T03-017",
+            "T03-018",
+            "T03-019",
+            "T03-020",
+            "T03-021",
+            "T03-022",
+            "T03-023",
+            "T03-024",
+            "T03-025",
+            "T03-026",
+            "T03-027",
+            "T03-028",
+            "T03-029",
+            "T03-030",
+            "T03-031",
+            "T03-032",
+            "T03-033"
+          ],
+          "n_activity": 4,
+          "n_unclear": 1,
+          "n_student": 1,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T03-032",
+              "text": "Kinh nghiệm tiếp theo khi các bạn đi làm nhá: thường sếp sẽ đưa bạn một yêu cầu rất là to luôn, khách hàng cũng thế.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-015",
+              "text": "Track thứ hai là MLOps: làm thế nào deploy được kết quả của ông AI engineer lên một hệ thống thực tế.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-021",
+              "text": "Chúng ta sẽ học những góc nhìn và những phương pháp để các bạn nhìn thấy được, trong hiện tại hoặc có thể trong tương lai, những lĩnh vực nào, những bài toán nào,…",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 2,
+          "title": "Giới hạn của LLM, tool calling và RAG → Bài toán sinh đề toán tự động",
+          "title_auto": true,
+          "section_titles": [
+            "Giới hạn của LLM, tool calling và RAG",
+            "Chọn dự án: giá trị cạnh tranh, metric và mindset đi làm",
+            "Bài toán sinh đề toán tự động — ý tưởng từ các nhóm"
+          ],
+          "section_range": [
+            4,
+            6
+          ],
+          "n_chars": 22531,
+          "n_segments": 40,
+          "seg_ids": [
+            "T03-034",
+            "T03-035",
+            "T03-036",
+            "T03-037",
+            "T03-038",
+            "T03-039",
+            "T03-040",
+            "T03-041",
+            "T03-042",
+            "T03-043",
+            "T03-044",
+            "T03-045",
+            "T03-046",
+            "T03-047",
+            "T03-048",
+            "T03-049",
+            "T03-050",
+            "T03-051",
+            "T03-052",
+            "T03-053",
+            "T03-054",
+            "T03-055",
+            "T03-056",
+            "T03-057",
+            "T03-058",
+            "T03-059",
+            "T03-060",
+            "T03-061",
+            "T03-062",
+            "T03-063",
+            "T03-064",
+            "T03-065",
+            "T03-066",
+            "T03-067",
+            "T03-068",
+            "T03-069",
+            "T03-070",
+            "T03-071",
+            "T03-072",
+            "T03-073"
+          ],
+          "n_activity": 0,
+          "n_unclear": 2,
+          "n_student": 13,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T03-043",
+              "text": "Tức là người PM phải viết ra được những cái metric đánh giá, để biết sau 3 tháng nếu không đạt được cái mục tiêu mình đặt ra thì mình phải tự biết là khả năng fail nó…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-036",
+              "text": "Quay lại — cái chốt đầu tiên các bạn cần phải để ý chính là cái problem của bạn và cái khả năng xử lý của LLM: nó có xử lý được không, hay là phải thêm những cái phần…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-037",
+              "text": "Khi các bạn đã xác định là cái bài toán mình có khả năng làm được bằng LLM rồi, thì các bạn phải nghĩ tiếp: các bạn đang muốn bán sản phẩm đúng không?",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 3,
+          "title": "Lời giải → Hậu quả khi sai sót, bảo mật và đánh giá bằng AI",
+          "title_auto": true,
+          "section_titles": [
+            "Lời giải: tách phần deterministic ra khỏi LLM",
+            "Chi phí vận hành: dựng con số trước khi trình sếp",
+            "Hậu quả khi sai sót, bảo mật và đánh giá bằng AI"
+          ],
+          "section_range": [
+            7,
+            9
+          ],
+          "n_chars": 24763,
+          "n_segments": 31,
+          "seg_ids": [
+            "T03-074",
+            "T03-075",
+            "T03-076",
+            "T03-077",
+            "T03-078",
+            "T03-079",
+            "T03-080",
+            "T03-081",
+            "T03-082",
+            "T03-083",
+            "T03-084",
+            "T03-085",
+            "T03-086",
+            "T03-087",
+            "T03-088",
+            "T03-089",
+            "T03-090",
+            "T03-091",
+            "T03-092",
+            "T03-093",
+            "T03-094",
+            "T03-095",
+            "T03-096",
+            "T03-097",
+            "T03-098",
+            "T03-099",
+            "T03-100",
+            "T03-101",
+            "T03-102",
+            "T03-103",
+            "T03-104"
+          ],
+          "n_activity": 2,
+          "n_unclear": 2,
+          "n_student": 5,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T03-090",
+              "text": "Như vậy sẽ có những hành vi sau này các bạn cần có một cái kiểm duyệt, ví dụ như gửi email.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-088",
+              "text": "Còn hậu quả khi sai sót thì hơi đặc thù một tí, nhưng chắc mình cũng sẽ nhắc, sau này các bạn sẽ gặp nhiều.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-098",
+              "text": "Cái mà em thiếu là em không hiểu về cái scope: em đặt ra một bài toán nhưng em không có scope của em.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 4,
+          "title": "Scope vận hành và ODD → Fine-tuning hay RAG",
+          "title_auto": true,
+          "section_titles": [
+            "Scope vận hành và ODD: hệ thống chạy đúng trong điều kiện nào",
+            "Scope, chi phí và đạo đức nghề nghiệp",
+            "Câu chuyện xe tự hành Cruise và rủi ro một phần vạn",
+            "Fine-tuning hay RAG — và cách thuyết phục sếp"
+          ],
+          "section_range": [
+            10,
+            13
+          ],
+          "n_chars": 21375,
+          "n_segments": 18,
+          "seg_ids": [
+            "T03-105",
+            "T03-106",
+            "T03-107",
+            "T03-108",
+            "T03-109",
+            "T03-110",
+            "T03-111",
+            "T03-112",
+            "T03-113",
+            "T03-114",
+            "T03-115",
+            "T03-116",
+            "T03-117",
+            "T03-118",
+            "T03-119",
+            "T03-120",
+            "T03-121",
+            "T03-122"
+          ],
+          "n_activity": 1,
+          "n_unclear": 3,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T03-122",
+              "text": "Đúng là cho dù các bạn chứng minh được dự án của bạn ok, [không nghe rõ], nhưng thực tế cái khoảng cách còn phải to hơn.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T03-119",
+              "text": "Cũng là kinh nghiệm cho các bạn: các bạn cũng đừng quá [không nghe rõ] cái kỹ thuật gọi là fine-tuning nhá.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T03-118",
+              "text": "Mình ví dụ: sau này hệ thống của các bạn dựa trên cái log để chạy, để tiết kiệm rất nhiều.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 5,
+          "title": "Hệ thống nhiều thành phần → Workflow pattern",
+          "title_auto": true,
+          "section_titles": [
+            "Hệ thống nhiều thành phần: khoanh vùng lỗi và UI/UX",
+            "Workflow pattern: chaining, routing, parallel và agent"
+          ],
+          "section_range": [
+            14,
+            15
+          ],
+          "n_chars": 20772,
+          "n_segments": 15,
+          "seg_ids": [
+            "T03-123",
+            "T03-124",
+            "T03-125",
+            "T03-126",
+            "T03-127",
+            "T03-128",
+            "T03-129",
+            "T03-130",
+            "T03-131",
+            "T03-132",
+            "T03-133",
+            "T03-134",
+            "T03-135",
+            "T03-136",
+            "T03-137"
+          ],
+          "n_activity": 0,
+          "n_unclear": 0,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T03-124",
+              "text": "Một hệ thống AI system không tốt là nó bị break ở bất kỳ phần nào là nó lại báo lên, hoặc cái luồng bị crash, hoặc tệ hơn nữa: người dùng chat xong con AI cứ xoay…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-127",
+              "text": "Cái UI/UX ở đây sẽ hỗ trợ khi hệ thống của bạn có vấn đề như lúc nãy mình bảo.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-133",
+              "text": "Ví dụ người dùng bảo các bạn tổng hợp cho họ 100 quyển sách chuyên ngành toán tốt nhất, mới nhất bây giờ.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 6,
+          "title": "Bảo mật dữ liệu nhạy cảm khi làm việc với khách hàng → Q&A",
+          "title_auto": true,
+          "section_titles": [
+            "Bảo mật dữ liệu nhạy cảm khi làm việc với khách hàng",
+            "Test AI system — chuẩn bị kịch bản hỏng",
+            "Chuẩn bị bài tập nhóm cho ngày mai",
+            "Q&A: cách chọn project của chương trình"
+          ],
+          "section_range": [
+            16,
+            19
+          ],
+          "n_chars": 7062,
+          "n_segments": 17,
+          "seg_ids": [
+            "T03-138",
+            "T03-139",
+            "T03-140",
+            "T03-141",
+            "T03-142",
+            "T03-143",
+            "T03-144",
+            "T03-145",
+            "T03-146",
+            "T03-147",
+            "T03-148",
+            "T03-149",
+            "T03-150",
+            "T03-151",
+            "T03-152",
+            "T03-153",
+            "T03-154"
+          ],
+          "n_activity": 3,
+          "n_unclear": 3,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T03-141",
+              "text": "Rồi, khi các bạn làm những lĩnh vực như ngân hàng này nọ, thường các bạn phải đến văn phòng và phải tuân thủ rất nghiêm ngặt quy tắc bảo mật của họ.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T03-143",
+              "text": "Tại thường các bạn không có kinh nghiệm, khi làm test case ấy, bạn chỉ chọn test happy case thôi.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T03-142",
+              "text": "Các bạn develop một cái software thì không cần phải nói rồi đúng không, tại vì các bạn test, test đến khi nó lỗi thôi.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "04",
+      "title": "Day 1 — Foundation: cách LLM hoạt động (transformer, attention, agent)",
+      "locate_confidence": "cao",
+      "locate_confidence_note": "cao",
+      "n_sections": 21,
+      "n_segments": 98,
+      "n_activity": 9,
+      "n_unclear": 15,
+      "n_student": 0,
+      "parts": [
+        {
+          "idx": 1,
+          "title": "Chào lớp và giới thiệu giảng viên → Lịch sử AI",
+          "title_auto": true,
+          "section_titles": [
+            "Chào lớp và giới thiệu giảng viên",
+            "Nội dung ngày học và bức tranh tổng quan về AI",
+            "Lịch sử AI: Turing test và hai mùa đông"
+          ],
+          "section_range": [
+            1,
+            3
+          ],
+          "n_chars": 21986,
+          "n_segments": 29,
+          "seg_ids": [
+            "T04-001",
+            "T04-002",
+            "T04-003",
+            "T04-004",
+            "T04-005",
+            "T04-006",
+            "T04-007",
+            "T04-008",
+            "T04-009",
+            "T04-010",
+            "T04-011",
+            "T04-012",
+            "T04-013",
+            "T04-014",
+            "T04-015",
+            "T04-016",
+            "T04-017",
+            "T04-018",
+            "T04-019",
+            "T04-020",
+            "T04-021",
+            "T04-022",
+            "T04-023",
+            "T04-024",
+            "T04-025",
+            "T04-026",
+            "T04-027",
+            "T04-028",
+            "T04-029"
+          ],
+          "n_activity": 2,
+          "n_unclear": 3,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T04-022",
+              "text": "Thực ra nó đã có khoảng 70 năm rồi, và cái này chỉ mang tính tương đối để các bạn hình dung được thôi nhá — nó không thực sự chính xác, nhưng mình hình dung về cái lộ…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-015",
+              "text": "Ở đây chúng ta sẽ nhìn vào một hình ảnh để dễ dàng hình dung các thuật ngữ này nằm ở đâu trong bức tranh lớn.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-010",
+              "text": "Đợt đấy nó cũng khá là nổi tiếng, được rất nhiều quan tâm và có rất nhiều user — bọn mình đạt đỉnh khoảng 57.000 vào cái đêm [không nghe rõ].",
+              "has_student_speech": false,
+              "has_unclear": true
+            }
+          ]
+        },
+        {
+          "idx": 2,
+          "title": "Deep learning và sức mạnh của dữ liệu → Cuộc đua AI sau ChatGPT",
+          "title_auto": true,
+          "section_titles": [
+            "Deep learning và sức mạnh của dữ liệu",
+            "AlphaGo và kiến trúc Transformer",
+            "Cuộc đua AI sau ChatGPT"
+          ],
+          "section_range": [
+            4,
+            6
+          ],
+          "n_chars": 15184,
+          "n_segments": 16,
+          "seg_ids": [
+            "T04-030",
+            "T04-031",
+            "T04-032",
+            "T04-033",
+            "T04-034",
+            "T04-035",
+            "T04-036",
+            "T04-037",
+            "T04-038",
+            "T04-039",
+            "T04-040",
+            "T04-041",
+            "T04-042",
+            "T04-043",
+            "T04-044",
+            "T04-045"
+          ],
+          "n_activity": 0,
+          "n_unclear": 5,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T04-030",
+              "text": "Ý tưởng khiến cho máy móc có thể học được rất nhiều dữ liệu là tái tạo được mạng neuron thần kinh giống như con người — đấy là nền tảng của deep learning.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-033",
+              "text": "Deep learning thực ra có ý tưởng, kiến trúc từ năm 2006, nhưng phải đến năm 2012 mới đạt được thành tựu đầu tiên.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-044",
+              "text": "Trung Quốc thì lại đi theo mấy cái chiến thuật kiểu chưng cất từ những mô hình lớn để có thể đi một số cách đường tắt hơn.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 3,
+          "title": "Mổ xẻ mô hình ngôn ngữ lớn → Tham số, RLHF và ngành gán nhãn dữ liệu",
+          "title_auto": true,
+          "section_titles": [
+            "Mổ xẻ mô hình ngôn ngữ lớn: dự đoán token và context",
+            "Attention, multi-head và bài học quản lý context",
+            "Tham số, RLHF và ngành gán nhãn dữ liệu"
+          ],
+          "section_range": [
+            7,
+            9
+          ],
+          "n_chars": 21173,
+          "n_segments": 18,
+          "seg_ids": [
+            "T04-046",
+            "T04-047",
+            "T04-048",
+            "T04-049",
+            "T04-050",
+            "T04-051",
+            "T04-052",
+            "T04-053",
+            "T04-054",
+            "T04-055",
+            "T04-056",
+            "T04-057",
+            "T04-058",
+            "T04-059",
+            "T04-060",
+            "T04-061",
+            "T04-062",
+            "T04-063"
+          ],
+          "n_activity": 0,
+          "n_unclear": 2,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T04-057",
+              "text": "Rồi, thế thì sau tất cả những cái này, mình rút ra một cái mình nghĩ rất là quan trọng cho tất cả chúng ta khi chúng ta sẽ cần làm việc với AI rất nhiều trong giai…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-062",
+              "text": "Sau khi AI phát triển đến như bây giờ, những bài toán gán nhãn dữ liệu kiểu như vậy — gán con chó con mèo ấy — bây giờ AI nó một phát là đoán được rồi đúng không, các…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-051",
+              "text": "Rồi sau token thì cũng có một khái niệm rất là quan trọng, đấy là context.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 4,
+          "title": "Thí nghiệm bàn cờ, giới hạn kiến thức và các mức tiếp cận mô hình → Bức tranh thị trường mô hình và tốc độ thay đổi",
+          "title_auto": true,
+          "section_titles": [
+            "Thí nghiệm bàn cờ, giới hạn kiến thức và các mức tiếp cận mô hình",
+            "Temperature và top-k/top-p",
+            "Từ mô hình đến AI agent",
+            "Các lớp bao quanh LLM và tầm quan trọng của evaluation",
+            "Bức tranh thị trường mô hình và tốc độ thay đổi"
+          ],
+          "section_range": [
+            10,
+            14
+          ],
+          "n_chars": 16704,
+          "n_segments": 16,
+          "seg_ids": [
+            "T04-064",
+            "T04-065",
+            "T04-066",
+            "T04-067",
+            "T04-068",
+            "T04-069",
+            "T04-070",
+            "T04-071",
+            "T04-072",
+            "T04-073",
+            "T04-074",
+            "T04-075",
+            "T04-076",
+            "T04-077",
+            "T04-078",
+            "T04-079"
+          ],
+          "n_activity": 2,
+          "n_unclear": 1,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T04-068",
+              "text": "Đây sẽ là một số cách để chúng ta có thể tiếp cận và làm việc với các mô hình lớn.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-066",
+              "text": "Thế thì cái thí nghiệm này họ làm một cách đơn giản như thế này.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-067",
+              "text": "Và bản thân các mô hình đấy, khi đào tạo từ các dữ liệu đấy, thì nó cũng sẽ gặp phải một giới hạn: đấy là nó chỉ được đào tạo dựa trên những dữ liệu mà nó được học…",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 5,
+          "title": "Làn sóng mã nguồn mở Trung Quốc và khoảnh khắc DeepSeek → Tương tác cuối buổi",
+          "title_auto": true,
+          "section_titles": [
+            "Làn sóng mã nguồn mở Trung Quốc và khoảnh khắc DeepSeek",
+            "Benchmark năng lực và xu hướng chi phí tính toán",
+            "Chọn mô hình phù hợp với công việc",
+            "Mixture of Experts",
+            "Cơ bản về gọi API mô hình LLM",
+            "Tóm tắt buổi học",
+            "Tương tác cuối buổi"
+          ],
+          "section_range": [
+            15,
+            21
+          ],
+          "n_chars": 13373,
+          "n_segments": 19,
+          "seg_ids": [
+            "T04-080",
+            "T04-081",
+            "T04-082",
+            "T04-083",
+            "T04-084",
+            "T04-085",
+            "T04-086",
+            "T04-087",
+            "T04-088",
+            "T04-089",
+            "T04-090",
+            "T04-091",
+            "T04-092",
+            "T04-093",
+            "T04-094",
+            "T04-095",
+            "T04-096",
+            "T04-097",
+            "T04-098"
+          ],
+          "n_activity": 5,
+          "n_unclear": 4,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T04-096",
+              "text": "- Vòng lặp đúng trong sinh văn bản autoregressive của LLM: predict, append và rerun.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T04-089",
+              "text": "Trong một lần gọi API với AI, có một số cấu phần bạn cần tinh chỉnh và đưa vào prompt.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T04-085",
+              "text": "Ví dụ cách mình hay xài: những mô hình như kiểu [không nghe rõ] hay GPT-5.6 vừa mới ra, hay gần nhất là Kimi K3, mình sẽ thường xài như các bộ não để planning; sau…",
+              "has_student_speech": false,
+              "has_unclear": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "05",
+      "title": "Buổi về bài toán · đánh giá · dữ liệu",
+      "locate_confidence": "—",
+      "locate_confidence_note": "—",
+      "n_sections": 19,
+      "n_segments": 154,
+      "n_activity": 17,
+      "n_unclear": 25,
+      "n_student": 21,
+      "parts": [
+        {
+          "idx": 1,
+          "title": "Chọn làm cái gì và không làm cái gì với AI → Bức tranh chung và quiz hệ sinh thái Vingroup",
+          "title_auto": true,
+          "section_titles": [
+            "Chọn làm cái gì và không làm cái gì với AI",
+            "Workflow là gì",
+            "Bức tranh chung và quiz hệ sinh thái Vingroup"
+          ],
+          "section_range": [
+            1,
+            3
+          ],
+          "n_chars": 18635,
+          "n_segments": 34,
+          "seg_ids": [
+            "T05-001",
+            "T05-002",
+            "T05-003",
+            "T05-004",
+            "T05-005",
+            "T05-006",
+            "T05-007",
+            "T05-008",
+            "T05-009",
+            "T05-010",
+            "T05-011",
+            "T05-012",
+            "T05-013",
+            "T05-014",
+            "T05-015",
+            "T05-016",
+            "T05-017",
+            "T05-018",
+            "T05-019",
+            "T05-020",
+            "T05-021",
+            "T05-022",
+            "T05-023",
+            "T05-024",
+            "T05-025",
+            "T05-026",
+            "T05-027",
+            "T05-028",
+            "T05-029",
+            "T05-030",
+            "T05-031",
+            "T05-032",
+            "T05-033",
+            "T05-034"
+          ],
+          "n_activity": 2,
+          "n_unclear": 2,
+          "n_student": 9,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T05-008",
+              "text": "Với các bạn thì đúng là càng làm nhiều càng tốt, tại vì sau mỗi bài học chúng ta sẽ nâng cấp bậc thang.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T05-026",
+              "text": "Tại vì bản chất, nếu chúng ta đi xa hơn — mà cụ thể đi xa ở đây là: tốt nhất các bạn phải đặt mình là phó tổng giám đốc hoặc tổng giám đốc phụ trách sản xuất của tập…",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T05-033",
+              "text": "Một ý tưởng rất hay, mình bật mí cho các bạn luôn: thực ra cái này ở bên Nhật người ta đã phục vụ rồi.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 2,
+          "title": "AI tạo giá trị ở đâu → AI product life cycle",
+          "title_auto": true,
+          "section_titles": [
+            "AI tạo giá trị ở đâu — bốn dấu hiệu đốt tiền sai chỗ",
+            "AI product life cycle"
+          ],
+          "section_range": [
+            4,
+            5
+          ],
+          "n_chars": 15223,
+          "n_segments": 31,
+          "seg_ids": [
+            "T05-035",
+            "T05-036",
+            "T05-037",
+            "T05-038",
+            "T05-039",
+            "T05-040",
+            "T05-041",
+            "T05-042",
+            "T05-043",
+            "T05-044",
+            "T05-045",
+            "T05-046",
+            "T05-047",
+            "T05-048",
+            "T05-049",
+            "T05-050",
+            "T05-051",
+            "T05-052",
+            "T05-053",
+            "T05-054",
+            "T05-055",
+            "T05-056",
+            "T05-057",
+            "T05-058",
+            "T05-059",
+            "T05-060",
+            "T05-061",
+            "T05-062",
+            "T05-063",
+            "T05-064",
+            "T05-065"
+          ],
+          "n_activity": 0,
+          "n_unclear": 2,
+          "n_student": 7,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T05-050",
+              "text": "Cái ý kiến này mình đề nghị các bạn hôm nay nên ghi nhận lại.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T05-039",
+              "text": "Kế tiếp, chúng ta nói đến các tác vụ cần tổng hợp và search các tài liệu.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T05-053",
+              "text": "Phần này mình sẽ giảng dạy các bạn ít nhất là hai ngày rưỡi, và mình biết là bài này thực ra sẽ khó để giảng dạy — theo nghĩa là các bạn đang rất hào hứng làm.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 3,
+          "title": "Làm việc với AI → Hỏi đáp giờ giải lao",
+          "title_auto": true,
+          "section_titles": [
+            "Làm việc với AI: đừng để não quá tải",
+            "Sáu giai đoạn phát triển và problem scoping",
+            "Bài toán thực tế hay không: case SpaceX",
+            "Data, baseline, build–eval và bốn bài học kỹ thuật",
+            "Hỏi đáp giờ giải lao: bài toán kinh tế của sản phẩm công nghệ"
+          ],
+          "section_range": [
+            6,
+            10
+          ],
+          "n_chars": 15583,
+          "n_segments": 30,
+          "seg_ids": [
+            "T05-066",
+            "T05-067",
+            "T05-068",
+            "T05-069",
+            "T05-070",
+            "T05-071",
+            "T05-072",
+            "T05-073",
+            "T05-074",
+            "T05-075",
+            "T05-076",
+            "T05-077",
+            "T05-078",
+            "T05-079",
+            "T05-080",
+            "T05-081",
+            "T05-082",
+            "T05-083",
+            "T05-084",
+            "T05-085",
+            "T05-086",
+            "T05-087",
+            "T05-088",
+            "T05-089",
+            "T05-090",
+            "T05-091",
+            "T05-092",
+            "T05-093",
+            "T05-094",
+            "T05-095"
+          ],
+          "n_activity": 4,
+          "n_unclear": 8,
+          "n_student": 5,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T05-088",
+              "text": "Và ở đây có bốn cái bài học kỹ thuật quan trọng từ cái life cycle này.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T05-094",
+              "text": "Anh sẽ đưa cho em một cái ví dụ rất là thực tiễn — anh nhấn mạnh lại là chuyện này thì bắt buộc phải nghiên cứu nhá.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T05-077",
+              "text": "Ok, tức là đến ngưỡng an toàn thì nó ngắt đi, ngắt đi và sạc chậm lại — quá rất là tuyệt vời.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 4,
+          "title": "Bài lab nhóm buổi chiều → Giao lưu khách mời",
+          "title_auto": true,
+          "section_titles": [
+            "Bài lab nhóm buổi chiều",
+            "Bài học từ lab: phối hợp nhóm",
+            "Chọn kiến trúc cho giải pháp AI: các thành phần và rủi ro",
+            "Giao lưu khách mời: [khách mời] (VinFast) về xe tự lái và nhân lực AI"
+          ],
+          "section_range": [
+            11,
+            14
+          ],
+          "n_chars": 15964,
+          "n_segments": 37,
+          "seg_ids": [
+            "T05-096",
+            "T05-097",
+            "T05-098",
+            "T05-099",
+            "T05-100",
+            "T05-101",
+            "T05-102",
+            "T05-103",
+            "T05-104",
+            "T05-105",
+            "T05-106",
+            "T05-107",
+            "T05-108",
+            "T05-109",
+            "T05-110",
+            "T05-111",
+            "T05-112",
+            "T05-113",
+            "T05-114",
+            "T05-115",
+            "T05-116",
+            "T05-117",
+            "T05-118",
+            "T05-119",
+            "T05-120",
+            "T05-121",
+            "T05-122",
+            "T05-123",
+            "T05-124",
+            "T05-125",
+            "T05-126",
+            "T05-127",
+            "T05-128",
+            "T05-129",
+            "T05-130",
+            "T05-131",
+            "T05-132"
+          ],
+          "n_activity": 9,
+          "n_unclear": 7,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T05-131",
+              "text": "Tại vì generation bây giờ sẽ sướng hơn generation trước — có giá rồi — nhưng challenge là sẽ có quá nhiều thứ multiple, part nào cũng cần quá nhiều thứ xung quanh, và…",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T05-130",
+              "text": "[Khách mời]: Bây giờ nó đang hot, nhưng không chỉ hot kiểu ngày xưa — ngày xưa hot theo kiểu hype, nghĩa là có thể nó fail.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T05-123",
+              "text": "Nói về tiên phong, [khách mời] với [giảng viên] chia sẻ thêm một thông tin nữa: cách đây 4 năm, gặp một bài toán cũng là lái xe tự động, và Vin là đơn vị đã tài trợ…",
+              "has_student_speech": false,
+              "has_unclear": true
+            }
+          ]
+        },
+        {
+          "idx": 5,
+          "title": "Hỏi đáp về xe tự lái → Thông điệp kết buổi sáng",
+          "title_auto": true,
+          "section_titles": [
+            "Hỏi đáp về xe tự lái",
+            "Ba mức độ giải pháp: script — LLM feature — agent",
+            "Problem statement",
+            "Eval plan và stakeholder",
+            "Thông điệp kết buổi sáng"
+          ],
+          "section_range": [
+            15,
+            19
+          ],
+          "n_chars": 13201,
+          "n_segments": 22,
+          "seg_ids": [
+            "T05-133",
+            "T05-134",
+            "T05-135",
+            "T05-136",
+            "T05-137",
+            "T05-138",
+            "T05-139",
+            "T05-140",
+            "T05-141",
+            "T05-142",
+            "T05-143",
+            "T05-144",
+            "T05-145",
+            "T05-146",
+            "T05-147",
+            "T05-148",
+            "T05-149",
+            "T05-150",
+            "T05-151",
+            "T05-152",
+            "T05-153",
+            "T05-154"
+          ],
+          "n_activity": 2,
+          "n_unclear": 6,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T05-151",
+              "text": "Và cuối cùng, ở góc của các bạn là một kỹ sư về dữ liệu: khi một bạn ở phòng sale, phòng marketing hoặc bên ra yêu cầu đưa cho các bạn một yêu cầu, có một lỗi thường…",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T05-136",
+              "text": "Mình không biết các bạn cảm nhận sự nghiêm túc đến đâu trong phần chia sẻ của [khách mời] — đối với mình thì đấy là một chia sẻ rất tuyệt vời.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T05-152",
+              "text": "Mình muốn đọng lại cho các bạn mấy ý này — mình muốn các bạn nhớ, quan trọng này.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "06",
+      "title": "Buổi Foundation: transformer & attention",
+      "locate_confidence": "—",
+      "locate_confidence_note": "—",
+      "n_sections": 21,
+      "n_segments": 162,
+      "n_activity": 11,
+      "n_unclear": 28,
+      "n_student": 21,
+      "parts": [
+        {
+          "idx": 1,
+          "title": "Giới thiệu giảng viên và khảo sát làm quen lớp → AI, machine learning, deep learning và foundation model",
+          "title_auto": true,
+          "section_titles": [
+            "Giới thiệu giảng viên và khảo sát làm quen lớp",
+            "Nội dung buổi học",
+            "AI, machine learning, deep learning và foundation model"
+          ],
+          "section_range": [
+            1,
+            3
+          ],
+          "n_chars": 21557,
+          "n_segments": 45,
+          "seg_ids": [
+            "T06-001",
+            "T06-002",
+            "T06-003",
+            "T06-004",
+            "T06-005",
+            "T06-006",
+            "T06-007",
+            "T06-008",
+            "T06-009",
+            "T06-010",
+            "T06-011",
+            "T06-012",
+            "T06-013",
+            "T06-014",
+            "T06-015",
+            "T06-016",
+            "T06-017",
+            "T06-018",
+            "T06-019",
+            "T06-020",
+            "T06-021",
+            "T06-022",
+            "T06-023",
+            "T06-024",
+            "T06-025",
+            "T06-026",
+            "T06-027",
+            "T06-028",
+            "T06-029",
+            "T06-030",
+            "T06-031",
+            "T06-032",
+            "T06-033",
+            "T06-034",
+            "T06-035",
+            "T06-036",
+            "T06-037",
+            "T06-038",
+            "T06-039",
+            "T06-040",
+            "T06-041",
+            "T06-042",
+            "T06-043",
+            "T06-044",
+            "T06-045"
+          ],
+          "n_activity": 2,
+          "n_unclear": 9,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T06-044",
+              "text": "Tiếp theo là về foundation model — có bạn nào xung phong nhỉ?",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T06-045",
+              "text": "Và cái cuối cùng — trái tim của mọi việc — đấy là LLM, hay còn gọi là large language model.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T06-016",
+              "text": "Tức là thông điệp bắt đầu là gì: bây giờ vibe code ai cũng làm rồi, nghĩa là nó dễ rồi.",
+              "has_student_speech": false,
+              "has_unclear": true
+            }
+          ]
+        },
+        {
+          "idx": 2,
+          "title": "Ba nhóm AI và lịch sử phát triển → Vì sao 2025-2026 là bước ngoặt",
+          "title_auto": true,
+          "section_titles": [
+            "Ba nhóm AI và lịch sử phát triển",
+            "Vì sao 2025-2026 là bước ngoặt"
+          ],
+          "section_range": [
+            4,
+            5
+          ],
+          "n_chars": 14634,
+          "n_segments": 17,
+          "seg_ids": [
+            "T06-046",
+            "T06-047",
+            "T06-048",
+            "T06-049",
+            "T06-050",
+            "T06-051",
+            "T06-052",
+            "T06-053",
+            "T06-054",
+            "T06-055",
+            "T06-056",
+            "T06-057",
+            "T06-058",
+            "T06-059",
+            "T06-060",
+            "T06-061",
+            "T06-062"
+          ],
+          "n_activity": 1,
+          "n_unclear": 5,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T06-059",
+              "text": "Thế thì ý mình nói rằng là cái lịch sử thì nó đi rất là dài, nhưng trong lịch sử này có mấy cái điểm nhấn.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T06-051",
+              "text": "Nhóm đầu tiên là cái gọi là discriminative AI — nói một tiếng là phân loại, dự đoán.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T06-060",
+              "text": "Lúc nãy câu hỏi ban đầu của mình là các bạn đang thấy AI nó đang thuận trend đúng không?",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 3,
+          "title": "Hỏi đáp về phạm vi và lộ trình khóa học → Trò chuyện bên lề trong lúc phát thẻ",
+          "title_auto": true,
+          "section_titles": [
+            "Hỏi đáp về phạm vi và lộ trình khóa học",
+            "LLM: encoder–decoder, transformer và attention",
+            "Trò chuyện bên lề trong lúc phát thẻ: hành trình công nghệ và Google Developer Expert"
+          ],
+          "section_range": [
+            6,
+            8
+          ],
+          "n_chars": 18617,
+          "n_segments": 54,
+          "seg_ids": [
+            "T06-063",
+            "T06-064",
+            "T06-065",
+            "T06-066",
+            "T06-067",
+            "T06-068",
+            "T06-069",
+            "T06-070",
+            "T06-071",
+            "T06-072",
+            "T06-073",
+            "T06-074",
+            "T06-075",
+            "T06-076",
+            "T06-077",
+            "T06-078",
+            "T06-079",
+            "T06-080",
+            "T06-081",
+            "T06-082",
+            "T06-083",
+            "T06-084",
+            "T06-085",
+            "T06-086",
+            "T06-087",
+            "T06-088",
+            "T06-089",
+            "T06-090",
+            "T06-091",
+            "T06-092",
+            "T06-093",
+            "T06-094",
+            "T06-095",
+            "T06-096",
+            "T06-097",
+            "T06-098",
+            "T06-099",
+            "T06-100",
+            "T06-101",
+            "T06-102",
+            "T06-103",
+            "T06-104",
+            "T06-105",
+            "T06-106",
+            "T06-107",
+            "T06-108",
+            "T06-109",
+            "T06-110",
+            "T06-111",
+            "T06-112",
+            "T06-113",
+            "T06-114",
+            "T06-115",
+            "T06-116"
+          ],
+          "n_activity": 4,
+          "n_unclear": 5,
+          "n_student": 19,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T06-074",
+              "text": "Lúc sáng [giảng viên] cũng đã trao đổi đầu buổi, mình cũng vì việc này việc kia mà không đi hết được cái summary này cho các bạn.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T06-105",
+              "text": "Còn cái add-on của mình ở trang [đã ẩn] Cái Google Sheet này bây giờ nhiều nữa nhá: càng phát triển càng nhiều thì người ta lợi dụng làm database.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T06-084",
+              "text": "Đặc điểm cuối cùng là emergent capability — xuất hiện khi mô hình được scale.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 4,
+          "title": "Trao đổi về hệ thống LMS học viên đang xây → Vì sao có hallucination",
+          "title_auto": true,
+          "section_titles": [
+            "Trao đổi về hệ thống LMS học viên đang xây",
+            "Google trong giáo dục K12 (kết phần chia sẻ)",
+            "Transformer — trái tim của LLM",
+            "Self-attention: ví dụ \"con mèo ngồi trên bàn\" và công thức Q–K–V",
+            "Token và cơ chế dự đoán next token",
+            "Vì sao có hallucination — bias dữ liệu và quá trình huấn luyện"
+          ],
+          "section_range": [
+            9,
+            14
+          ],
+          "n_chars": 14146,
+          "n_segments": 24,
+          "seg_ids": [
+            "T06-117",
+            "T06-118",
+            "T06-119",
+            "T06-120",
+            "T06-121",
+            "T06-122",
+            "T06-123",
+            "T06-124",
+            "T06-125",
+            "T06-126",
+            "T06-127",
+            "T06-128",
+            "T06-129",
+            "T06-130",
+            "T06-131",
+            "T06-132",
+            "T06-133",
+            "T06-134",
+            "T06-135",
+            "T06-136",
+            "T06-137",
+            "T06-138",
+            "T06-139",
+            "T06-140"
+          ],
+          "n_activity": 1,
+          "n_unclear": 4,
+          "n_student": 2,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T06-119",
+              "text": "Thế là giải quyết số một là slide nhá: thầy dùng bản base slide của chương trình, rồi thầy có tạo cho mỗi học viên một bài gọi là self-reading để các bạn có thể đọc…",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T06-127",
+              "text": "Ở bước số 1 là quá trình chúng ta đưa văn bản đầu vào — ví dụ văn bản kiểu viết bình thường — nó sẽ được tách thành các token.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T06-139",
+              "text": "Rồi qua fine-tuning, rồi self-supervised learning, rồi reinforcement learning.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        },
+        {
+          "idx": 5,
+          "title": "LLM được tạo ra như thế nào → Lab demo",
+          "title_auto": true,
+          "section_titles": [
+            "LLM được tạo ra như thế nào — ba giai đoạn huấn luyện",
+            "Giới hạn của LLM: knowledge cutoff, hallucination, context window",
+            "Khảo sát API và Q&A: hệ thống production có gọi API",
+            "Token economy và chi phí API",
+            "Chọn mô hình và context window trong thiết kế hệ thống",
+            "Tổng kết buổi học",
+            "Lab demo: trực quan hóa self-attention ([TA] hướng dẫn)"
+          ],
+          "section_range": [
+            15,
+            21
+          ],
+          "n_chars": 11779,
+          "n_segments": 22,
+          "seg_ids": [
+            "T06-141",
+            "T06-142",
+            "T06-143",
+            "T06-144",
+            "T06-145",
+            "T06-146",
+            "T06-147",
+            "T06-148",
+            "T06-149",
+            "T06-150",
+            "T06-151",
+            "T06-152",
+            "T06-153",
+            "T06-154",
+            "T06-155",
+            "T06-156",
+            "T06-157",
+            "T06-158",
+            "T06-159",
+            "T06-160",
+            "T06-161",
+            "T06-162"
+          ],
+          "n_activity": 3,
+          "n_unclear": 5,
+          "n_student": 0,
+          "activity_heavy": false,
+          "quotes": [
+            {
+              "seg_id": "T06-154",
+              "text": "Ở slide này các bạn quay về một chút: mỗi lần chúng ta gọi API thì phải trả một khoản tiền, và khoản tiền đấy trả cho những bên cung cấp như OpenAI hoặc Google.",
+              "has_student_speech": false,
+              "has_unclear": true
+            },
+            {
+              "seg_id": "T06-160",
+              "text": "Codelab này là một cái trực quan cho mọi người hiểu được bài giảng lúc nãy [giảng viên] nói về phần self-attention.",
+              "has_student_speech": false,
+              "has_unclear": false
+            },
+            {
+              "seg_id": "T06-158",
+              "text": "Buổi hôm nay mình wrap up lại: các bạn nhớ cấu trúc của AI — từ vòng tròn bên ngoài, sau đấy đến machine learning với deep learning là trái tim của AI hiện đại.",
+              "has_student_speech": false,
+              "has_unclear": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

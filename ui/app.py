@@ -58,7 +58,7 @@ except Exception:
     SESSIONS = []
 
 if st.runtime.exists():
-    st.session_state.setdefault("sid", None)
+    st.session_state.setdefault("sid", "01" if SESSIONS else None)
     st.session_state.setdefault("msgs", [])
     st.session_state.setdefault("done", {})
     st.session_state.setdefault("slide_part", 1)
@@ -135,21 +135,20 @@ def screen_list() -> None:
         unsafe_allow_html=True,
     )
     st.write("")
-    st.write("")
 
     with st.container(border=True):
         st.markdown(
-            '<div class="mock-banner"><b>Luồng TÓM TẮT (Luồng 2)</b>: Tóm tắt từng phần & gộp sổ tay cả buổi qua Map-Reduce. '
+            '<div class="mock-banner"><b>Luồng TÓM TẮT (Luồng 2)</b>: Tóm tắt từng phần & gộp sổ tay cả buổi qua Map-Reduce.<br>'
             "<b>Luồng TRA CỨU (Luồng 1)</b>: Tra cứu nội dung chi tiết qua RRF 3 nhánh (BM25, Qdrant, Neo4j) có 4 cổng từ chối.</div>",
             unsafe_allow_html=True,
         )
 
     st.write("")
-    st.markdown(f"##### {len(SESSIONS)} buổi đã có bản ghi")
+    st.markdown(f"### 📚 Chọn 1 trong {len(SESSIONS)} buổi học bên dưới:")
 
     for i, s in enumerate(SESSIONS, start=1):
         with st.container(border=True):
-            badge, body, action = st.columns([0.09, 0.73, 0.18], vertical_alignment="center")
+            badge, body, action = st.columns([0.1, 0.7, 0.2], vertical_alignment="center")
             with badge:
                 st.markdown(
                     f'<div class="day-badge"><span>BUỔI</span><b>{s["id"]}</b></div>',
@@ -170,8 +169,7 @@ def screen_list() -> None:
                     unsafe_allow_html=True,
                 )
             with action:
-                if st.button("Mở buổi này", key=f"open{s['id']}", width="stretch",
-                             type="primary"):
+                if st.button(f"Mở Buổi {s['id']}", key=f"open_home_{s['id']}", use_container_width=True, type="primary"):
                     open_session(s["id"])
                     st.rerun()
 
@@ -185,7 +183,7 @@ def render_slide(session: dict) -> None:
           <div class="slide-title">{part['title']}</div>
           <div class="slide-foot">
             <span class="slide-stamp">SLIDE MINH HOẠ</span>
-            <span>{part['idx']} / {len(session['parts'])}</span>
+            <span>Phần {part['idx']} / {len(session['parts'])}</span>
           </div>
         </div>
         """,
@@ -296,69 +294,99 @@ def render_msg(m: dict) -> None:
 
 
 def render_suggestions(session: dict) -> None:
-    if st.button("🔎 Buổi này có mấy phần?", key="sgtoc", width="stretch"):
-        st.session_state.pending = "buổi này có mấy phần?"
-        st.rerun()
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        if st.button("📌 Tóm phần 1", key="sg_p1", use_container_width=True):
+            st.session_state.pending = "tóm phần 1"
+            st.rerun()
+    with c2:
+        if st.button("📑 Tóm cả buổi", key="sg_all", use_container_width=True):
+            st.session_state.pending = "tóm cả buổi"
+            st.rerun()
+    with c3:
+        if st.button("🔎 Mục lục buổi này", key="sg_toc", use_container_width=True):
+            st.session_state.pending = "buổi này có mấy phần?"
+            st.rerun()
 
 
 def screen_session(session: dict, toggles: Toggles) -> None:
-    top = st.columns([0.1, 0.9], vertical_alignment="center")
-    with top[0]:
-        if st.button("← Buổi khác", width="stretch"):
-            st.session_state.sid = None
-            st.rerun()
-    with top[1]:
-        st.markdown(f"**Buổi {session['id']}** — {session['title']}")
+    st.markdown(f"## 📖 Buổi {session['id']} — {session['title']}")
 
-    left, right = st.columns([0.54, 0.46], gap="large")
+    left, right = st.columns([0.45, 0.55], gap="medium")
 
     with left:
         render_slide(session)
 
     with right:
         n_done = len(st.session_state.done)
-        st.markdown(f"#### Hỏi về buổi này  <small>· đã tóm {n_done}/"
-                    f"{len(session['parts'])} phần</small>", unsafe_allow_html=True)
+        st.markdown(f"### 💬 Trợ lý AI Buổi {session['id']}  <small style='font-size:0.8rem; color:#64748b;'>(đã tóm {n_done}/{len(session['parts'])} phần)</small>", unsafe_allow_html=True)
 
-        box = st.container(height=430)
+        box = st.container(height=480)
         with box:
             if not st.session_state.msgs:
                 with st.chat_message("assistant"):
                     st.write(
-                        f"Buổi này có **{len(session['parts'])} phần**. Hỏi mình bất cứ gì "
-                        "về buổi — ví dụ *“buổi này có mấy phần”*, *“tóm phần 1”*, "
-                        "hoặc một câu về nội dung đã giảng."
+                        f"Xin chào! Buổi này gồm **{len(session['parts'])} phần**. "
+                        "Bạn có thể gõ *“tóm phần 1”*, *“tóm cả buổi”*, hoặc đặt câu hỏi tra cứu kiến thức bên dưới!"
                     )
             for m in st.session_state.msgs:
                 render_msg(m)
 
         render_suggestions(session)
 
-        if typed := st.chat_input("Ví dụ: tóm tắt phần I cho tôi"):
+        if typed := st.chat_input("Nhập câu hỏi hoặc yêu cầu (ví dụ: tóm phần 1)..."):
             st.session_state.pending = typed
             st.rerun()
 
 
 def run_app():
     with st.sidebar:
-        st.markdown("#### Nhánh truy vấn (RRF)")
+        st.title("📓 Sổ Tay Buổi Học")
+        st.markdown("---")
+
+        st.markdown("### 📚 Chọn Buổi Học")
+        options = ["Trang chủ (Danh sách)"] + [f"Buổi {s['id']} — {s['title'][:25]}..." for s in SESSIONS]
+        
+        current_idx = 0
+        if st.session_state.sid:
+            for idx, s in enumerate(SESSIONS, start=1):
+                if s["id"] == st.session_state.sid:
+                    current_idx = idx
+                    break
+                    
+        selected = st.selectbox(
+            "Danh sách buổi học",
+            options=options,
+            index=current_idx,
+            label_visibility="collapsed"
+        )
+        
+        if selected == "Trang chủ (Danh sách)":
+            if st.session_state.sid is not None:
+                st.session_state.sid = None
+                st.rerun()
+        else:
+            sid_chosen = selected.split(" — ")[0].replace("Buổi ", "").strip()
+            if st.session_state.sid != sid_chosen:
+                open_session(sid_chosen)
+                st.rerun()
+
+        st.markdown("---")
+        st.markdown("#### ⚙️ Cấu hình RRF (Luồng 1)")
         use_bm25 = st.toggle("BM25 (offline)", value=True)
         use_qdrant = st.toggle("Qdrant (vector)", value=True)
         use_neo4j = st.toggle("Neo4j (graph)", value=True)
         toggles = Toggles(bm25=use_bm25, qdrant=use_qdrant, neo4j=use_neo4j)
 
         st.markdown("---")
-        st.markdown("#### Chế độ chạy")
+        st.markdown("#### ⚡ Chế độ Real-time AI")
         st.caption(backend_label())
         force = st.toggle(
             "Bỏ qua cache",
             value=False,
-            help="Bật thì mỗi lần tóm đều gọi LLM mới, kể cả phần đã tóm rồi. "
-            "Dùng để tự kiểm chứng là AI chạy thật chứ không đọc file có sẵn.",
+            help="Bật thì mỗi lần tóm đều gọi LLM mới.",
         )
         set_force(force)
-        if force:
-            st.warning("Mỗi lượt tóm đều tốn API.")
 
     if st.session_state.sid is None:
         screen_list()
