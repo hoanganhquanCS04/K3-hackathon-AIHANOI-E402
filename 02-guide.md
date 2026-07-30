@@ -6,7 +6,7 @@
 | ---------------------- | ----------------------------- | ---- |
 | 1 · Khám phá        | Phát đề → CP1 Canvas      | §1  |
 | 2 · Thiết kế & Spec | CP1 → CP4 + spec.md 23:59 N1 | §2  |
-| 3 · Build             | CP2 → CP3<br />              | §3  |
+| 3 · Build             | CP2 → CP3                    | §3  |
 | 4 · Đo & Validate    | CP3 → CP5                    | §4  |
 | 5 · Demo & Nộp       | CP5 → CP6                    | §5  |
 

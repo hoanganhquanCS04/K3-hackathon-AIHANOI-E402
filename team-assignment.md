@@ -17,16 +17,16 @@ Sinh **sổ tay 1 trang gồm đúng 5 ý chính của một buổi học** từ
 
 ## Đầu việc tổng — 8 khối
 
-| Khối | Đầu việc | Chủ | Điểm rubric |
-|---|---|---|---|
-| **A** | `parse.py` → `segments.jsonl` (700 đoạn, 3 cờ metadata) | M1 | nền cho tất cả |
-| **B** | `chunk.py` + `index.py` (BM25) — **chỉ phục vụ luồng 1** | M1 | — |
-| **C** | `citation_validator.py` — bộ kiểm mã trích dẫn dùng chung 2 luồng | M1 | R3 · 11đ |
-| **D** | Luồng 2: vỏ gọi model + prompt + sinh 5 ý | M2 | R5 · 8đ |
-| **E** | Luồng 1: 4 cổng từ chối + hiệu chỉnh ngưỡng T1 | M2 | R3 · 11đ |
-| **F** | Golden set 20 case + script đếm bằng chứng + 3 lượt đo | M3 | R4 · 15đ |
-| **G** | Sổ tay hiển thị + CLI + slide 6 trang + dry run | M4 | R5 · 8đ |
-| **H** | Khảo sát 20 người + 18 ý vàng + validation + `spec.md` + repo | M5 | R1 15đ + R2/R3 26đ + R6 8đ + R7 3đ |
+| Khối       | Đầu việc                                                                 | Chủ | Điểm rubric                          |
+| ----------- | --------------------------------------------------------------------------- | ---- | -------------------------------------- |
+| **A** | `parse.py` → `segments.jsonl` (700 đoạn, 3 cờ metadata)             | M1   | nền cho tất cả                      |
+| **B** | `chunk.py` + `index.py` (BM25) — **chỉ phục vụ luồng 1**     | M1   | —                                     |
+| **C** | `citation_validator.py` — bộ kiểm mã trích dẫn dùng chung 2 luồng | M1   | R3 · 11đ                             |
+| **D** | Luồng 2: vỏ gọi model + prompt + sinh 5 ý                               | M2   | R5 · 8đ                              |
+| **E** | Luồng 1: 4 cổng từ chối + hiệu chỉnh ngưỡng T1                      | M2   | R3 · 11đ                             |
+| **F** | Golden set 20 case + script đếm bằng chứng + 3 lượt đo               | M3   | R4 · 15đ                             |
+| **G** | Sổ tay hiển thị + CLI + slide 6 trang + dry run                          | M4   | R5 · 8đ                              |
+| **H** | Khảo sát 20 người + 18 ý vàng + validation +`spec.md` + repo        | M5   | R1 15đ + R2/R3 26đ + R6 8đ + R7 3đ |
 
 ---
 
@@ -108,6 +108,7 @@ Sở hữu **quyết định AI duy nhất** của sản phẩm.
 Không viết code. Giữ khối điểm lớn nhất trong nhóm.
 
 - [ ] **Khảo sát ≥20 người ngoài nhóm**, đúng 4 câu, không đổi cách hỏi giữa các người:
+
   1. Từng nghỉ / vào muộn / mất mạch một buổi chưa?
   2. Lúc đó làm gì để nắm lại? *(ghi nguyên văn)*
   3. Mất bao lâu?
@@ -148,14 +149,14 @@ Ghép đôi bắt buộc: M5↔M3 (golden set) · M5↔M3 (số liệu) · M1↔
 
 ## Lịch 6 mốc
 
-| Mốc | M1 | M2 | M3 | M4 | M5 |
-|---|---|---|---|---|---|
-| **CP1** Canvas | — | — | bắt đầu script đếm | — | **chốt canvas + đi khảo sát** |
-| **CP2** Bấm được | **`parse.py` chạy được, số khớp** | dựng vỏ gọi model | script đếm xong | — | khảo sát tiếp |
-| **CP3** AI thật | danh mục buổi + validator | **1 lời gọi AI thật (luồng 2)** | golden set 20 case + **bảng lượt 1** | bắt đầu render | gán nhãn 18 ý vàng |
-| **CP4** Spec 23:59 N1 | chunk + index xong | prompt v1 + bắt đầu luồng 1 | lượt đo 2 | CLI chạy | **`spec.md` nộp** |
-| **CP5** Xác minh | giải thích được file mình | luồng 1 + chốt T1 | **3 lượt đo + phiếu chấm tay** | dry run ×2 | **validation ≥5 mẩu có tên** |
-| **CP6** Demo | — | — | — | **demo 5 phút** | — |
+| Mốc                        | M1                                              | M2                                        | M3                                           | M4                     | M5                                      |
+| --------------------------- | ----------------------------------------------- | ----------------------------------------- | -------------------------------------------- | ---------------------- | --------------------------------------- |
+| **CP1** Canvas        | —                                              | —                                        | bắt đầu script đếm                      | —                     | **chốt canvas + đi khảo sát** |
+| **CP2** Bấm được  | **`parse.py` chạy được, số khớp** | dựng vỏ gọi model                      | script đếm xong                            | —                     | khảo sát tiếp                        |
+| **CP3** AI thật      | danh mục buổi + validator                     | **1 lời gọi AI thật (luồng 2)** | golden set 20 case +**bảng lượt 1** | bắt đầu render      | gán nhãn 18 ý vàng                  |
+| **CP4** Spec 23:59 N1 | chunk + index xong                              | prompt v1 + bắt đầu luồng 1           | lượt đo 2                                 | CLI chạy              | **`spec.md` nộp**              |
+| **CP5** Xác minh     | giải thích được file mình                 | luồng 1 + chốt T1                       | **3 lượt đo + phiếu chấm tay**    | dry run ×2            | **validation ≥5 mẩu có tên**  |
+| **CP6** Demo          | —                                              | —                                        | —                                           | **demo 5 phút** | —                                      |
 
 Mỗi người phải giải thích được phần có tên mình tại CP5 — không giải thích được thì phần đó 0 điểm.
 
@@ -174,15 +175,15 @@ Mỗi người phải giải thích được phần có tên mình tại CP5 —
 
 ## Định nghĩa "xong"
 
-| # | Điều kiện |
-|---|---|
-| 1 | `python -m sotay build 03` ra sổ tay 5 ý, **mọi mã đoạn tồn tại thật** |
-| 2 | `python -m sotay build 07` từ chối + liệt kê 6 buổi có sẵn |
-| 3 | `segments.jsonl` khớp đúng 700 / 55 / 103 / 69 |
-| 4 | Golden set 20 case, phủ ≥2 case mỗi lớp chỗ khó, 18 ý vàng do **người** gán nhãn |
-| 5 | 3 lượt đo trong `eval/`, kể cả lượt kém, có % đối chiếu quality bar |
-| 6 | ≥20 người khảo sát đã log toàn bộ Q&A nguyên văn |
-| 7 | ≥5 mẩu feedback từ ≥5 người ngoài nhóm, có tên, trong `validation/` |
-| 8 | `spec.md` commit trước 23:59 N1, quality bar chốt cứng, không sửa sau |
-| 9 | 5 file `reflection/`, mỗi người 1 |
-| 10 | `data/` **không** có trong repo nộp bài · không commit API key |
+| #  | Điều kiện                                                                                      |
+| -- | ------------------------------------------------------------------------------------------------- |
+| 1  | `python -m sotay build 03` ra sổ tay 5 ý, **mọi mã đoạn tồn tại thật**           |
+| 2  | `python -m sotay build 07` từ chối + liệt kê 6 buổi có sẵn                               |
+| 3  | `segments.jsonl` khớp đúng 700 / 55 / 103 / 69                                               |
+| 4  | Golden set 20 case, phủ ≥2 case mỗi lớp chỗ khó, 18 ý vàng do**người** gán nhãn |
+| 5  | 3 lượt đo trong`eval/`, kể cả lượt kém, có % đối chiếu quality bar                  |
+| 6  | ≥20 người khảo sát đã log toàn bộ Q&A nguyên văn                                       |
+| 7  | ≥5 mẩu feedback từ ≥5 người ngoài nhóm, có tên, trong`validation/`                    |
+| 8  | `spec.md` commit trước 23:59 N1, quality bar chốt cứng, không sửa sau                     |
+| 9  | 5 file`reflection/`, mỗi người 1                                                             |
+| 10 | `data/` **không** có trong repo nộp bài · không commit API key                      |
