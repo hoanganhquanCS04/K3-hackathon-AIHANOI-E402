@@ -1,0 +1,43 @@
+{
+  "abstract": "Phần này đi từ năng lực biến yêu cầu mơ hồ thành bài toán cụ thể trong ứng dụng AI đến sự phân hóa vai trò giữa product manager và project manager. Từ đó, nội dung mở rộng sang ảnh hưởng của văn hóa tổ chức và việc rèn luyện thói quen đặt câu hỏi đối với tư duy làm sản phẩm.",
+  "key_points": [
+    {
+      "text": "Hiệu quả ứng dụng AI phụ thuộc lớn vào con người và quy trình, nên việc đầu tiên không phải là triển khai công nghệ mà là xác định đúng bài toán kinh doanh. Người thực hiện cần chủ động hỏi lại, bóc tách yêu cầu mơ hồ thành mục tiêu và lựa chọn cụ thể để xác nhận với stakeholder.",
+      "citations": [
+        "T01-001",
+        "T01-002",
+        "T01-003",
+        "T01-004",
+        "T01-005",
+        "T01-006"
+      ]
+    },
+    {
+      "text": "Dù ranh giới vị trí trong nhóm AI ngày càng mờ và thúc đẩy xu hướng generalist, product manager và project manager vẫn khác nhau về trọng tâm: một bên tìm cơ hội và giải pháp sản phẩm, bên kia bảo đảm dự án hoàn thành đúng tiến độ và ngân sách.",
+      "citations": [
+        "T01-007",
+        "T01-008",
+        "T01-009",
+        "T01-010",
+        "T01-011"
+      ]
+    },
+    {
+      "text": "Văn hóa tổ chức tác động trực tiếp đến năng lực làm sản phẩm: môi trường chỉ khuyến khích làm theo yêu cầu sẽ hạn chế đóng góp ý kiến, tư duy sản phẩm và chất lượng đầu ra. Mức độ cởi mở và sự hiện diện của các công ty trẻ được xem là những điều kiện tạo môi trường phát triển sản phẩm thuận lợi hơn.",
+      "citations": [
+        "T01-012",
+        "T01-013",
+        "T01-014"
+      ]
+    },
+    {
+      "text": "Tư duy xác định vấn đề và tư duy sản phẩm đều phải được rèn qua việc liên tục đặt câu hỏi, làm rõ giả định và chuyển từ phản xạ nhanh sang suy nghĩ có chủ đích. Quá trình này khó khăn nhưng cần thiết để hình thành thói quen làm việc mới.",
+      "citations": [
+        "T01-005",
+        "T01-006",
+        "T01-015",
+        "T01-016"
+      ]
+    }
+  ]
+}

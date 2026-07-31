@@ -1,10 +1,11 @@
 import { useState } from "react";
 import {
+  AnswerPayload,
+  Claim,
   ChatResponse,
+  KeyPoint,
   PartSummary,
   RecapSummary,
-  AnswerPayload,
-  KeyPoint,
 } from "../lib/api";
 
 interface ChatMsg {
@@ -204,20 +205,55 @@ function RecapView({ payload }: { payload: RecapSummary; stats: ChatResponse["st
   );
 }
 
+function ClaimItem({ claim }: { claim: Claim }) {
+  const [open, setOpen] = useState(false);
+
+  if (!claim.quote) return null;
+
+  return (
+    <div style={{ marginBottom: "var(--space-3)" }}>
+      {claim.claim && (
+        <p style={{ margin: 0, marginBottom: 4 }}>{claim.claim}</p>
+      )}
+      <div style={{ display: "flex", alignItems: "center", gap: "var(--space-1)" }}>
+        <button
+          onClick={() => setOpen((o) => !o)}
+          className="cite cite-btn"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            fontSize: "var(--text-micro)",
+            padding: "1px 6px",
+          }}
+        >
+          {claim.cite[0]} {open ? "▲" : "▼"}
+        </button>
+      </div>
+      {open && (
+        <blockquote className="q" style={{ marginTop: "var(--space-2)" }}>
+          "{claim.quote}"
+        </blockquote>
+      )}
+    </div>
+  );
+}
+
 function AnswerView({ payload }: { payload: AnswerPayload }) {
+  if (!payload.claims || payload.claims.length === 0) {
+    return (
+      <p style={{ color: "var(--color-muted)", fontSize: "var(--text-small)" }}>
+        {payload.note || "(tra-cứu không có kết quả)"}
+      </p>
+    );
+  }
   return (
     <>
       {payload.claims.map((c, i) => (
-        <div key={i} style={{ marginBottom: "var(--space-3)" }}>
-          <p style={{ margin: 0 }}>
-            {c.claim ?? <em style={{ color: "var(--color-muted)" }}>(ý tóm tắt do AI sinh sẽ nằm ở đây)</em>}{" "}
-            {c.cite[0] && <span className="cite">{c.cite[0]}</span>}
-          </p>
-          <blockquote className="q">"{c.quote}"</blockquote>
-        </div>
+        <ClaimItem key={i} claim={c} />
       ))}
       {payload.note && (
-        <p style={{ fontSize: "var(--text-micro)", color: "var(--color-muted)", marginTop: "var(--space-3)" }}>
+        <p style={{ fontSize: "var(--text-micro)", color: "var(--color-muted)", marginTop: "var(--space-2)" }}>
           {payload.note}
         </p>
       )}

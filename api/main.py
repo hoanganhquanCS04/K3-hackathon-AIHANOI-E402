@@ -33,17 +33,69 @@ from dotenv import load_dotenv  # noqa: E402
 
 load_dotenv(_ROOT / ".env")
 
-# Them `summarizer/` (parent chua package `summarizer/`) va `src/` (graph_db, vector_db stub)
-# vao sys.path TRUOC khi import live.py, vi live import `summarizer.llm`, `vector_db.session_reader`,
-# va `graph_db.query`.
-_SUMMARIZER_SRC = _ROOT / "summarizer" / "src"   # chua package 'summarizer/' ben trong (src layout cua uv_build)
-_SRC = _ROOT / "src"
-for p in (_SUMMARIZER_SRC, _SRC, _CODEBASE):
+# Them `summarizer/` (parent chua package `summarizer/`) ben trong (src layout cua uv_build),
+# `vector-db/src/` (CHUA goi parser, search, ...), va `src/` (graph_db, vector_db stub).
+# Thu tu insert(0) QUAN TRONG:
+#   - Cuoi cung insert = dau tien tim. Vay vong for phai chay theo thu tu uu tien
+#     TANG DAN: phan tu can thang phai nam CUOI for.
+#   - vector-db/src (real) phai thang src/ (stub).
+#   - summarizer/src (chua 'summarizer/' package) phai o dau de khi loader.py goi
+#     `from summarizer.schemas` thi tim dung package that.
+#   - codebase (live.py, stubs.py, sources.py) khong co o cac vi tri khac, an toan o giua.
+# Khi `live.py` import `vector_db.session_reader`, Python di theo sys.path tu [0].
+# Phai dam bao vector-db/src dung TRUOC src/ — bang cach insert vector-db/src cuoi cung.
+# Neu vector_db da duoc load tu stub truoc (do __init__.py cua mot module nao do),
+# Python se cache trong sys.modules va cac lan sau dung lai — phai restart server.
+# Phai dam bao `vector-db/src` (co parser, search, ...) thang `src/vector_db` stub.
+# 2 cho can tro:
+#   1) `vector_db.pth` trong site-packages da add vector-db/src vao sys.path
+#   2) `src/` (co stub `vector_db/__init__.py`) cung duoc them vao sys.path o duoi day
+# Fix: chen vector-db/src o vi tri [0] SAU DO moi them src/. Nhu vay khi import
+# vector_db Python se gap vector-db/src truoc. Hon nua, chen vector-db/src len vi tri
+# [0] bang remove+insert de chac chan khong bi trung.
+_SUMMARIZER_SRC = _ROOT / "summarizer" / "src"  # chua package `summarizer`
+_CODEBASE = _ROOT / "codebase"  # live.py, stubs.py, sources.py
+_SRC = _ROOT / "src"  # stub vector_db/__init__.py va graph_db
+_VECTOR_DB_SRC = _ROOT / "vector-db" / "src"  # real vector_db (parser, search, ...)
+
+# 1) them summarizer/src + codebase o muc uu tien THAP hon vector-db/src (de
+# `from summarizer.schemas` van tim dung, nhung `vector_db` tim o vector-db/src).
+for p in (_SUMMARIZER_SRC, _CODEBASE):
     sp = str(p)
     if p.is_dir() and sp not in sys.path:
         sys.path.insert(0, sp)
 
-import live  # codebase/live.py  (se auto-import summarizer.llm, vector_db.session_reader, graph_db.query)
+# 2) them src/ (stub) o vi tri THAP hon vector-db/src (sau khi ta chen vector-db/src o [0]).
+for p in (_SRC,):
+    sp = str(p)
+    if p.is_dir() and sp not in sys.path:
+        sys.path.insert(0, sp)
+
+# 3) chen vector-db/src o [0] (dau tien), va remove moi entry cu~ (neu co) de tranh duplicate.
+_sp_vdb = str(_VECTOR_DB_SRC)
+while _sp_vdb in sys.path:
+    sys.path.remove(_sp_vdb)
+sys.path.insert(0, _sp_vdb)
+
+# DEBUG: in sys.path dau de biet vector_db load tu dau
+import os as _os  # noqa: E402
+_sys_path_log = _ROOT / "api" / "_sys_path.log"
+with open(_sys_path_log, "w", encoding="utf-8") as _f:
+    _f.write("CWD: " + _os.getcwd() + "\n")
+    _f.write("_ROOT: " + str(_ROOT) + "\n")
+    _f.write("_VECTOR_DB_SRC: " + str(_VECTOR_DB_SRC) + "\n")
+    _f.write("_VECTOR_DB_SRC.is_dir(): " + str(_VECTOR_DB_SRC.is_dir()) + "\n")
+    _f.write("sp string: " + str(str(_VECTOR_DB_SRC)) + "\n")
+    _f.write("sp in sys.path?: " + str(str(_VECTOR_DB_SRC) in sys.path) + "\n")
+    _f.write("sys.path head:\n")
+    for _p in sys.path[:10]:
+        _f.write("  " + _p + "\n")
+
+# EAGER: load full vector_db (gom parser, search, session_reader, ...) tu vector-db/src
+# TRUOC khi live.py co co hoi import vector_db.session_reader tu src/ stub.
+import vector_db  # noqa: E402, F401
+import vector_db.parser  # noqa: E402, F401 -- preload de khong bi che boi stub
+import vector_db.session_reader  # noqa: E402, F401
 
 from fastapi import FastAPI, HTTPException  # noqa: E402
 from fastapi.middleware.cors import CORSMiddleware  # noqa: E402

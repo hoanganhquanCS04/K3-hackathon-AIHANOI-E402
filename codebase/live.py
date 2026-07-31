@@ -22,6 +22,7 @@ from dataclasses import dataclass, field
 import router as _router
 import sources
 from part_reduce import summarize_part_sections
+from pydantic import BaseModel
 from stubs import (  # noqa: F401  — phần đã thật sẵn thì dùng lại nguyên
     get_session,
     load_outline,
@@ -35,6 +36,7 @@ from summarizer.loader import get_loader
 from summarizer.mapper import summarize_sections
 from summarizer.reducer import summarize_session
 from summarizer.schemas import Chunk, SectionSummary
+from vector_db.search import find_chunks
 
 # Model gộp cả buổi — đây là "bản tóm tắt cuối cùng" người dùng đọc, nên dùng
 # model mạnh. Bước MAP giữ model rẻ trong settings (gpt-4o-mini): nó chạy nhiều
@@ -378,21 +380,129 @@ def build_recap(session: dict, done: dict) -> dict:
 # ─────────────────────────────────────────────────────────────────────────────
 
 
-def answer_query(session: dict, query: str) -> dict:
-    """CHƯA THẬT. Đây là luồng SEARCH, thuộc module khác, không phải M2.
+# ─────────────────────────────────────────────────────────────────────────────
+# LUỒNG 1 — tra cứu
+# ─────────────────────────────────────────────────────────────────────────────
 
-    Giữ nguyên hành vi giả lập của `stubs.py` và nói thẳng ra trong `note` để
-    không ai nhầm là AI đã trả lời. Tóm tắt thì đã thật.
+
+# Schema cho LLM trả về claim + citation
+class _ClaimDraft(BaseModel):
+    claim: str
+    citations: list[str]
+
+
+class _AnswerDraft(BaseModel):
+    claims: list[_ClaimDraft]
+
+
+def answer_query(session: dict, query: str) -> dict:
+    """Tra cứu: retrieve → rejection gates → LLM generate.
+
+    Khác stub: gọi vector_db.search.find_chunks rồi gọi LLM sinh claim có trích dẫn.
     """
 
     global _last
-    _last = Stats()
-    quotes = [q for p in session["parts"] for q in p["quotes"]][:2]
+    started = time.perf_counter()
+    loader, llm, cache = _resources()
+    session_id = _sid(session)
+
+    # Bước 1 — retrieve top-5 đoạn liên quan
+    hits = find_chunks(query, session_id=session_id, top_k=5, exclude_activities=True)
+    if not hits:
+        _last = Stats(llm_calls=0, cache_hits=0, seconds=time.perf_counter() - started)
+        return {
+            "status": "empty",
+            "claims": [],
+            "note": "Không tìm thấy đoạn nào liên quan trong bản ghi buổi này.",
+        }
+
+    chunks = _chunk_index(session_id)
+    evidence: list[dict] = []
+    for hit in hits:
+        chunk = chunks.get(hit.payload.get("chunk_id"))
+        if chunk:
+            evidence.append(
+                {
+                    "cite": hit.payload["chunk_id"],
+                    "quote": chunk.text,
+                    "section_title": chunk.section_title,
+                }
+            )
+
+    if not evidence:
+        _last = Stats(llm_calls=0, cache_hits=0, seconds=time.perf_counter() - started)
+        return {
+            "status": "empty",
+            "claims": [],
+            "note": "Không tìm thấy đoạn nào liên quan trong bản ghi buổi này.",
+        }
+
+    # Bước 2 — build prompt cho LLM
+    evidence_lines = "\n".join(
+        f"[{e['cite']}] ({e['section_title']})\n{e['quote']}"
+        for e in evidence
+    )
+    system_prompt = (
+        "Bạn là trợ lý học tập. Trả lời câu hỏi của học viên bằng TIẾNG VIỆT, dựa trên "
+        "các trích đoạn transcript được cung cấp bên dưới.\n\n"
+        "QUY TẮC:\n"
+        "1. Mỗi ý trả lời phải có TRÍCH DẪN từ đoạn gốc — ghi mã đoạn trong ngoặc vuông.\n"
+        "2. Nếu câu hỏi hỏi về định nghĩa/khái niệm, định nghĩa bằng lời của bạn rồi trích dẫn.\n"
+        "3. Nếu câu hỏi hỏi về hành động/ý kiến, trích nguyên văn từ giảng viên.\n"
+        "4. Nếu câu hỏi hỏi về sự kiện/cuộc trò chuyện, tóm tắt rồi trích dẫn.\n"
+        "5. Nếu không có căn cứ trong transcript, nói 'Buổi này không đề cập [chủ đề].' và KHÔNG bịa.\n"
+        "6. Chỉ trả lời dựa trên transcript. Không suy đoán hay bổ sung kiến thức bên ngoài.\n"
+        "7. Trả lời NGẮN GỌN — mỗi claim 1-3 câu."
+    )
+    user_prompt = (
+        f"Câu hỏi: {query}\n\n"
+        f"Trích đoạn buổi học:\n{evidence_lines}\n\n"
+        f"Trả lời (tiếng Việt, mỗi ý có trích dẫn):"
+    )
+
+    # Bước 3 — LLM generate
+    model_for_answer = settings.map_model  # dùng model rẻ cho tra-cứu
+    try:
+        draft = llm.parse(
+            model=model_for_answer,
+            system=system_prompt,
+            user=user_prompt,
+            schema=_AnswerDraft,
+            temperature=0.3,
+        )
+    except Exception as exc:
+        elapsed = time.perf_counter() - started
+        _last = Stats(llm_calls=0, cache_hits=0, seconds=elapsed)
+        return {
+            "status": "error",
+            "claims": [],
+            "note": f"Lỗi khi gọi LLM: {exc}",
+        }
+
+    elapsed = time.perf_counter() - started
+    engine, why = _router.last_route_info()
+    _last = Stats(
+        llm_calls=1,
+        cache_hits=0,
+        seconds=elapsed,
+        warnings=[],
+        router=f"{engine} — {why}" if why else engine,
+        outline="tra-cứu (retrieve + generate)",
+    )
+
+    claims_out = []
+    for c in draft.claims:
+        # LLM có thể trả [T01-001] hoặc T01-001 — chuẩn hoá về raw ID
+        first_cite = c.citations[0].lstrip("[").rstrip("]") if c.citations else ""
+        quote = next((e["quote"] for e in evidence if e["cite"] == first_cite), "")
+        claims_out.append({
+            "claim": c.claim,
+            "cite": [cit.lstrip("[").rstrip("]") for cit in c.citations],
+            "quote": quote,
+        })
+
     return {
         "status": "answered",
-        "claims": [
-            {"claim": None, "cite": [q["seg_id"]], "quote": q["text"]} for q in quotes
-        ],
-        "note": "Luồng TRA CỨU chưa nối — đây vẫn là chỗ trống. Chỉ luồng TÓM TẮT "
-        "(“tóm phần 1”, “tóm cả buổi”) là đã gọi AI thật.",
+        "claims": claims_out,
+        "note": "",
     }
