@@ -91,3 +91,8 @@ data/vlearn-pack/
 vector-db/artifacts/embedding_cache.sqlite3
 vector-db/artifacts/rejected_records.jsonl
 summairizer/artifacts
+
+# M3 local review sheets may contain short transcript excerpts and reviewer names.
+# Commit only the aggregate evidence/results reports, not these working CSV files.
+eval/evidence/review-samples.csv
+eval/manual-review/*.csv

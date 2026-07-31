@@ -1,0 +1,78 @@
+{
+  "generated_at": "2026-07-30T15:46:47.122460+00:00",
+  "source_file": "D:\\AI\\AI_thuc_chien\\Lab\\Batch03-2A202601875-HoangAnhQuan\\data\\vlearn-pack\\chatlog\\chat_history_anonymized_for_hackathon.csv",
+  "rules_version": "v2-locked",
+  "rules_status": "locked",
+  "count_unit": "turn_id",
+  "review_sample_policy": "The deterministic 40-row sample selected under v1-draft is locked and reused while correcting regex errors.",
+  "review_instructions": "AI produced pre-labels; M3 owner explicitly reviewed and confirmed all 40 labels. Metrics for v2 are calibration metrics on this fixed reviewed sample, not an independent holdout estimate.",
+  "rules": {
+    "summary_request_regex": "\\b(?:tom\\s*tat|tong\\s*hop|khai\\s*quat|noi\\s*dung\\s*chinh|y\\s*chinh|summary|summari[sz]e|recap)\\b",
+    "whole_session_regex": "(?:ca\\s*buoi|toan\\s*bo\\s*(?:buoi|bai|slide|tai\\s*lieu)|tat\\s*ca\\s*(?:slide|noi\\s*dung)|buoi\\s*hoc\\s*(?:nay|hom\\s*nay)?|bai\\s*hoc\\s*(?:nay|hom\\s*nay)?|bai\\s*(?:nay|hom\\s*nay)|bai\\s*giang\\s*(?:nay|hom\\s*nay)?|ngay\\s*hom\\s*nay|this\\s*lecture|the\\s*lesson|lesson\\s*1|slide\\s*day\\s*\\d+|kien\\s*thuc\\s*cot\\s*loi\\s*cua\\s*tai\\s*lieu|cac\\s*khai\\s*niem|tu\\s*trang\\s*1\\s*den)",
+    "failure_regex": "(?:khong\\s*(?:the\\s*)?(?:tim|tra\\s*cuu)\\s*thay|chua\\s*(?:tim|tra\\s*cuu)\\s*(?:duoc|thay)|khong\\s*thay\\s*(?:noi\\s*dung|thong\\s*tin|tai\\s*lieu)|khong\\s*the\\s*(?:truy\\s*xuat|truy\\s*cap|tu\\s*dong\\s*tong\\s*hop)|chua\\s*co\\s*noi\\s*dung\\s*tom\\s*tat|khong\\s*co\\s*(?:du\\s*)?(?:noi\\s*dung|thong\\s*tin|du\\s*lieu)|khong\\s*chua\\s*thong\\s*tin|khong\\s*the\\s*xac\\s*dinh|couldn['’]?t\\s*find|could\\s*not\\s*find|don['’]?t\\s*have\\s*(?:enough\\s*)?(?:content|information))"
+  },
+  "counts": {
+    "raw_message_rows": 2522,
+    "unique_turn_ids": 1261,
+    "complete_turn_pairs": 1261,
+    "incomplete_turn_ids": 0,
+    "duplicate_role_turn_ids": 0,
+    "unique_users": 369,
+    "summary_request_turns": 156,
+    "summary_request_users": 110,
+    "summary_user_rate": 0.2981029810298103,
+    "whole_session_request_turns": 69,
+    "whole_session_request_users": 59,
+    "whole_session_user_rate": 0.15989159891598917,
+    "all_failure_turns": 223,
+    "baseline_failure_rate": 0.17684377478191912,
+    "summary_failure_turns": 74,
+    "summary_failure_rate": 0.47435897435897434,
+    "whole_session_failure_turns": 37,
+    "whole_session_failure_rate": 0.5362318840579711
+  },
+  "human_review": {
+    "reviewed_rows": 40,
+    "complete_rows": 40,
+    "review_complete": true,
+    "reviewers": [
+      "M3 owner — user-confirmed in Codex"
+    ],
+    "confirmed_at": [
+      "2026-07-30 (confirmed in conversation)"
+    ],
+    "metrics": {
+      "summary": {
+        "tp": 21,
+        "fp": 0,
+        "fn": 0,
+        "tn": 19,
+        "labeled": 40,
+        "precision": 1.0,
+        "recall": 1.0,
+        "false_positive_rate": 0.0
+      },
+      "whole_session": {
+        "tp": 17,
+        "fp": 0,
+        "fn": 0,
+        "tn": 23,
+        "labeled": 40,
+        "precision": 1.0,
+        "recall": 1.0,
+        "false_positive_rate": 0.0
+      },
+      "failure": {
+        "tp": 23,
+        "fp": 0,
+        "fn": 0,
+        "tn": 17,
+        "labeled": 40,
+        "precision": 1.0,
+        "recall": 1.0,
+        "false_positive_rate": 0.0
+      }
+    }
+  },
+  "official_numbers_ready": true
+}

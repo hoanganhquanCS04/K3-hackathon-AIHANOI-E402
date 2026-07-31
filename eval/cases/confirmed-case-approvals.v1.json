@@ -1,0 +1,29 @@
+{
+  "version": "v1",
+  "reviewer": "M3 owner — user-confirmed in Codex",
+  "confirmed_at": "2026-07-30 (confirmed in conversation)",
+  "statement": "M3 owner stated that all 20 expected behaviors were read very carefully and explicitly approved.",
+  "draft_sha256": "dc85d76aa63537a248c7bedfec220e455fb4beaf82dc48b41868eea8eed0764f",
+  "approvals": [
+    {"case_id": "SUM-T01", "expected_status": "ok"},
+    {"case_id": "SUM-T02", "expected_status": "ok"},
+    {"case_id": "SUM-T03", "expected_status": "ok"},
+    {"case_id": "SUM-T04", "expected_status": "ok"},
+    {"case_id": "SUM-T05", "expected_status": "ok"},
+    {"case_id": "SUM-T06", "expected_status": "ok"},
+    {"case_id": "AMB-001", "expected_status": "needs_clarification"},
+    {"case_id": "AMB-002", "expected_status": "ok"},
+    {"case_id": "SRC-001", "expected_status": "ok"},
+    {"case_id": "RARE-001", "expected_status": "ok"},
+    {"case_id": "OOS-001", "expected_status": "out_of_scope"},
+    {"case_id": "SRC-002", "expected_status": "ok"},
+    {"case_id": "SRC-003", "expected_status": "needs_clarification"},
+    {"case_id": "RARE-002", "expected_status": "needs_clarification"},
+    {"case_id": "AMB-003", "expected_status": "ok"},
+    {"case_id": "NORMAL-001", "expected_status": "ok"},
+    {"case_id": "SRC-004", "expected_status": "insufficient"},
+    {"case_id": "OOS-002", "expected_status": "refused"},
+    {"case_id": "DOM-001", "expected_status": "insufficient"},
+    {"case_id": "DOM-002", "expected_status": "ok"}
+  ]
+}

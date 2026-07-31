@@ -1,0 +1,18 @@
+{
+  "case_count": 20,
+  "chatlog_case_count": 10,
+  "approved_case_count": 20,
+  "gold_idea_count": 0,
+  "risk_counts": {
+    "source_truth": 16,
+    "ambiguity": 3,
+    "out_of_scope": 2,
+    "domain": 3
+  },
+  "structural_errors": [],
+  "readiness_blockers": [
+    "Need exactly 18 human gold ideas; currently 0",
+    "Human gold incomplete for summary cases: SUM-T01, SUM-T02, SUM-T03, SUM-T04, SUM-T05, SUM-T06"
+  ],
+  "ready_to_finalize": false
+}

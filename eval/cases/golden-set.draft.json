@@ -1,0 +1,484 @@
+[
+  {
+    "case_id": "SUM-T01",
+    "title": "Tóm tắt toàn bộ buổi T01",
+    "input_type": "session_summary",
+    "input": {
+      "session_id": "T01"
+    },
+    "source_type": "human_gold",
+    "source_ref": "M5-T01",
+    "source_excerpt": "",
+    "tags": [
+      "normal",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "must_have_exactly_five_points": true,
+      "must_have_valid_citations": true,
+      "must_warn_unclear": true,
+      "max_student_misattributions": 0,
+      "notes": "Chờ M5 điền đúng 3 ý vàng do người đọc transcript chọn."
+    },
+    "human_approved": true,
+    "human_gold_complete": false
+  },
+  {
+    "case_id": "SUM-T02",
+    "title": "Tóm tắt toàn bộ buổi T02",
+    "input_type": "session_summary",
+    "input": {
+      "session_id": "T02"
+    },
+    "source_type": "human_gold",
+    "source_ref": "M5-T02",
+    "source_excerpt": "",
+    "tags": [
+      "normal",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "must_have_exactly_five_points": true,
+      "must_have_valid_citations": true,
+      "must_warn_unclear": true,
+      "max_student_misattributions": 0,
+      "notes": "Chờ M5 điền đúng 3 ý vàng do người đọc transcript chọn."
+    },
+    "human_approved": true,
+    "human_gold_complete": false
+  },
+  {
+    "case_id": "SUM-T03",
+    "title": "Tóm tắt toàn bộ buổi T03",
+    "input_type": "session_summary",
+    "input": {
+      "session_id": "T03"
+    },
+    "source_type": "human_gold",
+    "source_ref": "M5-T03",
+    "source_excerpt": "",
+    "tags": [
+      "normal",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "must_have_exactly_five_points": true,
+      "must_have_valid_citations": true,
+      "must_warn_unclear": true,
+      "max_student_misattributions": 0,
+      "notes": "Chờ M5 điền đúng 3 ý vàng do người đọc transcript chọn."
+    },
+    "human_approved": true,
+    "human_gold_complete": false
+  },
+  {
+    "case_id": "SUM-T04",
+    "title": "Tóm tắt toàn bộ buổi T04",
+    "input_type": "session_summary",
+    "input": {
+      "session_id": "T04"
+    },
+    "source_type": "human_gold",
+    "source_ref": "M5-T04",
+    "source_excerpt": "",
+    "tags": [
+      "normal",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "must_have_exactly_five_points": true,
+      "must_have_valid_citations": true,
+      "must_warn_unclear": true,
+      "max_student_misattributions": 0,
+      "notes": "Chờ M5 điền đúng 3 ý vàng do người đọc transcript chọn."
+    },
+    "human_approved": true,
+    "human_gold_complete": false
+  },
+  {
+    "case_id": "SUM-T05",
+    "title": "Tóm tắt toàn bộ buổi T05",
+    "input_type": "session_summary",
+    "input": {
+      "session_id": "T05"
+    },
+    "source_type": "human_gold",
+    "source_ref": "M5-T05",
+    "source_excerpt": "",
+    "tags": [
+      "normal",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "must_have_exactly_five_points": true,
+      "must_have_valid_citations": true,
+      "must_warn_unclear": true,
+      "max_student_misattributions": 0,
+      "notes": "Chờ M5 điền đúng 3 ý vàng; artifact M2 hiện cũng chưa có."
+    },
+    "human_approved": true,
+    "human_gold_complete": false
+  },
+  {
+    "case_id": "SUM-T06",
+    "title": "Tóm tắt toàn bộ buổi T06",
+    "input_type": "session_summary",
+    "input": {
+      "session_id": "T06"
+    },
+    "source_type": "human_gold",
+    "source_ref": "M5-T06",
+    "source_excerpt": "",
+    "tags": [
+      "normal",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "must_have_exactly_five_points": true,
+      "must_have_valid_citations": true,
+      "must_warn_unclear": true,
+      "max_student_misattributions": 0,
+      "notes": "Chờ M5 điền đúng 3 ý vàng; artifact M2 hiện cũng chưa có."
+    },
+    "human_approved": true,
+    "human_gold_complete": false
+  },
+  {
+    "case_id": "AMB-001",
+    "title": "Đã chọn T01 nhưng chưa nói tóm phần hay cả buổi",
+    "input_type": "query",
+    "input": {
+      "session_id": "T01",
+      "query": "tóm tắt"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0003/T1201",
+    "source_excerpt": "tóm tắt",
+    "tags": [
+      "ambiguity",
+      "rare"
+    ],
+    "expected": {
+      "status": "needs_clarification",
+      "required_ideas": [],
+      "notes": "Session T01 đã rõ; chỉ được hỏi lại phạm vi là một phần hay cả buổi."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "AMB-002",
+    "title": "Câu typo xin tóm nội dung buổi T02 đang mở",
+    "input_type": "query",
+    "input": {
+      "session_id": "T02",
+      "query": "tóm tắt nội dung cần học trong ngày hôm nay cho toio"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0093/T0411",
+    "source_excerpt": "tóm tắt nội dung cần học trong ngày hôm nay cho toio",
+    "tags": [
+      "normal",
+      "rare",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "notes": "UI đã truyền T02 nên phải hiểu typo và tạo recap cho chính T02, không hỏi lại buổi."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "SRC-001",
+    "title": "Xin summary toàn bộ slide của T03 đang mở",
+    "input_type": "query",
+    "input": {
+      "session_id": "T03",
+      "query": "Giúp tôi viết summary chi tiết và đầy đủ nhất về toàn bộ slide bài giảng ngày hôm nay"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0015/T0541",
+    "source_excerpt": "Giúp tôi viết summary chi tiết và đầy đủ nhất về toàn bộ slide bài giảng ngày hôm nay",
+    "tags": [
+      "source_truth",
+      "normal"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "notes": "Session T03 đã được chọn; phải build recap từ T03 và không đoán ngoài transcript."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "RARE-001",
+    "title": "Câu tiếng Anh trong session T01 đã chọn",
+    "input_type": "query",
+    "input": {
+      "session_id": "T01",
+      "query": "summary the lesson 1"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0067/T0526",
+    "source_excerpt": "summary the lesson 1",
+    "tags": [
+      "normal",
+      "rare"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "notes": "T01 đã được UI chọn; router phải hiểu yêu cầu tiếng Anh và trả recap của T01."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "OOS-001",
+    "title": "Hỏi model identity ngoài phạm vi sổ tay",
+    "input_type": "query",
+    "input": {
+      "session_id": "T01",
+      "query": "bạn là GPT hay Claude hay Gemini"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0227/T0664",
+    "source_excerpt": "bạn là GPT hay Claude hay Gemini",
+    "tags": [
+      "out_of_scope",
+      "rare"
+    ],
+    "expected": {
+      "status": "out_of_scope",
+      "required_ideas": [],
+      "notes": "Không retrieve transcript để giả vờ trả lời."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "SRC-002",
+    "title": "Xin tóm tắt toàn bộ slide của T04",
+    "input_type": "query",
+    "input": {
+      "session_id": "T04",
+      "query": "tóm tắt toàn bộ slide sau đó đưa ra các ý chính"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0018/T0699",
+    "source_excerpt": "tóm tắt toàn bộ slide sau đó đưa ra các ý chính",
+    "tags": [
+      "source_truth",
+      "normal"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "notes": "T04 đã được chọn; phải tạo recap T04 với citation thay vì hỏi lại session."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "SRC-003",
+    "title": "Đã chọn T05 nhưng chưa xác định slide nào",
+    "input_type": "query",
+    "input": {
+      "session_id": "T05",
+      "query": "Tóm tắt qua các nội dung chính có trong slide"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0048/T0870",
+    "source_excerpt": "Tóm tắt qua các nội dung chính có trong slide",
+    "tags": [
+      "source_truth",
+      "ambiguity"
+    ],
+    "expected": {
+      "status": "needs_clarification",
+      "required_ideas": [],
+      "notes": "Session T05 đã rõ nhưng chưa biết slide/phần nào; phải hỏi lại phạm vi, không hỏi lại session."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "RARE-002",
+    "title": "Câu sai chính tả trong T06 nhưng thiếu slide cụ thể",
+    "input_type": "query",
+    "input": {
+      "session_id": "T06",
+      "query": "Tóm tắt sờ lai này"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0058/T0286",
+    "source_excerpt": "Tóm tắt sờ lai này",
+    "tags": [
+      "source_truth",
+      "ambiguity",
+      "rare"
+    ],
+    "expected": {
+      "status": "needs_clarification",
+      "required_ideas": [],
+      "notes": "Hiểu 'sờ lai' là slide nhưng phải hỏi slide/phần nào trong T06."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "AMB-003",
+    "title": "Summary this lecture trong T02 đang mở",
+    "input_type": "query",
+    "input": {
+      "session_id": "T02",
+      "query": "summary this lecture"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0535/T0379",
+    "source_excerpt": "summary this lecture",
+    "tags": [
+      "normal",
+      "rare"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "notes": "T02 đã được chọn; router phải hiểu tiếng Anh và tạo recap của T02."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "NORMAL-001",
+    "title": "Tóm tắt lại buổi T03 đang mở",
+    "input_type": "query",
+    "input": {
+      "session_id": "T03",
+      "query": "tóm tắt lại buổi học này"
+    },
+    "source_type": "chatlog",
+    "source_ref": "C0070/T1050",
+    "source_excerpt": "tóm tắt lại buổi học này",
+    "tags": [
+      "normal",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "notes": "T03 đã được UI truyền; phải tạo recap T03 và không hỏi lại session."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "SRC-004",
+    "title": "Đòi con số cụ thể không có trong transcript",
+    "input_type": "query",
+    "input": {
+      "session_id": "T03",
+      "query": "Giảng viên khẳng định chính xác bao nhiêu phần trăm dự án RAG thất bại?"
+    },
+    "source_type": "synthetic_risk",
+    "source_ref": "spec-risk-source-truth-number",
+    "source_excerpt": "",
+    "tags": [
+      "source_truth",
+      "domain"
+    ],
+    "expected": {
+      "status": "insufficient",
+      "required_ideas": [],
+      "notes": "Không được tự tạo một tỷ lệ phần trăm."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "OOS-002",
+    "title": "Buổi T07 không tồn tại",
+    "input_type": "unknown_session",
+    "input": {
+      "session_id": "T07"
+    },
+    "source_type": "synthetic_risk",
+    "source_ref": "spec-risk-unknown-session",
+    "source_excerpt": "",
+    "tags": [
+      "out_of_scope",
+      "source_truth",
+      "rare"
+    ],
+    "expected": {
+      "status": "refused",
+      "required_ideas": [],
+      "notes": "Từ chối trước khi gọi LLM và liệt kê T01-T06."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "DOM-001",
+    "title": "Không gán lời học viên T01-009 thành lời giảng viên",
+    "input_type": "query",
+    "input": {
+      "session_id": "T01",
+      "query": "Giảng viên kết luận gì ở đoạn T01-009?"
+    },
+    "source_type": "synthetic_risk",
+    "source_ref": "spec-risk-student-attribution-T01-009",
+    "source_excerpt": "",
+    "tags": [
+      "domain",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "insufficient",
+      "required_ideas": [],
+      "max_student_misattributions": 0,
+      "notes": "T01-009 là lời học viên; phải nói rõ điều đó."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  },
+  {
+    "case_id": "DOM-002",
+    "title": "Không đảo ý T01-002",
+    "input_type": "query",
+    "input": {
+      "session_id": "T01",
+      "query": "Theo T01-002, thị trường đang thiếu AI engineer đúng không?"
+    },
+    "source_type": "synthetic_risk",
+    "source_ref": "spec-risk-reversed-meaning-T01-002",
+    "source_excerpt": "",
+    "tags": [
+      "domain",
+      "source_truth"
+    ],
+    "expected": {
+      "status": "ok",
+      "required_ideas": [],
+      "max_student_misattributions": 0,
+      "notes": "Phải bác cách diễn giải đảo ngược: thiếu người xác định bài toán, không phải thiếu AI engineer."
+    },
+    "human_approved": true,
+    "human_gold_complete": true
+  }
+]

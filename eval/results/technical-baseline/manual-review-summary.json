@@ -1,0 +1,263 @@
+{
+  "review_row_count": 32,
+  "complete_row_count": 0,
+  "reviewers": [],
+  "decisions": [
+    {
+      "case_id": "SUM-T01",
+      "claim_id": "KP-01",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T01",
+      "claim_id": "KP-02",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T01",
+      "claim_id": "KP-03",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T01",
+      "claim_id": "KP-04",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T01",
+      "claim_id": "KP-05",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T01",
+      "claim_id": "KP-06",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T01",
+      "claim_id": "KP-07",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T01",
+      "claim_id": "KP-08",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T02",
+      "claim_id": "KP-01",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T02",
+      "claim_id": "KP-02",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T02",
+      "claim_id": "KP-03",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T02",
+      "claim_id": "KP-04",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T02",
+      "claim_id": "KP-05",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T02",
+      "claim_id": "KP-06",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T02",
+      "claim_id": "KP-07",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T02",
+      "claim_id": "KP-08",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T03",
+      "claim_id": "KP-01",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T03",
+      "claim_id": "KP-02",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T03",
+      "claim_id": "KP-03",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T03",
+      "claim_id": "KP-04",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T03",
+      "claim_id": "KP-05",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T03",
+      "claim_id": "KP-06",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T03",
+      "claim_id": "KP-07",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T03",
+      "claim_id": "KP-08",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T04",
+      "claim_id": "KP-01",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T04",
+      "claim_id": "KP-02",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T04",
+      "claim_id": "KP-03",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T04",
+      "claim_id": "KP-04",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T04",
+      "claim_id": "KP-05",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T04",
+      "claim_id": "KP-06",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T04",
+      "claim_id": "KP-07",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    },
+    {
+      "case_id": "SUM-T04",
+      "claim_id": "KP-08",
+      "supports_claim": null,
+      "reverses_meaning": null,
+      "reviewer": null,
+      "complete": false
+    }
+  ]
+}

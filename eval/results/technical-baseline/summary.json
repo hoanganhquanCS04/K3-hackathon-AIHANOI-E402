@@ -1,0 +1,19 @@
+{
+  "run_id": "technical-baseline",
+  "created_at": "2026-07-30T15:57:59.186231+00:00",
+  "git_commit": "4c44b00279fcfd87e13d1f0bdef9bcf8248a8b8a",
+  "cases_path": "D:\\AI\\AI_thuc_chien\\Lab\\Batch03-2A202601875-HoangAnhQuan\\eval\\cases\\golden-set.draft.json",
+  "case_count": 20,
+  "technical_pass_count": 5,
+  "technical_pass_rate": 0.25,
+  "official_pass_count": null,
+  "official_pass_rate": null,
+  "fake_citation_cases": 0,
+  "student_misattribution_cases": 0,
+  "not_implemented_cases": 6,
+  "missing_artifact_cases": 2,
+  "quality_bar_status": "pending_human_input",
+  "blockers": [
+    "Not every case has an official human-reviewed verdict."
+  ]
+}

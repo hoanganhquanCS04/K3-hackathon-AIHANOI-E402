@@ -8,7 +8,7 @@ Loại: [ ] Tối ưu tính năng có sẵn &nbsp; [x] Tính năng mới
 - **Core JTBD (không tên sản phẩm/AI):** Khi tôi bỏ lỡ một buổi học, tôi cần nắm lại đúng những gì giảng viên đã dạy trong 10 phút, thay vì tua lại 1-2 tiếng ghi âm hoặc bỏ qua hẳn phần đó.
 - **Problem statement (không chữ AI):** AI tutor hiện có của VLearn trả lời theo từng đoạn bôi đen (RAG theo trang) nên không có cách nhìn thấy toàn bộ một buổi học. Khi học viên xin "tóm tắt cả buổi", hệ thống trả về "không tìm thấy" ở tỉ lệ cao hơn hẳn mức nền — học viên không có nơi nào khác để hỏi, nên phần kiến thức buổi đó bị bỏ trống vĩnh viễn.
 - **Evidence:**
-  - *(chuẩn B — mining, [chờ M3 xác nhận qua script đếm theo đúng 1 quy tắc — xem §8 team-assignment.md]):* ~92 lượt xin tóm tắt cấp buổi · ~72/369 học viên (≈19,5%) từng hỏi dạng này · tỉ lệ "không tìm thấy" trên các lượt này ước tính cao hơn 2 lần mức nền toàn hệ thống.
+  - *(chuẩn B — mining, M3 đã xác nhận bằng rule `v2-locked`, đơn vị `turn_id`):* **69/1.261 lượt** là yêu cầu tóm tắt toàn buổi, đến từ **59/369 học viên (16,0%)**. Trong nhóm này, **37/69 = 53,6%** lượt bị trả theo mẫu “không tìm thấy/không truy xuất được”, so với nền **223/1.261 = 17,7%** — cao khoảng **3,03 lần**. M3 đã soi và xác nhận 40/40 mẫu; rule v2 đạt 0 false positive/0 false negative trên chính tập calibration 40 mẫu này (không diễn giải như kết quả holdout độc lập). Script và report: `eval/src/m3_eval/mine_chatlog.py`, `eval/evidence/evidence-report.md`.
   - *(chuẩn A — khảo sát, n = 20 người ngoài nhóm):* **15/20 = 75% trả lời "Có"** ở câu "từng nghỉ/vào muộn/mất mạch một buổi chưa?" — vượt ngưỡng ≥50% cần đạt. Thời gian nắm lại phổ biến nhất là 30 phút-1 tiếng (9/20); 3/20 chọn "bỏ qua, không tìm hiểu lại" — tức mất kiến thức vĩnh viễn, đúng như pain đã nêu.
     *Lưu ý minh bạch đo lường:* 3/5 người trả lời "Không" lại cho câu trả lời Câu 2-3 mâu thuẫn (VD: chọn "Không" nhưng vẫn mô tả cách xử lý khi bỏ lỡ buổi) — nhiều khả năng do form không có logic nhảy câu. Không ảnh hưởng kết luận (75% vẫn đạt xa ngưỡng), nhưng ghi lại để trung thực về chất lượng đo.
     *Câu hỏi phụ (không tính vào % đạt vì là câu hỏi giả định "bạn có muốn X không"):* 16/20 = 80% nói muốn có bản tóm tắt — chỉ dùng làm tín hiệu bổ sung, không dùng làm bằng chứng chính.
@@ -21,11 +21,11 @@ Loại: [ ] Tối ưu tính năng có sẵn &nbsp; [x] Tính năng mới
 | Ứng viên | Job executor | Bao nhiêu người × tần suất | Tốn gì mỗi lần | Khả thi xây trong 1 ngày |
 |---|---|---|---|---|
 | 1. Bản tin chất lượng tutor cho PM | PM vận hành VLearn | 1 người, hằng ngày, trên 1.261 lượt/tuần | ~260 lượt hỏng/tuần không ai đọc | Cao (script + 1 LLM call), nhưng **R6 rủi ro cao** — khó chốt ≥3 TA/mentor xác nhận dùng ngay tại CP1 |
-| **2. Sổ tay buổi học (CHỌN)** | Học viên nghỉ/mất mạch buổi | ~72/369 học viên (19,5%), lặp lại theo tuần | 1-2 tiếng tua lại ghi âm, hoặc bỏ qua | Cao — 6 transcript đã có mã đoạn sẵn, cả lớp là user thật nên R6 dễ đạt nhất |
+| **2. Sổ tay buổi học (CHỌN)** | Học viên nghỉ/mất mạch buổi | 59/369 học viên (16,0%) có yêu cầu tóm tắt toàn buổi; 53,6% các lượt này thất bại | 1-2 tiếng tua lại ghi âm, hoặc bỏ qua | Cao — 6 transcript đã có mã đoạn sẵn, cả lớp là user thật nên R6 dễ đạt nhất |
 | 3. Trợ lý sửa học liệu từ hotspot câu hỏi | Người soạn học liệu | 102 cặp (tài liệu, trang) bị ≥3 người hỏi, hút 60,7% câu hỏi | Không biết slide nào cần sửa trước buổi sau | Loại vì "chẩn đoán đúng/sai" khó định nghĩa kiểm chứng được (rủi ro R4), và user (người soạn học liệu) khó tiếp cận để validate |
 
 - **Ứng viên đã loại + vì sao:** #1 loại vì rủi ro R6 (validation) cao nhất trong 3 ứng viên — người dùng thật (PM vận hành) khó chốt được ngay tại CP1. #3 loại vì tiêu chí "đúng/sai" của chẩn đoán không kiểm chứng được rõ ràng bằng số, rủi ro trực tiếp cho R4 (15đ).
-- **Ứng viên chọn + vì sao (bằng số):** #2 — vì (a) 19,5% học viên đã tự chứng minh nhu cầu qua chatlog thật, (b) willing users có sẵn ngay trong lớp (giảm rủi ro R6 xuống thấp nhất trong 3 ứng viên), (c) data đã có mã đoạn `[Txx-NNN]` sẵn, không cần tự gán nhãn từ đầu.
+- **Ứng viên chọn + vì sao (bằng số):** #2 — vì (a) 16,0% học viên đã tự phát sinh yêu cầu tóm tắt toàn buổi và 53,6% các lượt đó thất bại, cao 3,03 lần mức nền, (b) willing users có sẵn ngay trong lớp (giảm rủi ro R6 xuống thấp nhất trong 3 ứng viên), (c) data đã có mã đoạn `[Txx-NNN]` sẵn, không cần tự gán nhãn từ đầu.
 
 ## §3. Giải pháp tương tự đã nghiên cứu
 
@@ -101,6 +101,6 @@ Loại: [ ] Tối ưu tính năng có sẵn &nbsp; [x] Tính năng mới
 
 | Thời điểm | Đổi gì | Vì sao (trỏ về feedback/case nào) |
 |---|---|---|
-| CP1 | Chốt lát cắt "Sổ tay buổi học", đề tài 2/3 ứng viên | Evidence mining ban đầu (19,5% học viên hỏi dạng tóm tắt cấp buổi) |
+| CP1 | Chốt lát cắt "Sổ tay buổi học", đề tài 2/3 ứng viên | Evidence mining M3 v2-locked: 59/369 học viên (16,0%) hỏi tóm tắt toàn buổi; failure 53,6%, cao 3,03× nền |
 | CP1→CP3 | Mở rộng kiến trúc 1 luồng → 2 luồng (sổ tay + tra cứu), thêm Qdrant + OpenAI embeddings cho retrieval | Cần hỗ trợ cả câu hỏi cụ thể lẫn tóm tắt toàn buổi; xem `05-ke-hoach-trien-khai-m1-vector-db.md` |
 | CP4 | Điền kết quả khảo sát thật (n=20, 75% xác nhận Câu 1) vào §1 | Google Form đóng, đủ 20 phản hồi |
